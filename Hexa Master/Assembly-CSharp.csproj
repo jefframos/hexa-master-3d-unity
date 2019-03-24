@@ -65,10 +65,12 @@
     <Compile Include="Assets\Scripts\Board\BoardInput.cs" />
     <Compile Include="Assets\Scripts\Board\Card\AllCards.cs" />
     <Compile Include="Assets\Scripts\Board\Card\Card.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\Card3D.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardDynamicData.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardsDataManager.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardStaticData.cs" />
     <Compile Include="Assets\Scripts\Board\Card\GameCardView.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\GameCardView3D.cs" />
     <Compile Include="Assets\Scripts\Board\Card\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />

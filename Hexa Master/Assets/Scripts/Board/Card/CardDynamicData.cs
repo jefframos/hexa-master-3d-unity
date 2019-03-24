@@ -25,7 +25,7 @@ public class CardDynamicData
 
         int maxSpdValue = 120;
 
-        Debug.Log(cardStaticData.stats.speed);
+        //Debug.Log(cardStaticData.stats.speed);
 
         decimal tot = Math.Floor((decimal)cardStaticData.stats.speed / maxSpdValue * tempSideList.Count);
 
