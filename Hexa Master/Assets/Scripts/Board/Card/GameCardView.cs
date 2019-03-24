@@ -14,15 +14,13 @@ public class GameCardView : MonoBehaviour
     public TextMeshProUGUI rangeLabel;
     public List<GameObject> starsList;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    public void setData(CardStaticData _cardStaticData)
+    //void Start()
+    //{
+
+    //}
+    public void SetData(CardStaticData _cardStaticData)
     {
         cardStaticData = _cardStaticData;
-
-        Debug.Log("Cards/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
 
         attackLabel.text = cardStaticData.stats.attack.ToString();
         defenseLabel.text = cardStaticData.stats.defense.ToString();
@@ -40,17 +38,12 @@ public class GameCardView : MonoBehaviour
 
         var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
 
-        Debug.Log(cardStaticData.thumb_url);
-
-        Debug.Log(sp);
-        //Debug.Log(texture);
 
         charSprite.sprite = sp;
-        //charSprite.sp Resources.Load<Sprite>("Cards/"+ cardStaticData.thumb_url);
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void Update()
+    //{
+
+    //}
 }

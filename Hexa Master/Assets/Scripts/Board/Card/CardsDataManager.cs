@@ -68,8 +68,36 @@ public class CardsDataManager : Singleton<CardsDataManager>
         return deck;
     }
 
-    // Update is called once per frame
-    void Update()
+    public SideType GetOppositeSide(SideType side)
+    {
+        SideType oppSide = SideType.TopRight;
+        switch (side)
+        {
+            case SideType.BottomLeft:
+                oppSide = SideType.TopRight;
+                break;
+            case SideType.BottomRight:
+                oppSide = SideType.TopLeft;
+                break;
+            case SideType.Left:
+                oppSide = SideType.Right;
+                break;
+            case SideType.Right:
+                oppSide = SideType.Left;
+                break;
+            case SideType.TopLeft:
+                oppSide = SideType.BottomRight;
+                break;
+            case SideType.TopRight:
+                oppSide = SideType.BottomLeft;
+                break;
+            default:
+                break;
+        }
+        return oppSide;
+    }
+        // Update is called once per frame
+        void Update()
     {
 
     }

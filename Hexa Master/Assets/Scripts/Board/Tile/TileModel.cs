@@ -10,7 +10,7 @@ public class TileModel : MonoBehaviour
     public int id;
     public int type;
     public bool isBlock = false;
-    public CardModel cardModel;
+    public Card card;
     public GameObject tileView;
     public string col = "";
 

@@ -735,6 +735,7 @@ GameObject:
   - component: {fileID: 4170990126290034286}
   - component: {fileID: 4170990126290034287}
   - component: {fileID: 1891713855310831042}
+  - component: {fileID: 5943145223484520040}
   m_Layer: 5
   m_Name: GameCard
   m_TagString: Untagged
@@ -871,6 +872,18 @@ MonoBehaviour:
   - {fileID: 4472585533509590413}
   - {fileID: 7582121470696846296}
   - {fileID: 544306749004862868}
+--- !u!114 &5943145223484520040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4170990126290034321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08cc960db0aee441a73786637f5d3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4472585533509590413
 GameObject:
   m_ObjectHideFlags: 0

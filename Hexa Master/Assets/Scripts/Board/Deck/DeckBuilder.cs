@@ -54,8 +54,8 @@ public class DeckBuilder : MonoBehaviour
             CardStaticData data = deck[i];
             GameObject cardTransform = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
             cardTransform.transform.SetParent(deckContainer);
-            GameCardView cardView = cardTransform.GetComponent<GameCardView>();
-            cardView.setData(data);
+            Card cardView = cardTransform.GetComponent<Card>();
+            cardView.SetData(data);
         }
         
         
