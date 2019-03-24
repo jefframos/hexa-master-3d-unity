@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class CardsDataManager : MonoBehaviour
+public class CardsDataManager : Singleton<CardsDataManager>
 {
     // Start is called before the first frame update
     public string gameDataFileName;
+    public AllCards allCards;
     void Start()
     {
-
-
+        LoadGameData();
     }
 
     private void LoadGameData()
@@ -24,10 +24,8 @@ public class CardsDataManager : MonoBehaviour
             // Read the json from the file into a string
             string dataAsJson = File.ReadAllText(filePath);
 
-            Debug.Log(dataAsJson);
             // Pass the json to JsonUtility, and tell it to create a GameData object from it
-            //GameData loadedData = JsonUtility.FromJson<GameData>(dataAsJson);
-
+            allCards = JsonUtility.FromJson<AllCards>(dataAsJson);
             // Retrieve the allRoundData property of loadedData
         }
         else
@@ -36,9 +34,43 @@ public class CardsDataManager : MonoBehaviour
         }
     }
 
+ 
+    public List<CardStaticData> GetRandomDeck(uint tot, int[] levels)
+    {
+     
+        List<CardStaticData> deck = new List<CardStaticData>();
+
+        for (int i = 0; i < tot; i++)
+        {
+            int id = levels[Random.Range(0, levels.Length)];
+            switch (id)
+            {
+                case 1:
+                    deck.Add(allCards.level1[Random.Range(0, allCards.level1.Length)]);
+                    break;
+                case 2:
+                    deck.Add(allCards.level2[Random.Range(0, allCards.level2.Length)]);
+                    break;
+                case 3:
+                    deck.Add(allCards.level3[Random.Range(0, allCards.level3.Length)]);
+                    break;
+                case 4:
+                    deck.Add(allCards.level4[Random.Range(0, allCards.level4.Length)]);
+                    break;
+                case 5:
+                    deck.Add(allCards.level5[Random.Range(0, allCards.level5.Length)]);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return deck;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

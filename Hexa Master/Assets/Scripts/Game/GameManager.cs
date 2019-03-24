@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public BoardInput boardInput;
     BoardController boardController;
-
-
     public NeighborsArroundModel currentNeighborsList;
     public TileModel currentTile;
 

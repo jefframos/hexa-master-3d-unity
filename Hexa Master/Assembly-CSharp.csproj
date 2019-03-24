@@ -63,9 +63,14 @@
     <Compile Include="Assets\Scripts\Board\BoardBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\BoardController.cs" />
     <Compile Include="Assets\Scripts\Board\BoardInput.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\AllCards.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardModel.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardsDataManager.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\CardStaticData.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\GameCardView.cs" />
     <Compile Include="Assets\Scripts\Board\Card\SideType.cs" />
+    <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
+    <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborsArroundModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\Tile.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="Assets\Scripts\Board\Tile\TileView.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLook.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Utils\SimpleObjectPool.cs" />
     <Compile Include="Assets\Scripts\Utils\Singleton.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
