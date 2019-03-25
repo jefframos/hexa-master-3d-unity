@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d06a083cb31bfd4dba89bd8ec2c01f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardView: {fileID: 0}
   cardStaticData:
     name: 
     number: 0
@@ -66,6 +67,7 @@ MonoBehaviour:
     image_url: 
     classType: 
     race: 0
+  cardID: 0
 --- !u!114 &8613206588888539368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +105,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.61, y: 3.25, z: 0.1}
+  m_Size: {x: 2.61, y: 3.25, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8613206588896139189
 GameObject:

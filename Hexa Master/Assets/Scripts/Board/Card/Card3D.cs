@@ -7,7 +7,8 @@ public class Card3D : MonoBehaviour
     public GameCardView3D cardView;
     public CardStaticData cardStaticData;
     public CardDynamicData cardDynamicData;
-
+    public uint cardID;
+    private int orderAdd = 0;
     //public List<SideType> sides;
     //public List<SideType> oppositeSides;
 
@@ -19,7 +20,7 @@ public class Card3D : MonoBehaviour
     public void SetData(CardStaticData _cardStaticData)
     {
         cardView = GetComponent<GameCardView3D>();
-        Debug.Log(cardView);
+
         cardDynamicData = new CardDynamicData();
 
         cardStaticData = _cardStaticData;
@@ -32,7 +33,24 @@ public class Card3D : MonoBehaviour
     }
     public void SetOrder(int order)
     {
+        
+        Vector3 orderPos = transform.localPosition;
+        orderPos.z = -order * 0.01f;
+
+        order += orderAdd;
         cardView.SetOrder(order);
+
+        transform.localPosition = orderPos;
+    }
+    public void OnOut()
+    {
+        orderAdd = 0;
+        cardView.OnOut();
+    }
+    public void OnOver()
+    {
+        orderAdd = 6;
+        cardView.OnOver();
     }
     // Update is called once per frame
     void Update()

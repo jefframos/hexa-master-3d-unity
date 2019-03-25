@@ -25,15 +25,15 @@ public class BoardController : Singleton<BoardController>
     public NeighborModel GetTileOnSide(TileModel tile, SideType side, int distance = 1)
     {
         NeighborModel neighbor = new NeighborModel();
-       // int adj =(tile.j % 2 == 0) ? 0 : -1;
-        int adj =(tile.i % 2 == 0) ? -1 : 0;
+        // int adj =(tile.j % 2 == 0) ? 0 : -1;
+        int adj = (tile.i % 2 == 0) ? -1 : 0;
 
 
         switch (side)
         {
             case SideType.TopLeft:
                 neighbor.i = tile.i - 1;
-                neighbor.j = tile.j  + adj;
+                neighbor.j = tile.j + adj;
                 neighbor.side = SideType.TopLeft;
                 neighbor.distance = distance;
 
@@ -81,7 +81,7 @@ public class BoardController : Singleton<BoardController>
     }
     public Tile GetTile(int i, int j)
     {
-        if(i >= tileList.Count || i < 0)
+        if (i >= tileList.Count || i < 0)
         {
             return null;
         }
@@ -95,9 +95,6 @@ public class BoardController : Singleton<BoardController>
     {
         NeighborsArroundModel returnObject = new NeighborsArroundModel();
 
-
-
-
         returnObject.topLeft.Add(GetTileOnSide(tile, SideType.TopLeft, 1));
         returnObject.topRight.Add(GetTileOnSide(tile, SideType.TopRight, 1));
         returnObject.left.Add(GetTileOnSide(tile, SideType.Left, 1));
@@ -108,13 +105,34 @@ public class BoardController : Singleton<BoardController>
 
         if (range > 1)
         {
+            for (int i = 0; i < range; i++)
+            {
+                if (i < returnObject.topLeft.Count && returnObject.topLeft[i].tile != null)
+                {
+                    returnObject.topLeft.Add(GetTileOnSide(returnObject.topLeft[i].tile.tileModel, SideType.TopLeft, 1));
+                }
+                if (i < returnObject.topRight.Count && returnObject.topRight[i].tile != null)
+                {
+                    returnObject.topRight.Add(GetTileOnSide(returnObject.topRight[i].tile.tileModel, SideType.TopRight, 1));
+                }
+                if (i < returnObject.left.Count && returnObject.left[i].tile != null)
+                {
+                    returnObject.left.Add(GetTileOnSide(returnObject.left[i].tile.tileModel, SideType.Left, 1));
+                }
+                if (i < returnObject.right.Count && returnObject.right[i].tile != null)
+                {
+                    returnObject.right.Add(GetTileOnSide(returnObject.right[i].tile.tileModel, SideType.Right, 1));
+                }
+                if (i < returnObject.bottomLeft.Count && returnObject.bottomLeft[i].tile != null)
+                {
+                    returnObject.bottomLeft.Add(GetTileOnSide(returnObject.bottomLeft[i].tile.tileModel, SideType.BottomLeft, 1));
+                }
+                if (i < returnObject.bottomRight.Count && returnObject.bottomRight[i].tile != null)
+                {
+                    returnObject.bottomRight.Add(GetTileOnSide(returnObject.bottomRight[i].tile.tileModel, SideType.BottomRight, 1));
+                }
+            }
 
-            //returnObject.topLeft.Add(GetTileOnSide(returnObject.topLeft[0], SideType.TopLeft, 1));
-            //returnObject.topRight.Add(GetTileOnSide(returnObject.topRight[0], SideType.TopRight, 1));
-            //returnObject.left.Add(GetTileOnSide(returnObject.left[0], SideType.Left, 1));
-            //returnObject.right.Add(GetTileOnSide(returnObject.right[0], SideType.Right, 1));
-            //returnObject.bottomLeft.Add(GetTileOnSide(returnObject.bottomLeft[0], SideType.BottomLeft, 1));
-            //returnObject.bottomRight.Add(GetTileOnSide(returnObject.bottomRight[0], SideType.BottomRight, 1));
         }
 
         return returnObject;

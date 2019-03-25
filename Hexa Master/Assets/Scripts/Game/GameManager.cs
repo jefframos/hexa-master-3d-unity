@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     {
         boardController = BoardController.Instance;
         boardInput.onTileOver.AddListener(OnTileOver);
+        boardInput.onTileOut.AddListener(onTileOut);
+    }
+    void onTileOut(Tile tile)
+    {
+        ClearAllNeighbors();
     }
     void OnTileOver(Tile tile)
     {
@@ -22,7 +27,7 @@ public class GameManager : MonoBehaviour
         ClearAllNeighbors();
         //}
         currentTile = tile.tileModel;
-        currentNeighborsList = boardController.GetNeighbours(tile.tileModel);
+        currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
 
         HighlightAllNeighbors();
 

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DeckBuilder : MonoBehaviour
 {
+    public static uint CARD_ID_COUNTER = 0;
     // Start is called before the first frame update
+    DeckView deckView;
     public Transform deckContainer;
     public GameObject cardPrefab;
     CardsDataManager cardsDataManager;
@@ -18,7 +20,7 @@ public class DeckBuilder : MonoBehaviour
     void Start()
     {
         cardsDataManager = CardsDataManager.Instance;
-
+        deckView = GetComponent<DeckView>();
 
         //cardsDataManager.allCards.level1[0];
 
@@ -42,12 +44,12 @@ public class DeckBuilder : MonoBehaviour
         }
         else
         {
-            CreateCard();
+            CreateCards();
         }
 
     }
 
-    void CreateCard()
+    void CreateCards()
     {
         int[] levels = new int[3];
         levels[0] = 1;
@@ -62,20 +64,14 @@ public class DeckBuilder : MonoBehaviour
             cardTransform.transform.localPosition = new Vector3(i * cardsDistance - ((maxInHand - 1) * cardsDistance / 2), 0, 0);
             Card3D card = cardTransform.GetComponent<Card3D>();
             card.SetData(data);
-
-            //float tempRotation = cardsRotation / (maxInHand - 1) * (i) - (cardsRotation / 2);
-            //Vector3 targetPosition = new Vector3(i * cardsDistance - ((maxInHand - 1) * cardsDistance / 2), 0, 0);
-            //float sin = Mathf.Sin(tempRotation / 180 * Mathf.PI);
-            //targetPosition.y += sin * 8;
-            //Debug.Log(targetPosition + " - " + sin);
-            //card.transform.localPosition = targetPosition;
-            //card.transform.eulerAngles = new Vector3(0, 0, tempRotation); ;
+            card.cardID = CARD_ID_COUNTER;
+            CARD_ID_COUNTER++;
 
             handDeck.Add(card);
             UpdateCardPosition(i);
         }
 
-
+        
     }
     // Update is called once per frame
     void Update()
@@ -83,7 +79,6 @@ public class DeckBuilder : MonoBehaviour
         for (int i = 0; i < handDeck.Count; i++)
         {
             UpdateCardPosition(i);
-
         }
     }
     void UpdateCardPosition(int i, bool debug = false)

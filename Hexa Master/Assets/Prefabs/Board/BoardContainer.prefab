@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: 
   currentTile: {fileID: 0}
+  boardCamera: {fileID: 0}
   onTileOver:
     m_PersistentCalls:
       m_Calls: []

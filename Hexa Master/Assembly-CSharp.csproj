@@ -73,6 +73,8 @@
     <Compile Include="Assets\Scripts\Board\Card\GameCardView3D.cs" />
     <Compile Include="Assets\Scripts\Board\Card\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
+    <Compile Include="Assets\Scripts\Board\Deck\DeckInput.cs" />
+    <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborsArroundModel.cs" />
