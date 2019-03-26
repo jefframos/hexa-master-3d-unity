@@ -20,6 +20,9 @@ public class GameCardView3D : MonoBehaviour
     public TextMeshPro[] allTextMesh;
     public List<int> allTextMeshOrder;
 
+    public ParticleSystem[] allParticles;
+    public List<int> allParticlesOrder;
+
     // Start is called before the first frame update
     //void Start()
     //{
@@ -42,6 +45,14 @@ public class GameCardView3D : MonoBehaviour
         {
             allTextMeshOrder.Add(allTextMesh[i].sortingOrder);
         }
+
+        //Save the order of the sprites
+        //allParticles = GetComponentsInChildren<ParticleSystem>();
+        //allParticlesOrder = new List<int>();
+        //for (int i = 0; i < allParticles.Length; i++)
+        //{
+        //    allParticlesOrder.Add(allParticles[i].re);
+        //}
 
         cardStaticData = _cardStaticData;
 

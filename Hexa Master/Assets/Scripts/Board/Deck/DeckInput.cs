@@ -13,6 +13,8 @@ public class DeckInput : MonoBehaviour
     public class CardEvent : UnityEvent<Card3D> { };
     public CardEvent onCardOver = new CardEvent();
 
+    public CardEvent onCardOut = new CardEvent();
+
     private List<int> collidableLayers;
     private Card3D tempCard;
     // Start is called before the first frame update
@@ -64,6 +66,8 @@ public class DeckInput : MonoBehaviour
         if (currentCard)
         {
             currentCard.cardView.OnOut();
+            onCardOut.Invoke(currentCard);
+
         }
         currentCard = null;
     }
@@ -75,10 +79,12 @@ public class DeckInput : MonoBehaviour
             {
                 return;
             }
+            onCardOut.Invoke(currentCard);
             currentCard.OnOut();
         }
         currentCard = card;
         currentCard.OnOver();
+        onCardOver.Invoke(card);
     }
 
 

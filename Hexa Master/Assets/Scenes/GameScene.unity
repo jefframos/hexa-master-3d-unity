@@ -707,7 +707,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 5175
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -747,30 +747,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2071862510}
   distance: {x: 0, y: -84.4, z: 29.3}
---- !u!1 &1626732869 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 779553125694583442, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 779553127302417367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1626732870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
     type: 3}
   m_PrefabInstance: {fileID: 779553127302417367}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1626732872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626732869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1764713599 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4170990126290034320, guid: cd9520277d975e94697adb900a1b94bb,

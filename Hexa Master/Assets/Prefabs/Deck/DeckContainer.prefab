@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 779553125694583441}
   - component: {fileID: 779553125694583440}
   - component: {fileID: 3562676935163322406}
+  - component: {fileID: 1626732872}
   m_Layer: 8
   m_Name: DeckContainer
   m_TagString: Untagged
@@ -49,9 +50,6 @@ MonoBehaviour:
   cardPrefab: {fileID: 8613206588888539370, guid: 3f67992159454c84393f60e77d0775cd,
     type: 3}
   maxInHand: 5
-  cardsDistance: 2.16
-  cardsRotation: -50
-  cardsaaaa: -1.8
 --- !u!114 &3562676935163322406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,9 +67,51 @@ MonoBehaviour:
   deckCamera: {fileID: 0}
   onCardOver:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1626732872}
+        m_MethodName: FocusCardOn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  onCardOut:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1626732872}
+        m_MethodName: FocusCardOut
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1626732872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779553125694583442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsDistance: 2.5
+  cardsRotation: -50
+  cardsArc: -1.84
 --- !u!1001 &779553125864949381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,36 +183,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206588896139187, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206588896139187, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206589869352132, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206589869352132, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206590872257448, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613206590872257448, guid: 3f67992159454c84393f60e77d0775cd,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f67992159454c84393f60e77d0775cd, type: 3}
