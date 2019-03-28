@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Board\Deck\DeckInput.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
+    <Compile Include="Assets\Scripts\Board\Entity\EntityView.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborsArroundModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\Tile.cs" />

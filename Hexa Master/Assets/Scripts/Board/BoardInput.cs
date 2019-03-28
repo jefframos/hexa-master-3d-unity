@@ -7,6 +7,7 @@ public class BoardInput : MonoBehaviour
 {
     public string col;
     public Tile currentTile;
+    public Tile currentTileSelected;
     public Camera boardCamera;
     //public UnityEvent onTileOver = new UnityEvent<Tile>();
 
@@ -14,6 +15,7 @@ public class BoardInput : MonoBehaviour
     public class TileEvent : UnityEvent<Tile> { };
     public TileEvent onTileOver = new TileEvent();
     public TileEvent onTileOut = new TileEvent();
+    public TileEvent onTileSelected = new TileEvent();
 
 
 
@@ -51,7 +53,13 @@ public class BoardInput : MonoBehaviour
 
                 if (tempTile != null)
                 {
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        TileSelect(tempTile);
+                    }
                     OnTileOver(tempTile);
+                    
                 }
             }
         }
@@ -64,7 +72,15 @@ public class BoardInput : MonoBehaviour
         //}
 
     }
+    void TileSelect(Tile tile)
+    {
+        if (currentTileSelected != tile)
+        {
+            currentTileSelected = tile;
 
+        }
+        onTileSelected.Invoke(currentTileSelected);
+    }
     void NoTileOver()
     {
         if (currentTile)

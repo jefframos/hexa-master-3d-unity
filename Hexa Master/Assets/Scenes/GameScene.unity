@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 781776030}
   - component: {fileID: 781776029}
   m_Layer: 0
-  m_Name: DeckCamera
+  m_Name: Deck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2048
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -837,6 +837,16 @@ PrefabInstance:
       propertyPath: deckCamera
       value: 
       objectReference: {fileID: 781776030}
+    - target: {fileID: 3562676935163322406, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
+        type: 3}
+      propertyPath: onCardSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 394877962}
+    - target: {fileID: 3562676935163322406, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
+        type: 3}
+      propertyPath: onCardSelect.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetCurrentCard
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b770423cc284448a0a3bbf9fc8c9fb, type: 3}
 --- !u!1001 &999218261641698153
@@ -909,11 +919,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
-        type: 3}
-      propertyPath: boardData.lin
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f6285b83719b2b4d88aa738f78c8f4c, type: 3}

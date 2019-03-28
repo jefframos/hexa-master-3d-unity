@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameCardView3D : MonoBehaviour
 {
+    public SpriteRenderer spriteSelected;
+    public Color colorSelect;
     public SpriteRenderer charSprite;
     private CardStaticData cardStaticData;
     public TextMeshPro attackLabel;
@@ -22,6 +24,8 @@ public class GameCardView3D : MonoBehaviour
 
     public ParticleSystem[] allParticles;
     public List<int> allParticlesOrder;
+
+    private bool isSelected = false;
 
     // Start is called before the first frame update
     //void Start()
@@ -74,6 +78,7 @@ public class GameCardView3D : MonoBehaviour
 
 
         charSprite.sprite = sp;
+        isSelected = false;
     }
     public void SetOrder(int order)
     {
@@ -89,11 +94,29 @@ public class GameCardView3D : MonoBehaviour
     }
     public void OnOut()
     {
+        if (isSelected)
+        {
+            return;
+        }
         charSprite.color = Color.white;
     }
     public void OnOver()
     {
+        if (isSelected)
+        {
+            return;
+        }
         charSprite.color = Color.red;
+    }
+    public void OnSelect()
+    {
+        isSelected = true;
+        spriteSelected.color = colorSelect;
+    }
+    public void OnUnSelect()
+    {
+        isSelected = false;
+        spriteSelected.color = Color.white;
     }
     // Update is called once per frame
     //void Update()

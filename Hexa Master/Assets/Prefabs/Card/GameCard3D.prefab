@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &86594051104149434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4987905363563913232}
+  - component: {fileID: 6122424683353127348}
+  m_Layer: 11
+  m_Name: cardBackSelected
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4987905363563913232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86594051104149434}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.010048239, y: 0.832193, z: -0.025}
+  m_LocalScale: {x: 0.28604537, y: 0.2688564, z: 0.3473}
+  m_Children: []
+  m_Father: {fileID: 8240246222520081432}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6122424683353127348
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86594051104149434}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 50
+  m_Sprite: {fileID: 21300000, guid: 07f8c71a3a9727b4aa327b7aec9163b1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.56, y: 2.56}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &4145894389157687521
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +90,7 @@ GameObject:
   - component: {fileID: 399155122427526402}
   - component: {fileID: 7102147337850585495}
   - component: {fileID: 3055387611582589819}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +679,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 50
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -865,7 +944,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20.84
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4707,7 +4786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3158591279683919190}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4729,6 +4808,37 @@ Transform:
   m_Father: {fileID: 8613206588888539371}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6159764344058021694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8240246222520081432}
+  m_Layer: 11
+  m_Name: attackZones
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8240246222520081432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159764344058021694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4987905363563913232}
+  m_Father: {fileID: 8613206589004421887}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8613206588888539370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4741,7 +4851,7 @@ GameObject:
   - component: {fileID: 8613206588888539369}
   - component: {fileID: 8613206588888539368}
   - component: {fileID: 6369800180314984690}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: GameCard3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4810,6 +4920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8140b86288615eb4f94ab0b8092cfa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteSelected: {fileID: 8613206589004421884}
+  colorSelect: {r: 0, g: 1, b: 0.027116776, a: 1}
   charSprite: {fileID: 8613206590033342335}
   attackLabel: {fileID: 8613206588896139187}
   defenseLabel: {fileID: 8613206589869352132}
@@ -4852,7 +4964,7 @@ GameObject:
   - component: {fileID: 8613206588896139185}
   - component: {fileID: 8613206588896139184}
   - component: {fileID: 8613206588896139187}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5030,11 +5142,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8613206588896139198}
@@ -5058,7 +5170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589004421887}
   - component: {fileID: 8613206589004421884}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5080,6 +5192,7 @@ Transform:
   - {fileID: 8613206589979831524}
   - {fileID: 8613206589801380868}
   - {fileID: 8613206589296156336}
+  - {fileID: 8240246222520081432}
   m_Father: {fileID: 8613206588888539371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5141,7 +5254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589151164082}
   - component: {fileID: 8613206589151164083}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: star_gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5219,7 +5332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613206589296156336}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5255,7 +5368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589460725680}
   - component: {fileID: 8613206589460725681}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5333,7 +5446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613206589801380868}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5368,7 +5481,7 @@ GameObject:
   - component: {fileID: 8613206589869352130}
   - component: {fileID: 8613206589869352133}
   - component: {fileID: 8613206589869352132}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: DefenseLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5546,11 +5659,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8613206589869352131}
@@ -5574,7 +5687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589959919480}
   - component: {fileID: 8613206589959919481}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: star_gold (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5653,7 +5766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589979831524}
   - component: {fileID: 8613206589979831525}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: defense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5733,7 +5846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590033342334}
   - component: {fileID: 8613206590033342335}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: CharSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5812,7 +5925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590087443310}
   - component: {fileID: 8613206590087443311}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: star_gold (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5891,7 +6004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590135352296}
   - component: {fileID: 8613206590135352297}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: star_gold (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5970,7 +6083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590636366398}
   - component: {fileID: 8613206590636366399}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6053,7 +6166,7 @@ GameObject:
   - component: {fileID: 8613206590872257462}
   - component: {fileID: 8613206590872257449}
   - component: {fileID: 8613206590872257448}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: RangeLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6231,11 +6344,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8613206590872257463}
@@ -6259,7 +6372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590913054411}
   - component: {fileID: 8613206590913054408}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: star_gold (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

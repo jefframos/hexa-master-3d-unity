@@ -127,7 +127,7 @@ MonoBehaviour:
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
   boardData:
-    lin: 5
+    lin: 6
     col: 10
   tileData:
     width: 3.43
@@ -147,8 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: 
   currentTile: {fileID: 0}
+  currentTileSelected: {fileID: 0}
   boardCamera: {fileID: 0}
   onTileOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTileOut:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTileSelected:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -165,6 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075eb3ef494c383448b0f8e7a47da5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityPrefab: {fileID: 217470032729438371, guid: 3765e66545cbe5c419b47e4f5455b584,
+    type: 3}
 --- !u!1 &7441892357872541875
 GameObject:
   m_ObjectHideFlags: 0

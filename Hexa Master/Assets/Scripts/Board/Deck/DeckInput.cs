@@ -6,7 +6,10 @@ using UnityEngine.Events;
 public class DeckInput : MonoBehaviour
 {
     public string col;
-    public Card3D currentCard;
+    public Card3D currentCardOver;
+    public Card3D currentCardSelected;
+    private Card3D tempCard;
+
     public Camera deckCamera;
 
     [System.Serializable]
@@ -15,8 +18,9 @@ public class DeckInput : MonoBehaviour
 
     public CardEvent onCardOut = new CardEvent();
 
+    public CardEvent onCardSelect = new CardEvent();
+
     private List<int> collidableLayers;
-    private Card3D tempCard;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +50,13 @@ public class DeckInput : MonoBehaviour
 
                 if (tempCard != null)
                 {
-                    if (true)
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        OnCardOver(tempCard);
+                        CardSelect(tempCard);
                     }
+                        
+                     OnCardOver(tempCard);
+                   
                 }
             }
         }
@@ -61,29 +68,38 @@ public class DeckInput : MonoBehaviour
 
 
     }
-    void NoCardOver()
+    void CardSelect(Card3D card)
     {
-        if (currentCard)
+        if(currentCardSelected != card)
         {
-            currentCard.cardView.OnOut();
-            onCardOut.Invoke(currentCard);
+            currentCardSelected = card;
 
         }
-        currentCard = null;
+        onCardSelect.Invoke(currentCardSelected);
+    }
+    void NoCardOver()
+    {
+        if (currentCardOver)
+        {
+            currentCardOver.cardView.OnOut();
+            onCardOut.Invoke(currentCardOver);
+
+        }
+        currentCardOver = null;
     }
     void OnCardOver(Card3D card)
     {
-        if (currentCard)
+        if (currentCardOver)
         {
-            if (currentCard.cardID == card.cardID)
+            if (currentCardOver.cardID == card.cardID)
             {
                 return;
             }
-            onCardOut.Invoke(currentCard);
-            currentCard.OnOut();
+            onCardOut.Invoke(currentCardOver);
+            currentCardOver.OnOut();
         }
-        currentCard = card;
-        currentCard.OnOver();
+        currentCardOver = card;
+        currentCardOver.OnOver();
         onCardOver.Invoke(card);
     }
 
