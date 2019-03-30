@@ -137,9 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardsDistance: 2.5
-  cardsRotation: -50
-  cardsArc: -1.84
+  deckBuilder: {fileID: 779553125694583440}
+  cardsDistance: 1.6
+  cardsRotation: -34
+  cardsArc: -7.08
+  cardScale: 1.5
   cardSelected: {fileID: 0}
 --- !u!1001 &779553125864949381
 PrefabInstance:

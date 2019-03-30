@@ -130,8 +130,8 @@ MonoBehaviour:
     lin: 6
     col: 10
   tileData:
-    width: 3.43
-    height: 2.99
+    width: 1
+    height: 1
     scale: 1
 --- !u!114 &1102314970
 MonoBehaviour:

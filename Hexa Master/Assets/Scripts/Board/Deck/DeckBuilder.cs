@@ -12,8 +12,12 @@ public class DeckBuilder : MonoBehaviour
     CardsDataManager cardsDataManager;
     List<Card3D> handDeck;
     public int maxInHand = 5;
+    private int maxInHandDefault = 5;
+    private int currentCardID = 0;
+    List<CardStaticData> deck;
     void Start()
     {
+        maxInHandDefault = maxInHand;
         cardsDataManager = CardsDataManager.Instance;
         deckView = GetComponent<DeckView>();
 
@@ -50,24 +54,43 @@ public class DeckBuilder : MonoBehaviour
         levels[0] = 1;
         levels[1] = 2;
         levels[2] = 3;
-        List<CardStaticData> deck = cardsDataManager.GetRandomDeck(5, levels);
+        deck = cardsDataManager.GetRandomDeck(8, levels);
+        currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)
         {
-            CardStaticData data = deck[i];
-            GameObject cardTransform = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, deckContainer);
-            cardTransform.transform.localPosition = new Vector3(0, 0, 0);
-            Card3D card = cardTransform.GetComponent<Card3D>();
-            card.SetData(data);
-            card.cardID = CARD_ID_COUNTER;
-            CARD_ID_COUNTER++;
-
+            if(i >= maxInHand)
+            {
+                break;
+            }
+            Card3D card = GetCard();            
             handDeck.Add(card);
         }
 
         deckView.SetHandCards(handDeck, maxInHand);
+    }
 
+    public Card3D GetCard()
+    {
 
+        if (currentCardID >= deck.Count)
+        {
+            currentCardID++;
+            int n = currentCardID - deck.Count;
+            Debug.Log(n);
+
+            deckView.changeCardsInHandTotal(maxInHandDefault - n);
+            return null;
+        }
+        CardStaticData data = deck[currentCardID];
+        GameObject cardTransform = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, deckContainer);
+        cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
+        Card3D card = cardTransform.GetComponent<Card3D>();
+        card.SetData(data);
+        card.cardID = CARD_ID_COUNTER;
+        CARD_ID_COUNTER++;
+        currentCardID++;
+        return card;
     }
     // Update is called once per frame
     void Update()

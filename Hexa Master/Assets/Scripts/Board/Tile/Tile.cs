@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
 {
     public TileModel tileModel;
     public TileView tileView;
+    public float rnd = 0;
     Card3D card;
 
     public void SetCard(Card3D _card)

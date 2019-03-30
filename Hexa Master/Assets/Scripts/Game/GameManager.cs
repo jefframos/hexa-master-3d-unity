@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
     public BoardInput boardInput;
+    public DeckInput deckInput;
+    public DeckView deckView;
     BoardController boardController;
     public NeighborsArroundModel currentNeighborsList;
     public Tile currentTile;
     Card3D currentCard;
+    private bool acting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +28,48 @@ public class GameManager : MonoBehaviour
     }
     public void SelectTile(Tile tile)
     {
-        Debug.Log("CACACA");
         currentTile = tile;
         if (currentCard)
         {
+            acting = true;
+            deckInput.SetBlock();
+            deckView.RemoveCurrentCard();
             currentTile.SetCard(currentCard);
-            boardController.AddEntity(currentCard, tile);
+
+            currentCard.transform.SetParent(boardController.transform, true);
+
+            //DO AMAZING ANIMATION HERE
+            foreach (Transform child in currentCard.GetComponentsInChildren<Transform>(true))
+            {
+                child.gameObject.layer = boardController.gameObject.layer;  // add any layer you want. 
+            }
+
+            currentCard.gameObject.layer = boardController.gameObject.layer;
+            Vector3 target = tile.transform.position;
+            target.y += 1.5f;
+            float time = 1f;
+
+            currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time, RotateMode.Fast);//.SetEase(Ease.OutElastic);
+            currentCard.transform.DOMove(target, time).OnComplete(() =>
+            {
+                currentCard.transform.DOMove(tile.transform.position, 0.35f).OnComplete(() =>
+                {
+                    deckInput.SetUnblock(2f);
+                    boardController.AddEntity(currentCard, tile);
+                    boardController.AddEntity(currentCard, tile);
+                    Destroy(currentCard.gameObject);
+                    acting = false;
+                }).SetEase(Ease.InBack);
+            });
+            currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
+
+
+
         }
 
     }
+
+    //void Remove
     void OnTileOut(Tile tile)
     {
         ClearAllNeighbors();
@@ -55,7 +92,7 @@ public class GameManager : MonoBehaviour
     }
     void HighlightAllNeighbors()
     {
-        if (currentCard == null)
+        if (currentCard == null ||acting)
         {
             return;
         }

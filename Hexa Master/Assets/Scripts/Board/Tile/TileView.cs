@@ -2,36 +2,55 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using DG.Tweening;
 public class TileView : MonoBehaviour
 {
-    public Material material;
+    public Renderer mainRenderer;
     public TextMeshPro debug;
     public TextMeshPro debugID;
+    public List<Renderer> renderers;
+    public QuickOutline outline;
+    public Color highlightColor;
+    public Color mouseOverColor;
+    private Material mainMaterial;
+    private int maxColors = 32;
+    //public
     // Start is called before the first frame update
     void Start()
     {
-        material = GetComponentInChildren<Renderer>().material;
+        mainMaterial = mainRenderer.GetComponent<Renderer>().material;
+        Vector2 offs = mainMaterial.mainTextureOffset;
+        offs.x = maxColors / 256f * 3f;
+        mainMaterial.mainTextureOffset = offs;
+        debug.text = "";
+        outline.enabled = false;
+        //REVER ISSO, TAH BEM ESTRANHO AS TWEEN, PARECE UE TEM MUITA COISA CONFLITANDO
+        //0.125
     }
 
     public void OnOver()
     {
-        material.color = Color.red;
+        mainMaterial.DOColor(mouseOverColor, 0.5f);
+        outline.enabled = true;
     }
 
     public void OnOut()
     {
-        material.color = Color.white;
+        mainMaterial.DOColor(Color.white, 0.5f);
+        outline.enabled = false;
     }
 
     public void OnHighlight()
     {
-        material.color = Color.blue;
+
+        mainMaterial.DOColor(highlightColor, 0.5f);
+        outline.enabled = true;
     }
     public void OnClear()
     {
-        material.color = Color.white;
+        mainMaterial.DOColor(Color.white, 0.5f);
+        outline.enabled = false;
         debug.text = "";
     }
-    
+
 }

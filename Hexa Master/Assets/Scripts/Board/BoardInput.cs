@@ -18,7 +18,6 @@ public class BoardInput : MonoBehaviour
     public TileEvent onTileSelected = new TileEvent();
 
 
-
     private List<int> collidableLayers;
     private Tile tempTile;
 
@@ -42,7 +41,7 @@ public class BoardInput : MonoBehaviour
 
         var ray = boardCamera.ScreenPointToRay(Input.mousePosition);
 
-
+        //return;
         for (int i = 0; i < collidableLayers.Count; i++)
         {
 

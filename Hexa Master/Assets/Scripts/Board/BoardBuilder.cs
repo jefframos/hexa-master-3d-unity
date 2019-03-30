@@ -33,7 +33,7 @@ public class BoardBuilder : MonoBehaviour
         //starterHeight = tileData.height;
 
         int accum = 0;
-
+        List<float> rndPos = new List<float>{ -0.1f, 0f, 0.1f };
         tileList = new List<List<Tile>>();
         for (int i = 0; i < boardData.lin; i++)
         {
@@ -48,6 +48,7 @@ public class BoardBuilder : MonoBehaviour
                 tile.tileModel.i = i;
                 tile.tileModel.j = j;
                 tile.tileModel.id = accum;
+                tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
                 accum++;
                 tile.tileView.debugID.text = i + "-" + j;
                 tiles.Add(tile);
@@ -86,7 +87,7 @@ public class BoardBuilder : MonoBehaviour
                     targetX += 0.5f;
                 }
                 Tile tile = element[j];
-                tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, 0, targetZ * tileData.height);
+                tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, tile.rnd, targetZ * tileData.height);
                 tile.transform.localScale = new Vector3(tileData.scale, tileData.scale, tileData.scale);
             }
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class BoardController : Singleton<BoardController>
 {
     [System.Serializable]
@@ -27,7 +27,7 @@ public class BoardController : Singleton<BoardController>
         GameObject cardTransform = Instantiate(entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
         cardTransform.transform.localPosition = tile.transform.localPosition;
         EntityView entity = cardTransform.GetComponent<EntityView>();
-        entity.SetData(card.cardStaticData);
+        entity.SetData(card.cardStaticData);        
     }
 
     public NeighborModel GetTileOnSide(TileModel tile, SideType side, int distance = 1)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,6 +22,7 @@ public class DeckInput : MonoBehaviour
     public CardEvent onCardSelect = new CardEvent();
 
     private List<int> collidableLayers;
+    private bool block = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +31,14 @@ public class DeckInput : MonoBehaviour
     }
     void Update()
     {
-        col = "testing";
+        
 
+        if (block)
+        {
+            col = "block";
+            return;
+        }
+        col = "testing";
         //{
         RaycastHit hit;
 
@@ -67,6 +75,20 @@ public class DeckInput : MonoBehaviour
         }
 
 
+    }
+
+    internal void SetUnblock(float v)
+    {
+        Invoke("SetUnblock", v);
+    }
+
+    public void SetUnblock()
+    {
+        block = false;
+    }
+    public void SetBlock()
+    {
+        block = true;
     }
     void CardSelect(Card3D card)
     {
