@@ -285,7 +285,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 12
+  field of view: 8.5
   orthographic: 0
   orthographic size: 3.75
   m_Depth: 1
@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea760d24ba9ce77439d44ef51fab1308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: {fileID: 1626273093}
+  follow: {fileID: 1626273092}
 --- !u!114 &1102314970 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1102314970, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
@@ -720,7 +720,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 12
+  field of view: 8.5
   orthographic: 0
   orthographic size: 3.75
   m_Depth: -1
@@ -949,12 +949,12 @@ PrefabInstance:
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.4
+      value: 38.59
       objectReference: {fileID: 0}
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
@@ -995,6 +995,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626732872, guid: 88b770423cc284448a0a3bbf9fc8c9fb, type: 3}
+      propertyPath: cardsDistance
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3562676935163322406, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}

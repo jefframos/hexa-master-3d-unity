@@ -7,8 +7,13 @@ public class Tile : MonoBehaviour
     public TileModel tileModel;
     public TileView tileView;
     public float rnd = 0;
+    public bool isBlock = false;
     Card3D card;
-
+    public void SetBlock(bool v)
+    {
+        isBlock = v;
+        tileView.setBlock(isBlock);
+    }
     public void SetCard(Card3D _card)
     {
         card = _card;

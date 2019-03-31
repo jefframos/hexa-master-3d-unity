@@ -13,8 +13,10 @@ public class TileView : MonoBehaviour
     public Color highlightColor;
     public Color mouseOverColor;
     private Material mainMaterial;
+    public List<GameObject> blockersList;
+    public Transform blockerContainer;
     private int maxColors = 32;
-    //public
+    public bool isBlock = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,14 @@ public class TileView : MonoBehaviour
         //REVER ISSO, TAH BEM ESTRANHO AS TWEEN, PARECE UE TEM MUITA COISA CONFLITANDO
         //0.125
     }
-
+    public void setBlock(bool v)
+    {
+        if (v)
+        {
+            GameObject cardTransform = Instantiate(blockersList[Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+            //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
+        }
+    }
     public void OnOver()
     {
         mainMaterial.DOColor(mouseOverColor, 0.5f);

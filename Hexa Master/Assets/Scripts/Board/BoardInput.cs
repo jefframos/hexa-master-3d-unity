@@ -52,12 +52,19 @@ public class BoardInput : MonoBehaviour
 
                 if (tempTile != null)
                 {
-
-                    if (Input.GetMouseButtonDown(0))
+                    if (tempTile.isBlock)
                     {
-                        TileSelect(tempTile);
+                        NoTileOver();
                     }
-                    OnTileOver(tempTile);
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            TileSelect(tempTile);
+                        }
+                        OnTileOver(tempTile);
+                    }
+                    
                     
                 }
             }

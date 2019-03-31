@@ -141,7 +141,7 @@ MonoBehaviour:
   cardsDistance: 1.6
   cardsRotation: -34
   cardsArc: -7.08
-  cardScale: 1.5
+  cardScale: 1.1
   cardSelected: {fileID: 0}
 --- !u!1001 &779553125864949381
 PrefabInstance:

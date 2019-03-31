@@ -98,7 +98,7 @@ public class GameCardView3D : MonoBehaviour
         {
             return;
         }
-        charSprite.color = Color.white;
+        //charSprite.color = Color.white;
     }
     public void OnOver()
     {
@@ -106,7 +106,7 @@ public class GameCardView3D : MonoBehaviour
         {
             return;
         }
-        charSprite.color = Color.red;
+        //charSprite.color = Color.red;
     }
     public void OnSelect()
     {

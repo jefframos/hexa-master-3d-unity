@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
     }
     void HighlightAllNeighbors()
     {
+        currentNeighborsList.CapOnFirstBlock();
         if (currentCard == null ||acting)
         {
             return;

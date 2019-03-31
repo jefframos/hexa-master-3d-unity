@@ -51,6 +51,10 @@ public class BoardBuilder : MonoBehaviour
                 tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
                 accum++;
                 tile.tileView.debugID.text = i + "-" + j;
+                if(Random.Range(0,1f) < 0.15f)
+                {
+                    tile.SetBlock(true);
+                }
                 tiles.Add(tile);
             }
             tileList.Add(tiles);
