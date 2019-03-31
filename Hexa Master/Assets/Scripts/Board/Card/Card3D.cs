@@ -24,9 +24,11 @@ public class Card3D : MonoBehaviour
         cardDynamicData = new CardDynamicData();
 
         cardStaticData = _cardStaticData;
-        cardView.SetData(cardStaticData);
-
         cardDynamicData.SetData(cardStaticData);
+
+
+        cardView.SetData(cardStaticData, cardDynamicData);
+
 
         //sides = cardDynamicData.sideList;
         //oppositeSides = cardDynamicData.oppositeSideList;

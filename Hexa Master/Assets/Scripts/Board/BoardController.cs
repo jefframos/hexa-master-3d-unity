@@ -22,12 +22,14 @@ public class BoardController : Singleton<BoardController>
         tileList = _tileList;
     }
 
-    public void AddEntity(Card3D card, Tile tile)
+    public EntityView AddEntity(Card3D card, Tile tile)
     {
         GameObject cardTransform = Instantiate(entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
         cardTransform.transform.localPosition = tile.transform.localPosition;
         EntityView entity = cardTransform.GetComponent<EntityView>();
-        entity.SetData(card.cardStaticData);        
+        entity.SetData(card.cardStaticData, card.cardDynamicData);
+
+        return entity;
     }
 
     public NeighborModel GetTileOnSide(TileModel tile, SideType side, int distance = 1)

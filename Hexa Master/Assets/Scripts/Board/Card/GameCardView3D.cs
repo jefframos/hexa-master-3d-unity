@@ -11,6 +11,7 @@ public class GameCardView3D : MonoBehaviour
     public Color colorSelect;
     public SpriteRenderer charSprite;
     private CardStaticData cardStaticData;
+    private CardDynamicData cardDynamicData;
     public TextMeshPro attackLabel;
     public TextMeshPro defenseLabel;
     public TextMeshPro rangeLabel;
@@ -27,12 +28,15 @@ public class GameCardView3D : MonoBehaviour
 
     private bool isSelected = false;
 
+    //public GameObject attackZonesPrefab;
+    private AttackZonesCardView attackZonesView;
+    //public Transform attackZonesParent;
     // Start is called before the first frame update
     //void Start()
     //{
 
     //}
-    public void SetData(CardStaticData _cardStaticData)
+    public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
     {
         //Save the order of the sprites
         allRenderers = GetComponentsInChildren<SpriteRenderer>();
@@ -59,9 +63,10 @@ public class GameCardView3D : MonoBehaviour
         //}
 
         cardStaticData = _cardStaticData;
+        cardDynamicData = _cardDynamicData;
 
-        attackLabel.text = cardStaticData.stats.attack.ToString();
-        defenseLabel.text = cardStaticData.stats.defense.ToString();
+        attackLabel.text = (cardStaticData.stats.attack / 10).ToString();
+        defenseLabel.text = (cardStaticData.stats.defense / 10).ToString();
         rangeLabel.text = cardStaticData.stats.range.ToString();
 
         for (int i = 0; i < starsList.Count; i++)
@@ -76,7 +81,11 @@ public class GameCardView3D : MonoBehaviour
 
         var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
 
-
+        //GameObject attackZones = Instantiate(attackZonesPrefab, new Vector3(0, 0, 0), Quaternion.identity, attackZonesParent);
+        //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
+        attackZonesView = GetComponentInChildren<AttackZonesCardView>();
+        attackZonesView.setZones(cardDynamicData.sideList);
+        attackZonesView.setDeckLayer();
         charSprite.sprite = sp;
         isSelected = false;
     }

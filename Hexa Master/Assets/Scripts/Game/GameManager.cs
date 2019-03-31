@@ -41,27 +41,38 @@ public class GameManager : MonoBehaviour
             //DO AMAZING ANIMATION HERE
             foreach (Transform child in currentCard.GetComponentsInChildren<Transform>(true))
             {
-                child.gameObject.layer = boardController.gameObject.layer;  // add any layer you want. 
+                child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
             }
 
-            currentCard.gameObject.layer = boardController.gameObject.layer;
+            currentCard.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");//boardController.gameObject.layer;
             Vector3 target = tile.transform.position;
             target.y += 1.5f;
-            float time = 1f;
+            float time = 0.75f;
 
-            currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time, RotateMode.Fast);//.SetEase(Ease.OutElastic);
-            currentCard.transform.DOMove(target, time).OnComplete(() =>
+            Vector3 currentPos = currentCard.transform.position;
+            currentPos.y += 1.5f;
+
+            currentCard.transform.DOScale(2f, time / 2);
+            //currentCard.transform.DOLocalRotate(new Vector3(currentCard.transform.localRotation.x, currentCard.transform.localRotation.y, 0), time / 2, RotateMode.Fast);//.SetEase(Ease.OutElastic);
+            currentCard.transform.DOMove(currentPos, time / 2).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                currentCard.transform.DOMove(tile.transform.position, 0.35f).OnComplete(() =>
+                currentCard.transform.DOMove(target, time).OnComplete(() =>
                 {
-                    deckInput.SetUnblock(2f);
-                    boardController.AddEntity(currentCard, tile);
-                    boardController.AddEntity(currentCard, tile);
-                    Destroy(currentCard.gameObject);
-                    acting = false;
-                }).SetEase(Ease.InBack);
+                    //currentCard.transform.DOMove(tile.transform.position, 0.35f).OnComplete(() =>
+                    //{
+                        deckInput.SetUnblock(1f);
+                        EntityView ent = boardController.AddEntity(currentCard, tile);
+                        //PUTA GAMBIARRA ISSO AQUI
+                        tile.tileView.entityAttached = ent;                       
+                    //boardController.AddEntity(currentCard, tile);
+                        Destroy(currentCard.gameObject);
+                        acting = false;
+                    //}).SetEase(Ease.InBack);
+                });
+                currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
+                currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
+
             });
-            currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
 
 
 

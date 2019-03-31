@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Board\BoardController.cs" />
     <Compile Include="Assets\Scripts\Board\BoardInput.cs" />
     <Compile Include="Assets\Scripts\Board\Card\AllCards.cs" />
+    <Compile Include="Assets\Scripts\Board\Card\AttackZonesCardView.cs" />
     <Compile Include="Assets\Scripts\Board\Card\Card.cs" />
     <Compile Include="Assets\Scripts\Board\Card\Card3D.cs" />
     <Compile Include="Assets\Scripts\Board\Card\CardDynamicData.cs" />

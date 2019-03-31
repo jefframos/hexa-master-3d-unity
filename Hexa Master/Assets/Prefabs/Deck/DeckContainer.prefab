@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckBuilder: {fileID: 779553125694583440}
-  cardsDistance: 1.6
+  cardsDistance: 1.2
   cardsRotation: -34
   cardsArc: -7.08
   cardScale: 1.1

@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour
     {
         card = _card;
         tileModel.card = card;
+        //tileView.entityAttached =
     }
 }
 

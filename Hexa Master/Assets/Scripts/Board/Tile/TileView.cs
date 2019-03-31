@@ -17,9 +17,11 @@ public class TileView : MonoBehaviour
     public Transform blockerContainer;
     private int maxColors = 32;
     public bool isBlock = false;
+    public EntityView entityAttached;
     // Start is called before the first frame update
     void Start()
     {
+        entityAttached = null;
         mainMaterial = mainRenderer.GetComponent<Renderer>().material;
         Vector2 offs = mainMaterial.mainTextureOffset;
         offs.x = maxColors / 256f * 3f;
@@ -39,21 +41,28 @@ public class TileView : MonoBehaviour
     }
     public void OnOver()
     {
+        if (entityAttached)
+        {
+            entityAttached.OnOver();
+        }
         mainMaterial.DOColor(mouseOverColor, 0.5f);
-        outline.enabled = true;
+        //outline.enabled = true;
     }
 
     public void OnOut()
     {
+        if (entityAttached)
+        {
+            entityAttached.OnOut();
+        }
         mainMaterial.DOColor(Color.white, 0.5f);
         outline.enabled = false;
     }
 
     public void OnHighlight()
     {
-
         mainMaterial.DOColor(highlightColor, 0.5f);
-        outline.enabled = true;
+        //outline.enabled = true;
     }
     public void OnClear()
     {
