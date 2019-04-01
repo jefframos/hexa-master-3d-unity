@@ -35,7 +35,12 @@ public class TileView : MonoBehaviour
     {
         if (v)
         {
-            GameObject cardTransform = Instantiate(blockersList[Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+            GameObject blockTransform = Instantiate(blockersList[Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+            blockTransform.layer = LayerMask.NameToLayer("BoardLayerFront");
+            foreach (Transform child in blockTransform.GetComponentsInChildren<Transform>(true))
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
+            }
             //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         }
     }
@@ -45,6 +50,7 @@ public class TileView : MonoBehaviour
         {
             entityAttached.OnOver();
         }
+        mainMaterial.DOKill();
         mainMaterial.DOColor(mouseOverColor, 0.5f);
         //outline.enabled = true;
     }
@@ -55,17 +61,22 @@ public class TileView : MonoBehaviour
         {
             entityAttached.OnOut();
         }
+        mainMaterial.DOKill();
         mainMaterial.DOColor(Color.white, 0.5f);
+        //mainMaterial.color = Color.white;
         outline.enabled = false;
     }
 
     public void OnHighlight()
     {
+        mainMaterial.DOKill();
         mainMaterial.DOColor(highlightColor, 0.5f);
         //outline.enabled = true;
     }
     public void OnClear()
     {
+        mainMaterial.DOKill();
+        //mainMaterial.color = Color.white;
         mainMaterial.DOColor(Color.white, 0.5f);
         outline.enabled = false;
         debug.text = "";

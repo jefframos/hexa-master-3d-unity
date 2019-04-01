@@ -12,6 +12,7 @@ public class CardDynamicData
     CardsDataManager cardsDataManager;
     public void SetData(CardStaticData _cardStaticData)
     {
+        teamID = 1;
         cardsDataManager = CardsDataManager.Instance;
         cardStaticData = _cardStaticData;
 

@@ -11,19 +11,23 @@ public class EntityView : MonoBehaviour
     public SpriteRenderer charSprite;
     public TextMeshPro statsLabel;
     AttackZonesCardView attackZones;
+    public Renderer teamMaterial;
     private float sin;
     private bool floating;
     private float startY;
+    CardDynamicData cardDynamicData;
     // Start is called before the first frame update
     void Start()
     {
         sin = 0;
         floating = false;
+
        
     }
-
-    public void SetData(CardStaticData cardStaticData, CardDynamicData cardDynamicData)
+    
+    public void SetData(CardStaticData cardStaticData, CardDynamicData _cardDynamicData)
     {
+        cardDynamicData = _cardDynamicData;
         startY = charSprite.transform.localPosition.y;
         var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
         charSprite.sprite = sp;
@@ -35,7 +39,14 @@ public class EntityView : MonoBehaviour
         attackZones = GetComponentInChildren<AttackZonesCardView>();
         attackZones.setZones(cardDynamicData.sideList);
         attackZones.SetInGameMode();
-        
+
+        ApplyTeamColor();
+    }
+    public void ApplyTeamColor()
+    {
+        Vector2 offs = teamMaterial.material.mainTextureOffset;
+        offs.x = 32f / 256f * (float)cardDynamicData.teamID;
+        teamMaterial.material.mainTextureOffset = offs;
     }
     public void EnableFloating()
     {

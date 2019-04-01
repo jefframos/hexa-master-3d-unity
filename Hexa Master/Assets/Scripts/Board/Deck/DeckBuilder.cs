@@ -12,6 +12,7 @@ public class DeckBuilder : MonoBehaviour
     CardsDataManager cardsDataManager;
     List<Card3D> handDeck;
     public int maxInHand = 5;
+    public int teamID = 1;
     private int maxInHandDefault = 5;
     private int currentCardID = 0;
     List<CardStaticData> deck;
@@ -54,7 +55,7 @@ public class DeckBuilder : MonoBehaviour
         levels[0] = 1;
         levels[1] = 2;
         levels[2] = 3;
-        deck = cardsDataManager.GetRandomDeck(8, levels);
+        deck = cardsDataManager.GetRandomDeck(15, levels);
         currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)
@@ -86,7 +87,7 @@ public class DeckBuilder : MonoBehaviour
         GameObject cardTransform = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, deckContainer);
         cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         Card3D card = cardTransform.GetComponent<Card3D>();
-        card.SetData(data);
+        card.SetData(data, teamID);
         card.cardID = CARD_ID_COUNTER;
         CARD_ID_COUNTER++;
         currentCardID++;

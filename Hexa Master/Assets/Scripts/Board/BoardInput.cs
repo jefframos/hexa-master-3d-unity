@@ -52,6 +52,7 @@ public class BoardInput : MonoBehaviour
 
                 if (tempTile != null)
                 {
+
                     if (tempTile.isBlock)
                     {
                         NoTileOver();
@@ -80,6 +81,10 @@ public class BoardInput : MonoBehaviour
     }
     void TileSelect(Tile tile)
     {
+        if (tile.hasCard)
+        {
+            return;
+        }
         if (currentTileSelected != tile)
         {
             currentTileSelected = tile;

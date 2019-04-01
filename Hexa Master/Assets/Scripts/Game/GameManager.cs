@@ -13,13 +13,19 @@ public class GameManager : MonoBehaviour
     public Tile currentTile;
     Card3D currentCard;
     private bool acting = false;
+    public List<GameObject> decksTransform;
+    private int currentTeam = 0;
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 300;
         boardController = BoardController.Instance;
         boardInput.onTileOver.AddListener(OnTileOver);
         boardInput.onTileOut.AddListener(OnTileOut);
         boardInput.onTileSelected.AddListener(SelectTile);
+
+        //Invoke("UpdateCurrentTeam", 1f);
+        //UpdateCurrentTeam();
     }
 
     public void SetCurrentCard(Card3D card)
@@ -31,6 +37,9 @@ public class GameManager : MonoBehaviour
         currentTile = tile;
         if (currentCard)
         {
+            currentCard.cardDynamicData.teamID = 1 + currentTeam * 3;
+            //NOW THEY ARE DIFFERENT TEAMS, MAKE THE MAGIC HAPPENS AND CREATE ANOTHER CLASS TO MANAGE THIS
+            Debug.Log("READ THE COMMENTS HERE");
             acting = true;
             deckInput.SetBlock();
             deckView.RemoveCurrentCard();
@@ -75,11 +84,26 @@ public class GameManager : MonoBehaviour
             });
 
 
-
+            currentTeam++;
+            currentTeam %= decksTransform.Count;
+            //UpdateCurrentTeam();
         }
 
     }
-
+    void UpdateCurrentTeam()
+    {
+        for (int i = 0; i < decksTransform.Count; i++)
+        {
+            if(i == currentTeam)
+            {
+                decksTransform[i].SetActive(true);
+            }
+            else
+            {
+                decksTransform[i].SetActive(false);
+            }
+        }
+    }
     //void Remove
     void OnTileOut(Tile tile)
     {
@@ -91,10 +115,12 @@ public class GameManager : MonoBehaviour
         //{
         ClearAllNeighbors();
         //}
-        currentTile = tile;
-        currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
-
-        HighlightAllNeighbors();
+        if (!tile.hasCard)
+        {
+            currentTile = tile;
+            currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
+            HighlightAllNeighbors();
+        }        
 
         tile.tileView.OnOver();
 

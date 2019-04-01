@@ -17,7 +17,7 @@ public class Card3D : MonoBehaviour
     {
 
     }
-    public void SetData(CardStaticData _cardStaticData)
+    public void SetData(CardStaticData _cardStaticData, int teamID)
     {
         cardView = GetComponent<GameCardView3D>();
 
@@ -26,7 +26,7 @@ public class Card3D : MonoBehaviour
         cardStaticData = _cardStaticData;
         cardDynamicData.SetData(cardStaticData);
 
-
+        cardDynamicData.teamID = teamID;
         cardView.SetData(cardStaticData, cardDynamicData);
 
 
