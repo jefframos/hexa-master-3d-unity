@@ -859,7 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2071862510}
-  distance: {x: 0, y: -30, z: 29.3}
+  distance: {x: 0, y: -22, z: 25}
 --- !u!114 &1626273095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,12 +1213,12 @@ PrefabInstance:
     - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
         type: 3}
       propertyPath: boardData.lin
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
         type: 3}
       propertyPath: boardData.col
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f6285b83719b2b4d88aa738f78c8f4c, type: 3}

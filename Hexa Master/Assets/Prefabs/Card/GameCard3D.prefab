@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4987905363563913232}
   - component: {fileID: 6122424683353127348}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: cardBackSelected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 399155122427526402}
   - component: {fileID: 7102147337850585495}
   - component: {fileID: 3055387611582589819}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4786,7 +4786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3158591279683919190}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4817,7 +4817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8240246222520081432}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: attackZones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4853,7 +4853,7 @@ GameObject:
   - component: {fileID: 8613206588888539368}
   - component: {fileID: 6369800180314984690}
   - component: {fileID: 8963521998489366247}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GameCard3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5061,7 +5061,7 @@ GameObject:
   - component: {fileID: 8613206588896139185}
   - component: {fileID: 8613206588896139184}
   - component: {fileID: 8613206588896139187}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: AttackLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5267,7 +5267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589004421887}
   - component: {fileID: 8613206589004421884}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5351,7 +5351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589151164082}
   - component: {fileID: 8613206589151164083}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: star_gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5429,7 +5429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613206589296156336}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5465,7 +5465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589460725680}
   - component: {fileID: 8613206589460725681}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5543,7 +5543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8613206589801380868}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5578,7 +5578,7 @@ GameObject:
   - component: {fileID: 8613206589869352130}
   - component: {fileID: 8613206589869352133}
   - component: {fileID: 8613206589869352132}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: DefenseLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5784,7 +5784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589959919480}
   - component: {fileID: 8613206589959919481}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: star_gold (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5863,7 +5863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206589979831524}
   - component: {fileID: 8613206589979831525}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: defense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5943,7 +5943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590033342334}
   - component: {fileID: 8613206590033342335}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: CharSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6022,7 +6022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590087443310}
   - component: {fileID: 8613206590087443311}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: star_gold (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6101,7 +6101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590135352296}
   - component: {fileID: 8613206590135352297}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: star_gold (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6180,7 +6180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590636366398}
   - component: {fileID: 8613206590636366399}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6263,7 +6263,7 @@ GameObject:
   - component: {fileID: 8613206590872257462}
   - component: {fileID: 8613206590872257449}
   - component: {fileID: 8613206590872257448}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: RangeLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6469,7 +6469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613206590913054411}
   - component: {fileID: 8613206590913054408}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: star_gold (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6550,6 +6550,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackZones
       objectReference: {fileID: 0}
+    - target: {fileID: 6202624432795078298, guid: 445c02298096fbe44849d2086f6d5182,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6205800698905705724, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6605,35 +6610,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6205800698905705724, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 7050968878479833261, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.49141335
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 6205800698905705724, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 7460862755036068458, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2717486
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 6205800698905705724, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 8710131341733376691, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4618839
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 1373770185201328322, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 6293085744896949653, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.29
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 1373770185201328322, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 3758884243906016442, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.626
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 1373770185201328322, guid: 445c02298096fbe44849d2086f6d5182,
+    - target: {fileID: 1373770185201499362, guid: 445c02298096fbe44849d2086f6d5182,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.342
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 445c02298096fbe44849d2086f6d5182, type: 3}

@@ -261,6 +261,7 @@ MonoBehaviour:
   tileView: {fileID: 2844064886013899915}
   rnd: 0
   isBlock: 0
+  hasCard: 0
 --- !u!114 &221951875578451193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,14 +723,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -786,6 +779,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &255321218988946722 stripped
@@ -814,14 +815,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -879,6 +872,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fd94ddb5808b8cd48b2dff2d44991ce5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &4106079107083065282 stripped
@@ -907,14 +916,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -972,6 +973,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &6515318011934898380 stripped
@@ -1000,14 +1009,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1065,6 +1066,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &6917165208084628370 stripped
@@ -1094,18 +1103,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8082956ab1184b44facc19cd0c4ed72c, type: 2}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1162,6 +1159,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8082956ab1184b44facc19cd0c4ed72c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!1 &8598200183680925293 stripped

@@ -48,12 +48,12 @@ public class GameManager : MonoBehaviour
             currentCard.transform.SetParent(boardController.transform, true);
 
             //DO AMAZING ANIMATION HERE
-            foreach (Transform child in currentCard.GetComponentsInChildren<Transform>(true))
-            {
-                child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
-            }
+            //foreach (Transform child in currentCard.GetComponentsInChildren<Transform>(true))
+            //{
+            //    child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
+            //}
 
-            currentCard.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");//boardController.gameObject.layer;
+            //currentCard.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");//boardController.gameObject.layer;
             Vector3 target = tile.transform.position;
             target.y += 1.5f;
             float time = 0.75f;
