@@ -17,50 +17,28 @@ public class DeckView : MonoBehaviour
     private Card3D cardInFocusOld;
     List<Card3D> handDeck;
     private float outTimer = 0;
+    private bool blockMode = false;
     static float t = 0.0f;
     void Start()
     {
         handDeck = new List<Card3D>();
+        blockMode = false;
     }
 
-    
-    //void FocusMode()
-    //{
-    //    for (int i = 0; i < handDeck.Count; i++)
-    //    {
-    //        Card3D card = handDeck[i];
-    //        float targetY = -1f;
-    //        float focusDistance = cardsDistance * 0.8f;
-    //        float targetScale = 1f;
-    //        float targetAngle = 0f;
-    //        if (card.cardID == cardInFocus.cardID)
-    //        {
-    //            targetScale = 1.5f;
-    //            targetY = 1.2f;
-    //            card.SetOrder(maxInHand + 1);
-    //        }
-    //        else
-    //        {
-    //            targetScale = 0.85f;
-    //            card.SetOrder(i);
-    //        }
-    //        Vector3 scale = Vector3.Lerp(card.transform.localScale, new Vector3(targetScale, targetScale, targetScale), t); ;
-    //        card.transform.localScale = scale;
+    internal void SetBlock()
+    {
+        blockMode = true;
+    }
 
-    //        Vector3 rot = card.transform.eulerAngles;
-    //        float angle = Mathf.LerpAngle(card.transform.eulerAngles.z, targetAngle, t);
-    //        rot.z = angle;
-    //        card.transform.eulerAngles = rot;
+    internal void SetUnblock()
+    {
+        blockMode = false;
+    }
+    internal void SetUnblock(float v)
+    {
+        Invoke("SetUnblock", v);
+    }
 
-    //        float sin = Mathf.Abs(Mathf.Sin(angle / 180 * Mathf.PI));
-    //        Vector3 targetPosition = new Vector3(i * focusDistance - ((maxInHand - 1) * focusDistance / 2), 0, 0);
-    //        targetPosition.y += sin * cardsArc + targetY;
-    //        card.transform.localPosition = Vector3.Lerp(card.transform.localPosition, targetPosition, t);
-    //    }
-
-
-    //}
-    // Update is called once per frame
     void LateUpdate()
     {
         if (outTimer > 0 && cardInFocus)
@@ -72,7 +50,7 @@ public class DeckView : MonoBehaviour
                 cardInFocusOld = null;
             }
         }
-        t = 0.2f;//+= 0.5f * Time.deltaTime;
+        t = 0.15f;//+= 0.5f * Time.deltaTime;
         
         {
             for (int i = 0; i < handDeck.Count; i++)
@@ -167,7 +145,10 @@ public class DeckView : MonoBehaviour
             addY = 0.8f;
             order = maxInHand;
         }
-
+        if (blockMode)
+        {
+            addY = -2f;
+        }
         float targetScale = cardScale;
         Vector3 scale = Vector3.Lerp(card.transform.localScale, new Vector3(targetScale, targetScale, targetScale), t); ;
         card.transform.localScale = scale;
@@ -199,6 +180,11 @@ public class DeckView : MonoBehaviour
     {
         maxInHand = max;
         handDeck = deck;
+
+        for (int i = 0; i < handDeck.Count; i++)
+        {
+            handDeck[i].transform.localPosition = new Vector3(0, -1f, 0);
+        }
     }
     public void CardSelect(Card3D card)
     {

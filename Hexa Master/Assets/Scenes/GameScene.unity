@@ -310,6 +310,7 @@ MonoBehaviour:
   boardInput: {fileID: 1102314970}
   deckInput: {fileID: 1948993323}
   deckView: {fileID: 1948993322}
+  boardView: {fileID: 1081884643}
   currentNeighborsList:
     topLeft: []
     topRight: []
@@ -425,6 +426,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 1626273092}
+--- !u!114 &1081884643 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1081884643, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 999218261641698153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54e7b5585c97514fb9e7c050d2a75b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1102314970 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1102314970, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
@@ -1199,26 +1212,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 999218261714086755, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
-        type: 3}
-      propertyPath: tileData.height
-      value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
-        type: 3}
-      propertyPath: boardData.lin
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
-        type: 3}
-      propertyPath: boardData.col
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f6285b83719b2b4d88aa738f78c8f4c, type: 3}

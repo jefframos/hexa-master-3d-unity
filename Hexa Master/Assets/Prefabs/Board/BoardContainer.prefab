@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &999218261714086754
 Transform:
   m_ObjectHideFlags: 0
@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 999218262737643187}
   - component: {fileID: 1102314970}
   - component: {fileID: 1102314972}
+  - component: {fileID: 1081884643}
   m_Layer: 10
   m_Name: BoardContainer
   m_TagString: Untagged
@@ -127,12 +128,9 @@ MonoBehaviour:
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
   boardData:
-    lin: 6
-    col: 10
-  tileData:
-    width: 1
-    height: 1
-    scale: 1
+    lin: 5
+    col: 7
+  boardView: {fileID: 1081884643}
 --- !u!114 &1102314970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +174,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075eb3ef494c383448b0f8e7a47da5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1081884643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999218262737643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54e7b5585c97514fb9e7c050d2a75b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileData:
+    width: 1
+    height: 0.85
+    scale: 1
+  boardContainer: {fileID: 999218262737643186}
   entityPrefab: {fileID: 217470032729438371, guid: 3765e66545cbe5c419b47e4f5455b584,
     type: 3}
 --- !u!1 &7441892357872541875

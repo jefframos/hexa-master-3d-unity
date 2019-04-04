@@ -46,6 +46,8 @@ public class EntityView : MonoBehaviour
     {
         Vector2 offs = teamMaterial.material.mainTextureOffset;
         offs.x = 32f / 256f * (float)cardDynamicData.teamID;
+        Debug.Log(offs.x);
+
         teamMaterial.material.mainTextureOffset = offs;
     }
     public void EnableFloating()

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public BoardInput boardInput;
     public DeckInput deckInput;
     public DeckView deckView;
+    public BoardView boardView;
     BoardController boardController;
     public NeighborsArroundModel currentNeighborsList;
     public Tile currentTile;
@@ -24,8 +25,6 @@ public class GameManager : MonoBehaviour
         boardInput.onTileOut.AddListener(OnTileOut);
         boardInput.onTileSelected.AddListener(SelectTile);
 
-        //Invoke("UpdateCurrentTeam", 1f);
-        //UpdateCurrentTeam();
     }
 
     public void SetCurrentCard(Card3D card)
@@ -37,56 +36,21 @@ public class GameManager : MonoBehaviour
         currentTile = tile;
         if (currentCard)
         {
+            Debug.Log(currentTeam);
             currentCard.cardDynamicData.teamID = 1 + currentTeam * 3;
-            //NOW THEY ARE DIFFERENT TEAMS, MAKE THE MAGIC HAPPENS AND CREATE ANOTHER CLASS TO MANAGE THIS
-            Debug.Log("READ THE COMMENTS HERE");
-            acting = true;
             deckInput.SetBlock();
             deckView.RemoveCurrentCard();
-            currentTile.SetCard(currentCard);
-
-            currentCard.transform.SetParent(boardController.transform, true);
-
-            //DO AMAZING ANIMATION HERE
-            //foreach (Transform child in currentCard.GetComponentsInChildren<Transform>(true))
-            //{
-            //    child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
-            //}
-
-            //currentCard.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");//boardController.gameObject.layer;
-            Vector3 target = tile.transform.position;
-            target.y += 1.5f;
-            float time = 0.75f;
-
-            Vector3 currentPos = currentCard.transform.position;
-            currentPos.y += 1.5f;
-
-            currentCard.transform.DOScale(2f, time / 2);
-            //currentCard.transform.DOLocalRotate(new Vector3(currentCard.transform.localRotation.x, currentCard.transform.localRotation.y, 0), time / 2, RotateMode.Fast);//.SetEase(Ease.OutElastic);
-            currentCard.transform.DOMove(currentPos, time / 2).SetEase(Ease.OutBack).OnComplete(() =>
-            {
-                currentCard.transform.DOMove(target, time).OnComplete(() =>
-                {
-                    //currentCard.transform.DOMove(tile.transform.position, 0.35f).OnComplete(() =>
-                    //{
-                        deckInput.SetUnblock(1f);
-                        EntityView ent = boardController.AddEntity(currentCard, tile);
-                        //PUTA GAMBIARRA ISSO AQUI
-                        tile.tileView.entityAttached = ent;                       
-                    //boardController.AddEntity(currentCard, tile);
-                        Destroy(currentCard.gameObject);
-                        acting = false;
-                    //}).SetEase(Ease.InBack);
-                });
-                currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
-                currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
-
-            });
-
+            deckView.SetBlock();
+            acting = true;
+            boardController.PlaceCard(currentCard, tile);
+            boardView.PlaceCard(currentCard, tile, ()=> {
+                acting = false;
+                deckInput.SetUnblock();
+                deckView.SetUnblock(0.75f);
+            });      
 
             currentTeam++;
-            currentTeam %= decksTransform.Count;
-            //UpdateCurrentTeam();
+            currentTeam %= 2;// decksTransform.Count;
         }
 
     }
@@ -104,17 +68,15 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    //void Remove
+
     void OnTileOut(Tile tile)
     {
         ClearAllNeighbors();
     }
     void OnTileOver(Tile tile)
     {
-        //if (currentNeighborsList)
-        //{
         ClearAllNeighbors();
-        //}
+
         if (!tile.hasCard)
         {
             currentTile = tile;
@@ -123,10 +85,8 @@ public class GameManager : MonoBehaviour
         }        
 
         tile.tileView.OnOver();
-
-        //Debug.Log("TILE OVER "+tile.tileModel.i+" - "+ tile.tileModel.j);
-        //Debug.Log(currentNeighborsList);
     }
+
     void HighlightAllNeighbors()
     {
         currentNeighborsList.CapOnFirstBlock();

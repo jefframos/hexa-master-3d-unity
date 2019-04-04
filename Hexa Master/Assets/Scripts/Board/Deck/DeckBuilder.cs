@@ -12,6 +12,7 @@ public class DeckBuilder : MonoBehaviour
     CardsDataManager cardsDataManager;
     List<Card3D> handDeck;
     public int maxInHand = 5;
+    public int deckLenght = 15;
     public int teamID = 1;
     private int maxInHandDefault = 5;
     private int currentCardID = 0;
@@ -55,7 +56,7 @@ public class DeckBuilder : MonoBehaviour
         levels[0] = 1;
         levels[1] = 2;
         levels[2] = 3;
-        deck = cardsDataManager.GetRandomDeck(15, levels);
+        deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
         currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)

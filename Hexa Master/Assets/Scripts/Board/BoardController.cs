@@ -11,7 +11,7 @@ public class BoardController : Singleton<BoardController>
         public List<Tile> tiles;
     }
     List<List<Tile>> tileList;
-    public GameObject entityPrefab;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +22,12 @@ public class BoardController : Singleton<BoardController>
         tileList = _tileList;
     }
 
-    public EntityView AddEntity(Card3D card, Tile tile)
+    public void PlaceCard(Card3D card, Tile tile)
     {
-        GameObject cardTransform = Instantiate(entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
-        cardTransform.transform.localPosition = tile.transform.localPosition;
-        EntityView entity = cardTransform.GetComponent<EntityView>();
-        entity.SetData(card.cardStaticData, card.cardDynamicData);
-
-        return entity;
+        tile.SetCard(card);
     }
+
+    
 
     public NeighborModel GetTileOnSide(TileModel tile, SideType side, int distance = 1)
     {
