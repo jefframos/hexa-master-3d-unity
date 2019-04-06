@@ -10,7 +10,21 @@ public class Tile : MonoBehaviour
     public float rnd = 0;
     public bool isBlock = false;
     public bool hasCard = false;
-    Card3D card;
+    internal EntityView entityAttached;
+    internal Card3D card;
+    public void Reset()
+    {
+        //entityAttached = null;
+        //card = null;
+        //tileModel = null;
+        //tileView = null;
+        //isBlock = false;
+        //hasCard = false;
+    }
+    void Start()
+    {
+        tileView.tile = this;
+    }
     public void SetBlock(bool v)
     {
         isBlock = v;
@@ -23,6 +37,6 @@ public class Tile : MonoBehaviour
         hasCard = true;
         //tileView.entityAttached =
     }
-    
+
 }
 

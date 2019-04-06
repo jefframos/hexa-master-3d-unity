@@ -25,13 +25,89 @@ public class BoardView : MonoBehaviour
     public List<List<Tile>> tileList;
     public Transform boardContainer;
     public GameObject entityPrefab;
+    NeighborsArroundModel currentNeighborsList;
     // Start is called before the first frame update
     void Start()
     {
         built = false;
         boardController = BoardController.Instance;
+        currentNeighborsList = new NeighborsArroundModel();
     }
 
+    public void HighlightAllNeighbors(NeighborsArroundModel _currentNeighborsList, Card3D currentCard)
+    {
+        currentNeighborsList = _currentNeighborsList;
+        currentNeighborsList.CapOnFirstBlock();
+        //if (currentCard == null || acting)
+        //{
+        //    return;
+        //}
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
+        {
+            HighlightList(currentNeighborsList.topLeft, currentCard, "TL");
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopRight))
+        {
+            HighlightList(currentNeighborsList.topRight, currentCard, "TR");
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.Left))
+        {
+            HighlightList(currentNeighborsList.left, currentCard, "L");
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.Right))
+        {
+            HighlightList(currentNeighborsList.right, currentCard, "R");
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomLeft))
+        {
+            HighlightList(currentNeighborsList.bottomLeft, currentCard, "BL");
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomRight))
+        {
+            HighlightList(currentNeighborsList.bottomRight, currentCard, "BR");
+        }
+    }
+    public void HighlightList(List<NeighborModel> list, Card3D currentCard, string debug = "")
+    {
+        //for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (i < currentCard.cardStaticData.stats.range)
+            {
+                NeighborModel neighbor = list[i];
+                if (neighbor.tile)
+                {
+                    neighbor.tile.tileView.OnHighlight();
+                    neighbor.tile.tileView.debug.text = debug;
+                }
+            }
+
+        }
+    }
+
+    public void ClearAllNeighbors()
+    {        
+        ClearList(currentNeighborsList.topLeft);
+        ClearList(currentNeighborsList.topRight);
+        ClearList(currentNeighborsList.left);
+        ClearList(currentNeighborsList.right);
+        ClearList(currentNeighborsList.bottomLeft);
+        ClearList(currentNeighborsList.bottomRight);
+    }
+    public void ClearList(List<NeighborModel> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            NeighborModel neighbor = list[i];
+            if (neighbor.tile)
+            {
+                neighbor.tile.tileView.OnClear();
+
+            }
+        }
+    }
+
+    //END HIGHLIGHTINGS
 
     internal void SetTiles(List<List<Tile>> _tileList, int _lin, int _col)
     {
@@ -68,7 +144,11 @@ public class BoardView : MonoBehaviour
                 targetX = -col / 2 + j;
                 if(col % 2 != 0)
                 {
-                    targetX -= tileData.width / 2;
+                    targetX -= tileData.width - tileData.height;
+                }
+                else
+                {
+                    targetX += tileData.width - tileData.height;//0.15f;
                 }
                 targetZ = lin / 2 - i;
                 //targetZ = boardData.lin - i;
@@ -86,15 +166,10 @@ public class BoardView : MonoBehaviour
     internal void PlaceCard(Card3D currentCard, Tile tile, Action callback)
     {
         //NOW THEY ARE DIFFERENT TEAMS, MAKE THE MAGIC HAPPENS AND CREATE ANOTHER CLASS TO MANAGE THIS
-        Debug.Log("READ THE COMMENTS HERE");
-        //acting = true;
-        
-        //currentTile.SetCard(currentCard);
-
+        //Debug.Log("READ THE COMMENTS HERE");
         currentCard.transform.SetParent(boardContainer, true);
 
         //DO AMAZING ANIMATION HERE
-
         Vector3 target = tile.transform.position;
         target.y += 1.5f;
         float time = 0.75f;
@@ -108,17 +183,13 @@ public class BoardView : MonoBehaviour
         {
             currentCard.transform.DOMove(target, time).OnComplete(() =>
             {
-                //currentCard.transform.DOMove(tile.transform.position, 0.35f).OnComplete(() =>
-                //{
-                //deckInput.SetUnblock(1f);
+               
                 EntityView ent = AddEntity(currentCard, tile);
                 //PUTA GAMBIARRA ISSO AQUI
-                tile.tileView.entityAttached = ent;
+                tile.entityAttached = ent;
                 //boardController.AddEntity(currentCard, tile);
                 Destroy(currentCard.gameObject);
                 callback();
-                //acting = false;
-                //}).SetEase(Ease.InBack);
             });
             currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
             currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);

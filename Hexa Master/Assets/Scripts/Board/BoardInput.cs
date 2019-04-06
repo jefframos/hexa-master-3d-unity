@@ -45,7 +45,7 @@ public class BoardInput : MonoBehaviour
         for (int i = 0; i < collidableLayers.Count; i++)
         {
 
-            if (Physics.Raycast(ray, out hit, collidableLayers[i]))
+            if (Physics.Raycast(ray, out hit, 100f, collidableLayers[i]))
             {
 
                 tempTile = hit.transform.GetComponent<Tile>();

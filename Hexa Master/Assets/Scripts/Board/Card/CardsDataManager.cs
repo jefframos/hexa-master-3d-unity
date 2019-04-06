@@ -15,14 +15,36 @@ public class CardsDataManager : Singleton<CardsDataManager>
 
     private void LoadGameData()
     {
+        string dataAsJson;
         // Path.Combine combines strings into a file path
         // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build
+#if UNITY_EDITOR
         string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
+
+#elif UNITY_IOS
+        string filePath = Path.Combine (Application.streamingAssetsPath + "/Raw", gameDataFileName);
+ 
+#elif UNITY_ANDROID
+        string filePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath + "!assets/", gameDataFileName);
+ 
+#endif
+
 
         if (File.Exists(filePath))
         {
             // Read the json from the file into a string
-            string dataAsJson = File.ReadAllText(filePath);
+            //string dataAsJson = File.ReadAllText(filePath);
+
+
+#if UNITY_EDITOR || UNITY_IOS
+            dataAsJson = File.ReadAllText(filePath);
+
+#elif UNITY_ANDROID
+            WWW reader = new WWW (filePath);
+            while (!reader.isDone) {
+            }
+            dataAsJson = reader.text;
+#endif
 
             // Pass the json to JsonUtility, and tell it to create a GameData object from it
             allCards = JsonUtility.FromJson<AllCards>(dataAsJson);

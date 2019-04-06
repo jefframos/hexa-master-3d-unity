@@ -110,7 +110,7 @@ public class DeckView : MonoBehaviour
     {
 
     }
-
+    //remove card from hand to board
     public void RemoveCurrentCard()
     {
         if (cardSelected)
@@ -121,15 +121,12 @@ public class DeckView : MonoBehaviour
             {
                 handDeck.Add(newCard);
             }
-            Debug.Log("REMOVE");
         }
     }
-
+    //change maximum cards in hand, used to calculate position
     internal void changeCardsInHandTotal(int v)
     {
         maxInHand = v;
-
-        Debug.Log(maxInHand);
     }
 
 
@@ -137,7 +134,11 @@ public class DeckView : MonoBehaviour
     {
         //return;
         Card3D card = handDeck[i];
-
+        if (!card)
+        {
+            Debug.Log("ERROR HERE");
+            return;
+        }
         float addY = 0;
         int order = i;
         if (cardSelected && card.cardID == cardSelected.cardID)
@@ -188,6 +189,7 @@ public class DeckView : MonoBehaviour
     }
     public void CardSelect(Card3D card)
     {
+        Debug.Log("CARD SELECT");
         if(cardSelected == card)
         {
             cardSelected.cardView.OnUnSelect();

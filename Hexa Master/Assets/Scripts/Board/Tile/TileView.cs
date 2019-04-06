@@ -17,20 +17,24 @@ public class TileView : MonoBehaviour
     public Transform blockerContainer;
     private int maxColors = 32;
     public bool isBlock = false;
-    public EntityView entityAttached;
+    internal Tile tile;
+
+    // internal Tile tile;
     // Start is called before the first frame update
     void Start()
     {
-        entityAttached = null;
         mainMaterial = mainRenderer.GetComponent<Renderer>().material;
         Vector2 offs = mainMaterial.mainTextureOffset;
         offs.x = maxColors / 256f * 3f;
         mainMaterial.mainTextureOffset = offs;
         debug.text = "";
         outline.enabled = false;
+
+        
         //REVER ISSO, TAH BEM ESTRANHO AS TWEEN, PARECE UE TEM MUITA COISA CONFLITANDO
         //0.125
     }
+
     public void setBlock(bool v)
     {
         if (v)
@@ -46,9 +50,9 @@ public class TileView : MonoBehaviour
     }
     public void OnOver()
     {
-        if (entityAttached)
+        if (tile.entityAttached)
         {
-            entityAttached.OnOver();
+            tile.entityAttached.OnOver();
         }
         mainMaterial.DOKill();
         mainMaterial.DOColor(mouseOverColor, 0.5f);
@@ -57,9 +61,9 @@ public class TileView : MonoBehaviour
 
     public void OnOut()
     {
-        if (entityAttached)
+        if (tile.entityAttached)
         {
-            entityAttached.OnOut();
+            tile.entityAttached.OnOut();
         }
         mainMaterial.DOKill();
         mainMaterial.DOColor(Color.white, 0.5f);

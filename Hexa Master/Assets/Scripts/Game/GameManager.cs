@@ -6,15 +6,19 @@ using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     public BoardInput boardInput;
-    public DeckInput deckInput;
-    public DeckView deckView;
     public BoardView boardView;
     BoardController boardController;
+    public InGameHUD inGameHUD;
+    public RoundManager roundManager;
+
     public NeighborsArroundModel currentNeighborsList;
     public Tile currentTile;
-    Card3D currentCard;
+    public Card3D currentCard;
     private bool acting = false;
-    public List<GameObject> decksTransform;
+    public List<DeckView> deckViewList;
+    private DeckView currentDeckView;
+    private DeckInput currentDeckInput;
+
     private int currentTeam = 0;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +28,16 @@ public class GameManager : MonoBehaviour
         boardInput.onTileOver.AddListener(OnTileOver);
         boardInput.onTileOut.AddListener(OnTileOut);
         boardInput.onTileSelected.AddListener(SelectTile);
+        Invoke("StartGame", 0.2f);
 
+        //currentDeckView
+        //UpdateCurrentTeam();
+    }
+
+    void StartGame()
+    {
+        UpdateCurrentTeam();
+        inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
     }
 
     public void SetCurrentCard(Card3D card)
@@ -33,130 +46,72 @@ public class GameManager : MonoBehaviour
     }
     public void SelectTile(Tile tile)
     {
-        currentTile = tile;
-        if (currentCard)
+        if (currentDeckInput.mouseOverDeck)
         {
-            Debug.Log(currentTeam);
-            currentCard.cardDynamicData.teamID = 1 + currentTeam * 3;
-            deckInput.SetBlock();
-            deckView.RemoveCurrentCard();
-            deckView.SetBlock();
+            return;
+        }
+        currentTile = tile;
+        if(roundManager.CanPlance(tile, currentCard))
+        {
+            //currentCard.cardDynamicData.teamID = 1 + currentTeam * 3;
+            roundManager.DoRound(tile, currentNeighborsList, currentCard);
+            currentDeckInput.SetBlock();
+            currentDeckView.RemoveCurrentCard();
+            currentDeckView.SetBlock();
             acting = true;
             boardController.PlaceCard(currentCard, tile);
-            boardView.PlaceCard(currentCard, tile, ()=> {
+            boardView.PlaceCard(currentCard, tile, () =>
+            {
                 acting = false;
-                deckInput.SetUnblock();
-                deckView.SetUnblock(0.75f);
-            });      
+                currentDeckInput.SetUnblock();
+                currentDeckView.SetUnblock(0.75f);
+
+                Invoke("UpdateCurrentTeam", 0.5f);
+
+            });
 
             currentTeam++;
-            currentTeam %= 2;// decksTransform.Count;
+            currentTeam %= deckViewList.Count; //2;// decksTransform.Count;
+
+            //UpdateCurrentTeam();
         }
 
     }
     void UpdateCurrentTeam()
     {
-        for (int i = 0; i < decksTransform.Count; i++)
+        currentDeckView = deckViewList[currentTeam];
+        currentDeckInput = currentDeckView.GetComponent<DeckInput>();
+        for (int i = 0; i < deckViewList.Count; i++)
         {
             if(i == currentTeam)
             {
-                decksTransform[i].SetActive(true);
+                deckViewList[i].gameObject.SetActive(true);
             }
             else
             {
-                decksTransform[i].SetActive(false);
+                deckViewList[i].gameObject.SetActive(false);
             }
         }
     }
 
     void OnTileOut(Tile tile)
     {
-        ClearAllNeighbors();
+        boardView.ClearAllNeighbors();
     }
     void OnTileOver(Tile tile)
     {
-        ClearAllNeighbors();
+        boardView.ClearAllNeighbors();
 
-        if (!tile.hasCard)
+        if (!tile.hasCard && currentCard && !acting)
         {
             currentTile = tile;
             currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
-            HighlightAllNeighbors();
+            boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
         }        
 
         tile.tileView.OnOver();
     }
 
-    void HighlightAllNeighbors()
-    {
-        currentNeighborsList.CapOnFirstBlock();
-        if (currentCard == null ||acting)
-        {
-            return;
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
-        {
-            HighlightList(currentNeighborsList.topLeft, "TL");
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopRight))
-        {
-            HighlightList(currentNeighborsList.topRight, "TR");
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Left))
-        {
-            HighlightList(currentNeighborsList.left, "L");
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Right))
-        {
-            HighlightList(currentNeighborsList.right, "R");
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomLeft))
-        {
-            HighlightList(currentNeighborsList.bottomLeft, "BL");
-        }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomRight))
-        {
-            HighlightList(currentNeighborsList.bottomRight, "BR");
-        }
-    }
-    void HighlightList(List<NeighborModel> list, string debug = "")
-    {
-        //for (int i = 0; i < list.Count; i++)
-        for (int i = 0; i < list.Count; i++)
-        {
-            if (i < currentCard.cardStaticData.stats.range)
-            {
-                NeighborModel neighbor = list[i];
-                if (neighbor.tile)
-                {
-                    neighbor.tile.tileView.OnHighlight();
-                    neighbor.tile.tileView.debug.text = debug;
-                }
-            }
-
-        }
-    }
-
-    void ClearAllNeighbors()
-    {
-        ClearList(currentNeighborsList.topLeft);
-        ClearList(currentNeighborsList.topRight);
-        ClearList(currentNeighborsList.left);
-        ClearList(currentNeighborsList.right);
-        ClearList(currentNeighborsList.bottomLeft);
-        ClearList(currentNeighborsList.bottomRight);
-    }
-    void ClearList(List<NeighborModel> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            NeighborModel neighbor = list[i];
-            if (neighbor.tile)
-            {
-                neighbor.tile.tileView.OnClear();
-
-            }
-        }
-    }
+    
 
 }

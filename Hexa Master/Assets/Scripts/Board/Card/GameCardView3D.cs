@@ -84,7 +84,8 @@ public class GameCardView3D : MonoBehaviour
         //GameObject attackZones = Instantiate(attackZonesPrefab, new Vector3(0, 0, 0), Quaternion.identity, attackZonesParent);
         //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         attackZonesView = GetComponentInChildren<AttackZonesCardView>();
-        attackZonesView.setZones(cardDynamicData.sideList);
+        attackZonesView.SetZones(cardDynamicData.sideList);
+        attackZonesView.SetTeamID(cardDynamicData.teamID);
         attackZonesView.setDeckLayer();
         charSprite.sprite = sp;
         isSelected = false;

@@ -13,11 +13,18 @@ public class AttackZonesCardView : MonoBehaviour
     }
     public List<AttackZoneViewData> zones;
     public List<MeshRenderer> renderers;
+    public Renderer hexaRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        //hexaRenderer.sortingOrder = 0;
+    }
+    public void SetTeamID(int id)
+    {
+        Vector2 offs = hexaRenderer.material.mainTextureOffset;
+        offs.x = 8f / 256f * (float)id;
+        hexaRenderer.material.mainTextureOffset = offs;
     }
     public void SetInGameMode()
     {
@@ -35,7 +42,7 @@ public class AttackZonesCardView : MonoBehaviour
             renderers[i].material.color = tartgColor;
         }
     }
-    public void setZones(List<SideType> sides)
+    public void SetZones(List<SideType> sides)
     {   
         for (int i = 0; i < zones.Count; i++)
         {

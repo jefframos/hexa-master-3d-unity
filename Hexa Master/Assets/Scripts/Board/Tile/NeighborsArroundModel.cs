@@ -31,4 +31,33 @@ public class NeighborsArroundModel
             }
         }
     }
+    public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)
+    {
+        List<List<NeighborModel>> arroundsList = new List<List<NeighborModel>>();
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
+        {
+            arroundsList.Add(topLeft);
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopRight))
+        {
+            arroundsList.Add(topRight);
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.Left))
+        {
+            arroundsList.Add(left);
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.Right))
+        {
+            arroundsList.Add(right);
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomLeft))
+        {
+            arroundsList.Add(bottomLeft);
+        }
+        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomRight))
+        {
+            arroundsList.Add(bottomRight);
+        }
+        return arroundsList;
+    }
 }

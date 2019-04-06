@@ -16,13 +16,15 @@ public class DeckInput : MonoBehaviour
     [System.Serializable]
     public class CardEvent : UnityEvent<Card3D> { };
     public CardEvent onCardOver = new CardEvent();
-
     public CardEvent onCardOut = new CardEvent();
-
     public CardEvent onCardSelect = new CardEvent();
+    public CardEvent onBlockBoard = new CardEvent();
+    public CardEvent onUnblockBoard = new CardEvent();
 
+    public Transform deckBlocker;
     private List<int> collidableLayers;
     private bool block = false;
+    internal bool mouseOverDeck = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +32,7 @@ public class DeckInput : MonoBehaviour
         collidableLayers.Add(1 << LayerMask.NameToLayer("DeckLayer"));
     }
     void Update()
-    {
-        
+    {        
 
         if (block)
         {
@@ -46,13 +47,19 @@ public class DeckInput : MonoBehaviour
 
         var ray = deckCamera.ScreenPointToRay(Input.mousePosition);
 
+        bool hasBlock = false;
 
         for (int i = 0; i < collidableLayers.Count; i++)
         {
 
-            if (Physics.Raycast(ray, out hit, collidableLayers[i]))
+            if (Physics.Raycast(ray, out hit, 100f, collidableLayers[i]))
             {
 
+                if(deckBlocker == hit.transform)
+                {
+                    //Debug.Log("BLOCK");
+                    hasBlock = true;
+                }
                 //TO DO ARRUMAR ISSO AQUI
                 tempCard = hit.transform.GetComponentInChildren<Card3D>();
 
@@ -64,7 +71,8 @@ public class DeckInput : MonoBehaviour
                     }
                         
                      OnCardOver(tempCard);
-                   
+                    hasBlock = true;
+
                 }
             }
         }
@@ -73,6 +81,21 @@ public class DeckInput : MonoBehaviour
         {
             NoCardOver();
         }
+
+        if(mouseOverDeck != hasBlock)
+        {
+            mouseOverDeck = hasBlock;
+            if (mouseOverDeck)
+            {
+                onBlockBoard.Invoke(tempCard);
+            }
+            else
+            {
+                onUnblockBoard.Invoke(tempCard);
+            }
+        }
+
+        col = mouseOverDeck.ToString();
 
 
     }

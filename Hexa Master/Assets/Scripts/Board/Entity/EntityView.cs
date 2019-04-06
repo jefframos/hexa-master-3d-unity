@@ -15,7 +15,8 @@ public class EntityView : MonoBehaviour
     private float sin;
     private bool floating;
     private float startY;
-    CardDynamicData cardDynamicData;
+    public CardDynamicData cardDynamicData;
+    public CardStaticData cardStaticData;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +26,9 @@ public class EntityView : MonoBehaviour
        
     }
     
-    public void SetData(CardStaticData cardStaticData, CardDynamicData _cardDynamicData)
+    public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
     {
+        cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
         startY = charSprite.transform.localPosition.y;
         var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
@@ -37,7 +39,7 @@ public class EntityView : MonoBehaviour
         statsLabel.text = (cardStaticData.stats.attack / 10) + " / " + (cardStaticData.stats.defense / 10);
 
         attackZones = GetComponentInChildren<AttackZonesCardView>();
-        attackZones.setZones(cardDynamicData.sideList);
+        attackZones.SetZones(cardDynamicData.sideList);
         attackZones.SetInGameMode();
 
         ApplyTeamColor();
@@ -45,9 +47,7 @@ public class EntityView : MonoBehaviour
     public void ApplyTeamColor()
     {
         Vector2 offs = teamMaterial.material.mainTextureOffset;
-        offs.x = 32f / 256f * (float)cardDynamicData.teamID;
-        Debug.Log(offs.x);
-
+        offs.x = 8f / 256f * (float)cardDynamicData.teamID;
         teamMaterial.material.mainTextureOffset = offs;
     }
     public void EnableFloating()

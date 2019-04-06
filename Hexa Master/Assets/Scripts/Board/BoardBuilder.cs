@@ -19,18 +19,25 @@ public class BoardBuilder : MonoBehaviour
     {
         int accum = 0;
         int blockCounter = 0;
+        int tempCol = boardData.col;
         List<float> rndPos = new List<float>{ -0.1f, 0f, 0.1f };
         tileList = new List<List<Tile>>();
         for (int i = 0; i < boardData.lin; i++)
         {
             List<Tile> tiles = new List<Tile>();
 
-            for (int j = 0; j < boardData.col; j++)
+            tempCol = boardData.col;
+            if(i%2 != 0)
+            {
+                tempCol--;
+            }
+            for (int j = 0; j < tempCol; j++)
             {
 
                 GameObject tileTransform = Instantiate(TilePrefab, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
 
                 Tile tile = tileTransform.GetComponent<Tile>();
+                Debug.Log(tile.tileModel);
                 tile.tileModel.i = i;
                 tile.tileModel.j = j;
                 tile.tileModel.id = accum;
