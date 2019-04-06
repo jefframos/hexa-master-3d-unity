@@ -16,6 +16,7 @@ public class RoundManager : MonoBehaviour
         public Card3D card;
         public CardStaticData cardStatic;
         public CardDynamicData cardDynamic;
+        public SideType side;
     }
 
     void Start()
@@ -61,50 +62,6 @@ public class RoundManager : MonoBehaviour
             debug += "\n";
         }
 
-        //inGameHUD.DEBUG.text = debug;
-
-        //for (int i = 0; i < arroundsList.Count; i++)
-        //{
-        //    for (int j = 0; j < arroundsList[i].Count; j++)
-        //    {
-        //        if (arroundsList[i][j].tile && arroundsList[i][j].tile.hasCard)
-        //        {
-        //            if (DetectPossibleAttack(arroundsList[i][j].tile.tileModel.card, currentCard))
-        //            {
-        //                EnemiesAttackData enemyData = new EnemiesAttackData();
-        //                enemyData.tile = arroundsList[i][j].tile;
-        //                enemyData.cardStatic = arroundsList[i][j].tile.tileModel.card.cardStaticData;
-        //                enemyData.cardDynamic = arroundsList[i][j].tile.tileModel.card.cardDynamicData;
-        //                enemyData.dist = arroundsList[i][j].distance;
-
-        //                bool isPassive = true;
-        //                for (int k = 0; k < currentCardDynamicData.sideList.Count;k++)
-        //                {
-        //                    if (enemyData.cardDynamic.oppositeSideList.Contains(currentCardDynamicData.sideList[k]))
-        //                    {
-        //                        isPassive = false;
-        //                        break;
-        //                    }
-
-        //                }
-
-        //                if (isPassive)
-        //                {
-        //                    enemiesPassiveList.Add(enemyData);
-        //                }
-        //                else
-        //                {
-        //                    enemiesActiveList.Add(enemyData);
-
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //}
-
-        // inGameHUD.DEBUG
-
     }
     void GetAttackLists(List<List<NeighborModel>> arroundsList, CardDynamicData currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList)
     {
@@ -117,15 +74,10 @@ public class RoundManager : MonoBehaviour
         {
             debug += currentCardDynamicData.oppositeSideList[k].ToString();
             debug += "\n";
-            //if (enemyData.cardDynamic.oppositeSideList.Contains(currentCardDynamicData.sideList[k]))
-            //if (enemyData.cardDynamic.sideList.Contains(currentCardDynamicData.oppositeSideList[k]))
-            //{
-            //    isPassive = false;
-            //    break;
-            //}
-
 
         }
+
+        Debug.Log("STUCK HERE, something wrong getting the enemies arround");
 
         for (int i = 0; i < arroundsList.Count; i++)
         {
@@ -142,19 +94,23 @@ public class RoundManager : MonoBehaviour
                         enemyData.cardStatic = arroundsList[i][j].tile.tileModel.card.cardStaticData;
                         enemyData.cardDynamic = arroundsList[i][j].tile.tileModel.card.cardDynamicData;
                         enemyData.dist = arroundsList[i][j].distance;
+                        enemyData.side = arroundsList[i][j].side;
 
-                        bool isPassive = true;
-                        for (int k = 0; k < currentCardDynamicData.oppositeSideList.Count; k++)
-                        {
-                            //debug += currentCardDynamicData.oppositeSideList[k].ToString();
-                            //if (enemyData.cardDynamic.oppositeSideList.Contains(currentCardDynamicData.sideList[k]))
-                            if (enemyData.cardDynamic.sideList.Contains(currentCardDynamicData.oppositeSideList[k]))
-                            {
-                                isPassive = false;
-                                //break;
-                            }
+                        Debug.Log(enemyData.side);
+                        Debug.Log(enemyData.cardDynamic.sideList[0]);
 
-                        }
+                        bool isPassive = !enemyData.cardDynamic.sideList.Contains(enemyData.side);
+                        //for (int k = 0; k < currentCardDynamicData.oppositeSideList.Count; k++)
+                        //{
+                        //    //debug += currentCardDynamicData.oppositeSideList[k].ToString();
+                        //    //if (enemyData.cardDynamic.oppositeSideList.Contains(currentCardDynamicData.sideList[k]))
+                        //    if (enemyData.cardDynamic.sideList.Contains(currentCardDynamicData.oppositeSideList[k]))
+                        //    {
+                        //        isPassive = false;
+                        //        //break;
+                        //    }
+
+                        //}
 
                         if (isPassive)
                         {

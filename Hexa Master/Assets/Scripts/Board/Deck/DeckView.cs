@@ -136,7 +136,7 @@ public class DeckView : MonoBehaviour
         Card3D card = handDeck[i];
         if (!card)
         {
-            Debug.Log("ERROR HERE");
+            //Debug.Log("ERROR HERE");
             return;
         }
         float addY = 0;
@@ -189,7 +189,6 @@ public class DeckView : MonoBehaviour
     }
     public void CardSelect(Card3D card)
     {
-        Debug.Log("CARD SELECT");
         if(cardSelected == card)
         {
             cardSelected.cardView.OnUnSelect();

@@ -37,7 +37,6 @@ public class BoardBuilder : MonoBehaviour
                 GameObject tileTransform = Instantiate(TilePrefab, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
 
                 Tile tile = tileTransform.GetComponent<Tile>();
-                Debug.Log(tile.tileModel);
                 tile.tileModel.i = i;
                 tile.tileModel.j = j;
                 tile.tileModel.id = accum;
