@@ -62,29 +62,32 @@ public class CardsDataManager : Singleton<CardsDataManager>
      
         List<CardStaticData> deck = new List<CardStaticData>();
 
+        CardStaticData[] level1Copy = allCards.GetShuffleCopy(allCards.level1);
+        CardStaticData[] level2Copy = allCards.GetShuffleCopy(allCards.level2);
+        CardStaticData[] level3Copy = allCards.GetShuffleCopy(allCards.level3);
+        CardStaticData[] level4Copy = allCards.GetShuffleCopy(allCards.level4);
+        CardStaticData[] level5Copy = allCards.GetShuffleCopy(allCards.level5);
+
+        List<CardStaticData[]> allCardsList = new List<CardStaticData[]>
+        {
+            level1Copy,
+            level2Copy,
+            level3Copy,
+            level4Copy,
+            level5Copy
+        };
+
+        int aux = 0;
         for (int i = 0; i < tot; i++)
         {
             int id = levels[Random.Range(0, levels.Length)];
-            switch (id)
+            CardStaticData[] tempArray = allCardsList[id - 1];
+            aux = i;
+            if(aux > tempArray.Length - 1)
             {
-                case 1:
-                    deck.Add(allCards.level1[Random.Range(0, allCards.level1.Length)]);
-                    break;
-                case 2:
-                    deck.Add(allCards.level2[Random.Range(0, allCards.level2.Length)]);
-                    break;
-                case 3:
-                    deck.Add(allCards.level3[Random.Range(0, allCards.level3.Length)]);
-                    break;
-                case 4:
-                    deck.Add(allCards.level4[Random.Range(0, allCards.level4.Length)]);
-                    break;
-                case 5:
-                    deck.Add(allCards.level5[Random.Range(0, allCards.level5.Length)]);
-                    break;
-                default:
-                    break;
+                aux = Random.Range(0, tempArray.Length);
             }
+            deck.Add(tempArray[aux]);
         }
 
         return deck;

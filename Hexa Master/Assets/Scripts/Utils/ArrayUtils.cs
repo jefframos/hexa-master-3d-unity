@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 public static class ArrayUtils
 {
 
@@ -16,6 +15,17 @@ public static class ArrayUtils
             T value = list[k];
             list[k] = list[n];
             list[n] = value;
+        }
+    }
+
+    public static void Shuffle<T>(this Array[] arr)
+    {
+        for (var i = arr.Length - 1; i > 0; i--)
+        {
+            var r = rng.Next(i + 1);
+            var tmp = arr[i];
+            arr[i] = arr[r];
+            arr[r] = tmp;
         }
     }
 }

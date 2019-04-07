@@ -73,12 +73,13 @@
     <Compile Include="Assets\Scripts\Board\Card\CardStaticData.cs" />
     <Compile Include="Assets\Scripts\Board\Card\GameCardView.cs" />
     <Compile Include="Assets\Scripts\Board\Card\GameCardView3D.cs" />
-    <Compile Include="Assets\Scripts\Board\Card\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckInput.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
     <Compile Include="Assets\Scripts\Board\Entity\EntityView.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\AttackType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Player\TeamData.cs" />
     <Compile Include="Assets\Scripts\Board\Round\RoundManager.cs" />

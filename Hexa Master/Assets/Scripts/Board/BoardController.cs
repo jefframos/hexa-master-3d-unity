@@ -141,7 +141,7 @@ public class BoardController : Singleton<BoardController>
             }
 
         }
-
+        returnObject.AddListsOnList();
         return returnObject;
     }
 }

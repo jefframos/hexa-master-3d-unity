@@ -5,28 +5,133 @@ using UnityEngine;
 public class NeighborsArroundModel
 {
     public List<NeighborModel> topLeft = new List<NeighborModel>();
-    public List<NeighborModel> topRight  = new List<NeighborModel>();
-    public List<NeighborModel> left  = new List<NeighborModel>();
+    public List<NeighborModel> topRight = new List<NeighborModel>();
+    public List<NeighborModel> left = new List<NeighborModel>();
     public List<NeighborModel> right = new List<NeighborModel>();
-    public List<NeighborModel> bottomLeft  = new List<NeighborModel>();
-    public List<NeighborModel> bottomRight  = new List<NeighborModel>();
+    public List<NeighborModel> bottomLeft = new List<NeighborModel>();
+    public List<NeighborModel> bottomRight = new List<NeighborModel>();
+    public List<List<NeighborModel>> allLists = new List<List<NeighborModel>>();
+    public void AddListsOnList()
+    {
+        allLists = new List<List<NeighborModel>>();
+        allLists.Add(topLeft);
+        allLists.Add(topRight);
+        allLists.Add(left);
+        allLists.Add(right);
+        allLists.Add(bottomLeft);
+        allLists.Add(bottomRight);
+    }
+    public void AddListsOnBasedOnSideList(CardDynamicData data)
+    {
+        allLists = new List<List<NeighborModel>>();
+        for (int i = 0; i < data.sideList.Count; i++)
+        {
+            if (data.sideList[i] == SideType.TopLeft)
+            {
+                allLists.Add(topLeft);
+
+            }
+            if (data.sideList[i] == SideType.TopRight)
+            {
+                allLists.Add(topRight);
+
+            }
+            if (data.sideList[i] == SideType.Left)
+            {
+                allLists.Add(left);
+
+            }
+            if (data.sideList[i] == SideType.Right)
+            {
+                allLists.Add(right);
+
+            }
+            if (data.sideList[i] == SideType.BottomLeft)
+            {
+                allLists.Add(bottomLeft);
+
+            }
+            if (data.sideList[i] == SideType.BottomRight)
+            {
+                allLists.Add(bottomRight);
+
+            }
+        }
+
+    }
     public void CapOnFirstBlock()
     {
 
-        CapList(topLeft);
-        CapList(topRight);
-        CapList(left);
-        CapList(right);
-        CapList(bottomLeft);
-        CapList(bottomRight);
+        CapListOnBlock(topLeft);
+        CapListOnBlock(topRight);
+        CapListOnBlock(left);
+        CapListOnBlock(right);
+        CapListOnBlock(bottomLeft);
+        CapListOnBlock(bottomRight);
     }
-    void CapList(List<NeighborModel> list)
+    public void CapOnFirstFind()
+    {
+
+        CapListOnFirstFind(topLeft);
+        CapListOnFirstFind(topRight);
+        CapListOnFirstFind(left);
+        CapListOnFirstFind(right);
+        CapListOnFirstFind(bottomLeft);
+        CapListOnFirstFind(bottomRight);
+    }
+    public List<NeighborModel> GetAllEntitiesArroundOnly(int range = 1)
+    {
+        List<NeighborModel> rebounds = new List<NeighborModel>();
+        for (int i = 0; i < allLists.Count; i++)
+        {
+            for (int j = 0; j < allLists[i].Count; j++)
+            {
+                //if (j < range) continue;
+                if (allLists[i][j].tile && allLists[i][j].tile.hasCard)
+                {
+
+                    Debug.Log("distance is not working, sometimes if theres no enemi close, it jumps and get the next - " + allLists[i][j].distance);
+                    if (allLists[i][j].distance <= range)
+                    {
+                        rebounds.Add(allLists[i][j]);
+                    }
+                }
+            }
+        }
+        return rebounds;
+    }
+    void CapListOnBlock(List<NeighborModel> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
+            list[i].distance = 0 + 1;
             if (list[i].tile && list[i].tile.isBlock)
             {
                 list.RemoveRange(i, list.Count - i);
+                break;
+            }
+        }
+    }
+    void CapListOnFirstFind(List<NeighborModel> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].distance = 0 + 1;
+            if (list[i].tile && (list[i].tile.isBlock || list[i].tile.hasCard))
+            {
+                if (list[i].tile.hasCard)
+                {
+                    if (i < list.Count - 2)
+                    {
+                        //this line makes the last on the queue be the entity
+                        list.RemoveRange(i + 1, list.Count - (i + 1));
+                    }
+
+                }
+                else
+                {
+                    list.RemoveRange(i, list.Count - i);
+                }
                 break;
             }
         }
@@ -58,6 +163,7 @@ public class NeighborsArroundModel
         {
             arroundsList.Add(bottomRight);
         }
+        AddListsOnList();
         return arroundsList;
     }
 }

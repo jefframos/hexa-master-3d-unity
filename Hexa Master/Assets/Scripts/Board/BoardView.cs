@@ -37,7 +37,7 @@ public class BoardView : MonoBehaviour
     public void HighlightAllNeighbors(NeighborsArroundModel _currentNeighborsList, Card3D currentCard)
     {
         currentNeighborsList = _currentNeighborsList;
-        currentNeighborsList.CapOnFirstBlock();
+        currentNeighborsList.CapOnFirstFind();
         //if (currentCard == null || acting)
         //{
         //    return;
