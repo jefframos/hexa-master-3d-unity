@@ -52,6 +52,24 @@ MonoBehaviour:
   charSprite: {fileID: 7062718661661028864}
   statsLabel: {fileID: 1968176119048041319}
   teamMaterial: {fileID: 2044828679731249209}
+  cardStaticData:
+    name: 
+    number: 0
+    stats:
+      hp: 0
+      attack: 0
+      defense: 0
+      specAttack: 0
+      specDefense: 0
+      speed: 0
+      range: 0
+    level: 0
+    weaknes: 
+    types: 
+    thumb_url: 
+    image_url: 
+    classType: 
+    race: 0
 --- !u!1 &941337866456624053
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,16 +97,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941337866456624053}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.57125163, y: -0, z: -0, w: 0.820775}
+  m_LocalPosition: {x: 0, y: 0, z: -0.084}
   m_LocalScale: {x: 0.14935538, y: 0.14935538, z: 0.14935538}
   m_Children: []
   m_Father: {fileID: 7118140317249033425}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 69.675, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.16}
+  m_AnchoredPosition: {x: 0, y: 0.15886648}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &25901869670354657

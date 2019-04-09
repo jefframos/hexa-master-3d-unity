@@ -150,11 +150,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardState:
+    cardsDistance: 1.2
+    cardsRotation: -50
+    cardsArc: -1.84
+    cardScale: 1
+    targetY: 0
+    targetBlocker: {x: 0, y: -0.44, z: 0.45}
+  outState:
+    cardsDistance: 1
+    cardsRotation: -14.81
+    cardsArc: -0.38
+    cardScale: 0.82
+    targetY: -0.56
+    targetBlocker: {x: 0, y: -1.01, z: 0.45}
+  focusState:
+    cardsDistance: 1.2
+    cardsRotation: -50
+    cardsArc: -1.84
+    cardScale: 1.52
+    targetY: 0.75
+    targetBlocker: {x: 0, y: 0.69, z: 0.8}
+  selectedState:
+    cardsDistance: 0
+    cardsRotation: 0
+    cardsArc: 0
+    cardScale: 1.2
+    targetY: 0.5
+    targetBlocker: {x: 0, y: -0.05, z: 0.45}
+  blockTransform: {fileID: 7242529871041449202}
   deckBuilder: {fileID: 779553125694583440}
-  cardsDistance: 1.2
-  cardsRotation: -34
-  cardsArc: -7.08
-  cardScale: 1.1
   cardSelected: {fileID: 0}
 --- !u!1 &5705082694049801064
 GameObject:
@@ -182,13 +207,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5705082694049801064}
-  m_LocalRotation: {x: -0.55549765, y: -0.00000010401888, z: -0.0000001557047, w: 0.8315182}
-  m_LocalPosition: {x: 0, y: -0.12, z: 0.42}
+  m_LocalRotation: {x: -0.6937595, y: -0.00000012990914, z: -0.00000013486147, w: 0.72020674}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 0.31228402}
   m_Children: []
   m_Father: {fileID: 779553125694583441}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -67.49, y: 0, z: -0.000015258789}
+  m_LocalEulerAnglesHint: {x: -87.857, y: 0, z: 0}
 --- !u!33 &2711338524956877242
 MeshFilter:
   m_ObjectHideFlags: 0

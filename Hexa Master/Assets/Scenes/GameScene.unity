@@ -492,6 +492,7 @@ MonoBehaviour:
     level3: []
     level4: []
     level5: []
+  InGameHUD: {fileID: 1137696393}
 --- !u!4 &1109369719
 Transform:
   m_ObjectHideFlags: 0
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2071862510}
-  distance: {x: 0, y: -22, z: 25}
+  distance: {x: 0, y: -38, z: 20}
 --- !u!114 &1626273095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,6 +900,11 @@ PrefabInstance:
       propertyPath: onCardSelect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 394877962}
+    - target: {fileID: 2055207646618598473, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b770423cc284448a0a3bbf9fc8c9fb, type: 3}
 --- !u!1001 &999218261641698153
@@ -985,7 +991,7 @@ PrefabInstance:
     - target: {fileID: 999218262737643187, guid: 9f6285b83719b2b4d88aa738f78c8f4c,
         type: 3}
       propertyPath: boardData.col
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f6285b83719b2b4d88aa738f78c8f4c, type: 3}
@@ -1226,21 +1232,23 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1725843864, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
+    - target: {fileID: 353674147644705651, guid: c7360361a1b1b0045b29d48c0f8a6f13,
+        type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1725843864, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
+    - target: {fileID: 353674147644705651, guid: c7360361a1b1b0045b29d48c0f8a6f13,
+        type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1725843864, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
-      propertyPath: m_fontSize
-      value: 12
+    - target: {fileID: 323153577, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1725843864, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 12
+    - target: {fileID: 323153577, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7360361a1b1b0045b29d48c0f8a6f13, type: 3}

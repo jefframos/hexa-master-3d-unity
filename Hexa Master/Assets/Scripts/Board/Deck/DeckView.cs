@@ -6,11 +6,28 @@ using UnityEngine;
 public class DeckView : MonoBehaviour
 {
     // Start is called before the first frame update
+    [System.Serializable]
+    public class DeckStateConfig
+    {
+        public float cardsDistance = 1.2f;
+        public float cardsRotation = -50f;
+        public float cardsArc = -1.84f;
+        public float cardScale = 1f;
+        public float targetY = 0f;
+        public Vector3 targetBlocker = new Vector3(0, -0.05f, 0.45f);
+    }
+    public DeckStateConfig standardState;
+    public DeckStateConfig outState;
+    public DeckStateConfig focusState;
+    public DeckStateConfig selectedState;
+
+    private DeckStateConfig currentState;
+
+    public Transform blockTransform;
+
+    private DeckInput deckInput;
     public DeckBuilder deckBuilder;
-    public float cardsDistance = 2.5f;
-    public float cardsRotation = -50f;
-    public float cardsArc = -1.84f;
-    public float cardScale = 1f;
+
     private int maxInHand = 5;
     public Card3D cardSelected;
     private Card3D cardInFocus;
@@ -18,13 +35,34 @@ public class DeckView : MonoBehaviour
     List<Card3D> handDeck;
     private float outTimer = 0;
     private bool blockMode = false;
+    private bool overMode = false;
     static float t = 0.0f;
     void Start()
     {
         handDeck = new List<Card3D>();
         blockMode = false;
+
+        deckInput = GetComponent<DeckInput>();
+
+        deckInput.onBlockBoard.AddListener(DeckOut);
+        deckInput.onUnblockBoard.AddListener(DeckOver);
+
+        currentState = outState;
+
+        t = 0.115f;
+    }
+    
+    internal void DeckOver(Card3D card)
+    {
+        overMode = true;
+        currentState = outState;// standardState;
     }
 
+    internal void DeckOut(Card3D card)
+    {
+        overMode = false;
+        currentState = standardState;// outState;
+    }
     internal void SetBlock()
     {
         blockMode = true;
@@ -49,8 +87,7 @@ public class DeckView : MonoBehaviour
                 cardInFocus = null;
                 cardInFocusOld = null;
             }
-        }
-        t = 0.15f;//+= 0.5f * Time.deltaTime;
+        }        
         
         {
             for (int i = 0; i < handDeck.Count; i++)
@@ -66,25 +103,21 @@ public class DeckView : MonoBehaviour
         }
 
         if (cardInFocus)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                //Debug.Log("HOLDING CARD");
-            }
+        {           
             Focus();
-            //FocusMode();
+            blockTransform.localPosition = focusState.targetBlocker;
+        }
+        else
+        {
+            blockTransform.localPosition = currentState.targetBlocker;
         }
     }
     void Focus()
     {
-        //if(cardSelected && cardSelected == cardInFocus)
-        //{
-        //    return;
-        //}
         Card3D card = cardInFocus;
-        float targetY = 1.5f;
-        float focusDistance = cardsDistance * 0.8f;
-        float targetScale = cardScale * 1.5f;
+        float targetY = focusState.targetY;
+        float focusDistance = focusState.cardsDistance;//cardsDistance * 0.8f;
+        float targetScale = focusState.cardScale;//cardScale * 1.5f;
         float targetAngle = 0f;
         
         card.SetOrder(maxInHand + 1);
@@ -132,25 +165,22 @@ public class DeckView : MonoBehaviour
 
     void StandardMode(int i, bool debug = false)
     {
-        //return;
-        Card3D card = handDeck[i];
-        if (!card)
-        {
-            //Debug.Log("ERROR HERE");
-            return;
-        }
-        float addY = 0;
+        Card3D card = handDeck[i];       
+        float addY = currentState.targetY;
         int order = i;
+        float angleMult = 1f;
+        float targetScale = currentState.cardScale;
         if (cardSelected && card.cardID == cardSelected.cardID)
         {
-            addY = 0.8f;
+            addY = selectedState.targetY;
             order = maxInHand;
+            angleMult = selectedState.cardsRotation;
+            targetScale = selectedState.cardScale;
         }
         if (blockMode)
         {
             addY = -2f;
         }
-        float targetScale = cardScale;
         Vector3 scale = Vector3.Lerp(card.transform.localScale, new Vector3(targetScale, targetScale, targetScale), t); ;
         card.transform.localScale = scale;
 
@@ -158,22 +188,19 @@ public class DeckView : MonoBehaviour
         float tempRotation = 0;
         if(tempCardsInHand > 0)
         {
-            tempRotation = cardsRotation / tempCardsInHand * (i) - (cardsRotation / 2);
+            tempRotation = currentState.cardsRotation / tempCardsInHand * (i) - (currentState.cardsRotation / 2);
+            tempRotation *= angleMult;
         }
         
         float angle = Mathf.LerpAngle(card.transform.eulerAngles.z, tempRotation, t);
         float sin = Mathf.Abs(Mathf.Sin(angle / 180 * Mathf.PI));
 
-        //Debug.Log(sin);
-        //float adj
-        Vector3 targetPosition = new Vector3(i * cardsDistance - (tempCardsInHand * cardsDistance / 2), addY, 0);
-        targetPosition.y += sin * sin * cardsArc;// + sin * -5f;
+        float tempDistance = currentState.cardsDistance;
+        Vector3 targetPosition = new Vector3(i * tempDistance - (tempCardsInHand * tempDistance / 2), addY, 0);
+        targetPosition.y += sin * sin * currentState.cardsArc;
 
-        //Debug.Log(targetPosition);
         card.transform.localPosition = Vector3.Lerp(card.transform.localPosition, targetPosition, t);
-        card.transform.eulerAngles = new Vector3(65f, 0, angle);
-
-        
+        card.transform.eulerAngles = new Vector3(65f, 0, angle);        
         card.SetOrder(order);
     }
 
@@ -209,7 +236,7 @@ public class DeckView : MonoBehaviour
     }
     public void FocusCardOut(Card3D card)
     {
-        outTimer = 0.75f;
+        outTimer = 0.25f;
     }
     public void FocusCardOn(Card3D card)
     {
@@ -220,6 +247,5 @@ public class DeckView : MonoBehaviour
         cardInFocusOld = card;
         outTimer = 0;
         cardInFocus = card;
-        //card.transform.localScale = new Vector3(2, 5f, 2);
     }
 }

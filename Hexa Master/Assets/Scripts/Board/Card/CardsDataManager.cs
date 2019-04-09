@@ -8,6 +8,7 @@ public class CardsDataManager : Singleton<CardsDataManager>
     // Start is called before the first frame update
     public string gameDataFileName;
     public AllCards allCards;
+    public InGameHUD InGameHUD;
     void Start()
     {
         LoadGameData();
@@ -22,14 +23,15 @@ public class CardsDataManager : Singleton<CardsDataManager>
         string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
 
 #elif UNITY_IOS
-        string filePath = Path.Combine (Application.streamingAssetsPath + "/Raw", gameDataFileName);
+        string filePath = Path.Combine (Application.dataPath + "/Raw", gameDataFileName);
  
 #elif UNITY_ANDROID
-        string filePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath + "!assets/", gameDataFileName);
- 
+        string filePath = Path.Combine ("jar:file://" +Application.dataPath + "!assets/", gameDataFileName);
+ filePath = Application.streamingAssetsPath + gameDataFileName;
 #endif
-
-
+        InGameHUD.DEBUG.text += "\n";
+        InGameHUD.DEBUG.text += filePath;
+        InGameHUD.DEBUG.text += "\n";
         if (File.Exists(filePath))
         {
             // Read the json from the file into a string
@@ -45,13 +47,14 @@ public class CardsDataManager : Singleton<CardsDataManager>
             }
             dataAsJson = reader.text;
 #endif
-
+            InGameHUD.DEBUG.text += "Loaded";
             // Pass the json to JsonUtility, and tell it to create a GameData object from it
             allCards = JsonUtility.FromJson<AllCards>(dataAsJson);
             // Retrieve the allRoundData property of loadedData
         }
         else
         {
+            InGameHUD.DEBUG.text += "Cannot load game data!";
             Debug.LogError("Cannot load game data!");
         }
     }

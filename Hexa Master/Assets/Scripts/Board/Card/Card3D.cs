@@ -37,7 +37,7 @@ public class Card3D : MonoBehaviour
     {
         
         Vector3 orderPos = transform.localPosition;
-        orderPos.z = -order * 0.01f;
+        orderPos.z = -order * 0.2f;
 
         order += orderAdd;
         cardView.SetOrder(order);
