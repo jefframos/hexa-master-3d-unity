@@ -162,39 +162,63 @@ public class BoardView : MonoBehaviour
             }
         }
     }
-
-    internal void PlaceCard(Card3D currentCard, Tile tile, Action callback)
+    internal CommandDefault PlaceEntity(Card3D currentCard, Tile tile)
     {
+        CommandAddEntity.CommandEntityData data = new CommandAddEntity.CommandEntityData
+        {
+            currentCard = currentCard,
+            tile = tile,
+            entityPrefab = entityPrefab,
+            boardView = this
+        };
+
+        CommandAddEntity commandAdd = new CommandAddEntity();
+        commandAdd.SetData(data);
+
+        return commandAdd;
+    }
+    internal CommandDefault PlaceCard(Card3D currentCard, Tile tile)
+    {
+        CommandPlaceCard.CommandPlaceCardData data = new CommandPlaceCard.CommandPlaceCardData
+        {
+            currentCard = currentCard,
+            tile = tile,
+            boardContainer = boardContainer
+        };
+
+        CommandPlaceCard commandPlace = new CommandPlaceCard();
+        commandPlace.SetData(data);
+
+        return commandPlace;
+        
         //NOW THEY ARE DIFFERENT TEAMS, MAKE THE MAGIC HAPPENS AND CREATE ANOTHER CLASS TO MANAGE THIS
         //Debug.Log("READ THE COMMENTS HERE");
-        currentCard.transform.SetParent(boardContainer, true);
+        //currentCard.transform.SetParent(boardContainer, true);
 
-        //DO AMAZING ANIMATION HERE
-        Vector3 target = tile.transform.position;
-        target.y += 1.5f;
-        float time = 0.75f;
+        ////DO AMAZING ANIMATION HERE
+        //Vector3 target = tile.transform.position;
+        //target.y += 1.5f;
+        //float time = 0.75f;
 
-        Vector3 currentPos = currentCard.transform.position;
-        currentPos.y += 1.5f;
+        //Vector3 currentPos = currentCard.transform.position;
+        //currentPos.y += 1.5f;
 
-        currentCard.transform.DOScale(2f, time / 2);
-        //currentCard.transform.DOLocalRotate(new Vector3(currentCard.transform.localRotation.x, currentCard.transform.localRotation.y, 0), time / 2, RotateMode.Fast);//.SetEase(Ease.OutElastic);
-        currentCard.transform.DOMove(currentPos, time / 2).SetEase(Ease.OutBack).OnComplete(() =>
-        {
-            currentCard.transform.DOMove(target, time).OnComplete(() =>
-            {
-               
-                EntityView ent = AddEntity(currentCard, tile);
-                //PUTA GAMBIARRA ISSO AQUI
-                tile.entityAttached = ent;
-                //boardController.AddEntity(currentCard, tile);
-                Destroy(currentCard.gameObject);
-                callback();
-            });
-            currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
-            currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
+        //currentCard.transform.DOScale(2f, time / 2);
+        ////currentCard.transform.DOLocalRotate(new Vector3(currentCard.transform.localRotation.x, currentCard.transform.localRotation.y, 0), time / 2, RotateMode.Fast);//.SetEase(Ease.OutElastic);
+        //currentCard.transform.DOMove(currentPos, time / 2).SetEase(Ease.OutBack).OnComplete(() =>
+        //{
+        //    currentCard.transform.DOMove(target, time).OnComplete(() =>
+        //    {
 
-        });
+        //        EntityView ent = AddEntity(currentCard, tile);
+        //        tile.entityAttached = ent;
+        //        Destroy(currentCard.gameObject);
+        //        callback();
+        //    });
+        //    currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
+        //    currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
+
+        //});
 
     }
     public EntityView AddEntity(Card3D card, Tile tile)

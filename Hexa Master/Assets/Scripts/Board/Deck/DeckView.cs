@@ -35,7 +35,7 @@ public class DeckView : MonoBehaviour
     List<Card3D> handDeck;
     private float outTimer = 0;
     private bool blockMode = false;
-    private bool overMode = false;
+    //private bool overMode = false;
     static float t = 0.0f;
     void Start()
     {
@@ -54,13 +54,13 @@ public class DeckView : MonoBehaviour
     
     internal void DeckOver(Card3D card)
     {
-        overMode = true;
+        //overMode = true;
         currentState = outState;// standardState;
     }
 
     internal void DeckOut(Card3D card)
     {
-        overMode = false;
+        //overMode = false;
         currentState = standardState;// outState;
     }
     internal void SetBlock()

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public InGameHUD inGameHUD;
     public RoundManager roundManager;
 
+    public CommandList commandList;
+
     public NeighborsArroundModel currentNeighborsList;
     public Tile currentTile;
     public Card3D currentCard;
@@ -30,8 +32,13 @@ public class GameManager : MonoBehaviour
         boardInput.onTileSelected.AddListener(SelectTile);
         Invoke("StartGame", 0.2f);
 
+        //commandList = new CommandList();
+        commandList.Reset();
+        commandList.onFinishQueue.AddListener(OnFinishCommandQueue);
         //currentDeckView
         //UpdateCurrentTeam();
+
+        roundManager.onRoundReady.AddListener(OnRoundReady);
     }
 
     void StartGame()
@@ -44,6 +51,28 @@ public class GameManager : MonoBehaviour
     {
         currentCard = card;
     }
+    //finish to calc the round
+    void OnRoundReady(List<CommandDefault> roundCommands)
+    {
+        for (int i = 0; i < roundCommands.Count; i++)
+        {
+            commandList.AddCommand(roundCommands[i]);
+        }
+        commandList.Play();
+        currentTeam++;
+        currentTeam %= deckViewList.Count;
+    }
+    //finish command list, normally after a round
+    void OnFinishCommandQueue()
+    {
+        commandList.Reset();
+        acting = false;
+        currentDeckInput.SetUnblock();
+        currentDeckView.SetUnblock(0.15f);
+
+        Invoke("UpdateCurrentTeam", 0.1f);
+    }
+    //click on tile on board
     public void SelectTile(Tile tile)
     {
         if (currentDeckInput.mouseOverDeck)
@@ -51,29 +80,24 @@ public class GameManager : MonoBehaviour
             return;
         }
         currentTile = tile;
-        if(roundManager.CanPlance(tile, currentCard))
+        if (roundManager.CanPlance(tile, currentCard))
         {
-            //currentCard.cardDynamicData.teamID = 1 + currentTeam * 3;
-            roundManager.DoRound(tile, currentNeighborsList, currentCard);
             currentDeckInput.SetBlock();
             currentDeckView.RemoveCurrentCard();
             currentDeckView.SetBlock();
             acting = true;
             boardController.PlaceCard(currentCard, tile);
-            boardView.PlaceCard(currentCard, tile, () =>
-            {
-                acting = false;
-                currentDeckInput.SetUnblock();
-                currentDeckView.SetUnblock(0.75f);
 
-                Invoke("UpdateCurrentTeam", 0.5f);
+            commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
+            commandList.AddCommand(boardView.PlaceEntity(currentCard, tile)).AddCallback(() =>
+            {
+                commandList.Reset();
+                roundManager.DoRound(tile, currentNeighborsList, currentCard);
 
             });
 
-            currentTeam++;
-            currentTeam %= deckViewList.Count; //2;// decksTransform.Count;
 
-            //UpdateCurrentTeam();
+            commandList.Play(true);
         }
 
     }
@@ -83,7 +107,7 @@ public class GameManager : MonoBehaviour
         currentDeckInput = currentDeckView.GetComponent<DeckInput>();
         for (int i = 0; i < deckViewList.Count; i++)
         {
-            if(i == currentTeam)
+            if (i == currentTeam)
             {
                 deckViewList[i].gameObject.SetActive(true);
             }
@@ -107,11 +131,8 @@ public class GameManager : MonoBehaviour
             currentTile = tile;
             currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
-        }        
+        }
 
         tile.tileView.OnOver();
     }
-
-    
-
 }

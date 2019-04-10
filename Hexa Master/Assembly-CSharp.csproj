@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Board\Enum\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Player\TeamData.cs" />
+    <Compile Include="Assets\Scripts\Board\Round\EnemiesAttackData.cs" />
     <Compile Include="Assets\Scripts\Board\Round\RoundManager.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborsArroundModel.cs" />
@@ -91,6 +92,13 @@
     <Compile Include="Assets\Scripts\Camera\CameraCopy.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLook.cs" />
     <Compile Include="Assets\Scripts\Camera\DragCamera.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandAddEntity.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandAttack.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandDefault.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandList.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandPlaceCard.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandRebound.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandWait.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />
     <Compile Include="Assets\Scripts\HUD\TopHUD.cs" />

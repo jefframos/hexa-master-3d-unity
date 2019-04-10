@@ -109,34 +109,35 @@ public class BoardController : Singleton<BoardController>
         returnObject.bottomLeft.Add(GetTileOnSide(tile, SideType.BottomLeft, 1));
         returnObject.bottomRight.Add(GetTileOnSide(tile, SideType.BottomRight, 1));
 
-
+        int dist = 0;
         if (range > 1)
         {
             for (int i = 0; i < range; i++)
             {
+                dist = i + 2;
                 if (i < returnObject.topLeft.Count && returnObject.topLeft[i].tile != null)
                 {
-                    returnObject.topLeft.Add(GetTileOnSide(returnObject.topLeft[i].tile.tileModel, SideType.TopLeft, 1));
+                    returnObject.topLeft.Add(GetTileOnSide(returnObject.topLeft[i].tile.tileModel, SideType.TopLeft, dist));
                 }
                 if (i < returnObject.topRight.Count && returnObject.topRight[i].tile != null)
                 {
-                    returnObject.topRight.Add(GetTileOnSide(returnObject.topRight[i].tile.tileModel, SideType.TopRight, 1));
+                    returnObject.topRight.Add(GetTileOnSide(returnObject.topRight[i].tile.tileModel, SideType.TopRight, dist));
                 }
                 if (i < returnObject.left.Count && returnObject.left[i].tile != null)
                 {
-                    returnObject.left.Add(GetTileOnSide(returnObject.left[i].tile.tileModel, SideType.Left, 1));
+                    returnObject.left.Add(GetTileOnSide(returnObject.left[i].tile.tileModel, SideType.Left, dist));
                 }
                 if (i < returnObject.right.Count && returnObject.right[i].tile != null)
                 {
-                    returnObject.right.Add(GetTileOnSide(returnObject.right[i].tile.tileModel, SideType.Right, 1));
+                    returnObject.right.Add(GetTileOnSide(returnObject.right[i].tile.tileModel, SideType.Right, dist));
                 }
                 if (i < returnObject.bottomLeft.Count && returnObject.bottomLeft[i].tile != null)
                 {
-                    returnObject.bottomLeft.Add(GetTileOnSide(returnObject.bottomLeft[i].tile.tileModel, SideType.BottomLeft, 1));
+                    returnObject.bottomLeft.Add(GetTileOnSide(returnObject.bottomLeft[i].tile.tileModel, SideType.BottomLeft, dist));
                 }
                 if (i < returnObject.bottomRight.Count && returnObject.bottomRight[i].tile != null)
                 {
-                    returnObject.bottomRight.Add(GetTileOnSide(returnObject.bottomRight[i].tile.tileModel, SideType.BottomRight, 1));
+                    returnObject.bottomRight.Add(GetTileOnSide(returnObject.bottomRight[i].tile.tileModel, SideType.BottomRight, dist));
                 }
             }
 

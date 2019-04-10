@@ -53,8 +53,8 @@ public class DeckBuilder : MonoBehaviour
     void CreateCards()
     {
         int[] levels = new int[3];
-        levels[0] = 1;
-        levels[1] = 2;
+        levels[0] = 4;
+        levels[1] = 3;
         levels[2] = 3;
         deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
         currentCardID = 0;

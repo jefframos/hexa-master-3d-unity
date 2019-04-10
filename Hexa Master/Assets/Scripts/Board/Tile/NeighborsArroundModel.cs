@@ -86,11 +86,9 @@ public class NeighborsArroundModel
         {
             for (int j = 0; j < allLists[i].Count; j++)
             {
-                //if (j < range) continue;
                 if (allLists[i][j].tile && allLists[i][j].tile.hasCard)
                 {
 
-                    Debug.Log("distance is not working, sometimes if theres no enemi close, it jumps and get the next - " + allLists[i][j].distance);
                     if (allLists[i][j].distance <= range)
                     {
                         rebounds.Add(allLists[i][j]);

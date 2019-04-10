@@ -2,22 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RoundManager : MonoBehaviour
 {
     //Start is called before the first frame update
     public InGameHUD inGameHUD;
+    List<CommandDefault> roundCommands;
 
-    [System.Serializable]
-    public class EnemiesAttackData
-    {
-        public int dist;
-        public Tile tile;
-        public Card3D card;
-        public CardStaticData cardStatic;
-        public CardDynamicData cardDynamic;
-        public SideType sideAttack;
-    }
+    public class RoundEvent : UnityEvent<List<CommandDefault>> { };
+    public RoundEvent onRoundReady = new RoundEvent();
 
     void Start()
     {
@@ -41,33 +35,99 @@ public class RoundManager : MonoBehaviour
 
     internal void DoRound(Tile tile, NeighborsArroundModel currentNeighborsList, Card3D currentCard)
     {
+        roundCommands = new List<CommandDefault>();
         List<List<NeighborModel>> arroundsList = currentNeighborsList.GetCardArrounds(currentCard);
         CardDynamicData currentCardDynamicData = currentCard.cardDynamicData;
+        CardStaticData currentCardStaticData = currentCard.cardStaticData;
         GetAttackLists(arroundsList, currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList);
-        string debug = "";
-        if (enemiesActiveList.Count > 0)
-            debug += "Active List\n";
-        for (int i = 0; i < enemiesActiveList.Count; i++)
-        {
-            enemiesActiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
-            enemiesActiveList[i].tile.entityAttached.ApplyTeamColor();
-            Rebound(enemiesActiveList[i].tile);
-            debug += enemiesActiveList[i].cardStatic.name;
-            debug += "\n";
-        }
-        if (enemiesPassiveList.Count > 0)
-            debug += "Passive List\n";
-        for (int i = 0; i < enemiesPassiveList.Count; i++)
-        {
-            enemiesPassiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
-            enemiesPassiveList[i].tile.entityAttached.ApplyTeamColor();
-            debug += enemiesPassiveList[i].cardStatic.name;
-            debug += "\n";
-        }
 
-        inGameHUD.DEBUG.text = debug;
+        if (enemiesActiveList.Count > 8)
+        {
+
+        }
+        else
+        {
+            for (int i = 0; i < enemiesPassiveList.Count; i++)
+            {
+                roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID));
+            }
+
+
+            for (int i = 0; i < enemiesActiveList.Count; i++)
+            {
+                if (enemiesActiveList[i].cardStatic.stats.defense < currentCardStaticData.stats.attack)
+                {
+                    enemiesActiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
+                    roundCommands.Add(AddAttackCommand(enemiesActiveList[i], currentCardDynamicData.teamID));
+                    roundCommands.Add(AddReboundCommand(enemiesActiveList[i].tile, currentCardDynamicData.teamID));
+                }
+                else
+                {
+                    //enemiesActiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
+                    currentCardDynamicData.teamID = enemiesActiveList[i].cardDynamic.teamID;
+
+                    EnemiesAttackData selfData = new EnemiesAttackData
+                    {
+                        tile = tile,
+                        cardStatic = currentCardStaticData,
+                        cardDynamic = currentCardDynamicData,
+                        dist = 1,
+                        sideAttack = SideType.BottomLeft
+                    };
+
+                    roundCommands.Add(AddAttackCommand(selfData, enemiesActiveList[i].cardDynamic.teamID));
+                    roundCommands.Add(AddReboundCommand(selfData.tile, enemiesActiveList[i].cardDynamic.teamID));
+                }
+            }
+
+            Debug.Log("ROUND DONE HERE");
+            onRoundReady.Invoke(roundCommands);
+        }
+        
 
     }
+    private CommandDefault AddReboundCommand(Tile tile, int teamID)
+    {
+        List<NeighborModel> allArrounds = Rebound(tile, teamID);
+        CommandRebound.CommandReboundData data = new CommandRebound.CommandReboundData
+        {
+            allArrounds = allArrounds,
+            teamTarget = teamID
+        };
+
+        CommandRebound command = new CommandRebound();
+        command.SetData(data);
+        return command;
+    }
+
+    private CommandDefault AddAttackCommand(EnemiesAttackData enemieData, int teamTarget)
+    {
+        CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
+        {
+            attackData = enemieData,
+            teamTarget = teamTarget,
+            attackType = AttackType.Active
+        };
+
+        CommandAttack command = new CommandAttack();
+        command.SetData(data);
+        return command;
+    }
+
+    private CommandDefault AddPassiveAttackCommand(EnemiesAttackData enemieData, int teamTarget)
+    {
+        CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
+        {
+            attackData = enemieData,
+            teamTarget = teamTarget,
+            attackType = AttackType.Passive
+        };
+
+        CommandAttack command = new CommandAttack();
+        command.SetData(data);
+        return command;
+    }
+
     void GetAttackLists(List<List<NeighborModel>> arroundsList, CardDynamicData currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList)
     {
         enemiesActiveList = new List<EnemiesAttackData>();
@@ -117,17 +177,17 @@ public class RoundManager : MonoBehaviour
     }
 
     //internal List<Tile> Rebound(Tile tile)
-    internal void Rebound(Tile tile)
+    internal List<NeighborModel> Rebound(Tile tile, int id)
     {
         NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2);
         currentNeighborsList.AddListsOnBasedOnSideList(tile.entityAttached.cardDynamicData);
         List<NeighborModel> allArrounds = currentNeighborsList.GetAllEntitiesArroundOnly();
         for (int i = 0; i < allArrounds.Count; i++)
         {
-            allArrounds[i].tile.entityAttached.cardDynamicData.teamID = tile.entityAttached.cardDynamicData.teamID;
-            allArrounds[i].tile.entityAttached.ApplyTeamColor();
+            allArrounds[i].tile.entityAttached.cardDynamicData.teamID = id;// tile.entityAttached.cardDynamicData.teamID;
+            //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }
-
+        return allArrounds;
     }
 
     internal bool DetectPossibleAttack(Card3D target, CardDynamicData currentCardDynamicData)
