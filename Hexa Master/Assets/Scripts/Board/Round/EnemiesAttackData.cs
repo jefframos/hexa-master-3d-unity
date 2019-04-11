@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemiesAttackData
 {
     public int dist;
+    public Tile attacker;
     public Tile tile;
     public Card3D card;
     public CardStaticData cardStatic;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CommandAttack : CommandDefault
 {
@@ -8,6 +9,8 @@ public class CommandAttack : CommandDefault
     {
         internal EnemiesAttackData attackData;
         internal CardDynamicData currentCardDynamicData;
+        internal EntityView entityAttack;
+        internal EntityView entityDefense;
         internal AttackType attackType;
         internal int teamTarget;
     }
@@ -22,7 +25,7 @@ public class CommandAttack : CommandDefault
     }
     public override void Update()
     {
-        timer -= Time.deltaTime;
+        //timer -= Time.deltaTime;
         if(timer <= 0)
         {
             Kill();
@@ -45,7 +48,15 @@ public class CommandAttack : CommandDefault
             Debug.Log("ACTIVE");
 
         }
-
+        Vector3 target = data.entityDefense.transform.position - data.entityAttack.transform.position;
+        target += data.entityAttack.charSprite.transform.position;
+        Vector3 targetStartPosition = data.entityAttack.charSprite.transform.position;
+        data.entityAttack.charSprite.transform.DOMove(target, 0.25f).SetEase(Ease.InBack).OnComplete(() => {
+            data.entityDefense.GetAttack();
+        });
+        data.entityAttack.charSprite.transform.DOMove(targetStartPosition, 0.35f).SetEase(Ease.OutBack).SetDelay(0.25f).OnComplete(()=> {
+            Kill();
+        });
 
         base.Play();
         

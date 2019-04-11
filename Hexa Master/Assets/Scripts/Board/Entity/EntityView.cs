@@ -17,13 +17,15 @@ public class EntityView : MonoBehaviour
     private float startY;
     public CardDynamicData cardDynamicData;
     public CardStaticData cardStaticData;
+    public GameObject getAttackedParticla;
     // Start is called before the first frame update
     void Start()
     {
         sin = 0;
         floating = false;
+        getAttackedParticla.SetActive(false);
 
-       
+
     }
     
     public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
@@ -53,6 +55,17 @@ public class EntityView : MonoBehaviour
     public void EnableFloating()
     {
         floating = true;
+    }
+
+    internal void GetAttack()
+    {
+        getAttackedParticla.SetActive(true);
+        Invoke("RemoveParticles", 1f);
+
+    }
+    void RemoveParticles()
+    {
+        getAttackedParticla.SetActive(false);
     }
     // Update is called once per frame
     void Update()

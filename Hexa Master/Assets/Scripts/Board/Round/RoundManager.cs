@@ -49,7 +49,7 @@ public class RoundManager : MonoBehaviour
         {
             for (int i = 0; i < enemiesPassiveList.Count; i++)
             {
-                roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID));
+                roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID, tile));
             }
 
 
@@ -58,7 +58,7 @@ public class RoundManager : MonoBehaviour
                 if (enemiesActiveList[i].cardStatic.stats.defense < currentCardStaticData.stats.attack)
                 {
                     enemiesActiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
-                    roundCommands.Add(AddAttackCommand(enemiesActiveList[i], currentCardDynamicData.teamID));
+                    roundCommands.Add(AddAttackCommand(enemiesActiveList[i], currentCardDynamicData.teamID, tile));
                     roundCommands.Add(AddReboundCommand(enemiesActiveList[i].tile, currentCardDynamicData.teamID));
                 }
                 else
@@ -75,7 +75,7 @@ public class RoundManager : MonoBehaviour
                         sideAttack = SideType.BottomLeft
                     };
 
-                    roundCommands.Add(AddAttackCommand(selfData, enemiesActiveList[i].cardDynamic.teamID));
+                    roundCommands.Add(AddAttackCommand(selfData, enemiesActiveList[i].cardDynamic.teamID, tile));
                     roundCommands.Add(AddReboundCommand(selfData.tile, enemiesActiveList[i].cardDynamic.teamID));
                 }
             }
@@ -100,13 +100,17 @@ public class RoundManager : MonoBehaviour
         return command;
     }
 
-    private CommandDefault AddAttackCommand(EnemiesAttackData enemieData, int teamTarget)
+    private CommandDefault AddAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker)
     {
+        enemyData.attacker = attacker;
         CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
-        {
-            attackData = enemieData,
+        {            
+            attackData = enemyData,
             teamTarget = teamTarget,
-            attackType = AttackType.Active
+            attackType = AttackType.Active,
+            entityAttack = attacker.entityAttached,
+            entityDefense = enemyData.tile.entityAttached
+
         };
 
         CommandAttack command = new CommandAttack();
@@ -114,13 +118,16 @@ public class RoundManager : MonoBehaviour
         return command;
     }
 
-    private CommandDefault AddPassiveAttackCommand(EnemiesAttackData enemieData, int teamTarget)
+    private CommandDefault AddPassiveAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker)
     {
+        enemyData.attacker = attacker;
         CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
         {
-            attackData = enemieData,
+            attackData = enemyData,
             teamTarget = teamTarget,
-            attackType = AttackType.Passive
+            attackType = AttackType.Passive,
+            entityAttack = attacker.entityAttached,
+            entityDefense = enemyData.tile.entityAttached
         };
 
         CommandAttack command = new CommandAttack();
