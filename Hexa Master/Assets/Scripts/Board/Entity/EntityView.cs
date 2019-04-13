@@ -17,17 +17,24 @@ public class EntityView : MonoBehaviour
     private float startY;
     public CardDynamicData cardDynamicData;
     public CardStaticData cardStaticData;
-    public GameObject getAttackedParticla;
+    public GameObject getAttackedParticle;
+    public Transform blockView;
+    public TextMeshPro actionLabel;
+    public InteractiveObject interactive;
     // Start is called before the first frame update
     void Start()
     {
         sin = 0;
         floating = false;
-        getAttackedParticla.SetActive(false);
-
+        getAttackedParticle.SetActive(false);
+        blockView.gameObject.SetActive(false);
+        SetInteractive(false);
 
     }
-    
+    internal void SetInteractive(bool b)
+    {
+        interactive.gameObject.SetActive(b);
+    }
     public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
     {
         cardStaticData = _cardStaticData;
@@ -59,13 +66,34 @@ public class EntityView : MonoBehaviour
 
     internal void GetAttack()
     {
-        getAttackedParticla.SetActive(true);
+        getAttackedParticle.SetActive(true);
         Invoke("RemoveParticles", 1f);
 
     }
+    internal void CounterAttack()
+    {
+        actionLabel.text = "Counter";
+        blockView.gameObject.SetActive(true);
+        blockView.DOScale(Vector3.zero, 0.75f).SetEase(Ease.OutBack).From();
+        Invoke("HideBlock", 1f);
+
+    }
+    internal void BlockAttack()
+    {
+        actionLabel.text = "BLOCK";
+        blockView.gameObject.SetActive(true);
+        blockView.DOScale(Vector3.zero, 0.75f).SetEase(Ease.OutBack).From();
+        Invoke("HideBlock", 1f);
+
+    }
+    void HideBlock()
+    {
+        blockView.gameObject.SetActive(false);
+    }
+
     void RemoveParticles()
     {
-        getAttackedParticla.SetActive(false);
+        getAttackedParticle.SetActive(false);
     }
     // Update is called once per frame
     void Update()

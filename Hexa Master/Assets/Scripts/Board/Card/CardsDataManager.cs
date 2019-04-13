@@ -9,6 +9,7 @@ public class CardsDataManager : Singleton<CardsDataManager>
     public string gameDataFileName;
     public AllCards allCards;
     public InGameHUD InGameHUD;
+    List<CardStaticData[]> allCardsList = null;// = new List<CardStaticData[]>();
     void Start()
     {
         LoadGameData();
@@ -59,10 +60,36 @@ public class CardsDataManager : Singleton<CardsDataManager>
         }
     }
 
- 
+    public CardStaticData GetCardByID(int id)
+    {
+        if (allCardsList == null)
+        {
+            allCardsList = new List<CardStaticData[]>
+            {
+                allCards.level1,
+                allCards.level2,
+                allCards.level3,
+                allCards.level4,
+                allCards.level5
+            };
+        }
+
+        for (int i = 0; i < allCardsList.Count; i++)
+        {
+            for (int j = 0; j < allCardsList[i].Length; j++)
+            {
+                if (allCardsList[i][j].number == id)
+                {
+                    return allCardsList[i][j];
+                }
+            }
+        }
+
+        return allCardsList[0][0];
+    }
     public List<CardStaticData> GetRandomDeck(uint tot, int[] levels)
     {
-     
+
         List<CardStaticData> deck = new List<CardStaticData>();
 
         CardStaticData[] level1Copy = allCards.GetShuffleCopy(allCards.level1);
@@ -71,7 +98,7 @@ public class CardsDataManager : Singleton<CardsDataManager>
         CardStaticData[] level4Copy = allCards.GetShuffleCopy(allCards.level4);
         CardStaticData[] level5Copy = allCards.GetShuffleCopy(allCards.level5);
 
-        List<CardStaticData[]> allCardsList = new List<CardStaticData[]>
+        List<CardStaticData[]> allCardsRandomList = new List<CardStaticData[]>
         {
             level1Copy,
             level2Copy,
@@ -84,9 +111,9 @@ public class CardsDataManager : Singleton<CardsDataManager>
         for (int i = 0; i < tot; i++)
         {
             int id = levels[Random.Range(0, levels.Length)];
-            CardStaticData[] tempArray = allCardsList[id - 1];
+            CardStaticData[] tempArray = allCardsRandomList[id - 1];
             aux = i;
-            if(aux > tempArray.Length - 1)
+            if (aux > tempArray.Length - 1)
             {
                 aux = Random.Range(0, tempArray.Length);
             }
@@ -124,8 +151,8 @@ public class CardsDataManager : Singleton<CardsDataManager>
         }
         return oppSide;
     }
-        // Update is called once per frame
-        void Update()
+    // Update is called once per frame
+    void Update()
     {
 
     }

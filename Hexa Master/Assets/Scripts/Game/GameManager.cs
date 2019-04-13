@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     BoardController boardController;
     public InGameHUD inGameHUD;
     public RoundManager roundManager;
+    public MultipleAttackSelector multipleAttackSelector;
 
     public CommandList commandList;
 
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
         //UpdateCurrentTeam();
 
         roundManager.onRoundReady.AddListener(OnRoundReady);
+        roundManager.onMultipleAttack.AddListener(OnMultipleAttack);
+        multipleAttackSelector.onMultiplesReady.AddListener(MultipleAttackReady);
     }
 
     void StartGame()
@@ -51,6 +54,22 @@ public class GameManager : MonoBehaviour
     {
         currentCard = card;
     }
+    void MultipleAttackReady(List<EnemiesAttackData> attackList)
+    {
+        roundManager.GenerateRoundCommands(attackList, currentCard, currentTile);
+    }
+    void OnMultipleAttack(List<EnemiesAttackData> attackList)
+    {
+        List<EntityView> entities = new List<EntityView>();
+        for (int i = 0; i < attackList.Count; i++)
+        {
+            EnemiesAttackData element = attackList[i];
+            entities.Add(element.tile.entityAttached);
+        }
+
+        multipleAttackSelector.SetEntities(attackList);
+    }
+
     //finish to calc the round
     void OnRoundReady(List<CommandDefault> roundCommands)
     {
@@ -69,7 +88,7 @@ public class GameManager : MonoBehaviour
         acting = false;
         currentDeckInput.SetUnblock();
         currentDeckView.SetUnblock(0.15f);
-
+        boardInput.enabled = true;
         Invoke("UpdateCurrentTeam", 0.1f);
     }
     //click on tile on board
@@ -82,6 +101,8 @@ public class GameManager : MonoBehaviour
         currentTile = tile;
         if (roundManager.CanPlance(tile, currentCard))
         {
+            boardView.ClearAllNeighbors();
+            boardInput.enabled = false;
             currentDeckInput.SetBlock();
             currentDeckView.RemoveCurrentCard();
             currentDeckView.SetBlock();
@@ -129,7 +150,7 @@ public class GameManager : MonoBehaviour
         if (!tile.hasCard && currentCard && !acting)
         {
             currentTile = tile;
-            currentNeighborsList = boardController.GetNeighbours(tile.tileModel, 2);
+            currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
         }
 

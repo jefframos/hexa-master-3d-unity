@@ -297,6 +297,7 @@ Transform:
   m_Children:
   - {fileID: 1102314971}
   - {fileID: 1137696392}
+  - {fileID: 997429650}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,6 +317,7 @@ MonoBehaviour:
   boardView: {fileID: 1081884643}
   inGameHUD: {fileID: 1137696393}
   roundManager: {fileID: 1799880623}
+  multipleAttackSelector: {fileID: 997429651}
   commandList: {fileID: 1950913660}
   currentNeighborsList:
     topLeft: []
@@ -427,6 +429,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 1626273092}
+--- !u!1 &997429649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997429650}
+  - component: {fileID: 997429651}
+  m_Layer: 0
+  m_Name: FocusedTiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997429650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997429649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 394877961}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &997429651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997429649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bdadc4619817e42831da27c7eccc96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectorPrefab: {fileID: 2408920164781021197, guid: b80ba486534d50e48bfecc33790433b3,
+    type: 3}
 --- !u!114 &1081884643 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1081884643, guid: 9f6285b83719b2b4d88aa738f78c8f4c,

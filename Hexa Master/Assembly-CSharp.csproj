@@ -78,8 +78,10 @@
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
     <Compile Include="Assets\Scripts\Board\Entity\EntityView.cs" />
+    <Compile Include="Assets\Scripts\Board\EntitySelector\EntitySelectorView.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\AttackType.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\SideType.cs" />
+    <Compile Include="Assets\Scripts\Board\MultipleAttackSelector.cs" />
     <Compile Include="Assets\Scripts\Board\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Player\TeamData.cs" />
     <Compile Include="Assets\Scripts\Board\Round\EnemiesAttackData.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />
     <Compile Include="Assets\Scripts\HUD\TopHUD.cs" />
     <Compile Include="Assets\Scripts\Utils\ArrayUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\InteractiveObject.cs" />
     <Compile Include="Assets\Scripts\Utils\SimpleObjectPool.cs" />
     <Compile Include="Assets\Scripts\Utils\Singleton.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

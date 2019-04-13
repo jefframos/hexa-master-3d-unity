@@ -102,7 +102,7 @@ public class NeighborsArroundModel
     {
         for (int i = 0; i < list.Count; i++)
         {
-            list[i].distance = 0 + 1;
+            list[i].distance = i + 1;
             if (list[i].tile && list[i].tile.isBlock)
             {
                 list.RemoveRange(i, list.Count - i);
@@ -114,7 +114,7 @@ public class NeighborsArroundModel
     {
         for (int i = 0; i < list.Count; i++)
         {
-            list[i].distance = 0 + 1;
+            list[i].distance = i + 1;
             if (list[i].tile && (list[i].tile.isBlock || list[i].tile.hasCard))
             {
                 if (list[i].tile.hasCard)

@@ -57,6 +57,9 @@ public class DeckBuilder : MonoBehaviour
         levels[1] = 3;
         levels[2] = 3;
         deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
+        deck.Insert(0, cardsDataManager.GetCardByID(637));
+        deck.Insert(0, cardsDataManager.GetCardByID(291));
+        deck.Insert(0, cardsDataManager.GetCardByID(291));
         currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)
