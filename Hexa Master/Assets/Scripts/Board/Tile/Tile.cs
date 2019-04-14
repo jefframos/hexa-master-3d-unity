@@ -11,7 +11,8 @@ public class Tile : MonoBehaviour
     public bool isBlock = false;
     public bool hasCard = false;
     internal EntityView entityAttached;
-    internal Card3D card;
+    //internal Card3D card;
+    internal CardDynamicData cardDynamicData;
     public void Reset()
     {
         //entityAttached = null;
@@ -30,10 +31,22 @@ public class Tile : MonoBehaviour
         isBlock = v;
         tileView.setBlock(isBlock);
     }
-    public void SetCard(Card3D _card)
+    public bool TileFree()
     {
-        card = _card;
-        tileModel.card = card;
+        return !isBlock && !hasCard;
+    }
+    //public void SetCard(Card3D _card)
+    //{
+    //    card = _card;
+    //    tileModel.card = card;
+    //    hasCard = true;
+    //    //tileView.entityAttached =
+    //}
+
+    public void SetData(CardDynamicData _cardDynamicData)
+    {
+        cardDynamicData = _cardDynamicData;
+        tileModel.cardDynamicData = cardDynamicData;
         hasCard = true;
         //tileView.entityAttached =
     }

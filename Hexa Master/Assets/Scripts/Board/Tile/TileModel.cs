@@ -10,9 +10,8 @@ public class TileModel : MonoBehaviour
     public int id;
     public int type;
     public bool isBlock = false;
-    public Card3D card;
+    //public Card3D card;
     //public GameObject tileView;
     public string col = "";
-
-
+    internal CardDynamicData cardDynamicData;
 }

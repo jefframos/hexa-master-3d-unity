@@ -15,6 +15,7 @@ public class BoardBuilder : MonoBehaviour
     public BoardData boardData;
     public List<List<Tile>> tileList;
     public BoardView boardView;
+    public int maxBlocks = 3;
     void Start()
     {
         int accum = 0;
@@ -43,7 +44,7 @@ public class BoardBuilder : MonoBehaviour
                 tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
                 accum++;
                 tile.tileView.debugID.text = i + "-" + j;
-                if(Random.Range(0,1f) < 0.15f && blockCounter < 4)
+                if(Random.Range(0,1f) < 0.15f && blockCounter < maxBlocks)
                 {
                     tile.SetBlock(true);
                     blockCounter++;

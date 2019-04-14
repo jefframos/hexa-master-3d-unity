@@ -18,6 +18,7 @@ public class TileView : MonoBehaviour
     private int maxColors = 32;
     public bool isBlock = false;
     internal Tile tile;
+    public TileMarkerView tileMarker;
 
     // internal Tile tile;
     // Start is called before the first frame update
@@ -29,8 +30,8 @@ public class TileView : MonoBehaviour
         mainMaterial.mainTextureOffset = offs;
         debug.text = "";
         outline.enabled = false;
+        tileMarker.gameObject.SetActive(false);
 
-        
         //REVER ISSO, TAH BEM ESTRANHO AS TWEEN, PARECE UE TEM MUITA COISA CONFLITANDO
         //0.125
     }
@@ -69,16 +70,24 @@ public class TileView : MonoBehaviour
         mainMaterial.DOColor(Color.white, 0.5f);
         //mainMaterial.color = Color.white;
         outline.enabled = false;
+
+        tileMarker.Deactive();
+        //tileMarker.gameObject.SetActive(false);
     }
 
     public void OnHighlight()
     {
         mainMaterial.DOKill();
         mainMaterial.DOColor(highlightColor, 0.5f);
+
+        //tileMarker.Highlight();
         //outline.enabled = true;
     }
     public void OnClear()
     {
+
+        tileMarker.Deactive();
+
         mainMaterial.DOKill();
         //mainMaterial.color = Color.white;
         mainMaterial.DOColor(Color.white, 0.5f);

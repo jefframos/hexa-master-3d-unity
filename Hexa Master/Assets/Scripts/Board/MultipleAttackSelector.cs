@@ -21,21 +21,19 @@ public class MultipleAttackSelector : MonoBehaviour
     static int INTERACTIVE_ACC = 0;
     private int order = 1;
     // Start is called before the first frame update
-    void Start()
-    {
+    //void Start()
+    //{
 
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
 
-    }
+    //}
 
     void EntitySelected(InteractiveObject interactive)
     {
-        Debug.Log("problema no multiplo ataque. apos funcioanar uma vez, nada acontece na proxima, mas mesmo assim detecta o clique");
-        Debug.Log("Select "+ interactive.id);
         EntityView entityView = interactive.GetComponentInParent<EntityView>();
         for (int i = 0; i < selectors.Count; i++)
         {
@@ -85,6 +83,7 @@ public class MultipleAttackSelector : MonoBehaviour
         {
             EntityView entity = attackList[i].tile.entityAttached;
             entity.SetInteractive(true);
+            entity.interactive.onClick.RemoveAllListeners();
             entity.interactive.onClick.AddListener(EntitySelected);
 
             GameObject selectorTransform = Instantiate(SelectorPrefab, new Vector3(0, 0, 0), Quaternion.identity, entity.transform);

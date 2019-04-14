@@ -55,15 +55,16 @@ public class RoundManager : MonoBehaviour
         {
             roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID, tile));
         }
-        if(enemiesActiveList.Count > 0)
+        if (enemiesActiveList.Count > 0)
         {
-            if(enemiesActiveList.Count <= 1)
+            if (enemiesActiveList.Count <= 1)
             {
                 //onMultipleAttack.Invoke(enemiesActiveList);
-                 GenerateRoundCommands(enemiesActiveList[0], currentCard, tile);
-                 onRoundReady.Invoke(roundCommands);
+                GenerateRoundCommands(enemiesActiveList[0], currentCard, tile);
+                onRoundReady.Invoke(roundCommands);
             }
-            else{
+            else
+            {
                 onMultipleAttack.Invoke(enemiesActiveList);
             }
         }
@@ -87,7 +88,7 @@ public class RoundManager : MonoBehaviour
         CardDynamicData currentCardDynamicData = currentCard.cardDynamicData;
         CardStaticData currentCardStaticData = currentCard.cardStaticData;
 
-        if(targetAttack.cardDynamic.teamID == currentCardDynamicData.teamID)
+        if (targetAttack.cardDynamic.teamID == currentCardDynamicData.teamID)
         {
             return;
         }
@@ -122,10 +123,8 @@ public class RoundManager : MonoBehaviour
         {
             roundCommands.Add(AddAttackCommand(targetAttack, currentCardDynamicData.teamID, tile, true));
         }
-        
 
     }
-
 
     #region Commands
     private CommandDefault AddReboundCommand(Tile tile, int teamID)
@@ -215,7 +214,7 @@ public class RoundManager : MonoBehaviour
                 //if (!found) continue;
                 if (arroundsList[i][j].tile && arroundsList[i][j].tile.hasCard)
                 {
-                    if (!found && DetectPossibleAttack(arroundsList[i][j].tile.tileModel.card, currentCardDynamicData))
+                    if (!found && DetectPossibleAttack(arroundsList[i][j], currentCardDynamicData))
                     {
                         if (currentCardDynamicData.attackType == AttackType.AttackFirstFindOnly)
                         {
@@ -224,14 +223,13 @@ public class RoundManager : MonoBehaviour
                         EnemiesAttackData enemyData = new EnemiesAttackData
                         {
                             tile = arroundsList[i][j].tile,
-                            cardStatic = arroundsList[i][j].tile.tileModel.card.cardStaticData,
-                            cardDynamic = arroundsList[i][j].tile.tileModel.card.cardDynamicData,
+                            cardStatic = arroundsList[i][j].tile.tileModel.cardDynamicData.cardStaticData,
+                            cardDynamic = arroundsList[i][j].tile.tileModel.cardDynamicData,
                             dist = arroundsList[i][j].distance,
                             sideAttack = CardsDataManager.Instance.GetOppositeSide(arroundsList[i][j].side)
                         };
 
-                        bool isPassive = !enemyData.cardDynamic.sideList.Contains(enemyData.sideAttack);
-
+                        bool isPassive = CardsDataManager.Instance.IsPassiveAttack(enemyData.cardDynamic, enemyData.sideAttack);
                         if (isPassive)
                         {
                             enemiesPassiveList.Add(enemyData);
@@ -249,22 +247,30 @@ public class RoundManager : MonoBehaviour
     }
 
     //internal List<Tile> Rebound(Tile tile)
-    internal List<NeighborModel> Rebound(Tile tile, int id)
+    internal List<NeighborModel> Rebound(Tile tile, int teamID)
     {
+        Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/");
         NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2);
         currentNeighborsList.AddListsOnBasedOnSideList(tile.entityAttached.cardDynamicData);
         List<NeighborModel> allArrounds = currentNeighborsList.GetAllEntitiesArroundOnly();
         for (int i = 0; i < allArrounds.Count; i++)
         {
-            allArrounds[i].tile.entityAttached.cardDynamicData.teamID = id;// tile.entityAttached.cardDynamicData.teamID;
+            allArrounds[i].tile.entityAttached.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
             //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }
         return allArrounds;
     }
     #endregion
-    internal bool DetectPossibleAttack(Card3D target, CardDynamicData currentCardDynamicData)
+    internal bool DetectPossibleAttack(NeighborModel neighborModel, CardDynamicData currentCardDynamicData)
     {
-        return target.cardDynamicData.teamID != currentCardDynamicData.teamID;
+        CardDynamicData cardDynamicData = neighborModel.tile.tileModel.cardDynamicData;
+
+        if(neighborModel.distance > currentCardDynamicData.cardStaticData.stats.range)
+        {
+            return false;
+        }
+
+        return cardDynamicData.teamID != currentCardDynamicData.teamID;
 
     }
 }

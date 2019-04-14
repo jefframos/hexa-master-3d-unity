@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,6 +12,7 @@ public class NeighborsArroundModel
     public List<NeighborModel> bottomLeft = new List<NeighborModel>();
     public List<NeighborModel> bottomRight = new List<NeighborModel>();
     public List<List<NeighborModel>> allLists = new List<List<NeighborModel>>();
+    public List<NeighborModel> allEnemies = new List<NeighborModel>();
     public void AddListsOnList()
     {
         allLists = new List<List<NeighborModel>>();
@@ -57,11 +59,36 @@ public class NeighborsArroundModel
 
             }
         }
+        for (int i = 0; i < allLists.Count; i++)
+        {
+            Debug.Log(allLists[i].Count);
+            Debug.Log(data.cardStaticData.stats.range);
+            if(allLists[i].Count > data.cardStaticData.stats.range)
+            {
+                allLists[i].RemoveRange(data.cardStaticData.stats.range - 1, allLists[i].Count - data.cardStaticData.stats.range+1);
 
+            }
+        }
     }
+
+    internal List<NeighborModel> GetOnlyEnemiesConnected()
+    {
+        List<NeighborModel> connectedEnemies = new List<NeighborModel>();
+        for (int i = 0; i < allLists.Count; i++)
+        {
+            for (int j = 0; j < allLists[i].Count; j++)
+            {
+                if (allLists[i][j].tile && allLists[i][j].tile.hasCard)
+                {
+                    connectedEnemies.Add(allLists[i][j]);
+                }
+            }
+        }
+        return connectedEnemies;
+    }
+
     public void CapOnFirstBlock()
     {
-
         CapListOnBlock(topLeft);
         CapListOnBlock(topRight);
         CapListOnBlock(left);
@@ -69,8 +96,9 @@ public class NeighborsArroundModel
         CapListOnBlock(bottomLeft);
         CapListOnBlock(bottomRight);
     }
-    public void CapOnFirstFind()
+    public List<NeighborModel> CapOnFirstFind()
     {
+        allEnemies = new List<NeighborModel>();
 
         CapListOnFirstFind(topLeft);
         CapListOnFirstFind(topRight);
@@ -78,7 +106,10 @@ public class NeighborsArroundModel
         CapListOnFirstFind(right);
         CapListOnFirstFind(bottomLeft);
         CapListOnFirstFind(bottomRight);
+
+        return allEnemies;
     }
+  
     public List<NeighborModel> GetAllEntitiesArroundOnly(int range = 1)
     {
         List<NeighborModel> rebounds = new List<NeighborModel>();
@@ -119,6 +150,7 @@ public class NeighborsArroundModel
             {
                 if (list[i].tile.hasCard)
                 {
+                    allEnemies.Add(list[i]);
                     if (i < list.Count - 2)
                     {
                         //this line makes the last on the queue be the entity

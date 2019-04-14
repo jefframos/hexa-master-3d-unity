@@ -22,12 +22,30 @@ public class BoardController : Singleton<BoardController>
         tileList = _tileList;
     }
 
-    public void PlaceCard(Card3D card, Tile tile)
+    public void PlaceCard(CardDynamicData cardDynamicData, Tile tile)
     {
-        tile.SetCard(card);
+        tile.SetData(cardDynamicData);
+        //tile.SetCard(card);
     }
 
-    
+    public Tile GetRandomEmpryTile()
+    {
+        bool getTile = false;
+        int i = 0;
+        int j = 0;
+
+        while (!getTile)
+        {
+            i = Random.Range(0, tileList.Count);
+            j = Random.Range(0, tileList[i].Count);
+            if (tileList[i][j].TileFree())
+            {
+                getTile = true;
+            }
+        }
+        
+        return tileList[i][j];
+    }
 
     public NeighborModel GetTileOnSide(TileModel tile, SideType side, int distance = 1)
     {

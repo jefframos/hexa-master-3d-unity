@@ -152,8 +152,13 @@ public class CardsDataManager : Singleton<CardsDataManager>
         return oppSide;
     }
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
 
+    //}
+
+    internal bool IsPassiveAttack(CardDynamicData cardDynamic, SideType sideAttack)
+    {
+        return !cardDynamic.sideList.Contains(sideAttack);
     }
 }

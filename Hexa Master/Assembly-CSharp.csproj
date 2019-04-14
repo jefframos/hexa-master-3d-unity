@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Board\Tile\NeighborModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\NeighborsArroundModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\Tile.cs" />
+    <Compile Include="Assets\Scripts\Board\Tile\TileMarkerView.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\TileModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\TileView.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCopy.cs" />

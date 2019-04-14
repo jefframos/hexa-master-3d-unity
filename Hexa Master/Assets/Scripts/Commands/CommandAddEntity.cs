@@ -7,7 +7,9 @@ public class CommandAddEntity : CommandDefault
   
     internal class CommandEntityData
     {
-        internal Card3D currentCard;
+        //internal Card3D currentCard;
+        internal CardStaticData cardStaticData;
+        internal CardDynamicData cardDynamicData;
         internal Tile tile;
         internal BoardView boardView;
         internal GameObject entityPrefab;
@@ -25,18 +27,18 @@ public class CommandAddEntity : CommandDefault
         base.Play();
 
 
-        EntityView ent = AddEntity(data.currentCard, data.tile);
+        EntityView ent = AddEntity(data.tile);
         data.tile.entityAttached = ent;
 
         timer = 0.5f;
 
     }
-    EntityView AddEntity(Card3D card, Tile tile)
+    EntityView AddEntity(Tile tile)
     {
         GameObject cardTransform = Object.Instantiate(data.entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, data.boardView.transform);
         cardTransform.transform.localPosition = tile.transform.localPosition;
         EntityView entity = cardTransform.GetComponent<EntityView>();
-        entity.SetData(card.cardStaticData, card.cardDynamicData);
+        entity.SetData(data.cardStaticData, data.cardDynamicData);
 
         return entity;
     }

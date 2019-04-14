@@ -38,6 +38,57 @@ public class BoardView : MonoBehaviour
     {
         currentNeighborsList = _currentNeighborsList;
         currentNeighborsList.CapOnFirstFind();
+        currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
+
+        for (int i = 0; i < currentNeighborsList.allLists.Count; i++)
+        {
+            for (int j = 0; j < currentNeighborsList.allLists[i].Count; j++)
+            {
+                if (currentNeighborsList.allLists[i][j].tile && !currentNeighborsList.allLists[i][j].tile.hasCard)
+                {
+                    currentNeighborsList.allLists[i][j].tile.tileView.tileMarker.Highlight();
+
+                }
+            }
+        }
+
+        List<NeighborModel> enemies = currentNeighborsList.GetOnlyEnemiesConnected();
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].distance <= currentCard.cardDynamicData.cardStaticData.stats.range)
+            {
+                NeighborModel enemy = enemies[i];
+                if (enemy.tile.cardDynamicData.teamID != currentCard.cardDynamicData.teamID)
+                {
+
+                    bool isPassive = false;
+                    if (CardsDataManager.Instance.IsPassiveAttack(enemy.tile.cardDynamicData, CardsDataManager.Instance.GetOppositeSide(enemy.side)))
+                    {
+                        isPassive = true;
+                    }
+                    if (!isPassive && enemy.tile.cardDynamicData.cardStaticData.stats.defense >= currentCard.cardDynamicData.cardStaticData.stats.attack)
+                    {
+                        if (enemies[i].distance > 1)
+                        {
+                            enemy.tile.tileView.tileMarker.DrawPreview();
+                        }
+                        else
+                        {
+                            enemy.tile.tileView.tileMarker.LosePreview();
+
+                        }
+                    }
+                    else
+                    {
+                        enemy.tile.tileView.tileMarker.WinPreview();
+                    }
+                }
+
+            }
+
+            //Vector3 pos = enemy.tile.transform.localPosition;
+            //enemy.tile.transform.localPosition = pos;
+        }
         //if (currentCard == null || acting)
         //{
         //    return;
@@ -86,7 +137,7 @@ public class BoardView : MonoBehaviour
     }
 
     public void ClearAllNeighbors()
-    {        
+    {
         ClearList(currentNeighborsList.topLeft);
         ClearList(currentNeighborsList.topRight);
         ClearList(currentNeighborsList.left);
@@ -142,7 +193,7 @@ public class BoardView : MonoBehaviour
             for (int j = 0; j < element.Count; j++)
             {
                 targetX = -col / 2 + j;
-                if(col % 2 != 0)
+                if (col % 2 != 0)
                 {
                     targetX -= tileData.width - tileData.height;
                 }
@@ -162,11 +213,12 @@ public class BoardView : MonoBehaviour
             }
         }
     }
-    internal CommandDefault PlaceEntity(Card3D currentCard, Tile tile)
+    internal CommandDefault PlaceEntity(CardStaticData cardStaticData, CardDynamicData cardDynamicData, Tile tile)
     {
         CommandAddEntity.CommandEntityData data = new CommandAddEntity.CommandEntityData
         {
-            currentCard = currentCard,
+            cardDynamicData = cardDynamicData,
+            cardStaticData = cardStaticData,
             tile = tile,
             entityPrefab = entityPrefab,
             boardView = this
@@ -190,35 +242,6 @@ public class BoardView : MonoBehaviour
         commandPlace.SetData(data);
 
         return commandPlace;
-        
-        //NOW THEY ARE DIFFERENT TEAMS, MAKE THE MAGIC HAPPENS AND CREATE ANOTHER CLASS TO MANAGE THIS
-        //Debug.Log("READ THE COMMENTS HERE");
-        //currentCard.transform.SetParent(boardContainer, true);
-
-        ////DO AMAZING ANIMATION HERE
-        //Vector3 target = tile.transform.position;
-        //target.y += 1.5f;
-        //float time = 0.75f;
-
-        //Vector3 currentPos = currentCard.transform.position;
-        //currentPos.y += 1.5f;
-
-        //currentCard.transform.DOScale(2f, time / 2);
-        ////currentCard.transform.DOLocalRotate(new Vector3(currentCard.transform.localRotation.x, currentCard.transform.localRotation.y, 0), time / 2, RotateMode.Fast);//.SetEase(Ease.OutElastic);
-        //currentCard.transform.DOMove(currentPos, time / 2).SetEase(Ease.OutBack).OnComplete(() =>
-        //{
-        //    currentCard.transform.DOMove(target, time).OnComplete(() =>
-        //    {
-
-        //        EntityView ent = AddEntity(currentCard, tile);
-        //        tile.entityAttached = ent;
-        //        Destroy(currentCard.gameObject);
-        //        callback();
-        //    });
-        //    currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
-        //    currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);
-
-        //});
 
     }
     public EntityView AddEntity(Card3D card, Tile tile)

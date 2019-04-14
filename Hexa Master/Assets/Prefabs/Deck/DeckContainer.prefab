@@ -50,8 +50,9 @@ MonoBehaviour:
   cardPrefab: {fileID: 8613206588888539370, guid: 3f67992159454c84393f60e77d0775cd,
     type: 3}
   maxInHand: 5
-  deckLenght: 15
+  deckLenght: 12
   teamID: 18
+  starterIDS: 7d0200007d02000023010000
 --- !u!114 &3562676935163322406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,8 +176,8 @@ MonoBehaviour:
     cardsDistance: 0
     cardsRotation: 0
     cardsArc: 0
-    cardScale: 1.2
-    targetY: 0.5
+    cardScale: 1
+    targetY: 0.2
     targetBlocker: {x: 0, y: -0.05, z: 0.45}
   blockTransform: {fileID: 7242529871041449202}
   deckBuilder: {fileID: 779553125694583440}

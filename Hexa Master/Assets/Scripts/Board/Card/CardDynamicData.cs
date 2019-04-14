@@ -9,7 +9,7 @@ public class CardDynamicData
     public List<SideType> oppositeSideList;
     public int teamID;
     internal AttackType attackType = AttackType.AttackFirstFindOnly;
-    CardStaticData cardStaticData;
+    internal CardStaticData cardStaticData;
     CardsDataManager cardsDataManager;
     public void SetData(CardStaticData _cardStaticData)
     {

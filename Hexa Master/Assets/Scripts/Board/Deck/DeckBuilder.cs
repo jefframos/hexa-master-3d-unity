@@ -17,6 +17,7 @@ public class DeckBuilder : MonoBehaviour
     private int maxInHandDefault = 5;
     private int currentCardID = 0;
     List<CardStaticData> deck;
+    public List<int> starterIDS;
     void Start()
     {
         maxInHandDefault = maxInHand;
@@ -56,10 +57,13 @@ public class DeckBuilder : MonoBehaviour
         levels[0] = 4;
         levels[1] = 3;
         levels[2] = 3;
-        deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
-        deck.Insert(0, cardsDataManager.GetCardByID(637));
-        deck.Insert(0, cardsDataManager.GetCardByID(291));
-        deck.Insert(0, cardsDataManager.GetCardByID(291));
+        deck = cardsDataManager.GetRandomDeck((uint)(deckLenght - starterIDS.Count), levels);
+
+        for (int i = 0; i < starterIDS.Count; i++)
+        {
+            deck.Insert(0, cardsDataManager.GetCardByID(starterIDS[i]));
+        }
+
         currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)

@@ -43,11 +43,25 @@ public class GameManager : MonoBehaviour
         roundManager.onMultipleAttack.AddListener(OnMultipleAttack);
         multipleAttackSelector.onMultiplesReady.AddListener(MultipleAttackReady);
     }
+    void AddCardOnBoardById(int id)
+    {
+        CardStaticData cardStaticData = CardsDataManager.Instance.GetCardByID(id);
+        CardDynamicData cardDynamicData = new CardDynamicData();
+        cardDynamicData.SetData(cardStaticData);
+        cardDynamicData.teamID = 5;
 
+        Tile tile = boardController.GetRandomEmpryTile();
+        boardController.PlaceCard(cardDynamicData, tile);
+        boardView.PlaceEntity(cardStaticData, cardDynamicData, tile).Play();
+    }
     void StartGame()
     {
         UpdateCurrentTeam();
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
+
+        AddCardOnBoardById(637);
+        AddCardOnBoardById(290);
+        AddCardOnBoardById(23);
     }
 
     public void SetCurrentCard(Card3D card)
@@ -107,10 +121,10 @@ public class GameManager : MonoBehaviour
             currentDeckView.RemoveCurrentCard();
             currentDeckView.SetBlock();
             acting = true;
-            boardController.PlaceCard(currentCard, tile);
+            boardController.PlaceCard(currentCard.cardDynamicData, tile);
 
             commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
-            commandList.AddCommand(boardView.PlaceEntity(currentCard, tile)).AddCallback(() =>
+            commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
             {
                 commandList.Reset();
                 roundManager.DoRound(tile, currentNeighborsList, currentCard);
