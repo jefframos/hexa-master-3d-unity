@@ -113,6 +113,7 @@ public class RoundManager : MonoBehaviour
                 sideAttack = SideType.BottomLeft
             };
             roundCommands.Add(AddMockAttackCommand(targetAttack, currentCardDynamicData.teamID, tile));
+
             roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
             roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID));
 
@@ -249,12 +250,18 @@ public class RoundManager : MonoBehaviour
     //internal List<Tile> Rebound(Tile tile)
     internal List<NeighborModel> Rebound(Tile tile, int teamID)
     {
-        Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/");
         NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2);
         currentNeighborsList.AddListsOnBasedOnSideList(tile.entityAttached.cardDynamicData);
         List<NeighborModel> allArrounds = currentNeighborsList.GetAllEntitiesArroundOnly();
+
+        Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/ " + tile.entityAttached.cardStaticData.name + " - "+allArrounds.Count);
+
+
         for (int i = 0; i < allArrounds.Count; i++)
         {
+            Vector3 pos = allArrounds[i].tile.transform.localPosition;
+            //pos.y = 1.5f;
+            allArrounds[i].tile.transform.localPosition = pos;
             allArrounds[i].tile.entityAttached.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
             //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }

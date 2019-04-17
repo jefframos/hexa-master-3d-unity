@@ -118,6 +118,7 @@ public class BoardController : Singleton<BoardController>
     }
     public NeighborsArroundModel GetNeighbours(TileModel tile, int range = 1)
     {
+        Debug.Log("verificar se tah pegando certo aqui, no neiboors data tah vindo vazio as cartas na segunda vez, por isso bugando");
         NeighborsArroundModel returnObject = new NeighborsArroundModel();
 
         returnObject.topLeft.Add(GetTileOnSide(tile, SideType.TopLeft, 1));

@@ -326,11 +326,13 @@ MonoBehaviour:
     right: []
     bottomLeft: []
     bottomRight: []
+    allEnemies: []
   currentTile: {fileID: 0}
   currentCard: {fileID: 0}
   deckViewList:
   - {fileID: 1948993322}
   - {fileID: 1880992484}
+  entitiesOnStart: 7d020000e7010000e7010000
 --- !u!1 &781776028
 GameObject:
   m_ObjectHideFlags: 0

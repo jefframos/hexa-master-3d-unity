@@ -61,8 +61,6 @@ public class NeighborsArroundModel
         }
         for (int i = 0; i < allLists.Count; i++)
         {
-            Debug.Log(allLists[i].Count);
-            Debug.Log(data.cardStaticData.stats.range);
             if(allLists[i].Count > data.cardStaticData.stats.range)
             {
                 allLists[i].RemoveRange(data.cardStaticData.stats.range - 1, allLists[i].Count - data.cardStaticData.stats.range+1);

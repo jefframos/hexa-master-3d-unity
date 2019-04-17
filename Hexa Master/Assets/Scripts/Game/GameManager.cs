@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public List<DeckView> deckViewList;
     private DeckView currentDeckView;
     private DeckInput currentDeckInput;
-
+    public List<int> entitiesOnStart;
     private int currentTeam = 0;
     // Start is called before the first frame update
     void Start()
@@ -59,9 +59,17 @@ public class GameManager : MonoBehaviour
         UpdateCurrentTeam();
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
 
-        AddCardOnBoardById(637);
-        AddCardOnBoardById(290);
-        AddCardOnBoardById(23);
+        if (entitiesOnStart != null)
+        {
+            for (int i = 0; i < entitiesOnStart.Count; i++)
+            {
+                AddCardOnBoardById(entitiesOnStart[i]);
+
+            }
+        }
+        //AddCardOnBoardById(637);
+        //AddCardOnBoardById(290);
+        //AddCardOnBoardById(23);
     }
 
     public void SetCurrentCard(Card3D card)
