@@ -59,30 +59,30 @@ public class NeighborsArroundModel
 
             }
         }
-        for (int i = 0; i < allLists.Count; i++)
-        {
-            if(allLists[i].Count > data.cardStaticData.stats.range)
-            {
-                allLists[i].RemoveRange(data.cardStaticData.stats.range - 1, allLists[i].Count - data.cardStaticData.stats.range+1);
-
-            }
-        }
+        //removed this and rebound is back, i dont remember why i added this at first
+        //for (int i = 0; i < allLists.Count; i++)
+        //{
+        //    if(allLists[i].Count > data.cardStaticData.stats.range)
+        //    {
+        //        //allLists[i].RemoveRange(data.cardStaticData.stats.range-1, allLists[i].Count - data.cardStaticData.stats.range);
+        //    }
+        //}
     }
 
-    internal List<NeighborModel> GetOnlyEnemiesConnected()
+    internal List<NeighborModel> GetOnlyEntitiesConnected()
     {
-        List<NeighborModel> connectedEnemies = new List<NeighborModel>();
+        List<NeighborModel> connectedEntities = new List<NeighborModel>();
         for (int i = 0; i < allLists.Count; i++)
         {
             for (int j = 0; j < allLists[i].Count; j++)
             {
                 if (allLists[i][j].tile && allLists[i][j].tile.hasCard)
                 {
-                    connectedEnemies.Add(allLists[i][j]);
+                    connectedEntities.Add(allLists[i][j]);
                 }
             }
         }
-        return connectedEnemies;
+        return connectedEntities;
     }
 
     public void CapOnFirstBlock()
@@ -164,30 +164,31 @@ public class NeighborsArroundModel
             }
         }
     }
-    public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)
+   // public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)
+    public List<List<NeighborModel>> GetCardArrounds(CardDynamicData currentCard)
     {
         List<List<NeighborModel>> arroundsList = new List<List<NeighborModel>>();
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
+        if (currentCard.sideList.Contains(SideType.TopLeft))
         {
             arroundsList.Add(topLeft);
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopRight))
+        if (currentCard.sideList.Contains(SideType.TopRight))
         {
             arroundsList.Add(topRight);
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Left))
+        if (currentCard.sideList.Contains(SideType.Left))
         {
             arroundsList.Add(left);
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Right))
+        if (currentCard.sideList.Contains(SideType.Right))
         {
             arroundsList.Add(right);
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomLeft))
+        if (currentCard.sideList.Contains(SideType.BottomLeft))
         {
             arroundsList.Add(bottomLeft);
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomRight))
+        if (currentCard.sideList.Contains(SideType.BottomRight))
         {
             arroundsList.Add(bottomRight);
         }

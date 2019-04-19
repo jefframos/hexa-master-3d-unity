@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour
     public void SetBlock(bool v)
     {
         isBlock = v;
-        tileView.setBlock(isBlock);
+        tileView.SetBlock(isBlock);
     }
     public bool TileFree()
     {

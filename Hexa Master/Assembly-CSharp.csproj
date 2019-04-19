@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AI\Bot\StandardBot.cs" />
     <Compile Include="Assets\Scripts\Board\BoardBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\BoardController.cs" />
     <Compile Include="Assets\Scripts\Board\BoardInput.cs" />

@@ -16,6 +16,8 @@ public class DeckView : MonoBehaviour
         public float targetY = 0f;
         public Vector3 targetBlocker = new Vector3(0, -0.05f, 0.45f);
     }
+
+    internal bool isBot;
     public DeckStateConfig standardState;
     public DeckStateConfig outState;
     public DeckStateConfig focusState;
@@ -32,14 +34,18 @@ public class DeckView : MonoBehaviour
     public Card3D cardSelected;
     private Card3D cardInFocus;
     private Card3D cardInFocusOld;
-    List<Card3D> handDeck;
     private float outTimer = 0;
     private bool blockMode = false;
     //private bool overMode = false;
     static float t = 0.0f;
+    List<Card3D> handDeck;
+    internal StandardBot bot;
+
+    public List<Card3D> HandDeck { get => handDeck; set => handDeck = value; }
+
     void Start()
     {
-        handDeck = new List<Card3D>();
+        HandDeck = new List<Card3D>();
         blockMode = false;
 
         deckInput = GetComponent<DeckInput>();
@@ -79,6 +85,7 @@ public class DeckView : MonoBehaviour
 
     void LateUpdate()
     {
+       
         if (outTimer > 0 && cardInFocus)
         {
             outTimer -= Time.deltaTime;
@@ -90,9 +97,9 @@ public class DeckView : MonoBehaviour
         }        
         
         {
-            for (int i = 0; i < handDeck.Count; i++)
+            for (int i = 0; i < HandDeck.Count; i++)
             {
-                if (cardInFocus && handDeck[i].cardID == cardInFocus.cardID)
+                if (cardInFocus && HandDeck[i].cardID == cardInFocus.cardID)
                 {
                 }
                 else
@@ -148,11 +155,11 @@ public class DeckView : MonoBehaviour
     {
         if (cardSelected)
         {
-            handDeck.Remove(cardSelected);
+            HandDeck.Remove(cardSelected);
             Card3D newCard = deckBuilder.GetCard();
             if (newCard)
             {
-                handDeck.Add(newCard);
+                HandDeck.Add(newCard);
             }
         }
     }
@@ -165,7 +172,7 @@ public class DeckView : MonoBehaviour
 
     void StandardMode(int i, bool debug = false)
     {
-        Card3D card = handDeck[i];       
+        Card3D card = HandDeck[i];       
         float addY = currentState.targetY;
         int order = i;
         float angleMult = 1f;
@@ -207,11 +214,11 @@ public class DeckView : MonoBehaviour
     internal void SetHandCards(List<Card3D> deck, int max)
     {
         maxInHand = max;
-        handDeck = deck;
+        HandDeck = deck;
 
-        for (int i = 0; i < handDeck.Count; i++)
+        for (int i = 0; i < HandDeck.Count; i++)
         {
-            handDeck[i].transform.localPosition = new Vector3(0, -1f, 0);
+            HandDeck[i].transform.localPosition = new Vector3(0, -1f, 0);
         }
     }
     public void CardSelect(Card3D card)

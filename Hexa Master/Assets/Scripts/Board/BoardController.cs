@@ -10,21 +10,50 @@ public class BoardController : Singleton<BoardController>
         public int i = 0;
         public List<Tile> tiles;
     }
+
+    public class ScoreData
+    {
+        public int player1;
+        public int player2;
+    }
+
     List<List<Tile>> tileList;
-   
+    List<CardDynamicData> cardsPlaced;
+
+    public bool debugging = false;
+    public bool debugging2 = false;
+
     // Start is called before the first frame update
     void Start()
     {
 
     }
+    public ScoreData GetScore()
+    {
+        ScoreData score = new ScoreData();
+        for (int i = 0; i < cardsPlaced.Count; i++)
+        {
+            if (cardsPlaced[i].teamID == 18)
+            {
+                score.player1++;
+            }
+            else if (cardsPlaced[i].teamID == 29)
+            {
+                score.player2++;
+            }
+        }
+        return score;
+    }
     public void SetBoard(List<List<Tile>> _tileList)
     {
         tileList = _tileList;
+        cardsPlaced = new List<CardDynamicData>();
     }
 
     public void PlaceCard(CardDynamicData cardDynamicData, Tile tile)
     {
         tile.SetData(cardDynamicData);
+        cardsPlaced.Add(cardDynamicData);
         //tile.SetCard(card);
     }
 
@@ -53,7 +82,10 @@ public class BoardController : Singleton<BoardController>
         // int adj =(tile.j % 2 == 0) ? 0 : -1;
         int adj = (tile.i % 2 == 0) ? -1 : 0;
 
-
+        if (debugging && debugging2)
+        {
+            Debug.Log(tile);
+        }
         switch (side)
         {
             case SideType.TopLeft:
@@ -116,9 +148,11 @@ public class BoardController : Singleton<BoardController>
         }
         return tileList[i][j];
     }
-    public NeighborsArroundModel GetNeighbours(TileModel tile, int range = 1)
+    public NeighborsArroundModel GetNeighbours(TileModel tile, int range = 1, bool debug = false)
     {
-        Debug.Log("verificar se tah pegando certo aqui, no neiboors data tah vindo vazio as cartas na segunda vez, por isso bugando");
+        debugging2 = debug;
+
+        //Debug.Log("verificar se tah pegando certo aqui, no neiboors data tah vindo vazio as cartas na segunda vez, por isso bugando");
         NeighborsArroundModel returnObject = new NeighborsArroundModel();
 
         returnObject.topLeft.Add(GetTileOnSide(tile, SideType.TopLeft, 1));
@@ -131,7 +165,7 @@ public class BoardController : Singleton<BoardController>
         int dist = 0;
         if (range > 1)
         {
-            for (int i = 0; i < range; i++)
+            for (int i = 0; i < range-1; i++)
             {
                 dist = i + 2;
                 if (i < returnObject.topLeft.Count && returnObject.topLeft[i].tile != null)
@@ -162,6 +196,12 @@ public class BoardController : Singleton<BoardController>
 
         }
         returnObject.AddListsOnList();
+
+        if (debugging && debugging2)
+        {
+            Debug.Log(tile);
+        }
+
         return returnObject;
     }
 }

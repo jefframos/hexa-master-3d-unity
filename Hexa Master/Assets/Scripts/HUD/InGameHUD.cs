@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class InGameHUD : MonoBehaviour
         topHud.UpdateCurrentTeam(0);
         topHud.UpdateScore(0, 0);
     }
+
+
 
     //// Update is called once per frame
     //void Update()

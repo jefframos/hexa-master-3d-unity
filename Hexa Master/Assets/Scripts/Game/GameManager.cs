@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public BoardInput boardInput;
     public BoardView boardView;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < entitiesOnStart.Count; i++)
             {
-                AddCardOnBoardById(entitiesOnStart[i]);
+                //AddCardOnBoardById(entitiesOnStart[i]);
 
             }
         }
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     }
     void MultipleAttackReady(List<EnemiesAttackData> attackList)
     {
-        roundManager.GenerateRoundCommands(attackList, currentCard, currentTile);
+        roundManager.GenerateRoundCommands(attackList, currentCard.cardDynamicData, currentTile);
     }
     void OnMultipleAttack(List<EnemiesAttackData> attackList)
     {
@@ -102,16 +102,19 @@ public class GameManager : MonoBehaviour
         commandList.Play();
         currentTeam++;
         currentTeam %= deckViewList.Count;
+
+
+       
     }
     //finish command list, normally after a round
     void OnFinishCommandQueue()
     {
         commandList.Reset();
         acting = false;
-        currentDeckInput.SetUnblock();
-        currentDeckView.SetUnblock(0.15f);
+       
         boardInput.enabled = true;
         Invoke("UpdateCurrentTeam", 0.1f);
+
     }
     //click on tile on board
     public void SelectTile(Tile tile)
@@ -135,7 +138,7 @@ public class GameManager : MonoBehaviour
             commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
             {
                 commandList.Reset();
-                roundManager.DoRound(tile, currentNeighborsList, currentCard);
+                roundManager.DoRound(tile, currentNeighborsList, currentCard.cardDynamicData);
 
             });
 
@@ -158,6 +161,30 @@ public class GameManager : MonoBehaviour
             {
                 deckViewList[i].gameObject.SetActive(false);
             }
+        }
+
+        BoardController.ScoreData score = boardController.GetScore();
+        inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
+
+        if (deckViewList[currentTeam].isBot)
+        {
+            //BOT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            Invoke("WaitNextMove", 0.5f);
+        }
+        else
+        {
+            currentDeckInput.SetUnblock();
+            currentDeckView.SetUnblock(0.15f);
+        }
+
+    }
+
+    void WaitNextMove()
+    {
+        if (deckViewList[currentTeam].isBot)
+        {
+            deckViewList[currentTeam].bot.ChooseMove();
+            //Debug.Log("WAIT FOR BOT");
         }
     }
 

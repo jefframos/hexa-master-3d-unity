@@ -29,7 +29,7 @@ public class TileMarkerView : MonoBehaviour
     internal void Deactive()
     {
         markView.material.color = standardColor;
-        markView.gameObject.SetActive(false);
+       markView.gameObject.SetActive(false);
     }
 
     internal void Highlight()

@@ -105,7 +105,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941337866456624053}
   m_LocalRotation: {x: 0.57125163, y: -0, z: -0, w: 0.820775}
-  m_LocalPosition: {x: 0, y: 0, z: -0.084}
+  m_LocalPosition: {x: 0, y: 0, z: -0.055}
   m_LocalScale: {x: 0.14935538, y: 0.14935538, z: 0.14935538}
   m_Children: []
   m_Father: {fileID: 7118140317249033425}
@@ -217,12 +217,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 16
+  m_fontSize: 12.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 8.17
-  m_fontSizeMax: 16
+  m_fontSizeMax: 12.6
   m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
@@ -517,7 +517,7 @@ Transform:
   m_GameObject: {fileID: 2559612978981670286}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0.48, z: 0.272}
-  m_LocalScale: {x: 0.47088578, y: 0.47088578, z: 0.47088578}
+  m_LocalScale: {x: 0.41437948, y: 0.41437948, z: 0.41437948}
   m_Children: []
   m_Father: {fileID: 7118140317249033425}
   m_RootOrder: 0
@@ -1102,6 +1102,10 @@ PrefabInstance:
       propertyPath: multiplier
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19800002, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
       value: 3
@@ -1147,6 +1151,22 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 19800012, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
       propertyPath: InitialModule.startRotationY.minMaxState
       value: 3
       objectReference: {fileID: 0}

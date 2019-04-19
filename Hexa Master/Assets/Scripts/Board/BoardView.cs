@@ -52,7 +52,7 @@ public class BoardView : MonoBehaviour
             }
         }
 
-        List<NeighborModel> enemies = currentNeighborsList.GetOnlyEnemiesConnected();
+        List<NeighborModel> enemies = currentNeighborsList.GetOnlyEntitiesConnected();
         for (int i = 0; i < enemies.Count; i++)
         {
             if (enemies[i].distance <= currentCard.cardDynamicData.cardStaticData.stats.range)

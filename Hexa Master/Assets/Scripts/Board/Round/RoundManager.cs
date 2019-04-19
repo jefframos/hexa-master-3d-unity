@@ -37,18 +37,18 @@ public class RoundManager : MonoBehaviour
         return true;
     }
 
-    internal void DoRound(Tile tile, NeighborsArroundModel currentNeighborsList, Card3D currentCard)
+    internal void DoRound(Tile tile, NeighborsArroundModel currentNeighborsList, CardDynamicData cardDynamicData)
     {
         roundCommands = new List<CommandDefault>();
-        List<List<NeighborModel>> arroundsList = currentNeighborsList.GetCardArrounds(currentCard);
+        List<List<NeighborModel>> arroundsList = currentNeighborsList.GetCardArrounds(cardDynamicData);
 
         if (arroundsList == null || arroundsList.Count == 0)
         {
             onRoundReady.Invoke(roundCommands);
             return;
         }
-        CardDynamicData currentCardDynamicData = currentCard.cardDynamicData;
-        CardStaticData currentCardStaticData = currentCard.cardStaticData;
+        CardDynamicData currentCardDynamicData = cardDynamicData;
+        CardStaticData currentCardStaticData = cardDynamicData.cardStaticData;
         GetAttackLists(arroundsList, currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList);
 
         for (int i = 0; i < enemiesPassiveList.Count; i++)
@@ -60,7 +60,7 @@ public class RoundManager : MonoBehaviour
             if (enemiesActiveList.Count <= 1)
             {
                 //onMultipleAttack.Invoke(enemiesActiveList);
-                GenerateRoundCommands(enemiesActiveList[0], currentCard, tile);
+                GenerateRoundCommands(enemiesActiveList[0], cardDynamicData, tile);
                 onRoundReady.Invoke(roundCommands);
             }
             else
@@ -73,20 +73,20 @@ public class RoundManager : MonoBehaviour
             onRoundReady.Invoke(roundCommands);
         }
     }
-    public void GenerateRoundCommands(List<EnemiesAttackData> targets, Card3D currentCard, Tile tile)
+    public void GenerateRoundCommands(List<EnemiesAttackData> targets, CardDynamicData cardDynamicData, Tile tile)
     {
         for (int i = 0; i < targets.Count; i++)
         {
-            GenerateRoundCommands(targets[i], currentCard, tile);
+            GenerateRoundCommands(targets[i], cardDynamicData, tile);
         }
 
         onRoundReady.Invoke(roundCommands);
     }
     /// Generate Command List for the target    
-    public void GenerateRoundCommands(EnemiesAttackData targetAttack, Card3D currentCard, Tile tile)
+    public void GenerateRoundCommands(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData, Tile tile)
     {
-        CardDynamicData currentCardDynamicData = currentCard.cardDynamicData;
-        CardStaticData currentCardStaticData = currentCard.cardStaticData;
+        CardDynamicData currentCardDynamicData = cardDynamicData;
+        CardStaticData currentCardStaticData = cardDynamicData.cardStaticData;
 
         if (targetAttack.cardDynamic.teamID == currentCardDynamicData.teamID)
         {
@@ -115,7 +115,7 @@ public class RoundManager : MonoBehaviour
             roundCommands.Add(AddMockAttackCommand(targetAttack, currentCardDynamicData.teamID, tile));
 
             roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
-            roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID));
+            roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, true));
 
             //if reach here, should stop the others
 
@@ -128,9 +128,9 @@ public class RoundManager : MonoBehaviour
     }
 
     #region Commands
-    private CommandDefault AddReboundCommand(Tile tile, int teamID)
+    private CommandDefault AddReboundCommand(Tile tile, int teamID, bool debug = false)
     {
-        List<NeighborModel> allArrounds = Rebound(tile, teamID);
+        List<NeighborModel> allArrounds = Rebound(tile, teamID, debug);
         CommandRebound.CommandReboundData data = new CommandRebound.CommandReboundData
         {
             allArrounds = allArrounds,
@@ -248,21 +248,44 @@ public class RoundManager : MonoBehaviour
     }
 
     //internal List<Tile> Rebound(Tile tile)
-    internal List<NeighborModel> Rebound(Tile tile, int teamID)
+    internal List<NeighborModel> Rebound(Tile tile, int teamID, bool debug = false)
     {
-        NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2);
+        NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2, true);
+
+        if (BoardController.Instance.debugging && BoardController.Instance.debugging2)
+        {
+            Debug.Log(currentNeighborsList);
+        }
+
+
         currentNeighborsList.AddListsOnBasedOnSideList(tile.entityAttached.cardDynamicData);
+
+
         List<NeighborModel> allArrounds = currentNeighborsList.GetAllEntitiesArroundOnly();
 
-        Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/ " + tile.entityAttached.cardStaticData.name + " - "+allArrounds.Count);
+        //Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/ " + tile.entityAttached.cardStaticData.name + " - "+allArrounds.Count);
 
+        if(allArrounds.Count == 0)
+        {
+            Debug.Log(currentNeighborsList);
+            //tile.tileView.debugID
+        }
+
+        if (BoardController.Instance.debugging && BoardController.Instance.debugging2 || debug)
+        {
+            Debug.Log(currentNeighborsList);
+        }
 
         for (int i = 0; i < allArrounds.Count; i++)
         {
             Vector3 pos = allArrounds[i].tile.transform.localPosition;
             //pos.y = 1.5f;
             allArrounds[i].tile.transform.localPosition = pos;
-            allArrounds[i].tile.entityAttached.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
+
+            Debug.Log("-" + allArrounds[i].tile.cardDynamicData.cardStaticData.name + " - " + allArrounds[i].tile.cardDynamicData.teamID + " - to: - " + teamID);
+
+
+            allArrounds[i].tile.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
             //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }
         return allArrounds;
