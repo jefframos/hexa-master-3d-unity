@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +31,20 @@ public class DeckBuilder : MonoBehaviour
 
         //inGameDeck = new InGameDeck()
         handDeck = new List<Card3D>();
-        DeckLoading();
+        //DeckLoading();
 
+    }
+
+    internal void InitDeck()
+    {
+        handDeck = new List<Card3D>();
+        DeckLoading();
     }
 
     private void DeckLoading()
     {
-        StartCoroutine(ShowDeck());
+        CreateCards();
+        //StartCoroutine(ShowDeck());
     }
 
     private IEnumerator ShowDeck()
@@ -55,7 +63,7 @@ public class DeckBuilder : MonoBehaviour
 
     void CreateCards()
     {
-
+        Debug.Log("CREATE CARDS");
 
         if (levels.Length <= 0)
         {
@@ -79,8 +87,16 @@ public class DeckBuilder : MonoBehaviour
             deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
         }
         
+        
+        if(deck.Count < 12)
+        {
+            Debug.Log(deckLenght);
+            Debug.Log(levels);
+            Debug.Log("ERROR ON DECK");
 
+        }
         currentCardID = 0;
+
 
         for (int i = 0; i < deck.Count; i++)
         {
@@ -102,8 +118,6 @@ public class DeckBuilder : MonoBehaviour
         {
             currentCardID++;
             int n = currentCardID - deck.Count;
-            Debug.Log(n);
-
             deckView.changeCardsInHandTotal(maxInHandDefault - n);
             return null;
         }
@@ -117,10 +131,12 @@ public class DeckBuilder : MonoBehaviour
         currentCardID++;
         return card;
     }
-    // Update is called once per frame
-    void Update()
-    {
 
+    internal void DestroyDeck()
+    {
+        deckView.DestroyCards();
+        //throw new NotImplementedException();
     }
+
 
 }

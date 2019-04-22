@@ -20,7 +20,7 @@ public class CommandRebound : CommandDefault
     }
     public override void Update()
     {
-        timer -= Time.deltaTime;
+        timer -= Time.deltaTime * GameManager.GAME_TIME_SCALE;
         if (timer <= 0)
         {
             Kill();

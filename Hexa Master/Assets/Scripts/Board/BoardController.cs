@@ -141,6 +141,22 @@ public class BoardController : Singleton<BoardController>
         return neighbor;
 
     }
+    internal void ResetAllTiles()
+    {
+        cardsPlaced = new List<CardDynamicData>();
+        for (int i = 0; i < tileList.Count; i++)
+        {
+            for (int j = 0; j < tileList[i].Count; j++)
+            {
+                if (tileList[i][j].hasCard && tileList[i][j].entityAttached)
+                {
+                    Destroy(tileList[i][j].entityAttached.gameObject);
+                    tileList[i][j].ResetTile();
+
+                }
+            }
+        }
+    }
     public Tile GetTile(int i, int j)
     {
         if (i >= tileList.Count || i < 0)

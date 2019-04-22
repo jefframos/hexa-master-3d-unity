@@ -118,6 +118,31 @@ public class RoundManager : MonoBehaviour
         return ResultType.IGNORE;
     }
 
+    internal ResultType GetResult(CardDynamicData targetAttack, NeighborModel neibourModel, CardDynamicData cardDynamicData)
+    {
+        if (targetAttack.teamID == cardDynamicData.teamID)
+        {
+            return ResultType.IGNORE;
+        }
+        if (targetAttack.Defense < cardDynamicData.Attack)
+        {
+            return ResultType.WIN;
+        }
+
+        if (targetAttack.Defense >= cardDynamicData.Attack)
+        {
+            if (neibourModel.distance <= 1)
+            {
+                return ResultType.LOSE;
+            }
+            else
+            {
+                return ResultType.BLOCK;
+            }
+        }
+        return ResultType.IGNORE;
+    }
+
     /// Generate Command List for the target    
     public void GenerateRoundCommands(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData, Tile tile)
     {
@@ -321,7 +346,10 @@ public class RoundManager : MonoBehaviour
             Debug.Log(currentNeighborsList);
         }
 
-
+        if(tile.entityAttached == null)
+        {
+            Debug.Log("Theres an error here" + tile);
+        }
         currentNeighborsList.AddListsOnBasedOnSideList(tile.entityAttached.cardDynamicData);
 
 

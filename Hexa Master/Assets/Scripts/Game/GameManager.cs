@@ -23,26 +23,57 @@ public class GameManager : Singleton<GameManager>
     private DeckInput currentDeckInput;
     public List<int> entitiesOnStart;
     private int currentTeam = 0;
-    bool IsBotRound { get => deckViewList[currentTeam].bot != null; }
+    bool IsBotRound { get => deckViewList[currentTeam].bot != null && !ignoredBots.Contains((int)currentTeam); }
     StandardBot CurrentBot { get => deckViewList[currentTeam].bot; }
-
+    public static float GAME_TIME_SCALE = 1f;
     public float tweenScale = 1f;
+    bool isPause = false;
+    List<float> ignoredBots;
     void Update()
     {
-        DOTween.timeScale = tweenScale;
+        if (isPause)
+        {
+            DOTween.timeScale = 0;
+        }
+        else
+        {
+            DOTween.timeScale = tweenScale;
+
+        }
+    }
+    public void PlayBots()
+    {
+        ignoredBots = new List<float>();
+        StartGame();
+    }
+    public void PlaySingle()
+    {
+        ignoredBots = new List<float> { 0};
+        StartGame();
+    }
+    public void PlayVs()
+    {
+        ignoredBots = new List<float> { 0, 1 };
+        StartGame();
+    }
+    public void UpdateTimeScale(float time)
+    {
+        GAME_TIME_SCALE = time;
+        tweenScale = time;
     }
     // Start is called before the first frame update
     void Start()
     {
+        GAME_TIME_SCALE = tweenScale;
         Application.targetFrameRate = 300;
         boardController = BoardController.Instance;
         boardInput.onTileOver.AddListener(OnTileOver);
         boardInput.onTileOut.AddListener(OnTileOut);
         boardInput.onTileSelected.AddListener(SelectTile);
-        Invoke("StartGame", 0.2f);
+        //Invoke("StartGame", 0.2f);
 
         //commandList = new CommandList();
-        commandList.Reset();
+        commandList.ResetQueue();
         commandList.onFinishQueue.AddListener(OnFinishCommandQueue);
         //currentDeckView
         //UpdateCurrentTeam();
@@ -62,8 +93,68 @@ public class GameManager : Singleton<GameManager>
         boardController.PlaceCard(cardDynamicData, tile);
         boardView.PlaceEntity(cardStaticData, cardDynamicData, tile).Play();
     }
-    void StartGame()
+    public void TogglePause()
     {
+        if (!isPause)
+        {
+            PauseGame();
+        }
+        else
+        {
+            UnPause();
+        }
+    }
+    public void UnPause()
+    {
+        GAME_TIME_SCALE = tweenScale;
+        isPause = false;
+    }
+    public void PauseGame()
+    {
+        GAME_TIME_SCALE = 0;
+        isPause = true;
+        
+        
+    }
+    public void DestroyGame()
+    {
+        PauseGame();
+        commandList.Destroy();
+        if (currentCard)
+        {
+            Destroy(currentCard.gameObject);
+        }
+
+        boardController.ResetAllTiles();
+        boardView.Destroy();
+
+        for (int i = 0; i < deckViewList.Count; i++)
+        {
+            deckViewList[i].deckBuilder.DestroyDeck();
+        }
+
+        currentCard = null;
+        currentTile = null;
+
+    }
+    public void StartGame()
+    {
+        DestroyGame();
+        boardInput.enabled = true;
+        currentTeam = 0;
+
+        currentCard = null;
+        currentTile = null;
+
+        boardController.ResetAllTiles();
+
+        for (int i = 0; i < deckViewList.Count; i++)
+        {
+            deckViewList[i].gameObject.SetActive(true);
+            deckViewList[i].ResetDeck();
+            deckViewList[i].deckBuilder.InitDeck();
+        }
+
         UpdateCurrentTeam();
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
 
@@ -75,6 +166,8 @@ public class GameManager : Singleton<GameManager>
 
             }
         }
+
+        UnPause();
         //AddCardOnBoardById(637);
         //AddCardOnBoardById(290);
         //AddCardOnBoardById(23);
@@ -118,17 +211,17 @@ public class GameManager : Singleton<GameManager>
         currentTeam++;
         currentTeam %= deckViewList.Count;
 
-
-
     }
     //finish command list, normally after a round
     void OnFinishCommandQueue()
     {
-        commandList.Reset();
+        commandList.ResetQueue();
         acting = false;
 
         boardInput.enabled = true;
-        Invoke("UpdateCurrentTeam", 0.1f);
+        Invoke("UpdateCurrentTeam", 0.1f / tweenScale);
+
+        Debug.Log("FINISH COMMAND");
 
     }
     //click on tile on board
@@ -139,6 +232,10 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         currentTile = tile;
+        if(currentCard == null)
+        {
+            return;
+        }
         if (roundManager.CanPlance(tile, currentCard.cardDynamicData))
         {
             boardView.ClearAllNeighbors();
@@ -152,7 +249,7 @@ public class GameManager : Singleton<GameManager>
             commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
             commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
             {
-                commandList.Reset();
+                commandList.ResetQueue();
                 roundManager.DoRound(tile, currentNeighborsList, currentCard.cardDynamicData);
 
             });
@@ -183,12 +280,13 @@ public class GameManager : Singleton<GameManager>
 
         if (IsBotRound)
         {
-            Invoke("WaitNextMove", 0.5f);
+            Invoke("WaitNextMove", 0.5f / tweenScale);
+            //WaitNextMove();
         }
         else
         {
             currentDeckInput.SetUnblock();
-            currentDeckView.SetUnblock(0.15f);
+            currentDeckView.SetUnblock(0.15f / tweenScale);
         }
 
     }
@@ -209,6 +307,8 @@ public class GameManager : Singleton<GameManager>
     internal void UpdateNeighboursList(Tile tile)
     {
         currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
+        currentNeighborsList.CapOnFirstFind();
+        currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
     }
     void OnTileOver(Tile tile)
     {
@@ -219,7 +319,6 @@ public class GameManager : Singleton<GameManager>
         {
             currentTile = tile;
             UpdateNeighboursList(tile);
-            //currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
         }
 

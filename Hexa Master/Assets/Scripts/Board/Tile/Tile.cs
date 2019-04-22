@@ -14,16 +14,17 @@ public class Tile : MonoBehaviour
     //internal Card3D card;
     internal CardDynamicData cardDynamicData;
 
-    public bool IsAvailable { get => !isBlock && !hasCard;}
+    public bool IsAvailable { get => !isBlock && !hasCard; }
 
-    public void Reset()
+    public void ResetTile()
     {
-        //entityAttached = null;
-        //card = null;
+        entityAttached = null;
+        isBlock = false;
         //tileModel = null;
         //tileView = null;
-        //isBlock = false;
-        //hasCard = false;
+        isBlock = false;
+        hasCard = false;
+        tileView.ResetView();
     }
     void Start()
     {

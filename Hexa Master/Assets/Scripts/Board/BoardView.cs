@@ -38,7 +38,6 @@ public class BoardView : MonoBehaviour
     {
         currentNeighborsList = _currentNeighborsList;
         currentNeighborsList.CapOnFirstFind();
-        currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
 
         for (int i = 0; i < currentNeighborsList.allLists.Count; i++)
         {
@@ -61,38 +60,38 @@ public class BoardView : MonoBehaviour
                 if (enemy.tile.cardDynamicData.teamID != currentCard.cardDynamicData.teamID)
                 {
 
-                    bool isPassive = false;
                     if (CardsDataManager.Instance.IsPassiveAttack(enemy.tile.cardDynamicData, CardsDataManager.Instance.GetOppositeSide(enemy.side)))
                     {
-                        isPassive = true;
-                    }
-                    if (!isPassive && enemy.tile.cardDynamicData.cardStaticData.stats.defense >= currentCard.cardDynamicData.cardStaticData.stats.attack)
-                    {
-                        if (enemies[i].distance > 1)
-                        {
-                            enemy.tile.tileView.tileMarker.DrawPreview();
-                        }
-                        else
-                        {
-                            enemy.tile.tileView.tileMarker.LosePreview();
-
-                        }
+                        enemy.tile.tileView.tileMarker.WinPreview();
                     }
                     else
                     {
-                        enemy.tile.tileView.tileMarker.WinPreview();
+                        RoundManager.ResultType result = GameManager.Instance.roundManager.GetResult(enemy.tile.cardDynamicData, enemy, currentCard.cardDynamicData);
+                        switch (result)
+                        {
+                            case RoundManager.ResultType.IGNORE:
+                                break;
+                            case RoundManager.ResultType.WIN:
+                                enemy.tile.tileView.tileMarker.WinPreview();
+                                break;
+                            case RoundManager.ResultType.LOSE:
+                                enemy.tile.tileView.tileMarker.LosePreview();
+                                break;
+                            case RoundManager.ResultType.DRAW:
+                                enemy.tile.tileView.tileMarker.DrawPreview();
+                                break;
+                            case RoundManager.ResultType.BLOCK:
+                                enemy.tile.tileView.tileMarker.DrawPreview();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
 
             }
-
-            //Vector3 pos = enemy.tile.transform.localPosition;
-            //enemy.tile.transform.localPosition = pos;
         }
-        //if (currentCard == null || acting)
-        //{
-        //    return;
-        //}
+
         if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
         {
             HighlightList(currentNeighborsList.topLeft, currentCard, "TL");
@@ -118,6 +117,12 @@ public class BoardView : MonoBehaviour
             HighlightList(currentNeighborsList.bottomRight, currentCard, "BR");
         }
     }
+
+    internal void Destroy()
+    {
+        
+    }
+
     public void HighlightList(List<NeighborModel> list, Card3D currentCard, string debug = "")
     {
         //for (int i = 0; i < list.Count; i++)

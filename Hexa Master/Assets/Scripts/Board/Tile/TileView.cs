@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
+
 public class TileView : MonoBehaviour
 {
     public Renderer mainRenderer;
@@ -20,6 +22,13 @@ public class TileView : MonoBehaviour
     internal Tile tile;
     public TileMarkerView tileMarker;
     readonly float standardColor = 11f;
+
+    internal void ResetView()
+    {
+        tileMarker.gameObject.SetActive(false);
+        ChangeColorId(standardColor);
+    }
+
     // internal Tile tile;
     // Start is called before the first frame update
     void Awake()

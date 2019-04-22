@@ -45,19 +45,27 @@ public class DeckView : MonoBehaviour
 
     void Start()
     {
-        HandDeck = new List<Card3D>();
-        blockMode = false;
+       
 
         deckInput = GetComponent<DeckInput>();
-
         deckInput.onBlockBoard.AddListener(DeckOut);
         deckInput.onUnblockBoard.AddListener(DeckOver);
 
-        currentState = outState;
+        
 
         t = 0.115f;
     }
-    
+
+    internal void ResetDeck()
+    {
+        handDeck = new List<Card3D>();
+        blockMode = false;
+        currentState = outState;
+        cardInFocus = null;
+        cardInFocusOld = null;
+        cardSelected = null;
+    }
+
     internal void DeckOver(Card3D card)
     {
         //overMode = true;
@@ -85,7 +93,10 @@ public class DeckView : MonoBehaviour
 
     void LateUpdate()
     {
-       
+       if(handDeck == null || handDeck.Count <= 0)
+        {
+            return;
+        }
         if (outTimer > 0 && cardInFocus)
         {
             outTimer -= Time.deltaTime;
@@ -97,9 +108,9 @@ public class DeckView : MonoBehaviour
         }        
         
         {
-            for (int i = 0; i < HandDeck.Count; i++)
+            for (int i = 0; i < handDeck.Count; i++)
             {
-                if (cardInFocus && HandDeck[i].cardID == cardInFocus.cardID)
+                if (cardInFocus && handDeck[i].cardID == cardInFocus.cardID)
                 {
                 }
                 else
@@ -142,6 +153,20 @@ public class DeckView : MonoBehaviour
         targetPosition.y = targetY;// sin * cardsArc + 0.5f;// + targetY;
         card.transform.localPosition = Vector3.Lerp(card.transform.localPosition, targetPosition, t);
     }
+
+    internal void DestroyCards()
+    {
+        if (handDeck == null)
+        {
+            return;
+        }
+        for (int i = 0; i < handDeck.Count; i++)
+        {
+            Destroy(handDeck[i].gameObject);
+        }
+        handDeck = new List<Card3D>();
+    }
+
     void ReleaseCard()
     {
 
@@ -155,11 +180,11 @@ public class DeckView : MonoBehaviour
     {
         if (cardSelected)
         {
-            HandDeck.Remove(cardSelected);
+            handDeck.Remove(cardSelected);
             Card3D newCard = deckBuilder.GetCard();
             if (newCard)
             {
-                HandDeck.Add(newCard);
+                handDeck.Add(newCard);
             }
         }
     }
@@ -172,7 +197,7 @@ public class DeckView : MonoBehaviour
 
     void StandardMode(int i, bool debug = false)
     {
-        Card3D card = HandDeck[i];       
+        Card3D card = handDeck[i];       
         float addY = currentState.targetY;
         int order = i;
         float angleMult = 1f;
@@ -214,11 +239,11 @@ public class DeckView : MonoBehaviour
     internal void SetHandCards(List<Card3D> deck, int max)
     {
         maxInHand = max;
-        HandDeck = deck;
+        handDeck = deck;
 
-        for (int i = 0; i < HandDeck.Count; i++)
+        for (int i = 0; i < handDeck.Count; i++)
         {
-            HandDeck[i].transform.localPosition = new Vector3(0, -1f, 0);
+            handDeck[i].transform.localPosition = new Vector3(0, -1f, 0);
         }
     }
     public void CardSelect(Card3D card)

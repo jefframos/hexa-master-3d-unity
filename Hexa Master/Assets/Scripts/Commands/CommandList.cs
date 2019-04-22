@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,11 +20,11 @@ public class CommandList : MonoBehaviour
     bool ignoreCallback = false;
     public string commandName;
 
-    public void Reset()
+    public void ResetQueue()
     {
         listOfCommands = new List<CommandDefault>();
         isPause = false;
-
+        
     }
 
     internal void Finish()
@@ -110,8 +111,6 @@ public class CommandList : MonoBehaviour
         {
             return;
         }
-        
-        
 
         if (currentCommand.IsFinished())
         {
@@ -122,5 +121,12 @@ public class CommandList : MonoBehaviour
         {
             currentCommand.Update();
         }
+    }
+
+    internal void Destroy()
+    {
+        ResetQueue();
+        commandIndex = 0;
+        currentCommand = null;
     }
 }

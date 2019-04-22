@@ -18,7 +18,7 @@ public class CommandWait : CommandDefault
     public override void Update()
     {
 
-        data.value -= Time.deltaTime;
+        data.value -= Time.deltaTime *  GameManager.GAME_TIME_SCALE;
         if (data.value <= 0)
         {
             Kill();
