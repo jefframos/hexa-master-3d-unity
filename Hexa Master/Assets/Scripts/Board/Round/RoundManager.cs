@@ -10,6 +10,15 @@ public class RoundManager : MonoBehaviour
     public InGameHUD inGameHUD;
     List<CommandDefault> roundCommands;
 
+    public enum ResultType
+    {
+        IGNORE,
+        WIN,
+        LOSE,
+        DRAW,
+        BLOCK
+    }
+
     public class RoundEvent : UnityEvent<List<CommandDefault>> { };
     public RoundEvent onRoundReady = new RoundEvent();
 
@@ -28,12 +37,12 @@ public class RoundManager : MonoBehaviour
 
     }
 
-    internal bool CanPlance(Tile tile, Card3D currentCard)
+    internal bool CanPlance(Tile tile, CardDynamicData cardDynamicData)
     {
-        if (!currentCard)
-        {
-            return false;
-        }
+        //if (!cardDynamicData)
+        //{
+        //    return false;
+        //}
         return true;
     }
 
@@ -49,6 +58,7 @@ public class RoundManager : MonoBehaviour
         }
         CardDynamicData currentCardDynamicData = cardDynamicData;
         CardStaticData currentCardStaticData = cardDynamicData.cardStaticData;
+
         GetAttackLists(arroundsList, currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList);
 
         for (int i = 0; i < enemiesPassiveList.Count; i++)
@@ -82,47 +92,101 @@ public class RoundManager : MonoBehaviour
 
         onRoundReady.Invoke(roundCommands);
     }
+    //get result for one action
+    internal ResultType GetResult(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData)
+    {
+        if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
+        {
+            return ResultType.IGNORE;
+        }
+        if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
+        {
+            return ResultType.WIN;
+        }
+
+        if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
+        {
+            if (targetAttack.dist <= 1)
+            {
+                return ResultType.LOSE;
+            }
+            else
+            {
+                return ResultType.BLOCK;
+            }
+        }
+        return ResultType.IGNORE;
+    }
+
     /// Generate Command List for the target    
     public void GenerateRoundCommands(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData, Tile tile)
     {
-        CardDynamicData currentCardDynamicData = cardDynamicData;
         CardStaticData currentCardStaticData = cardDynamicData.cardStaticData;
 
-        if (targetAttack.cardDynamic.teamID == currentCardDynamicData.teamID)
+        ResultType result = GetResult( targetAttack, cardDynamicData);
+
+        switch (result)
+        {
+            case ResultType.IGNORE:
+                return;
+                
+            case ResultType.WIN:
+                targetAttack.cardDynamic.teamID = cardDynamicData.teamID;
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile));
+                roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID));
+                break;
+            case ResultType.LOSE:
+                cardDynamicData.teamID = targetAttack.cardDynamic.teamID;
+                EnemiesAttackData selfData = new EnemiesAttackData
+                {
+                    tile = tile,
+                    cardStatic = currentCardStaticData,
+                    cardDynamic = cardDynamicData,
+                    dist = targetAttack.dist,
+                    sideAttack = SideType.BottomLeft
+                };
+                roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.teamID, tile));
+                roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
+                roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, true));
+                break;
+            case ResultType.DRAW:
+                break;
+            case ResultType.BLOCK:
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, true));
+                break;
+            default:
+                break;
+        }
+        return;
+        if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
         {
             return;
         }
 
-        if (targetAttack.cardStatic.stats.defense < currentCardStaticData.stats.attack)
+        if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
         {
-            targetAttack.cardDynamic.teamID = currentCardDynamicData.teamID;
-            roundCommands.Add(AddAttackCommand(targetAttack, currentCardDynamicData.teamID, tile));
-            roundCommands.Add(AddReboundCommand(targetAttack.tile, currentCardDynamicData.teamID));
+            targetAttack.cardDynamic.teamID = cardDynamicData.teamID;
+            roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile));
+            roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID));
         }
         else if (targetAttack.dist <= 1)
         {
-            //enemiesActiveList[i].cardDynamic.teamID = currentCardDynamicData.teamID;
-            currentCardDynamicData.teamID = targetAttack.cardDynamic.teamID;
-
+            cardDynamicData.teamID = targetAttack.cardDynamic.teamID;
             EnemiesAttackData selfData = new EnemiesAttackData
             {
                 tile = tile,
                 cardStatic = currentCardStaticData,
-                cardDynamic = currentCardDynamicData,
+                cardDynamic = cardDynamicData,
                 dist = targetAttack.dist,
                 sideAttack = SideType.BottomLeft
             };
-            roundCommands.Add(AddMockAttackCommand(targetAttack, currentCardDynamicData.teamID, tile));
-
+            roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.teamID, tile));
             roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
             roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, true));
-
-            //if reach here, should stop the others
-
         }
         else
         {
-            roundCommands.Add(AddAttackCommand(targetAttack, currentCardDynamicData.teamID, tile, true));
+            roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, true));
         }
 
     }
@@ -200,7 +264,7 @@ public class RoundManager : MonoBehaviour
     #endregion
 
     #region get lists
-    void GetAttackLists(List<List<NeighborModel>> arroundsList, CardDynamicData currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList)
+    public void GetAttackLists(List<List<NeighborModel>> arroundsList, CardDynamicData currentCardDynamicData, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList)
     {
         enemiesActiveList = new List<EnemiesAttackData>();
         enemiesPassiveList = new List<EnemiesAttackData>();
@@ -265,7 +329,7 @@ public class RoundManager : MonoBehaviour
 
         //Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/ " + tile.entityAttached.cardStaticData.name + " - "+allArrounds.Count);
 
-        if(allArrounds.Count == 0)
+        if (allArrounds.Count == 0)
         {
             Debug.Log(currentNeighborsList);
             //tile.tileView.debugID
@@ -282,7 +346,7 @@ public class RoundManager : MonoBehaviour
             //pos.y = 1.5f;
             allArrounds[i].tile.transform.localPosition = pos;
 
-            Debug.Log("-" + allArrounds[i].tile.cardDynamicData.cardStaticData.name + " - " + allArrounds[i].tile.cardDynamicData.teamID + " - to: - " + teamID);
+            //Debug.Log("-" + allArrounds[i].tile.cardDynamicData.cardStaticData.name + " - " + allArrounds[i].tile.cardDynamicData.teamID + " - to: - " + teamID);
 
 
             allArrounds[i].tile.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
@@ -295,7 +359,7 @@ public class RoundManager : MonoBehaviour
     {
         CardDynamicData cardDynamicData = neighborModel.tile.tileModel.cardDynamicData;
 
-        if(neighborModel.distance > currentCardDynamicData.cardStaticData.stats.range)
+        if (neighborModel.distance > currentCardDynamicData.cardStaticData.stats.range)
         {
             return false;
         }

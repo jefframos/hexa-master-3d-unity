@@ -11,6 +11,10 @@ public class CardDynamicData
     internal AttackType attackType = AttackType.AttackFirstFindOnly;
     internal CardStaticData cardStaticData;
     CardsDataManager cardsDataManager;
+
+    public float Attack { get => cardStaticData.stats.attack; }
+    public float Defense { get => cardStaticData.stats.defense; }
+
     public void SetData(CardStaticData _cardStaticData)
     {
         teamID = 1;
@@ -27,6 +31,9 @@ public class CardDynamicData
 
         int maxSpdValue = 120;
 
+        
+
+    
         //Debug.Log(cardStaticData.stats.speed);
 
         decimal tot = Math.Floor((decimal)cardStaticData.stats.speed / maxSpdValue * tempSideList.Count);

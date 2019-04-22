@@ -23,6 +23,14 @@ public class GameManager : Singleton<GameManager>
     private DeckInput currentDeckInput;
     public List<int> entitiesOnStart;
     private int currentTeam = 0;
+    bool IsBotRound { get => deckViewList[currentTeam].bot != null; }
+    StandardBot CurrentBot { get => deckViewList[currentTeam].bot; }
+
+    public float tweenScale = 1f;
+    void Update()
+    {
+        DOTween.timeScale = tweenScale;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -88,8 +96,15 @@ public class GameManager : Singleton<GameManager>
             EnemiesAttackData element = attackList[i];
             entities.Add(element.tile.entityAttached);
         }
+        if (IsBotRound)
+        {
+            MultipleAttackReady(CurrentBot.ChooseBestAttack(attackList));
+        }
+        else
+        {
+            multipleAttackSelector.SetEntities(attackList);
 
-        multipleAttackSelector.SetEntities(attackList);
+        }
     }
 
     //finish to calc the round
@@ -104,14 +119,14 @@ public class GameManager : Singleton<GameManager>
         currentTeam %= deckViewList.Count;
 
 
-       
+
     }
     //finish command list, normally after a round
     void OnFinishCommandQueue()
     {
         commandList.Reset();
         acting = false;
-       
+
         boardInput.enabled = true;
         Invoke("UpdateCurrentTeam", 0.1f);
 
@@ -124,7 +139,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         currentTile = tile;
-        if (roundManager.CanPlance(tile, currentCard))
+        if (roundManager.CanPlance(tile, currentCard.cardDynamicData))
         {
             boardView.ClearAllNeighbors();
             boardInput.enabled = false;
@@ -166,9 +181,8 @@ public class GameManager : Singleton<GameManager>
         BoardController.ScoreData score = boardController.GetScore();
         inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
 
-        if (deckViewList[currentTeam].isBot)
+        if (IsBotRound)
         {
-            //BOT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
             Invoke("WaitNextMove", 0.5f);
         }
         else
@@ -181,10 +195,10 @@ public class GameManager : Singleton<GameManager>
 
     void WaitNextMove()
     {
-        if (deckViewList[currentTeam].isBot)
+        if (IsBotRound)
         {
-            deckViewList[currentTeam].bot.ChooseMove();
-            //Debug.Log("WAIT FOR BOT");
+            CurrentBot.RoundManager = roundManager;
+            CurrentBot.ChooseMove();
         }
     }
 
@@ -192,14 +206,20 @@ public class GameManager : Singleton<GameManager>
     {
         boardView.ClearAllNeighbors();
     }
+    internal void UpdateNeighboursList(Tile tile)
+    {
+        currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
+    }
     void OnTileOver(Tile tile)
     {
+      
         boardView.ClearAllNeighbors();
 
         if (!tile.hasCard && currentCard && !acting)
         {
             currentTile = tile;
-            currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
+            UpdateNeighboursList(tile);
+            //currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
         }
 

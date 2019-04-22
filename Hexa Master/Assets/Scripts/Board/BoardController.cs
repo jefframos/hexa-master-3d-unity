@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+
+[RequireComponent(typeof(BoardBuilder))]
+
+
 public class BoardController : Singleton<BoardController>
 {
     [System.Serializable]
@@ -23,10 +27,11 @@ public class BoardController : Singleton<BoardController>
     public bool debugging = false;
     public bool debugging2 = false;
 
+    internal BoardBuilder boardBuilder;
     // Start is called before the first frame update
     void Start()
     {
-
+        boardBuilder = GetComponent<BoardBuilder>();
     }
     public ScoreData GetScore()
     {
@@ -67,7 +72,7 @@ public class BoardController : Singleton<BoardController>
         {
             i = Random.Range(0, tileList.Count);
             j = Random.Range(0, tileList[i].Count);
-            if (tileList[i][j].TileFree())
+            if (tileList[i][j].IsAvailable)
             {
                 getTile = true;
             }

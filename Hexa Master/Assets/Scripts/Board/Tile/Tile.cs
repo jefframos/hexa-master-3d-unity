@@ -13,6 +13,9 @@ public class Tile : MonoBehaviour
     internal EntityView entityAttached;
     //internal Card3D card;
     internal CardDynamicData cardDynamicData;
+
+    public bool IsAvailable { get => !isBlock && !hasCard;}
+
     public void Reset()
     {
         //entityAttached = null;
@@ -31,10 +34,10 @@ public class Tile : MonoBehaviour
         isBlock = v;
         tileView.SetBlock(isBlock);
     }
-    public bool TileFree()
-    {
-        return !isBlock && !hasCard;
-    }
+    //public bool TileFree()
+    //{
+    //    return !isBlock && !hasCard;
+    //}
     //public void SetCard(Card3D _card)
     //{
     //    card = _card;

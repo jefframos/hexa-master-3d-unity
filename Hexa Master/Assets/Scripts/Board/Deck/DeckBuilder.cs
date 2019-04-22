@@ -18,6 +18,8 @@ public class DeckBuilder : MonoBehaviour
     private int currentCardID = 0;
     List<CardStaticData> deck;
     public List<int> starterIDS;
+    public int[] levels;
+    public bool ignoreStarters = false;
     void Start()
     {
         maxInHandDefault = maxInHand;
@@ -53,26 +55,40 @@ public class DeckBuilder : MonoBehaviour
 
     void CreateCards()
     {
-        int[] levels = new int[3];
-        levels[0] = 4;
-        levels[1] = 3;
-        levels[2] = 3;
-        deck = cardsDataManager.GetRandomDeck((uint)(deckLenght - starterIDS.Count), levels);
 
-        for (int i = 0; i < starterIDS.Count; i++)
+
+        if (levels.Length <= 0)
         {
-            deck.Insert(0, cardsDataManager.GetCardByID(starterIDS[i]));
+            int[] levels = new int[3];
+            levels[0] = 2;
+            levels[1] = 3;
+            levels[2] = 4;
+
         }
+
+        if (!ignoreStarters)
+        {
+            deck = cardsDataManager.GetRandomDeck((uint)(deckLenght - starterIDS.Count), levels);
+            for (int i = 0; i < starterIDS.Count; i++)
+            {
+                deck.Insert(0, cardsDataManager.GetCardByID(starterIDS[i]));
+            }
+        }
+        else
+        {
+            deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
+        }
+        
 
         currentCardID = 0;
 
         for (int i = 0; i < deck.Count; i++)
         {
-            if(i >= maxInHand)
+            if (i >= maxInHand)
             {
                 break;
             }
-            Card3D card = GetCard();            
+            Card3D card = GetCard();
             handDeck.Add(card);
         }
 
@@ -104,7 +120,7 @@ public class DeckBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(DeckInput))]
@@ -10,6 +11,20 @@ public class StandardBot : MonoBehaviour
     DeckView deckView;
     BoardController boardController;
     GameManager gameManager;
+    internal class MoveData
+    {
+        internal Card3D card;
+        internal Tile tile;        
+        internal int points;
+    }
+
+    private RoundManager roundManager;
+    private List<List<NeighborModel>> arroundsList;
+
+    internal RoundManager RoundManager {set => roundManager = value; }
+
+    List<MoveData> moveDataList;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,21 +38,106 @@ public class StandardBot : MonoBehaviour
     }
     internal void ChooseMove()
     {
-        // deckView.HandDeck[0];
-        // boardController.GetTile(2,2).
-        //deckInput.onCardOver.Invoke(deckView.HandDeck[0]);
+
+        if(deckView.HandDeck.Count <= 0)
+        {
+            return;
+        }
+
         deckInput.SetBlock();
-        Card3D randomCard = deckView.HandDeck[Random.Range(0, deckView.HandDeck.Count)];
-        gameManager.SetCurrentCard(randomCard);
-        deckView.CardSelect(randomCard);
 
-        gameManager.SelectTile(boardController.GetRandomEmpryTile());
+        List<MoveData> handMoveData = new List<MoveData>();
+
+        for (int i = 0; i < deckView.HandDeck.Count; i++)
+        {
+            handMoveData.Add(GetBetterMoveFor(deckView.HandDeck[i]));
+        }
+
+        handMoveData.Sort((d1, d2) => d2.points.CompareTo(d1.points));
+        MoveData moveData = handMoveData[0];
+        Act(moveData);
+
+    }
+    void Act(MoveData moveData)
+    {
+        //this card
+        gameManager.SetCurrentCard(moveData.card);
+        deckView.CardSelect(moveData.card);
+
+        //this tile
+        gameManager.UpdateNeighboursList(moveData.tile);
+        gameManager.SelectTile(moveData.tile);
         //deckView.RemoveCurrentCard();
+    }
+    MoveData GetBetterMoveFor(Card3D card)
+    {
+        moveDataList = new List<MoveData>();
+        CardDynamicData cardDynamic = card.cardDynamicData;
+        MoveData moveData;
+        for (int i = 0; i < boardController.boardBuilder.boardData.lin; i++)
+        {
+            for (int j = 0; j < boardController.boardBuilder.boardData.col; j++)
+            {
+                moveData = new MoveData
+                {
+                    card = card,
+                    tile = boardController.GetTile(i, j)
+                };
+                if (moveData.tile && moveData.tile.IsAvailable)
+                {
+                    TestTile(moveData.tile.tileModel, moveData, cardDynamic);
+                    moveDataList.Add(moveData);
+                }
+            }
+        }
 
+        ArrayUtils.Shuffle(moveDataList);
+
+        moveDataList.Sort((d1, d2) => d2.points.CompareTo(d1.points));
+
+        return moveDataList[0];
+    }
+
+    void TestTile(TileModel tileModel, in MoveData moveData, CardDynamicData cardDynamic)
+    {
+        NeighborsArroundModel currentNeighborsList = boardController.GetNeighbours(tileModel, cardDynamic.cardStaticData.stats.range);
+        arroundsList = currentNeighborsList.GetCardArrounds(cardDynamic);
+        roundManager.GetAttackLists(arroundsList, cardDynamic, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList);
+
+        moveData.points += enemiesPassiveList.Count * 5;
+        for (int i = 0; i < enemiesActiveList.Count; i++)
+        {
+            RoundManager.ResultType result = roundManager.GetResult(enemiesActiveList[i], cardDynamic);
+            switch (result)
+            {
+                case RoundManager.ResultType.IGNORE:
+                    break;
+                case RoundManager.ResultType.WIN:
+                    moveData.points += 20 + enemiesActiveList[i].cardDynamic.sideList.Count + enemiesActiveList[i].dist * 2;
+                    break;
+                case RoundManager.ResultType.LOSE:
+                    moveData.points -= 100;
+                    break;
+                case RoundManager.ResultType.DRAW:
+                    break;
+                case RoundManager.ResultType.BLOCK:
+                    break;
+                default:
+                    break;
+            }
+        }
+       
+    }
+
+    internal List<EnemiesAttackData> ChooseBestAttack(List<EnemiesAttackData> entities)
+    {
+        //List<EntityView> entities = new List<EntityView>();
+
+        return entities;
     }
     // Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 }
