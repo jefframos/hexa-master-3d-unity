@@ -120,7 +120,20 @@ public class BoardView : MonoBehaviour
 
     internal void Destroy()
     {
+        built = false;
+        if(tileList != null)
+        {
+            for (int i = 0; i < tileList.Count; i++)
+            {
+                for (int j = 0; j < tileList[i].Count; j++)
+                {
+                    GamePool.Instance.ReturnTile(tileList[i][j].gameObject);
+                }
+            }
+        }
         
+
+        tileList = new List<List<Tile>>();
     }
 
     public void HighlightList(List<NeighborModel> list, Card3D currentCard, string debug = "")

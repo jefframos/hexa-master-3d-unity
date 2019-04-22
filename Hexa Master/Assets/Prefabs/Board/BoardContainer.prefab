@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &999218261714086754
 Transform:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2de5fd0d152f6db45923645f86d0167c, type: 2}
+  - {fileID: 2100000, guid: ccb3b301c243c3c438798e98c187ded9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,9 +128,10 @@ MonoBehaviour:
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
   boardData:
-    lin: 5
-    col: 7
+    lin: 8
+    col: 11
   boardView: {fileID: 1081884643}
+  maxBlocks: 25
 --- !u!114 &1102314970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075eb3ef494c383448b0f8e7a47da5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugging: 0
+  debugging2: 0
 --- !u!114 &1081884643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7441892357872541875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.34, z: -1.08}
+  m_LocalPosition: {x: 0, y: 0.34, z: -0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 999218262737643186}

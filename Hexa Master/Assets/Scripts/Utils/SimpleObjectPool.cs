@@ -27,7 +27,7 @@ public class SimpleObjectPool : MonoBehaviour
 
 			// add the PooledObject component to the prefab so we know it came from this pool
 			PooledObject pooledObject = spawnedGameObject.AddComponent<PooledObject>();
-			pooledObject.pool = this;
+			//pooledObject.pool = this;
 		}
 
 		// put the instance in the root of the scene and enable it
@@ -63,7 +63,7 @@ public class SimpleObjectPool : MonoBehaviour
 }
 
 // a component that simply identifies the pool that a GameObject came from
-public class PooledObject : MonoBehaviour
-{
-	public SimpleObjectPool pool;
-}
+//public class PooledObject : MonoBehaviour
+//{
+//	public SimpleObjectPool pool;
+//}

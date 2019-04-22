@@ -77,7 +77,7 @@ public class BoardController : Singleton<BoardController>
                 getTile = true;
             }
         }
-        
+
         return tileList[i][j];
     }
 
@@ -141,8 +141,16 @@ public class BoardController : Singleton<BoardController>
         return neighbor;
 
     }
+    internal void BuildBoard()
+    {
+        boardBuilder.BuildBoard();
+    }
     internal void ResetAllTiles()
     {
+        if (tileList == null)
+        {
+            return;
+        }
         cardsPlaced = new List<CardDynamicData>();
         for (int i = 0; i < tileList.Count; i++)
         {
@@ -186,7 +194,7 @@ public class BoardController : Singleton<BoardController>
         int dist = 0;
         if (range > 1)
         {
-            for (int i = 0; i < range-1; i++)
+            for (int i = 0; i < range - 1; i++)
             {
                 dist = i + 2;
                 if (i < returnObject.topLeft.Count && returnObject.topLeft[i].tile != null)

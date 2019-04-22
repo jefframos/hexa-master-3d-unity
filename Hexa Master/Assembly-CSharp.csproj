@@ -104,9 +104,11 @@
     <Compile Include="Assets\Scripts\Commands\CommandRebound.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandWait.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Game\MatchConfig.cs" />
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />
     <Compile Include="Assets\Scripts\HUD\TopHUD.cs" />
     <Compile Include="Assets\Scripts\Utils\ArrayUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\GamePool.cs" />
     <Compile Include="Assets\Scripts\Utils\InteractiveObject.cs" />
     <Compile Include="Assets\Scripts\Utils\SimpleObjectPool.cs" />
     <Compile Include="Assets\Scripts\Utils\Singleton.cs" />

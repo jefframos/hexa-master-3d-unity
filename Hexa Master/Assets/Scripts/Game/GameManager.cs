@@ -81,6 +81,8 @@ public class GameManager : Singleton<GameManager>
         roundManager.onRoundReady.AddListener(OnRoundReady);
         roundManager.onMultipleAttack.AddListener(OnMultipleAttack);
         multipleAttackSelector.onMultiplesReady.AddListener(MultipleAttackReady);
+
+        boardController.BuildBoard();
     }
     void AddCardOnBoardById(int id)
     {
@@ -140,6 +142,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         DestroyGame();
+        boardController.BuildBoard();
         boardInput.enabled = true;
         currentTeam = 0;
 
