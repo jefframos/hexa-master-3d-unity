@@ -19,7 +19,7 @@ public class BoardBuilder : MonoBehaviour
     public void BuildBoard()
     {
         int accum = 0;
-        int blockCounter = 0;
+        //int blockCounter = 0;
         int tempCol = boardData.col;
         List<float> rndPos = new List<float> { -0.1f, 0f, 0.1f };
         tileList = new List<List<Tile>>();

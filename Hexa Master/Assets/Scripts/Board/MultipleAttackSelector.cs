@@ -11,7 +11,7 @@ public class MultipleAttackSelector : MonoBehaviour
         internal EntitySelectorView selectorView;
         internal InteractiveObject interactive;
         internal EnemiesAttackData attackData;
-        internal int id;
+        internal int id = 0;
     }
     public class MultipleAttackEvent : UnityEvent<List<EnemiesAttackData>> { };
     public MultipleAttackEvent onMultiplesReady = new MultipleAttackEvent();

@@ -182,38 +182,7 @@ public class RoundManager : MonoBehaviour
             default:
                 break;
         }
-        return;
-        if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
-        {
-            return;
-        }
-
-        if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
-        {
-            targetAttack.cardDynamic.teamID = cardDynamicData.teamID;
-            roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile));
-            roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID));
-        }
-        else if (targetAttack.dist <= 1)
-        {
-            cardDynamicData.teamID = targetAttack.cardDynamic.teamID;
-            EnemiesAttackData selfData = new EnemiesAttackData
-            {
-                tile = tile,
-                cardStatic = currentCardStaticData,
-                cardDynamic = cardDynamicData,
-                dist = targetAttack.dist,
-                sideAttack = SideType.BottomLeft
-            };
-            roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.teamID, tile));
-            roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
-            roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, true));
-        }
-        else
-        {
-            roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, true));
-        }
-
+        
     }
 
     #region Commands

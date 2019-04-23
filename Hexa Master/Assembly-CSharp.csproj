@@ -103,6 +103,9 @@
     <Compile Include="Assets\Scripts\Commands\CommandPlaceCard.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandRebound.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandWait.cs" />
+    <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUI.cs" />
+    <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUIButton.cs" />
+    <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUIData.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game\MatchConfig.cs" />
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />
