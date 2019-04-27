@@ -13,7 +13,8 @@ public class Tile : MonoBehaviour
     internal EntityView entityAttached;
     //internal Card3D card;
     internal CardDynamicData cardDynamicData;
-
+    
+    private Collider collider;
     public bool IsAvailable { get => !isBlock && !hasCard; }
 
     public void ResetTile()
@@ -24,15 +25,20 @@ public class Tile : MonoBehaviour
         //tileView = null;
         isBlock = false;
         hasCard = false;
+
+        collider = GetComponent<Collider>();
+        collider.enabled = true;
         tileView.ResetView();
     }
     void Start()
     {
         tileView.tile = this;
+        
     }
     public void SetBlock(bool v)
     {
         isBlock = v;
+        collider.enabled = false;
         tileView.SetBlock(isBlock);
     }
     //public bool TileFree()
@@ -52,8 +58,20 @@ public class Tile : MonoBehaviour
         cardDynamicData = _cardDynamicData;
         tileModel.cardDynamicData = cardDynamicData;
         hasCard = true;
+        collider.enabled = false;
         //tileView.entityAttached =
     }
 
+    internal void SetZone(int v)
+    {
+        tileModel.zone = v;
+        tileView.SetZone(v);
+    }
+
+    internal void SetFlag(int zone)
+    {
+        isBlock = true;
+        tileView.SetFlag();
+    }
 }
 

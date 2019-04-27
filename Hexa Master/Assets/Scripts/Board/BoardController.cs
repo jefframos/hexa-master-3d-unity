@@ -143,7 +143,13 @@ public class BoardController : Singleton<BoardController>
     }
     internal void BuildBoard()
     {
-        boardBuilder.BuildBoard();
+        //boardBuilder.BuildBoard();
+
+        if (!boardBuilder)
+        {
+            boardBuilder = GetComponent<BoardBuilder>();
+        }
+        boardBuilder.BuildBoardFromTilemap();
     }
     internal void ResetAllTiles()
     {
@@ -156,7 +162,7 @@ public class BoardController : Singleton<BoardController>
         {
             for (int j = 0; j < tileList[i].Count; j++)
             {
-                if (tileList[i][j].hasCard && tileList[i][j].entityAttached)
+                if (tileList[i][j] != null && tileList[i][j].hasCard && tileList[i][j].entityAttached)
                 {
                     Destroy(tileList[i][j].entityAttached.gameObject);
                     tileList[i][j].ResetTile();

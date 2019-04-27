@@ -12,6 +12,7 @@ public class TileMarkerView : MonoBehaviour
     public Color drawColor;
     public Color loseColor;
     public Color winColor;
+    public Color overColor;
 
     Color targetColor;
     // Start is called before the first frame update
@@ -31,7 +32,12 @@ public class TileMarkerView : MonoBehaviour
         markView.material.color = standardColor;
        markView.gameObject.SetActive(false);
     }
-
+    internal void OnOver()
+    {
+        targetColor = overColor;
+        //markView.material.color = standardColor;
+        markView.gameObject.SetActive(true);
+    }
     internal void Highlight()
     {
         targetColor = highlightColor;

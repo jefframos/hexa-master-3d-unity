@@ -127,7 +127,11 @@ public class BoardView : MonoBehaviour
             {
                 for (int j = 0; j < tileList[i].Count; j++)
                 {
-                    GamePool.Instance.ReturnTile(tileList[i][j].gameObject);
+                    if(tileList[i][j] != null)
+                    {
+                        GamePool.Instance.ReturnTile(tileList[i][j].gameObject);
+
+                    }
                 }
             }
         }
@@ -210,7 +214,7 @@ public class BoardView : MonoBehaviour
             List<Tile> element = tileList[i];
             for (int j = 0; j < element.Count; j++)
             {
-                targetX = -col / 2 + j;
+                targetX = -(col) / 2 + j;
                 if (col % 2 != 0)
                 {
                     targetX -= tileData.width - tileData.height;
@@ -225,9 +229,14 @@ public class BoardView : MonoBehaviour
                 {
                     targetX += 0.5f;
                 }
-                Tile tile = element[j];
-                tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, tile.rnd, targetZ * tileData.height);
-                tile.transform.localScale = new Vector3(tileData.scale, tileData.scale, tileData.scale);
+                if (element[j])
+                {
+                    Tile tile = element[j];
+
+                    tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, tile.rnd, targetZ * tileData.height);
+                    tile.transform.localScale = new Vector3(tileData.scale, tileData.scale, tileData.scale);
+                }
+              
             }
         }
     }

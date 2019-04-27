@@ -230,6 +230,10 @@ public class GameManager : Singleton<GameManager>
     //click on tile on board
     public void SelectTile(Tile tile)
     {
+        if(currentDeckInput == null)
+        {
+            return;
+        }
         if (currentDeckInput.mouseOverDeck)
         {
             return;

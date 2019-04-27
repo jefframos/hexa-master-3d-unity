@@ -14,4 +14,5 @@ public class TileModel : MonoBehaviour
     //public GameObject tileView;
     public string col = "";
     internal CardDynamicData cardDynamicData;
+    internal int zone;
 }

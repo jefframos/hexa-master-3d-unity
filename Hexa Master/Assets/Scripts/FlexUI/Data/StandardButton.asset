@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
   buttonSpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: e747c462adcb1f047ad7661dacf3d2d4,
+    m_HighlightedSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: e747c462adcb1f047ad7661dacf3d2d4, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: e747c462adcb1f047ad7661dacf3d2d4, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   confirmColor: {r: 0, g: 0, b: 0, a: 0}
   declineColor: {r: 0, g: 0, b: 0, a: 0}

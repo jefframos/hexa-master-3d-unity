@@ -304,12 +304,14 @@ MonoBehaviour:
   highlightColor: {r: 0.48584908, g: 0.7411136, b: 1, a: 1}
   mouseOverColor: {r: 1, g: 0.33511916, b: 0.23921567, a: 1}
   blockersList:
-  - {fileID: 1928123463396898, guid: 71be69e7a312bc844ad384574d3624fe, type: 3}
-  - {fileID: 1517019888071542, guid: 39b499a5c4069b14f9642f978230eb46, type: 3}
-  - {fileID: 1434187378111682, guid: 32b583582798a5f4cbbbcaf093e364e0, type: 3}
+  - {fileID: 1668923954984932, guid: 46aabe81c014e774d8e7104bc6ce9335, type: 3}
+  - {fileID: 1220519445602468, guid: 3bc77662e4f05fb41948030e26fb4708, type: 3}
   blockerContainer: {fileID: 4106079107083065282}
   isBlock: 0
   tileMarker: {fileID: 5411663260705260550}
+  standardColor: 22
+  zonesColor: 0b0000000f0000001a0000000000000000000000
+  flagPrefab: {fileID: 100000, guid: b2c239f9b60751e4ab9034c7f2ad66b1, type: 3}
 --- !u!64 &6709753036794387416
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -417,11 +419,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markView: {fileID: 6352402769987788762}
-  standardColor: {r: 0.3135903, g: 0.7020899, b: 0.764151, a: 0}
-  highlightColor: {r: 0.3137255, g: 0.7019608, b: 0.7647059, a: 0.5372549}
-  drawColor: {r: 0.9716981, g: 0.34400925, b: 0.0045834924, a: 0.69411767}
+  standardColor: {r: 1, g: 0.99928594, b: 0.9481132, a: 0.72156864}
+  highlightColor: {r: 0.3137255, g: 0.7019608, b: 0.7647059, a: 1}
+  drawColor: {r: 0.9716981, g: 0.34400925, b: 0.0045834924, a: 1}
   loseColor: {r: 1, g: 0, b: 0, a: 1}
   winColor: {r: 0.02683338, g: 0.6320754, b: 0.15002555, a: 1}
+  overColor: {r: 0.9056604, g: 0.8758544, b: 0.48273405, a: 1}
 --- !u!1 &4709097173063285927
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +827,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -880,14 +891,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &255321218988946722 stripped
@@ -925,6 +928,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fd94ddb5808b8cd48b2dff2d44991ce5, type: 2}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -981,22 +1000,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fd94ddb5808b8cd48b2dff2d44991ce5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &4106079107083065282 stripped
@@ -1029,6 +1032,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1086,14 +1097,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &6515318011934898380 stripped
@@ -1126,6 +1129,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1183,14 +1194,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &6917165208084628370 stripped
@@ -1224,6 +1227,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8082956ab1184b44facc19cd0c4ed72c, type: 2}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1280,18 +1295,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8082956ab1184b44facc19cd0c4ed72c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!1 &8598200183680925293 stripped

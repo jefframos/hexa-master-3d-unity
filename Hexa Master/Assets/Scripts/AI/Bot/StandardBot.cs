@@ -74,9 +74,9 @@ public class StandardBot : MonoBehaviour
         moveDataList = new List<MoveData>();
         CardDynamicData cardDynamic = card.cardDynamicData;
         MoveData moveData;
-        for (int i = 0; i < boardController.boardBuilder.boardData.lin; i++)
+        for (int i = 0; i < boardController.boardBuilder.boardStaticData.lin; i++)
         {
-            for (int j = 0; j < boardController.boardBuilder.boardData.col; j++)
+            for (int j = 0; j < boardController.boardBuilder.boardStaticData.col; j++)
             {
                 moveData = new MoveData
                 {

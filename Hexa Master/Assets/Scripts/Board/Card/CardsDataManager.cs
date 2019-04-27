@@ -20,8 +20,9 @@ public class CardsDataManager : Singleton<CardsDataManager>
         string dataAsJson;
         // Path.Combine combines strings into a file path
         // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build
-#if UNITY_EDITOR
         string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
+#if UNITY_EDITOR
+        filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
 
 #elif UNITY_IOS
         string filePath = Path.Combine (Application.dataPath + "/Raw", gameDataFileName);
@@ -38,9 +39,9 @@ public class CardsDataManager : Singleton<CardsDataManager>
             // Read the json from the file into a string
             //string dataAsJson = File.ReadAllText(filePath);
 
-
-#if UNITY_EDITOR || UNITY_IOS
             dataAsJson = File.ReadAllText(filePath);
+#if UNITY_EDITOR || UNITY_IOS
+            //dataAsJson = File.ReadAllText(filePath);
 
 #elif UNITY_ANDROID
             WWW reader = new WWW (filePath);

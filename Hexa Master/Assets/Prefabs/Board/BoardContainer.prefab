@@ -86,6 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 999218262737643186}
+  - component: {fileID: 949754513814503891}
   - component: {fileID: 999218262737643187}
   - component: {fileID: 1102314970}
   - component: {fileID: 1102314972}
@@ -113,6 +114,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &949754513814503891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999218262737643184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523925dbc713fdd439a2e776438a00c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemapConfig: {fileID: 11400000, guid: bed2aeda68e0b714aa8e66dda9cf98b1, type: 2}
 --- !u!114 &999218262737643187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,11 +141,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
-  boardData:
+  boardStaticData:
     lin: 8
     col: 11
   boardView: {fileID: 1081884643}
   maxBlocks: 25
+  boardDataLoader: {fileID: 949754513814503891}
 --- !u!114 &1102314970
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="hexagonal" renderorder="right-down" width="12" height="12" tilewidth="32" tileheight="32" infinite="0" hexsidelength="16" staggeraxis="y" staggerindex="odd" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="map" tilewidth="32" tileheight="32" tilecount="8" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="32" height="32" source="blocker.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="zone1_flag.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="zone1_tile.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="zone2_flag.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="zone2_tile.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="zone3_flag.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="zone3_tile.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="neutral.png"/>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="12" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,3,3,3,0,0,0,8,7,7,7,0,
+0,3,3,3,3,0,0,8,7,7,7,7,
+3,3,2,3,3,8,8,7,7,6,7,7,
+0,3,3,3,3,1,1,1,7,7,7,7,
+0,3,3,3,1,5,5,5,7,7,7,8,
+0,0,8,8,1,5,5,5,5,1,1,8,
+0,8,8,1,5,5,4,5,5,8,0,0,
+0,0,0,8,8,5,5,5,5,8,0,0,
+0,0,0,0,8,5,5,5,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

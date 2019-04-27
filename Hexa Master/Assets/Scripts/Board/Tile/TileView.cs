@@ -21,10 +21,22 @@ public class TileView : MonoBehaviour
     public bool isBlock = false;
     internal Tile tile;
     public TileMarkerView tileMarker;
-    readonly float standardColor = 11f;
-
+    public float standardColor = 22f;
+    public int[] zonesColor;
+    private GameObject blockGameObject;
+    private GameObject flagGameObject;
+    public GameObject flagPrefab;
     internal void ResetView()
     {
+        if (blockGameObject)
+        {
+            Destroy(blockGameObject);
+        }
+        if (flagGameObject)
+        {
+            Destroy(flagGameObject);
+        }
+        
         tileMarker.gameObject.SetActive(false);
         ChangeColorId(standardColor);
     }
@@ -55,23 +67,38 @@ public class TileView : MonoBehaviour
         Vector2 offs = mainMaterial.mainTextureOffset;
         offs.x = 8f / 256f * id;
 
-        Debug.Log("CHANGE COLOR " + offs.x);
+        //Debug.Log("CHANGE COLOR " + offs.x);
 
 
 
         mainMaterial.mainTextureOffset = offs;
     }
+
+    internal void SetZone(int v)
+    {
+        ChangeColorId(zonesColor[v-1]);
+    }
+    public void SetFlag()
+    {
+        flagGameObject = Instantiate(flagPrefab, new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+        flagGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
+        flagGameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        foreach (Transform child in flagGameObject.GetComponentsInChildren<Transform>(true))
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
+        }
+    }
     public void SetBlock(bool v)
     {
         if (v)
         {
-            ChangeColorId(28f);
-            //GameObject blockTransform = Instantiate(blockersList[Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
-            //blockTransform.layer = LayerMask.NameToLayer("BoardLayerFront");
-            //foreach (Transform child in blockTransform.GetComponentsInChildren<Transform>(true))
-            //{
-            //    child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
-            //}
+            //ChangeColorId(28f);
+            blockGameObject = Instantiate(blockersList[UnityEngine.Random.Range(0, blockersList.Count)], new Vector3(0, 0.02f, 0), Quaternion.identity, blockerContainer);
+            blockGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
+            foreach (Transform child in blockGameObject.GetComponentsInChildren<Transform>(true))
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
+            }
             //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         }
     }
@@ -81,7 +108,8 @@ public class TileView : MonoBehaviour
         {
             tile.entityAttached.OnOver();
         }
-        tileMarker.Highlight();
+        tileMarker.OnOver();
+        //tileMarker.Highlight();
         mainMaterial.DOKill();
         //mainMaterial.DOColor(mouseOverColor, 0.5f);
         //outline.enabled = true;
