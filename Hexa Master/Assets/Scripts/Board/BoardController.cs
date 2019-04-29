@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 [RequireComponent(typeof(BoardBuilder))]
 
@@ -20,6 +21,8 @@ public class BoardController : Singleton<BoardController>
         public int player1;
         public int player2;
     }
+
+    public TMP_Dropdown dropdown;
 
     List<List<Tile>> tileList;
     List<CardDynamicData> cardsPlaced;
@@ -149,7 +152,14 @@ public class BoardController : Singleton<BoardController>
         {
             boardBuilder = GetComponent<BoardBuilder>();
         }
-        boardBuilder.BuildBoardFromTilemap();
+        if(dropdown != null)
+        {
+            boardBuilder.BuildBoardFromTilemap(dropdown.captionText.text);
+        }
+        else
+        {
+            boardBuilder.BuildBoardFromTilemap("map1.json");
+        }
     }
     internal void ResetAllTiles()
     {

@@ -80,9 +80,11 @@ public class TileView : MonoBehaviour
     }
     public void SetFlag()
     {
-        flagGameObject = Instantiate(flagPrefab, new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+        flagGameObject = Instantiate(flagPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         flagGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
         flagGameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        flagGameObject.transform.SetParent(blockerContainer);
+        flagGameObject.transform.localPosition = Vector3.zero;
         foreach (Transform child in flagGameObject.GetComponentsInChildren<Transform>(true))
         {
             child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
@@ -93,8 +95,10 @@ public class TileView : MonoBehaviour
         if (v)
         {
             //ChangeColorId(28f);
-            blockGameObject = Instantiate(blockersList[UnityEngine.Random.Range(0, blockersList.Count)], new Vector3(0, 0.02f, 0), Quaternion.identity, blockerContainer);
+            blockGameObject = Instantiate(blockersList[UnityEngine.Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
             blockGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
+            blockGameObject.transform.SetParent(blockerContainer);
+            blockGameObject.transform.localPosition = new Vector3(0,0.01f,0);
             foreach (Transform child in blockGameObject.GetComponentsInChildren<Transform>(true))
             {
                 child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 

@@ -17,9 +17,9 @@ public class BoardBuilder : MonoBehaviour
     public BoardView boardView;
     public int maxBlocks = 3;
     public BoardDataLoader boardDataLoader;
-    public void BuildBoardFromTilemap()
+    public void BuildBoardFromTilemap(string mapUrl)
     {
-        BoardData boardData = boardDataLoader.LoadBoard("map1.json");
+        BoardData boardData = boardDataLoader.LoadBoard(mapUrl);
         BoardStaticData tempStaticData = new BoardStaticData
         {
             lin = boardData.height,
@@ -68,6 +68,7 @@ public class BoardBuilder : MonoBehaviour
                     if (tileType == BoardData.TileMapType.FLAG)
                     {
                         int zone = boardData.GetZone(dataId);
+                        tile.SetZone(boardData.GetZone(dataId));
                         tile.SetFlag(zone);
                     }
 

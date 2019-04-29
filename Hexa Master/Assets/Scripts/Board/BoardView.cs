@@ -217,11 +217,11 @@ public class BoardView : MonoBehaviour
                 targetX = -(col) / 2 + j;
                 if (col % 2 != 0)
                 {
-                    targetX -= tileData.width - tileData.height;
+                    targetX -= tileData.width - tileData.height + tileData.width/2;
                 }
                 else
                 {
-                    targetX += tileData.width - tileData.height;//0.15f;
+                    targetX += tileData.width - tileData.height + tileData.width/2;//0.15f;
                 }
                 targetZ = lin / 2 - i;
                 //targetZ = boardData.lin - i;
