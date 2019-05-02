@@ -13,9 +13,9 @@ public class BoardInput : MonoBehaviour
 
     [System.Serializable]
     public class TileEvent : UnityEvent<Tile> { };
-    public TileEvent onTileOver = new TileEvent();
-    public TileEvent onTileOut = new TileEvent();
-    public TileEvent onTileSelected = new TileEvent();
+    internal TileEvent onTileOver = new TileEvent();
+    internal TileEvent onTileOut = new TileEvent();
+    internal TileEvent onTileSelected = new TileEvent();
 
 
     private List<int> collidableLayers;
@@ -66,6 +66,7 @@ public class BoardInput : MonoBehaviour
                             TileSelect(tempTile);
                         }
                         OnTileOver(tempTile);
+                       // Debug.Log("TILE");
                     }
                     
                     

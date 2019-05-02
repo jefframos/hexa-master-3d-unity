@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public TileView tileView;
     public float rnd = 0;
     public bool isBlock = false;
+    internal bool isFlag;
     public bool hasCard = false;
     internal EntityView entityAttached;
     //internal Card3D card;
@@ -16,15 +17,19 @@ public class Tile : MonoBehaviour
     
     private Collider collider;
     public bool IsAvailable { get => !isBlock && !hasCard; }
+    public int TeamID { get => cardDynamicData.teamID; }
 
+    
     public void ResetTile()
     {
         entityAttached = null;
         isBlock = false;
         //tileModel = null;
         //tileView = null;
-        isBlock = false;
+        isFlag = false;
         hasCard = false;
+
+        tileModel.zone = -1;
 
         collider = GetComponent<Collider>();
         collider.enabled = true;
@@ -71,6 +76,7 @@ public class Tile : MonoBehaviour
     internal void SetFlag(int zone)
     {
         isBlock = true;
+        isFlag = true;
         tileView.SetFlag();
     }
 }

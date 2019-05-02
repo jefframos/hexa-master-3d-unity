@@ -34,12 +34,13 @@ public class TileMarkerView : MonoBehaviour
     }
     internal void OnOver()
     {
-        targetColor = overColor;
+        //targetColor = overColor;
         //markView.material.color = standardColor;
         markView.gameObject.SetActive(true);
     }
     internal void Highlight()
     {
+        Debug.Log("Highlight");
         targetColor = highlightColor;
         //markView.material.color = standardColor;
         markView.gameObject.SetActive(true);
@@ -54,6 +55,8 @@ public class TileMarkerView : MonoBehaviour
     internal void WinPreview()
     {
         targetColor = winColor;
+
+        Debug.Log("WIN");
         //markView.material.color = winColor;
         markView.gameObject.SetActive(true);
     }

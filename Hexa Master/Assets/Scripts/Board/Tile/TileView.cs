@@ -82,14 +82,34 @@ public class TileView : MonoBehaviour
     {
         flagGameObject = Instantiate(flagPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         flagGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
-        flagGameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        flagGameObject.transform.localScale = new Vector3(0.2f, 0.1f, 0.2f);
         flagGameObject.transform.SetParent(blockerContainer);
         flagGameObject.transform.localPosition = Vector3.zero;
         foreach (Transform child in flagGameObject.GetComponentsInChildren<Transform>(true))
         {
             child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
         }
+
+        Renderer flagRenderer = flagGameObject.GetComponent<Renderer>();
+        ChangeColorId(0);
+        for (int i = 0; i < flagRenderer.materials.Length; i++)
+        {
+            flagRenderer.materials[i].color = Color.white;
+        }
+        //flagRenderer.materials.color = Color.red;
     }
+
+    internal void SetFlagColor(Color color)
+    {
+        
+        Renderer flagRenderer = flagGameObject.GetComponent<Renderer>();
+
+        for (int i = 0; i < flagRenderer.materials.Length; i++)
+        {
+            flagRenderer.materials[i].color = color;
+        }
+    }
+
     public void SetBlock(bool v)
     {
         if (v)

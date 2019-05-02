@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markView: {fileID: 6352402769987788762}
-  standardColor: {r: 1, g: 0.99928594, b: 0.9481132, a: 0.72156864}
+  standardColor: {r: 1, g: 0.99928594, b: 0.9481132, a: 1}
   highlightColor: {r: 0.3137255, g: 0.7019608, b: 0.7647059, a: 1}
   drawColor: {r: 0.9716981, g: 0.34400925, b: 0.0045834924, a: 1}
   loseColor: {r: 1, g: 0, b: 0, a: 1}

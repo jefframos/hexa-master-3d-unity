@@ -26,6 +26,7 @@ public class BoardBuilder : MonoBehaviour
             col = boardData.width
         };
         int accum = 0;
+        int accum2 = 0;
         int tempCol = tempStaticData.col;
         tileList = new List<List<Tile>>();
         List<Tile> allTiles = new List<Tile>();
@@ -54,7 +55,8 @@ public class BoardBuilder : MonoBehaviour
                     tile.ResetTile();
                     tile.tileModel.i = i;
                     tile.tileModel.j = j;
-                    tile.tileModel.id = accum;
+                    tile.tileModel.id = accum2;
+                    accum2++;
                     tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
                     tile.tileView.debugID.text = i + "-" + j;
                     tiles.Add(tile);

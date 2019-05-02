@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -19,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     public Card3D currentCard;
     private bool acting = false;
     public List<DeckView> deckViewList;
+    public int maxPlayers = 2;
     private DeckView currentDeckView;
     private DeckInput currentDeckInput;
     public List<int> entitiesOnStart;
@@ -29,6 +31,9 @@ public class GameManager : Singleton<GameManager>
     public float tweenScale = 1f;
     bool isPause = false;
     List<float> ignoredBots;
+
+    public TMP_Dropdown dropdown;
+
     void Update()
     {
         if (isPause)
@@ -66,6 +71,8 @@ public class GameManager : Singleton<GameManager>
     {
         GAME_TIME_SCALE = tweenScale;
         Application.targetFrameRate = 300;
+
+        maxPlayers = dropdown.value + 2;
         boardController = BoardController.Instance;
         boardInput.onTileOver.AddListener(OnTileOver);
         boardInput.onTileOut.AddListener(OnTileOut);
@@ -142,6 +149,7 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         DestroyGame();
+        maxPlayers = dropdown.value + 2;
         boardController.BuildBoard();
         boardInput.enabled = true;
         currentTeam = 0;
@@ -153,9 +161,17 @@ public class GameManager : Singleton<GameManager>
 
         for (int i = 0; i < deckViewList.Count; i++)
         {
-            deckViewList[i].gameObject.SetActive(true);
-            deckViewList[i].ResetDeck();
-            deckViewList[i].deckBuilder.InitDeck();
+            if(i < maxPlayers)
+            {
+                deckViewList[i].gameObject.SetActive(true);
+                deckViewList[i].ResetDeck();
+                deckViewList[i].deckBuilder.InitDeck();
+            }
+            else
+            {
+                deckViewList[i].gameObject.SetActive(false);
+            }
+          
         }
 
         UpdateCurrentTeam();
@@ -212,7 +228,7 @@ public class GameManager : Singleton<GameManager>
         }
         commandList.Play();
         currentTeam++;
-        currentTeam %= deckViewList.Count;
+        currentTeam %= maxPlayers;//deckViewList.Count;
 
     }
     //finish command list, normally after a round
@@ -283,6 +299,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         BoardController.ScoreData score = boardController.GetScore();
+
+        //Debug.Log("Zone 1 " + score.zonesScore1[0] + " - " + score.zonesScore2[0]);
+        //Debug.Log("Zone 2 " + score.zonesScore1[1] + " - " + score.zonesScore2[1]);
+        //Debug.Log("Zone 3 " + score.zonesScore1[2] + " - " + score.zonesScore2[2]);
+
         inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
 
         if (IsBotRound)

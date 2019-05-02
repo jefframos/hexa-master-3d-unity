@@ -18,8 +18,61 @@ public class BoardController : Singleton<BoardController>
 
     public class ScoreData
     {
-        public int player1;
-        public int player2;
+        public int player1 = 0;
+        public int player2 = 0;
+        public int player3 = 0;
+
+        internal List<int> zonesScore1 = new List<int> { 0, 0, 0 };
+        internal List<int> zonesScore2 = new List<int> { 0, 0, 0 };
+        internal List<int> zonesScore3 = new List<int> { 0, 0, 0 };
+        internal void Reset()
+        {
+            for (int i = 0; i < zonesScore1.Count; i++)
+            {
+                zonesScore1[i] = 0;
+                zonesScore2[i] = 0;
+                zonesScore3[i] = 0;
+
+                player1 = 0;
+                player2 = 0;
+                player3 = 0;
+            }
+        }
+        int GetHigher(int id)
+        {
+            int currentHighest = 0;
+
+            if (zonesScore1[id] + zonesScore2[id] + zonesScore3[id] <= 0)
+            {
+                return 0;
+            }
+
+            if (zonesScore1[id] > zonesScore2[id] && zonesScore1[id] > zonesScore3[id])
+            {
+                currentHighest = 1;
+            }
+            else if (zonesScore2[id] > zonesScore1[id] && zonesScore2[id] > zonesScore3[id])
+            {
+                currentHighest = 2;
+            }
+            else if (zonesScore3[id] > zonesScore1[id] && zonesScore3[id] > zonesScore2[id])
+            {
+                currentHighest = 3;
+            }
+            //Mathf.Max(new int[3])
+            return currentHighest;
+        }
+        internal int[] GetResult()
+        {
+            int[] result = new int[3];
+
+            for (int i = 0; i < zonesScore1.Count; i++)
+            {
+                result[i] = GetHigher(i);
+            }
+
+            return result;
+        }
     }
 
     public TMP_Dropdown dropdown;
@@ -31,31 +84,92 @@ public class BoardController : Singleton<BoardController>
     public bool debugging2 = false;
 
     internal BoardBuilder boardBuilder;
+    ScoreData score;
+    Tile[] flags = new Tile[3];
     // Start is called before the first frame update
     void Start()
     {
         boardBuilder = GetComponent<BoardBuilder>();
+        score = new ScoreData();
+
     }
     public ScoreData GetScore()
     {
-        ScoreData score = new ScoreData();
-        for (int i = 0; i < cardsPlaced.Count; i++)
+
+        score.Reset();
+
+        for (int i = 0; i < tileList.Count; i++)
         {
-            if (cardsPlaced[i].teamID == 18)
+            for (int j = 0; j < tileList[i].Count; j++)
             {
-                score.player1++;
-            }
-            else if (cardsPlaced[i].teamID == 29)
-            {
-                score.player2++;
+                if (tileList[i][j] && tileList[i][j].hasCard && tileList[i][j].tileModel.zone >= 0)
+                {
+                    int zone = tileList[i][j].tileModel.zone - 1;
+
+                    if (tileList[i][j].TeamID == 18)
+                    {
+                        //score.player1++;
+
+                        score.zonesScore1[zone]++;
+                    }
+                    else if (tileList[i][j].TeamID == 29)
+                    {
+                        //score.player2++;
+
+                        score.zonesScore2[zone]++;
+                    }
+                    else
+                    {
+                        score.zonesScore3[zone]++;
+                    }
+                }
+
             }
         }
+
+        int[] results = score.GetResult();
+
+        for (int i = 0; i < flags.Length; i++)
+        {
+            if (results[i] == 0)
+            {
+                flags[i].tileView.SetFlagColor(Color.white);
+            }
+            else if (results[i] == 1)
+            {
+                score.player1++;
+                flags[i].tileView.SetFlagColor(Color.cyan);
+            }
+            else if (results[i] == 2)
+            {
+                score.player2++;
+                flags[i].tileView.SetFlagColor(Color.magenta);
+            }
+            if (results[i] == 3)
+            {
+                score.player3++;
+                flags[i].tileView.SetFlagColor(Color.grey);
+            }
+        }
+
         return score;
     }
     public void SetBoard(List<List<Tile>> _tileList)
     {
         tileList = _tileList;
         cardsPlaced = new List<CardDynamicData>();
+
+        for (int i = 0; i < tileList.Count; i++)
+        {
+            for (int j = 0; j < tileList[i].Count; j++)
+            {
+                if (tileList[i][j] && tileList[i][j].isFlag)
+                {
+                    int zone = tileList[i][j].tileModel.zone - 1;
+                    flags[zone] = tileList[i][j];
+                }
+            }
+        }
     }
 
     public void PlaceCard(CardDynamicData cardDynamicData, Tile tile)
@@ -152,7 +266,7 @@ public class BoardController : Singleton<BoardController>
         {
             boardBuilder = GetComponent<BoardBuilder>();
         }
-        if(dropdown != null)
+        if (dropdown != null)
         {
             boardBuilder.BuildBoardFromTilemap(dropdown.captionText.text);
         }
