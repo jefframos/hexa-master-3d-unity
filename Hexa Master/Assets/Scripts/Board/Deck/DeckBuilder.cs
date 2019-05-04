@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class DeckBuilder : MonoBehaviour
 {
+    public enum DeckType
+    {
+        NONE,ALLIANCE,HORDE
+    }
+    public DeckType deckType = DeckType.NONE;
     public static uint CARD_ID_COUNTER = 0;
     // Start is called before the first frame update
     DeckView deckView;
@@ -84,7 +89,20 @@ public class DeckBuilder : MonoBehaviour
         }
         else
         {
-            deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
+            switch (deckType)
+            {
+                case DeckType.NONE:
+                    deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
+                    break;
+                case DeckType.ALLIANCE:
+                    deck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
+                    break;
+                case DeckType.HORDE:
+                    deck = cardsDataManager.GetHordeDeck((uint)deckLenght);
+                    break;
+                default:
+                    break;
+            }           
         }
         
         

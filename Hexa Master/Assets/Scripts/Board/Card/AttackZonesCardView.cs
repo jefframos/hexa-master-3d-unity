@@ -20,12 +20,17 @@ public class AttackZonesCardView : MonoBehaviour
     {
         //hexaRenderer.sortingOrder = 0;
     }
-    public void SetTeamID(int id)
+    public void SetTeamColor(Color color)
     {
-        Vector2 offs = hexaRenderer.material.mainTextureOffset;
-        offs.x = 8f / 256f * (float)id;
-        hexaRenderer.material.mainTextureOffset = offs;
+        hexaRenderer.material.color = color;
     }
+
+    //public void SetTeamID(int id)
+    //{
+    //    Vector2 offs = hexaRenderer.material.mainTextureOffset;
+    //    offs.x = 8f / 256f * (float)id;
+    //    hexaRenderer.material.mainTextureOffset = offs;
+    //}
     public void SetInGameMode()
     {
         renderers = new List<MeshRenderer>();

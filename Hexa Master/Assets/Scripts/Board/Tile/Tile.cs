@@ -7,7 +7,7 @@ public class Tile : MonoBehaviour
 {
     public TileModel tileModel;
     public TileView tileView;
-    public float rnd = 0;
+    public float startY = 0;
     public bool isBlock = false;
     internal bool isFlag;
     public bool hasCard = false;
@@ -18,8 +18,8 @@ public class Tile : MonoBehaviour
     private Collider collider;
     public bool IsAvailable { get => !isBlock && !hasCard; }
     public int TeamID { get => cardDynamicData.teamID; }
-
-    
+    internal float sin;
+    internal bool isFloating;
     public void ResetTile()
     {
         entityAttached = null;
@@ -34,6 +34,39 @@ public class Tile : MonoBehaviour
         collider = GetComponent<Collider>();
         collider.enabled = true;
         tileView.ResetView();
+        sin = 0;
+
+        transform.localPosition = Vector3.zero;
+
+        isFloating = false;
+
+    }
+    internal void StartFloating(float _sin)
+    {
+        isFloating = true;
+        sin = _sin;
+        UpdateFloatingPosition();
+    }
+    internal void UpdateFloatingPosition()
+    {
+        Vector3 targ = transform.localPosition;
+        targ.y = startY + Mathf.Sin(sin) * 0.025f;
+        sin += Time.deltaTime * 1.1f;
+        transform.localPosition = targ;
+    }
+    void Update()
+    {
+        if (isFloating)
+        {
+            UpdateFloatingPosition();
+        }
+
+        if (entityAttached)
+        {
+            Vector3 targ = transform.localPosition;
+            entityAttached.transform.localPosition = targ;
+        }
+       
     }
     void Start()
     {
@@ -69,6 +102,7 @@ public class Tile : MonoBehaviour
 
     internal void SetZone(int v)
     {
+        
         tileModel.zone = v;
         tileView.SetZone(v);
     }

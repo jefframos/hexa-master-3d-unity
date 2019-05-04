@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999218261714086755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -0, z: 0.26}
+  m_LocalPosition: {x: 0.09, y: -1.28, z: 0.26}
   m_LocalScale: {x: 4.54047, y: 1.3598, z: 4.4669676}
   m_Children: []
   m_Father: {fileID: 999218262737643186}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd69b1bfb14adf2438541013734d3118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boardColorScheme: {fileID: 11400000, guid: 6f3a7e0b92e4be94d9bf5f3fdb014b5d, type: 2}
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
   boardStaticData:
@@ -163,21 +164,6 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   currentTileSelected: {fileID: 0}
   boardCamera: {fileID: 0}
-  onTileOver:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onTileOut:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onTileSelected:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: BoardInput+TileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &1102314972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075eb3ef494c383448b0f8e7a47da5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropdown: {fileID: 0}
   debugging: 0
   debugging2: 0
 --- !u!114 &1081884643

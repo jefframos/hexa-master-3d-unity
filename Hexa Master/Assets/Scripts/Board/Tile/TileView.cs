@@ -39,6 +39,9 @@ public class TileView : MonoBehaviour
         
         tileMarker.gameObject.SetActive(false);
         ChangeColorId(standardColor);
+        ChangeColor(Color.white);
+
+        outline.enabled = false;
     }
 
     // internal Tile tile;
@@ -55,7 +58,7 @@ public class TileView : MonoBehaviour
        
         
         debug.text = "";
-        outline.enabled = false;
+        //outline.enabled = false;
         tileMarker.gameObject.SetActive(false);
         //REVER ISSO, TAH BEM ESTRANHO AS TWEEN, PARECE UE TEM MUITA COISA CONFLITANDO
         //0.125
@@ -71,18 +74,24 @@ public class TileView : MonoBehaviour
 
 
 
-        mainMaterial.mainTextureOffset = offs;
+        //mainMaterial.mainTextureOffset = offs;
     }
 
     internal void SetZone(int v)
     {
-        ChangeColorId(zonesColor[v-1]);
+        //ChangeColorId(zonesColor[v-1]);
+
+        outline.enabled = true;
+        outline.OutlineWidth = 1.5f;
+
+
+
     }
     public void SetFlag()
     {
         flagGameObject = Instantiate(flagPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         flagGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
-        flagGameObject.transform.localScale = new Vector3(0.2f, 0.1f, 0.2f);
+        flagGameObject.transform.localScale = new Vector3(0.2f, 0.05f, 0.2f);
         flagGameObject.transform.SetParent(blockerContainer);
         flagGameObject.transform.localPosition = Vector3.zero;
         foreach (Transform child in flagGameObject.GetComponentsInChildren<Transform>(true))
@@ -97,6 +106,12 @@ public class TileView : MonoBehaviour
             flagRenderer.materials[i].color = Color.white;
         }
         //flagRenderer.materials.color = Color.red;
+    }
+
+    internal void ChangeColor(Color color)
+    {
+        mainMaterial.color = color;
+        outline.OutlineColor = color;
     }
 
     internal void SetFlagColor(Color color)
@@ -114,15 +129,18 @@ public class TileView : MonoBehaviour
     {
         if (v)
         {
+            //outline.enabled = true;
+            //outline.OutlineColor = Color.red;
             //ChangeColorId(28f);
-            blockGameObject = Instantiate(blockersList[UnityEngine.Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
-            blockGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
-            blockGameObject.transform.SetParent(blockerContainer);
-            blockGameObject.transform.localPosition = new Vector3(0,0.01f,0);
-            foreach (Transform child in blockGameObject.GetComponentsInChildren<Transform>(true))
-            {
-                child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
-            }
+            //blockGameObject = Instantiate(blockersList[UnityEngine.Random.Range(0, blockersList.Count)], new Vector3(0, 0, 0), Quaternion.identity, blockerContainer);
+            //blockGameObject.layer = LayerMask.NameToLayer("BoardLayerFront");
+            //blockGameObject.transform.SetParent(blockerContainer);
+            //blockGameObject.transform.localPosition = new Vector3(0,0.01f,0);
+            //foreach (Transform child in blockGameObject.GetComponentsInChildren<Transform>(true))
+            //{
+            //    child.gameObject.layer = LayerMask.NameToLayer("BoardLayerFront");  // add any layer you want. 
+            //}
+
             //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         }
     }
@@ -134,7 +152,7 @@ public class TileView : MonoBehaviour
         }
         tileMarker.OnOver();
         //tileMarker.Highlight();
-        mainMaterial.DOKill();
+       // mainMaterial.DOKill();
         //mainMaterial.DOColor(mouseOverColor, 0.5f);
         //outline.enabled = true;
     }
@@ -145,10 +163,10 @@ public class TileView : MonoBehaviour
         {
             tile.entityAttached.OnOut();
         }
-        mainMaterial.DOKill();
-        mainMaterial.DOColor(Color.white, 0.5f);
+        //mainMaterial.DOKill();
+        //mainMaterial.DOColor(Color.white, 0.5f);
         //mainMaterial.color = Color.white;
-        outline.enabled = false;
+        //outline.enabled = false;
 
         tileMarker.Deactive();
         //tileMarker.gameObject.SetActive(false);
@@ -167,10 +185,11 @@ public class TileView : MonoBehaviour
 
         tileMarker.Deactive();
 
-        mainMaterial.DOKill();
+        //mainMaterial.DOKill();
         //mainMaterial.color = Color.white;
-        mainMaterial.DOColor(Color.white, 0.5f);
-        outline.enabled = false;
+        //mainMaterial.DOColor(Color.white, 0.5f);
+
+        //outline.enabled = false;
         debug.text = "";
     }
 

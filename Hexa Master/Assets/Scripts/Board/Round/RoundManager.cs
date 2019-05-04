@@ -63,7 +63,7 @@ public class RoundManager : MonoBehaviour
 
         for (int i = 0; i < enemiesPassiveList.Count; i++)
         {
-            roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID, tile));
+            roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID, tile, currentCardDynamicData.teamColor));
         }
         if (enemiesActiveList.Count > 0)
         {
@@ -157,11 +157,13 @@ public class RoundManager : MonoBehaviour
                 
             case ResultType.WIN:
                 targetAttack.cardDynamic.teamID = cardDynamicData.teamID;
-                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile));
-                roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID));
+                targetAttack.cardDynamic.teamColor = cardDynamicData.teamColor;
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, cardDynamicData.teamColor));
+                roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID, cardDynamicData.teamColor));
                 break;
             case ResultType.LOSE:
                 cardDynamicData.teamID = targetAttack.cardDynamic.teamID;
+                cardDynamicData.teamColor = targetAttack.cardDynamic.teamColor;
                 EnemiesAttackData selfData = new EnemiesAttackData
                 {
                     tile = tile,
@@ -171,13 +173,13 @@ public class RoundManager : MonoBehaviour
                     sideAttack = SideType.BottomLeft
                 };
                 roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.teamID, tile));
-                roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile));
-                roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, true));
+                roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile, targetAttack.cardDynamic.teamColor));
+                roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, targetAttack.cardDynamic.teamColor, true));
                 break;
             case ResultType.DRAW:
                 break;
             case ResultType.BLOCK:
-                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, true));
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, cardDynamicData.teamColor, true));
                 break;
             default:
                 break;
@@ -186,9 +188,9 @@ public class RoundManager : MonoBehaviour
     }
 
     #region Commands
-    private CommandDefault AddReboundCommand(Tile tile, int teamID, bool debug = false)
+    private CommandDefault AddReboundCommand(Tile tile, int teamID, Color teamColor, bool debug = false)
     {
-        List<NeighborModel> allArrounds = Rebound(tile, teamID, debug);
+        List<NeighborModel> allArrounds = Rebound(tile, teamID, teamColor, debug);
         CommandRebound.CommandReboundData data = new CommandRebound.CommandReboundData
         {
             allArrounds = allArrounds,
@@ -220,13 +222,14 @@ public class RoundManager : MonoBehaviour
         return command;
     }
 
-    private CommandDefault AddAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker, bool isBlock = false)
+    private CommandDefault AddAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker,  Color colorTarget,bool isBlock = false)
     {
         enemyData.attacker = attacker;
         CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
         {
             attackData = enemyData,
             teamTarget = teamTarget,
+            colorTarget = colorTarget,
             attackType = AttackType.Active,
             entityAttack = attacker.entityAttached,
             entityDefense = enemyData.tile.entityAttached,
@@ -239,13 +242,14 @@ public class RoundManager : MonoBehaviour
         return command;
     }
 
-    private CommandDefault AddPassiveAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker)
+    private CommandDefault AddPassiveAttackCommand(EnemiesAttackData enemyData, int teamTarget, Tile attacker, Color colorTarget)
     {
         enemyData.attacker = attacker;
         CommandAttack.CommandAttackData data = new CommandAttack.CommandAttackData
         {
             attackData = enemyData,
             teamTarget = teamTarget,
+            colorTarget = colorTarget,
             attackType = AttackType.Passive,
             entityAttack = attacker.entityAttached,
             entityDefense = enemyData.tile.entityAttached
@@ -306,7 +310,7 @@ public class RoundManager : MonoBehaviour
     }
 
     //internal List<Tile> Rebound(Tile tile)
-    internal List<NeighborModel> Rebound(Tile tile, int teamID, bool debug = false)
+    internal List<NeighborModel> Rebound(Tile tile, int teamID, Color teamColor, bool debug = false)
     {
         NeighborsArroundModel currentNeighborsList = BoardController.Instance.GetNeighbours(tile.tileModel, 2, true);
 
@@ -346,7 +350,8 @@ public class RoundManager : MonoBehaviour
             //Debug.Log("-" + allArrounds[i].tile.cardDynamicData.cardStaticData.name + " - " + allArrounds[i].tile.cardDynamicData.teamID + " - to: - " + teamID);
 
 
-            allArrounds[i].tile.cardDynamicData.teamID = teamID;// tile.entityAttached.cardDynamicData.teamID;
+            allArrounds[i].tile.cardDynamicData.teamID = teamID;
+            allArrounds[i].tile.cardDynamicData.teamColor = teamColor;// tile.entityAttached.cardDynamicData.teamID;
             //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }
         return allArrounds;

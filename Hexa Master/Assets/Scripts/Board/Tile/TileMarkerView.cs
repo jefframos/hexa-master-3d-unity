@@ -18,6 +18,7 @@ public class TileMarkerView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        targetColor = standardColor;
         markView.material.color = standardColor;
     }
 
@@ -40,7 +41,7 @@ public class TileMarkerView : MonoBehaviour
     }
     internal void Highlight()
     {
-        Debug.Log("Highlight");
+        //Debug.Log("Highlight");
         targetColor = highlightColor;
         //markView.material.color = standardColor;
         markView.gameObject.SetActive(true);
@@ -48,21 +49,22 @@ public class TileMarkerView : MonoBehaviour
 
     internal void DrawPreview()
     {
-        targetColor = drawColor;
+        //targetColor = drawColor;
+
         //markView.material.color = drawColor;
         markView.gameObject.SetActive(true);
     }
     internal void WinPreview()
     {
-        targetColor = winColor;
+        //targetColor = winColor;
 
-        Debug.Log("WIN");
         //markView.material.color = winColor;
         markView.gameObject.SetActive(true);
     }
     internal void LosePreview()
     {
-        targetColor = loseColor;
+        //targetColor = loseColor;
+
         //markView.material.color = loseColor;
         markView.gameObject.SetActive(true);
     }

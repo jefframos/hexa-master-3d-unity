@@ -73,6 +73,7 @@ MonoBehaviour:
     image_url: 
     classType: 
     race: 0
+    folder: thumbs
   getAttackedParticle: {fileID: 8470755290110593321}
   blockView: {fileID: 3203544886305145538}
   actionLabel: {fileID: 8446455267049516887}
@@ -516,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2559612978981670286}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0.48, z: 0.272}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.41437948, y: 0.41437948, z: 0.41437948}
   m_Children: []
   m_Father: {fileID: 7118140317249033425}
@@ -801,6 +802,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeamColor
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf051fba995609b459f0eb4baf4bb478, type: 2}
+    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54e27284cc01974588d9debf23b0614, type: 2}
     - target: {fileID: 400000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -817,14 +830,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.012
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: cf051fba995609b459f0eb4baf4bb478, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac4a5a9e24f3efa44b8f02171e9eefda, type: 3}
 --- !u!4 &2044828679729349337 stripped

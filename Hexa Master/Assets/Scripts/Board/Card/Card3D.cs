@@ -27,6 +27,8 @@ public class Card3D : MonoBehaviour
         cardDynamicData.SetData(cardStaticData);
 
         cardDynamicData.teamID = teamID;
+        cardDynamicData.teamColor = GameConfig.Instance.GetTeamColor(teamID);
+        //GameConfig.GetTeamColor(teamID);
         cardView.SetData(cardStaticData, cardDynamicData);
 
 

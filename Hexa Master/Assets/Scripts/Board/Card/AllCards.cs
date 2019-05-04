@@ -8,6 +8,8 @@ public class AllCards {
     public CardStaticData[] level3;
     public CardStaticData[] level4;
     public CardStaticData[] level5;
+    public CardStaticData[] alliance;
+    public CardStaticData[] horde;
     public CardStaticData[] GetShuffleCopy(CardStaticData[] array)
     {
         CardStaticData[] randomized;

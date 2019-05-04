@@ -40,7 +40,7 @@ public class EntityView : MonoBehaviour
         cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
         startY = charSprite.transform.localPosition.y;
-        var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
+        var sp = Resources.Load<Sprite>("Cards/"+ cardStaticData.folder+"/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
         charSprite.sprite = sp;
         charSprite.transform.DOMoveY(charSprite.transform.localPosition.y + 1f, 0.75f).From().SetEase(Ease.OutBounce).OnComplete(()=> {
             EnableFloating();
@@ -55,9 +55,7 @@ public class EntityView : MonoBehaviour
     }
     public void ApplyTeamColor()
     {
-        Vector2 offs = teamMaterial.material.mainTextureOffset;
-        offs.x = 8f / 256f * (float)cardDynamicData.teamID;
-        teamMaterial.material.mainTextureOffset = offs;
+        teamMaterial.material.color = cardDynamicData.teamColor;
     }
     public void EnableFloating()
     {
@@ -101,7 +99,7 @@ public class EntityView : MonoBehaviour
         if (floating)
         {
             Vector3 targ = charSprite.transform.localPosition;
-            targ.y = startY + Mathf.Sin(sin) * 0.075f;
+            targ.y = startY + Mathf.Sin(sin) * 0.025f;
             sin += Time.deltaTime * 1.1f;
             charSprite.transform.localPosition = targ;
         }

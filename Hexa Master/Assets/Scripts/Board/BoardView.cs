@@ -121,13 +121,13 @@ public class BoardView : MonoBehaviour
     internal void Destroy()
     {
         built = false;
-        if(tileList != null)
+        if (tileList != null)
         {
             for (int i = 0; i < tileList.Count; i++)
             {
                 for (int j = 0; j < tileList[i].Count; j++)
                 {
-                    if(tileList[i][j] != null)
+                    if (tileList[i][j] != null)
                     {
                         GamePool.Instance.ReturnTile(tileList[i][j].gameObject);
 
@@ -135,7 +135,7 @@ public class BoardView : MonoBehaviour
                 }
             }
         }
-        
+
 
         tileList = new List<List<Tile>>();
     }
@@ -189,10 +189,50 @@ public class BoardView : MonoBehaviour
         tileList = _tileList;
         built = true;
         UpdateTilesPosition();
+        Invoke("StartFloatingAllTiles", tileList.Count * 0.15f + 0.5f);
+        for (int i = 0; i < tileList.Count; i++)
+        {
+            for (int j = 0; j < tileList[i].Count; j++)
+            {
+                if (tileList[i][j])
+                {
+
+                    Tile tile = tileList[i][j];
+                    tile.StartFloating(j);
+
+                    tile.transform.DOLocalMoveY(-0.5f, 0.5f)
+                        .SetDelay(i * 0.15f)
+                        .From()
+                        .SetEase(Ease.OutBack)
+                        .OnStart(() =>
+                    {
+                        tile.gameObject.SetActive(true);
+                    });
+                    tile.gameObject.SetActive(false);
+                    tile.isFloating = false;
+
+                }
+
+            }
+        }
+    }
+    void StartFloatingAllTiles()
+    {
+        for (int i = 0; i < tileList.Count; i++)
+        {
+            for (int j = 0; j < tileList[i].Count; j++)
+            {
+                if (tileList[i][j])
+                {
+                    tileList[i][j].isFloating = true;
+                }
+            }
+        }
     }
 
     void UpdateTilesPosition()
     {
+        // return;
         if (!built)
         {
             return;
@@ -206,7 +246,6 @@ public class BoardView : MonoBehaviour
         starterWidth = tileData.width;
         starterHeight = tileData.height;
 
-
         float targetX = 0;
         float targetZ = 0;
         for (int i = 0; i < tileList.Count; i++)
@@ -217,11 +256,11 @@ public class BoardView : MonoBehaviour
                 targetX = -(col) / 2 + j;
                 if (col % 2 != 0)
                 {
-                    targetX -= tileData.width - tileData.height + tileData.width/2;
+                    targetX -= tileData.width - tileData.height + tileData.width / 2;
                 }
                 else
                 {
-                    targetX += tileData.width - tileData.height + tileData.width/2;//0.15f;
+                    targetX += tileData.width - tileData.height + tileData.width / 2;//0.15f;
                 }
                 targetZ = lin / 2 - i;
                 //targetZ = boardData.lin - i;
@@ -233,10 +272,10 @@ public class BoardView : MonoBehaviour
                 {
                     Tile tile = element[j];
 
-                    tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, tile.rnd, targetZ * tileData.height);
-                    tile.transform.localScale = new Vector3(tileData.scale, tileData.scale, tileData.scale);
+                    tile.transform.position = new Vector3(targetX * tileData.width + tileData.width / 4, tile.startY, targetZ * tileData.height);
+                    //tile.transform.localScale = new Vector3(tileData.scale, tileData.scale, tileData.scale);
                 }
-              
+
             }
         }
     }

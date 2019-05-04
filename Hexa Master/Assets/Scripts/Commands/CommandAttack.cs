@@ -13,6 +13,7 @@ public class CommandAttack : CommandDefault
         internal EntityView entityDefense;
         internal AttackType attackType;
         internal int teamTarget;
+        internal Color colorTarget;
         internal bool isBlock;
         internal bool isCounter;
         internal bool isMock;
@@ -43,12 +44,14 @@ public class CommandAttack : CommandDefault
             if (data.attackType == AttackType.Passive)
             {
                 data.attackData.cardDynamic.teamID = data.teamTarget;
+                data.attackData.cardDynamic.teamColor = data.colorTarget;
                 data.attackData.tile.entityAttached.ApplyTeamColor();
                 Debug.Log("PASSIVE");
             }
             else
             {
                 data.attackData.cardDynamic.teamID = data.teamTarget;
+                data.attackData.cardDynamic.teamColor = data.colorTarget;
                 data.attackData.tile.entityAttached.ApplyTeamColor();
                 Debug.Log("ACTIVE");
             }

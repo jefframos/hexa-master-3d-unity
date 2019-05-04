@@ -25,4 +25,5 @@ public class CardStaticData
     public string image_url;
     public string classType;
     public int race;
+    public string folder = "thumbs";
 }

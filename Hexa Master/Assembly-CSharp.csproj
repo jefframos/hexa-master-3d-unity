@@ -187,6 +187,7 @@
     <Compile Include="Assets\Scripts\Board\Data\BoardDataLoader.cs" />
     <Compile Include="Assets\Scripts\Board\Data\BoardLayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Data\BoardTilemapConfig.cs" />
+    <Compile Include="Assets\Scripts\Board\Data\ColorScheme\BoardColorScheme.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckInput.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUI.cs" />
     <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUIButton.cs" />
     <Compile Include="Assets\Scripts\FlexUI\Scripts\FlexUIData.cs" />
+    <Compile Include="Assets\Scripts\Game\GameConfig.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game\MatchConfig.cs" />
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />

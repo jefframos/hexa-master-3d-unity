@@ -15,6 +15,7 @@ public class GameCardView3D : MonoBehaviour
     public TextMeshPro attackLabel;
     public TextMeshPro defenseLabel;
     public TextMeshPro rangeLabel;
+    public TextMeshPro nameLabel;
     public List<GameObject> starsList;
 
     public SpriteRenderer[] allRenderers;
@@ -78,16 +79,26 @@ public class GameCardView3D : MonoBehaviour
         {
             starsList[i].SetActive(true);
         }
+        var sp = Resources.Load<Sprite>("Cards/"+ cardStaticData.folder+"/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
 
-        var sp = Resources.Load<Sprite>("Cards/thumbs/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
-
+        nameLabel.text = cardStaticData.name;
         //GameObject attackZones = Instantiate(attackZonesPrefab, new Vector3(0, 0, 0), Quaternion.identity, attackZonesParent);
         //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         attackZonesView = GetComponentInChildren<AttackZonesCardView>();
         attackZonesView.SetZones(cardDynamicData.sideList);
-        attackZonesView.SetTeamID(cardDynamicData.teamID);
+        //attackZonesView.SetTeamID(cardDynamicData.teamID);
+        attackZonesView.SetTeamColor(cardDynamicData.teamColor);
+        
         attackZonesView.setDeckLayer();
         charSprite.sprite = sp;
+        if(cardStaticData.folder == "new")
+        {
+            charSprite.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        else
+        {
+            charSprite.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
+        }
         isSelected = false;
     }
     public void SetOrder(int order)
@@ -121,7 +132,7 @@ public class GameCardView3D : MonoBehaviour
     public void OnSelect()
     {
         isSelected = true;
-        spriteSelected.color = colorSelect;
+        spriteSelected.color = cardDynamicData.teamColor;
     }
     public void OnUnSelect()
     {

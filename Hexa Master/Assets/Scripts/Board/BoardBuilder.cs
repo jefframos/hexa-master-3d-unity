@@ -11,6 +11,7 @@ public class BoardBuilder : MonoBehaviour
         public int lin = 8;
         public int col = 11;
     }
+    public BoardColorScheme boardColorScheme;
     public GameObject TilePrefab;
     public BoardStaticData boardStaticData;
     public List<List<Tile>> tileList;
@@ -57,32 +58,44 @@ public class BoardBuilder : MonoBehaviour
                     tile.tileModel.j = j;
                     tile.tileModel.id = accum2;
                     accum2++;
-                    tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
+                    tile.startY = 0;// rndPos[(int)Random.Range(0,2)];
                     tile.tileView.debugID.text = i + "-" + j;
                     tiles.Add(tile);
                     allTiles.Add(tile);
 
-                    if(tileType == BoardData.TileMapType.BLOCK )
+                    if (tileType == BoardData.TileMapType.BLOCK)
                     {
                         tile.SetBlock(true);
+                        tile.tileView.ChangeColor(boardColorScheme.Blocker[Random.Range(0, boardColorScheme.Blocker.Length)]);
                     }
-
-                    if (tileType == BoardData.TileMapType.FLAG)
+                    else if (tileType == BoardData.TileMapType.FLAG)
                     {
                         int zone = boardData.GetZone(dataId);
                         tile.SetZone(boardData.GetZone(dataId));
                         tile.SetFlag(zone);
-                    }
 
-                    if (tileType == BoardData.TileMapType.ZONE)
+                        tile.tileView.ChangeColor(boardColorScheme.ZonesFlags[zone -1]);
+                    }
+                    else if (tileType == BoardData.TileMapType.ZONE)
                     {
                         int zone = boardData.GetZone(dataId);
                         tile.SetZone(boardData.GetZone(dataId));
 
-                        tile.rnd = zone * 0.15f - 0.3f;
+                        if(zone == 1)
+                        {
+                            tile.startY = 0.2f;
+                        }
+                        //tile.rnd = zone * 0.15f;// - 0.3f;
+
+                        tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
+                    }
+                    else
+                    {
+                        tile.tileView.ChangeColor(boardColorScheme.Standard[Random.Range(0, boardColorScheme.Standard.Length)]);
                     }
                 }
-                else{
+                else
+                {
                     tiles.Add(null);
                 }
                 //accum++;
@@ -90,24 +103,15 @@ public class BoardBuilder : MonoBehaviour
             }
             tileList.Add(tiles);
         }
-        //ArrayUtils.Shuffle(allTiles);
-        //for (int i = 0; i < maxBlocks; i++)
-        //{
-        //    if (i >= allTiles.Count)
-        //    {
-        //        break;
-        //    }
-        //    allTiles[i].SetBlock(true);
-        //}
+
         BoardController.Instance.SetBoard(tileList);
         boardView.SetTiles(tileList, boardStaticData.lin, boardStaticData.col);
 
-        Debug.Log("LOADD");
 
     }
     public void BuildBoard()
     {
-        
+
         int accum = 0;
         //int blockCounter = 0;
         int tempCol = boardStaticData.col;
@@ -135,7 +139,7 @@ public class BoardBuilder : MonoBehaviour
                 tile.tileModel.i = i;
                 tile.tileModel.j = j;
                 tile.tileModel.id = accum;
-                tile.rnd = 0;// rndPos[(int)Random.Range(0,2)];
+                tile.startY = 0;// rndPos[(int)Random.Range(0,2)];
                 accum++;
                 tile.tileView.debugID.text = i + "-" + j;
                 //if (Random.Range(0, 1f) < 0.15f && blockCounter < maxBlocks)
@@ -151,7 +155,7 @@ public class BoardBuilder : MonoBehaviour
         ArrayUtils.Shuffle(allTiles);
         for (int i = 0; i < maxBlocks; i++)
         {
-            if(i >= allTiles.Count)
+            if (i >= allTiles.Count)
             {
                 break;
             }

@@ -106,13 +106,13 @@ public class BoardController : Singleton<BoardController>
                 {
                     int zone = tileList[i][j].tileModel.zone - 1;
 
-                    if (tileList[i][j].TeamID == 18)
+                    if (tileList[i][j].TeamID == 0)
                     {
                         //score.player1++;
 
                         score.zonesScore1[zone]++;
                     }
-                    else if (tileList[i][j].TeamID == 29)
+                    else if (tileList[i][j].TeamID == 1)
                     {
                         //score.player2++;
 
@@ -128,30 +128,34 @@ public class BoardController : Singleton<BoardController>
         }
 
         int[] results = score.GetResult();
-
+        Color colorTarget = Color.white;
         for (int i = 0; i < flags.Length; i++)
         {
             if (results[i] == 0)
             {
+               
                 flags[i].tileView.SetFlagColor(Color.white);
             }
             else if (results[i] == 1)
             {
                 score.player1++;
-                flags[i].tileView.SetFlagColor(Color.cyan);
+                colorTarget = GameConfig.Instance.GetTeamColor(0);
+                flags[i].tileView.SetFlagColor(colorTarget);
             }
             else if (results[i] == 2)
             {
                 score.player2++;
-                flags[i].tileView.SetFlagColor(Color.magenta);
+                colorTarget = GameConfig.Instance.GetTeamColor(1);
+                flags[i].tileView.SetFlagColor(colorTarget);
             }
-            if (results[i] == 3)
+            else if (results[i] == 3)
             {
                 score.player3++;
-                flags[i].tileView.SetFlagColor(Color.grey);
+                colorTarget = GameConfig.Instance.GetTeamColor(2);
+                flags[i].tileView.SetFlagColor(colorTarget);
             }
+            Debug.Log(results[i]);
         }
-
         return score;
     }
     public void SetBoard(List<List<Tile>> _tileList)

@@ -88,6 +88,70 @@ public class CardsDataManager : Singleton<CardsDataManager>
 
         return allCardsList[0][0];
     }
+    public List<CardStaticData> GetAllianceDeck(uint tot)
+    {
+        List<CardStaticData> deck = new List<CardStaticData>();
+
+        CardStaticData[] level1Copy = allCards.GetShuffleCopy(allCards.alliance);
+        CardStaticData[] level2Copy = allCards.GetShuffleCopy(allCards.alliance);
+
+        Debug.Log(level1Copy.Length);
+
+        List<CardStaticData[]> allCardsRandomList = new List<CardStaticData[]>
+        {
+            level1Copy,
+            level2Copy
+        };
+
+        int aux = 0;
+        for (int i = 0; i < tot; i++)
+        {
+            int id = Random.Range(0, allCardsRandomList.Count);
+            CardStaticData[] tempArray = allCardsRandomList[id];
+            aux = i;
+            if (aux > tempArray.Length - 1)
+            {
+                aux = Random.Range(0, tempArray.Length);
+            }
+            deck.Add(tempArray[aux]);
+        }
+
+        return deck;
+    }
+
+    public List<CardStaticData> GetHordeDeck(uint tot)
+    {
+        List<CardStaticData> deck = new List<CardStaticData>();
+
+        CardStaticData[] level1Copy = allCards.GetShuffleCopy(allCards.horde);
+        CardStaticData[] level2Copy = allCards.GetShuffleCopy(allCards.horde);
+        CardStaticData[] level3Copy = allCards.GetShuffleCopy(allCards.horde);
+
+        Debug.Log(level1Copy.Length);
+
+        List<CardStaticData[]> allCardsRandomList = new List<CardStaticData[]>
+        {
+            level1Copy,
+            level2Copy,
+            level3Copy
+        };
+
+        int aux = 0;
+        for (int i = 0; i < tot; i++)
+        {
+            int id = Random.Range(0, allCardsRandomList.Count);
+            CardStaticData[] tempArray = allCardsRandomList[id];
+            aux = i;
+            if (aux > tempArray.Length - 1)
+            {
+                aux = Random.Range(0, tempArray.Length);
+            }
+            deck.Add(tempArray[aux]);
+        }
+
+        return deck;
+    }
+
     public List<CardStaticData> GetRandomDeck(uint tot, int[] levels)
     {
 
