@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class DeckBuilder : MonoBehaviour
 {
-    public enum DeckType
-    {
-        NONE,ALLIANCE,HORDE
-    }
-    public DeckType deckType = DeckType.NONE;
+    
     public static uint CARD_ID_COUNTER = 0;
     // Start is called before the first frame update
     DeckView deckView;
@@ -26,22 +22,16 @@ public class DeckBuilder : MonoBehaviour
     public List<int> starterIDS;
     public int[] levels;
     public bool ignoreStarters = false;
-    void Start()
+
+    internal PlayerData playerData;
+
+    internal void InitDeck(PlayerData _playerData)
     {
+        playerData = _playerData;
+        handDeck = new List<Card3D>();
         maxInHandDefault = maxInHand;
         cardsDataManager = CardsDataManager.Instance;
         deckView = GetComponent<DeckView>();
-
-        //cardsDataManager.allCards.level1[0];
-
-        //inGameDeck = new InGameDeck()
-        handDeck = new List<Card3D>();
-        //DeckLoading();
-
-    }
-
-    internal void InitDeck()
-    {
         handDeck = new List<Card3D>();
         DeckLoading();
     }
@@ -89,24 +79,13 @@ public class DeckBuilder : MonoBehaviour
         }
         else
         {
-            switch (deckType)
-            {
-                case DeckType.NONE:
-                    deck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
-                    break;
-                case DeckType.ALLIANCE:
-                    deck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
-                    break;
-                case DeckType.HORDE:
-                    deck = cardsDataManager.GetHordeDeck((uint)deckLenght);
-                    break;
-                default:
-                    break;
-            }           
+            playerData.LoadDeck(12);
+            deck = playerData.playerInGameDeck;
+            ArrayUtils.Shuffle(deck);
         }
-        
-        
-        if(deck.Count < 12)
+
+
+        if (deck.Count < 12)
         {
             Debug.Log(deckLenght);
             Debug.Log(levels);
@@ -152,7 +131,8 @@ public class DeckBuilder : MonoBehaviour
 
     internal void DestroyDeck()
     {
-        deckView.DestroyCards();
+        if (deckView)
+            deckView.DestroyCards();
         //throw new NotImplementedException();
     }
 

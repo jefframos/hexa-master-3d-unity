@@ -68,6 +68,13 @@ public class Tile : MonoBehaviour
         }
        
     }
+
+    internal void Highlight()
+    {
+        tileView.tileMarker.Highlight();
+
+    }
+
     void Start()
     {
         tileView.tile = this;
@@ -112,6 +119,11 @@ public class Tile : MonoBehaviour
         isBlock = true;
         isFlag = true;
         tileView.SetFlag();
+    }
+
+    internal void ForceClear()
+    {
+        tileView.OnOut();
     }
 }
 

@@ -83,7 +83,7 @@ public class BoardBuilder : MonoBehaviour
 
                         if(zone == 1)
                         {
-                            tile.startY = 0.2f;
+                            tile.startY = 0.22f;
                         }
                         //tile.rnd = zone * 0.15f;// - 0.3f;
 

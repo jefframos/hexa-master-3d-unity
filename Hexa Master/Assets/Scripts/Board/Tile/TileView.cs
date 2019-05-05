@@ -40,7 +40,7 @@ public class TileView : MonoBehaviour
         tileMarker.gameObject.SetActive(false);
         ChangeColorId(standardColor);
         ChangeColor(Color.white);
-
+        tileMarker.ResetMarker();
         outline.enabled = false;
     }
 
@@ -118,10 +118,9 @@ public class TileView : MonoBehaviour
     {
         
         Renderer flagRenderer = flagGameObject.GetComponent<Renderer>();
-
         for (int i = 0; i < flagRenderer.materials.Length; i++)
         {
-            flagRenderer.materials[i].color = color;
+            flagRenderer.materials[i].DOColor(color, 0.5f);
         }
     }
 
@@ -163,11 +162,12 @@ public class TileView : MonoBehaviour
         {
             tile.entityAttached.OnOut();
         }
+
         //mainMaterial.DOKill();
         //mainMaterial.DOColor(Color.white, 0.5f);
         //mainMaterial.color = Color.white;
         //outline.enabled = false;
-
+        tileMarker.OnOut();
         tileMarker.Deactive();
         //tileMarker.gameObject.SetActive(false);
     }
@@ -182,14 +182,7 @@ public class TileView : MonoBehaviour
     }
     public void OnClear()
     {
-
         tileMarker.Deactive();
-
-        //mainMaterial.DOKill();
-        //mainMaterial.color = Color.white;
-        //mainMaterial.DOColor(Color.white, 0.5f);
-
-        //outline.enabled = false;
         debug.text = "";
     }
 

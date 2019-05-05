@@ -45,7 +45,7 @@ public class BoardView : MonoBehaviour
             {
                 if (currentNeighborsList.allLists[i][j].tile && !currentNeighborsList.allLists[i][j].tile.hasCard)
                 {
-                    currentNeighborsList.allLists[i][j].tile.tileView.tileMarker.Highlight();
+                    currentNeighborsList.allLists[i][j].tile.Highlight();
 
                 }
             }

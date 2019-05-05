@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 779553125694583440}
   - component: {fileID: 3562676935163322406}
   - component: {fileID: 1626732872}
+  - component: {fileID: 2037742904}
   m_Layer: 13
   m_Name: DeckContainer
   m_TagString: Untagged
@@ -51,8 +52,10 @@ MonoBehaviour:
     type: 3}
   maxInHand: 5
   deckLenght: 12
-  teamID: 18
-  starterIDS: 7d0200007d02000023010000
+  teamID: 0
+  starterIDS: 7d020000cd0100007d0200007d0200007d0200007d0200007d020000
+  levels: 0200000003000000
+  ignoreStarters: 1
 --- !u!114 &3562676935163322406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +71,6 @@ MonoBehaviour:
   col: 
   currentCardOver: {fileID: 0}
   currentCardSelected: {fileID: 0}
-  deckCamera: {fileID: 0}
   onCardOver:
     m_PersistentCalls:
       m_Calls:
@@ -99,43 +101,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onCardSelect:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1626732872}
-        m_MethodName: CardSelect
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetCurrentCard
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onBlockBoard:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onUnblockBoard:
-    m_PersistentCalls:
-      m_Calls: []
     m_TypeName: DeckInput+CardEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   deckBlocker: {fileID: 7242529871041449202}
@@ -176,12 +141,24 @@ MonoBehaviour:
     cardsDistance: 0
     cardsRotation: 0
     cardsArc: 0
-    cardScale: 1
-    targetY: 0.2
+    cardScale: 1.1
+    targetY: 0.45
     targetBlocker: {x: 0, y: -0.05, z: 0.45}
   blockTransform: {fileID: 7242529871041449202}
   deckBuilder: {fileID: 779553125694583440}
   cardSelected: {fileID: 0}
+--- !u!114 &2037742904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779553125694583442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75630d1fe66ce8429241d4b8c1f2436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5705082694049801064
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +209,7 @@ MeshRenderer:
   m_GameObject: {fileID: 5705082694049801064}
   m_Enabled: 0
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

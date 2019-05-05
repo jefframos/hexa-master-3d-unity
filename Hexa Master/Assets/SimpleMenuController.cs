@@ -2,29 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class SimpleMenuController : MonoBehaviour
 {
-    public GameObject collapseMenu;
+    public Transform collapseMenu;
     public Text buttonText;
+    public bool collapsed = true;
+    Vector2 startPos;
     public void ToggleMenu()
     {
-        if (collapseMenu.activeSelf)
+        if (collapsed)
         {
-            collapseMenu.SetActive(false);
+            //collapseMenu.transform
+            collapseMenu.DOLocalMoveX(startPos.x - 300f, 0.5f).SetEase(Ease.InBack);
+            //collapseMenu.localPosition = new Vector2(startPos.x - 300f, startPos.y);
+            collapsed = false;
             buttonText.text = "SHOW";
         }
         else
         {
-            collapseMenu.SetActive(true);
+            collapseMenu.DOLocalMoveX(startPos.x, 0.5f).SetEase(Ease.OutBack);
+            collapsed = true;
             buttonText.text = "HIDE";
         }
     }
     // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
+    void Start()
+    {
+        startPos = collapseMenu.localPosition;
+
+
+    }
 
     //// Update is called once per frame
     //void Update()

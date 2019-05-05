@@ -11,25 +11,35 @@ public class DeckInput : MonoBehaviour
     public Card3D currentCardSelected;
     private Card3D tempCard;
 
-    public Camera deckCamera;
+    //public 
+    Camera deckCamera;
 
     [System.Serializable]
     public class CardEvent : UnityEvent<Card3D> { };
     public CardEvent onCardOver = new CardEvent();
     public CardEvent onCardOut = new CardEvent();
-    public CardEvent onCardSelect = new CardEvent();
-    public CardEvent onBlockBoard = new CardEvent();
-    public CardEvent onUnblockBoard = new CardEvent();
+    internal CardEvent onCardSelect = new CardEvent();
+
+    internal CardEvent onBlockBoard = new CardEvent();
+    internal CardEvent onUnblockBoard = new CardEvent();
 
     public Transform deckBlocker;
     private List<int> collidableLayers;
     private bool block = false;
     internal bool mouseOverDeck = false;
+
+    DeckView deckView;
     // Start is called before the first frame update
     void Start()
     {
-        collidableLayers = new List<int>();
-        collidableLayers.Add(1 << LayerMask.NameToLayer("DeckLayer"));
+        deckCamera = GetComponentInParent<Camera>();
+        deckView = GetComponent<DeckView>();
+        collidableLayers = new List<int>
+        {
+            1 << LayerMask.NameToLayer("DeckLayer")
+        };
+
+        onCardSelect.AddListener(GameManager.Instance.SetCurrentCard);
     }
     void Update()
     {        
@@ -41,7 +51,6 @@ public class DeckInput : MonoBehaviour
         }
         col = "testing";
         //{
-        RaycastHit hit;
 
         tempCard = null;
 
@@ -52,7 +61,7 @@ public class DeckInput : MonoBehaviour
         for (int i = 0; i < collidableLayers.Count; i++)
         {
 
-            if (Physics.Raycast(ray, out hit, 100f, collidableLayers[i]))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, collidableLayers[i]))
             {
 
                 if(deckBlocker == hit.transform)
@@ -115,11 +124,13 @@ public class DeckInput : MonoBehaviour
     }
     void CardSelect(Card3D card)
     {
+        Debug.Log("CARD SELECT");
         if(currentCardSelected != card)
         {
             currentCardSelected = card;
 
         }
+        deckView.CardSelect(currentCardSelected);
         onCardSelect.Invoke(currentCardSelected);
     }
     void NoCardOver()

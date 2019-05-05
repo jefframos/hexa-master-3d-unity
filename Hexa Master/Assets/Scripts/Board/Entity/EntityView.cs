@@ -55,7 +55,8 @@ public class EntityView : MonoBehaviour
     }
     public void ApplyTeamColor()
     {
-        teamMaterial.material.color = cardDynamicData.teamColor;
+        teamMaterial.material.DOColor(cardDynamicData.teamColor, 0.5f);
+        //teamMaterial.material.color = cardDynamicData.teamColor;
     }
     public void EnableFloating()
     {

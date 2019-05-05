@@ -31,8 +31,11 @@ public class GameManager : Singleton<GameManager>
     public float tweenScale = 1f;
     bool isPause = false;
     List<float> ignoredBots;
+    List<PlayerData> playerDataList;
 
     public TMP_Dropdown dropdown;
+
+    public PlayerInfoView testHud;
 
     void Update()
     {
@@ -71,7 +74,16 @@ public class GameManager : Singleton<GameManager>
     {
         GAME_TIME_SCALE = tweenScale;
         Application.targetFrameRate = 300;
-
+        playerDataList = new List<PlayerData>();
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerData playerData = new PlayerData
+            {
+                deckType = i % 2 == 0 ? DeckType.ALLIANCE : DeckType.HORDE
+            };
+            playerData.teamID = i + 1;
+            playerDataList.Add(playerData);
+        }
         maxPlayers = dropdown.value + 2;
         boardController = BoardController.Instance;
         boardInput.onTileOver.AddListener(OnTileOver);
@@ -159,13 +171,15 @@ public class GameManager : Singleton<GameManager>
 
         boardController.ResetAllTiles();
 
+
+
         for (int i = 0; i < deckViewList.Count; i++)
         {
             if(i < maxPlayers)
             {
                 deckViewList[i].gameObject.SetActive(true);
                 deckViewList[i].ResetDeck();
-                deckViewList[i].deckBuilder.InitDeck();
+                deckViewList[i].deckBuilder.InitDeck(playerDataList[i]);
             }
             else
             {
@@ -173,6 +187,7 @@ public class GameManager : Singleton<GameManager>
             }
           
         }
+        testHud.SetPlayerData(playerDataList[0]);
 
         UpdateCurrentTeam();
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
@@ -261,6 +276,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (roundManager.CanPlance(tile, currentCard.cardDynamicData))
         {
+            currentTile.ForceClear();
             boardView.ClearAllNeighbors();
             boardInput.enabled = false;
             currentDeckInput.SetBlock();
@@ -350,6 +366,6 @@ public class GameManager : Singleton<GameManager>
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
         }
 
-        tile.tileView.OnOver();
+        //tile.tileView.OnOver();
     }
 }

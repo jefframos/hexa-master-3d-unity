@@ -15,8 +15,9 @@ public class TileMarkerView : MonoBehaviour
     public Color overColor;
 
     Color targetColor;
+    bool isOver = false;
     // Start is called before the first frame update
-    void Start()
+    internal void ResetMarker()
     {
         targetColor = standardColor;
         markView.material.color = standardColor;
@@ -25,47 +26,49 @@ public class TileMarkerView : MonoBehaviour
     //// Update is called once per frame
     void Update()
     {
-        markView.material.color = Color.Lerp(markView.material.color, targetColor, 0.1f);
+        markView.material.color = Color.Lerp(markView.material.color, targetColor, 0.3f);
     }
 
     internal void Deactive()
     {
+        Debug.Log("DEACTIVE");
+        if (isOver)
+        {
+            return;
+        }
         markView.material.color = standardColor;
-       markView.gameObject.SetActive(false);
+        markView.gameObject.SetActive(false);
+    }
+    internal void OnOut()
+    {
+        markView.material.color = standardColor;
+        isOver = false;
     }
     internal void OnOver()
     {
-        //targetColor = overColor;
-        //markView.material.color = standardColor;
+        targetColor = overColor;
         markView.gameObject.SetActive(true);
+        isOver = true;
     }
     internal void Highlight()
     {
-        //Debug.Log("Highlight");
         targetColor = highlightColor;
-        //markView.material.color = standardColor;
         markView.gameObject.SetActive(true);
     }
 
     internal void DrawPreview()
     {
-        //targetColor = drawColor;
-
-        //markView.material.color = drawColor;
+        targetColor = drawColor;
         markView.gameObject.SetActive(true);
     }
     internal void WinPreview()
     {
-        //targetColor = winColor;
-
-        //markView.material.color = winColor;
+        targetColor = winColor;
         markView.gameObject.SetActive(true);
     }
     internal void LosePreview()
     {
-        //targetColor = loseColor;
-
-        //markView.material.color = loseColor;
+        targetColor = loseColor;
         markView.gameObject.SetActive(true);
     }
 }

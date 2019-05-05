@@ -27,6 +27,7 @@ public class Card3D : MonoBehaviour
         cardDynamicData.SetData(cardStaticData);
 
         cardDynamicData.teamID = teamID;
+        //get this color from player data
         cardDynamicData.teamColor = GameConfig.Instance.GetTeamColor(teamID);
         //GameConfig.GetTeamColor(teamID);
         cardView.SetData(cardStaticData, cardDynamicData);
@@ -57,8 +58,8 @@ public class Card3D : MonoBehaviour
         cardView.OnOver();
     }
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 }
