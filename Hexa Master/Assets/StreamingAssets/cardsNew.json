@@ -1,0 +1,1399 @@
+{
+    "alliance":[
+        {
+            "name": "Dwarf Miner",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 120,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/dwarf-miner.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Dwarf Monk",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 50,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/dwarf-monk.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Warrior",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/dwarf-warrior.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Elf Paladin",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Elf Ranger",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 120,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 100,
+                "range": 3
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/elf-ranger.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Elf Thief",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 120,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 120,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url": "thumbs/elf-thief.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Elf White Mage",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 80,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/elf-white-mage.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Human Mage",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 70,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/human-mage.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Ranger",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 90,
+                "range": 2
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/human-ranger.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Thief",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 120,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 90,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/human-thief.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Human Warrior",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 120,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/human-warrior.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }
+    ],
+    "horde":[
+        {
+            "name": "Orc Ranger 1",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 60,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 2
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name":"Orc Ranger 2",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 70,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 100,
+                "range": 2
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name":"Orc Ranger 3",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 100,
+                "range": 3
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Soldier 1",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 60,
+                "defense": 60,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/orc-soldier.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Soldier 2",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 70,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/orc-soldier.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Soldier 3",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 70,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url":  "thumbs/orc-soldier.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Orc Warrior",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 60,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Warrior 2",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 80,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 50,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Warrior 3",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Tank",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 100,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 30,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/orc-warrior-2.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Orc Tank",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 100,
+                "defense": 120,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 50,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/orc-warrior-2.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }
+    ],
+    "human":[
+        {
+            "name": "Human Mage 1",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 70,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/human-mage.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Mage 2",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 90,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 70,
+                "range": 2
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/human-mage.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Mage",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 100,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 70,
+                "range": 2
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/human-mage.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Ranger 1",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 90,
+                "defense": 50,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 60,
+                "range": 2
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/human-ranger.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Ranger 2",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 70,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 80,
+                "range": 2
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/human-ranger.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Ranger 2",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 110,
+                "defense": 70,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 100,
+                "range": 2
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/human-ranger.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Human Thief 1",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 60,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/human-thief.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Human Thief 2",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 110,
+                "defense": 60,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/human-thief.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Human Thief 3",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 120,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/human-thief.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Human Warrior 1",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 80,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/human-warrior.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Human Warrior 2",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/human-warrior.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Human Warrior 3",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 120,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/human-warrior.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }
+    ],
+    "dwarf":[
+        {
+            "name": "Dwarf Miner 1",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/dwarf-miner.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Dwarf Miner 2",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 100,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/dwarf-miner.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Dwarf Miner 3",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 120,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/dwarf-miner.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Dwarf Monk 1",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 50,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/dwarf-monk.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Monk 2",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 60,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/dwarf-monk.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Monk 3",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/dwarf-monk.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Warrior 1",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 80,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/dwarf-warrior.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Warrior 2",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 10,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/dwarf-warrior.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Dwarf Warrior 3",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 120,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/dwarf-warrior.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }
+    ],
+    "elf":[
+        {
+            "name": "Elf Paladin 1",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 60,
+                "defense": 60,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },{
+            "name": "Elf Paladin 2",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Elf Paladin 3",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Elf Ranger 1",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 100,
+                "range": 2
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/elf-ranger.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Elf Ranger 2",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 90,
+                "defense": 50,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 100,
+                "range": 2
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/elf-ranger.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Elf Ranger 3",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 60,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 100,
+                "range": 3
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/elf-ranger.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Elf Thief 1",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 90,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url": "thumbs/elf-thief.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Elf Thief 2",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url": "thumbs/elf-thief.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Elf Thief 3",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 120,
+                "defense": 40,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 90,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url": "thumbs/elf-thief.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Elf White Mage 1",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 80,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/elf-white-mage.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }, 
+        {
+            "name": "Elf White Mage 2",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 100,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/elf-white-mage.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        } ,
+         {
+            "name": "Elf White Mage 3",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 120,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/elf-white-mage.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        } 
+    ],
+    "orc":[
+        {
+            "name": "Orc Ranger 1",
+            "number": 150,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 60,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 80,
+                "range": 2
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Psychic",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/150.png",
+            "class": "Rogue",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name":"Orc Ranger 2",
+            "number": 249,
+            "stats": {
+                "hp": 80,
+                "attack": 80,
+                "defense": 70,
+                "specAttack": 80,
+                "specDefense": 120,
+                "speed": 100,
+                "range": 2
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Psychic,Flying",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/249.png",
+            "class": "Tank",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name":"Orc Ranger 3",
+            "number": 250,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 120,
+                "speed": 100,
+                "range": 3
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Fire,Flying",
+            "thumb_url": "thumbs/orc-ranger.png",
+            "image_url": "images/250.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Soldier 1",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 60,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/orc-soldier.png",
+            "image_url": "images/382.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Soldier 2",
+            "number": 384,
+            "stats": {
+                "hp": 80,
+                "attack": 70,
+                "defense": 90,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Dragon,Flying",
+            "thumb_url": "thumbs/orc-soldier.png",
+            "image_url": "images/384.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Soldier 3",
+            "number": 483,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 100,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 70,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Steel,Dragon",
+            "thumb_url":  "thumbs/orc-soldier.png",
+            "image_url": "images/483.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Orc Warrior 1",
+            "number": 487,
+            "stats": {
+                "hp": 120,
+                "attack": 70,
+                "defense": 60,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 2,
+            "weakness": [],
+            "types": "Ghost,Dragon",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/487.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Orc Warrior 2",
+            "number": 493,
+            "stats": {
+                "hp": 100,
+                "attack": 80,
+                "defense": 70,
+                "specAttack": 100,
+                "specDefense": 100,
+                "speed": 50,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Normal",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/493.png",
+            "class": "Knight",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Warrior 3",
+            "number": 643,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 100,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Fire",
+            "thumb_url": "thumbs/orc-warrior.png",
+            "image_url": "images/643.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 2
+        },
+        {
+            "name": "Orc Tank",
+            "number": 644,
+            "stats": {
+                "hp": 80,
+                "attack": 100,
+                "defense": 100,
+                "specAttack": 100,
+                "specDefense": 80,
+                "speed": 40,
+                "range": 1
+            },
+            "level": 3,
+            "weakness": [],
+            "types": "Dragon,Electric",
+            "thumb_url": "thumbs/orc-warrior-2.png",
+            "image_url": "images/644.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 0
+        },
+        {
+            "name": "Orc Tank",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 100,
+                "defense": 120,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 50,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/orc-warrior-2.png",
+            "image_url": "images/646.png",
+            "class": "Warrior",
+            "folder": "new",
+            "race": 1
+        }
+    ]
+}

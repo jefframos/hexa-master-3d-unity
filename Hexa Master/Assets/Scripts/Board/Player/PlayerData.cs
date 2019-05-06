@@ -54,7 +54,7 @@ public class PlayerData
             return agility;
         }
     }
-
+    
     // Start is called before the first frame update
     internal void LoadDeck(uint deckLenght)
     {
@@ -66,20 +66,23 @@ public class PlayerData
         levels[0] = 2;
         levels[1] = 3;
         levels[2] = 4;
-        switch (deckType)
-        {
-            case DeckType.NONE:
-                playerInGameDeck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
-                break;
-            case DeckType.ALLIANCE:
-                playerInGameDeck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
-                break;
-            case DeckType.HORDE:
-                playerInGameDeck = cardsDataManager.GetHordeDeck((uint)deckLenght);
-                break;
-            default:
-                playerInGameDeck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
-                break;
-        }
+
+        playerInGameDeck = cardsDataManager.GetDeckByType((uint)deckLenght, deckType);
+
+        //switch (deckType)
+        //{
+        //    case DeckType.NONE:
+        //        playerInGameDeck = cardsDataManager.GetRandomDeck((uint)deckLenght, levels);
+        //        break;
+        //    case DeckType.ALLIANCE:
+        //        playerInGameDeck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
+        //        break;
+        //    case DeckType.HORDE:
+        //        playerInGameDeck = cardsDataManager.GetHordeDeck((uint)deckLenght);
+        //        break;
+        //    default:
+        //        playerInGameDeck = cardsDataManager.GetAllianceDeck((uint)deckLenght);
+        //        break;
+        //}
     }
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3488e1d9945854a85fe8321fc3d954, type: 3}
   m_Name: StandardButton
   m_EditorClassIdentifier: 
-  buttonSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
+  buttonSprite: {fileID: 21300000, guid: 65c71294cd1408148854913fb9984328, type: 3}
   buttonSpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9,
+    m_HighlightedSprite: {fileID: 21300000, guid: 6c490c01988997a40a1f2db5f7c72ce9,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: cae531ffc6dbf9a4dac898da6fb9e3e9, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 6c490c01988997a40a1f2db5f7c72ce9, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 6c490c01988997a40a1f2db5f7c72ce9, type: 3}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   confirmColor: {r: 0, g: 0, b: 0, a: 0}
   declineColor: {r: 0, g: 0, b: 0, a: 0}

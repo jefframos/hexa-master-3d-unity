@@ -10,6 +10,8 @@ public class InGameHUD : MonoBehaviour
 
     public TextMeshProUGUI DEBUG;
 
+    internal PlayerHUDController playerHudController;
+
     public void UpdateCurrentRound(int currentTeam, int team1Score, int team2Score)
     {
         topHud.UpdateCurrentTeam(currentTeam);
@@ -20,8 +22,18 @@ public class InGameHUD : MonoBehaviour
     {
         topHud.UpdateCurrentTeam(0);
         topHud.UpdateScore(0, 0);
+        playerHudController = GetComponentInChildren<PlayerHUDController>();
     }
 
+    internal void BuildHud(List<PlayerData> playerDataList)
+    {
+        playerHudController.BuildGameHud(playerDataList);
+    }
+
+    internal void UpdateScore(ScoreData score)
+    {
+        playerHudController.UpdateScore(score);
+    }
 
 
     //// Update is called once per frame

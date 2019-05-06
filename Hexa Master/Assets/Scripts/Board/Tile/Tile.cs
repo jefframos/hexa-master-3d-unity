@@ -69,6 +69,11 @@ public class Tile : MonoBehaviour
        
     }
 
+    internal void Highlight(Color teamColor)
+    {
+        tileView.tileMarker.Highlight(teamColor);
+    }
+
     internal void Highlight()
     {
         tileView.tileMarker.Highlight();

@@ -10,6 +10,10 @@ public class AllCards {
     public CardStaticData[] level5;
     public CardStaticData[] alliance;
     public CardStaticData[] horde;
+    public CardStaticData[] human;
+    public CardStaticData[] elf;
+    public CardStaticData[] dwarf;
+    public CardStaticData[] orc;
     public CardStaticData[] GetShuffleCopy(CardStaticData[] array)
     {
         CardStaticData[] randomized;

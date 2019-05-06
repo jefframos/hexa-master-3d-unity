@@ -1,4 +1,4 @@
 ﻿public enum DeckType
 {
-    NONE, ALLIANCE, HORDE
+    NONE, ALLIANCE, HORDE, HUMAN, DWARF, ELF, ORC
 }

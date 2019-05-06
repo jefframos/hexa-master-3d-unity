@@ -224,13 +224,16 @@
     <Compile Include="Assets\Scripts\Game\GameConfig.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game\MatchConfig.cs" />
+    <Compile Include="Assets\Scripts\Game\ScoreData.cs" />
     <Compile Include="Assets\Scripts\HUD\InGameHUD.cs" />
+    <Compile Include="Assets\Scripts\HUD\PlayerHUDController.cs" />
     <Compile Include="Assets\Scripts\HUD\PlayerInfoView.cs" />
     <Compile Include="Assets\Scripts\HUD\TopHUD.cs" />
     <Compile Include="Assets\Scripts\Server\ServerConnect.cs" />
     <Compile Include="Assets\Scripts\Utils\ArrayUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\GamePool.cs" />
     <Compile Include="Assets\Scripts\Utils\InteractiveObject.cs" />
+    <Compile Include="Assets\Scripts\Utils\JsonLoader.cs" />
     <Compile Include="Assets\Scripts\Utils\SimpleObjectPool.cs" />
     <Compile Include="Assets\Scripts\Utils\Singleton.cs" />
     <Compile Include="Assets\SimpleMenuController.cs" />

@@ -31,11 +31,10 @@ public class GameManager : Singleton<GameManager>
     public float tweenScale = 1f;
     bool isPause = false;
     List<float> ignoredBots;
-    List<PlayerData> playerDataList;
-
+    internal List<PlayerData> playerDataList;
+    public SimpleMenuController simpleMenuController;
     public TMP_Dropdown dropdown;
 
-    public PlayerInfoView testHud;
 
     void Update()
     {
@@ -56,7 +55,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void PlaySingle()
     {
-        ignoredBots = new List<float> { 0};
+        ignoredBots = new List<float> { 0 };
         StartGame();
     }
     public void PlayVs()
@@ -77,10 +76,26 @@ public class GameManager : Singleton<GameManager>
         playerDataList = new List<PlayerData>();
         for (int i = 0; i < 4; i++)
         {
-            PlayerData playerData = new PlayerData
+            PlayerData playerData = new PlayerData();
+
+            switch (i)
             {
-                deckType = i % 2 == 0 ? DeckType.ALLIANCE : DeckType.HORDE
-            };
+                case 0:
+                    playerData.deckType = DeckType.HUMAN;
+                    break;
+                case 1:
+                    playerData.deckType = DeckType.ELF;
+                    break;
+                case 2:
+                    playerData.deckType = DeckType.ORC;
+                    break;
+                case 3:
+                    playerData.deckType = DeckType.DWARF;
+                    break;
+                default:
+                    break;
+            }
+
             playerData.teamID = i + 1;
             playerDataList.Add(playerData);
         }
@@ -134,8 +149,8 @@ public class GameManager : Singleton<GameManager>
     {
         GAME_TIME_SCALE = 0;
         isPause = true;
-        
-        
+
+
     }
     public void DestroyGame()
     {
@@ -160,6 +175,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartGame()
     {
+        simpleMenuController.Hide();
         DestroyGame();
         maxPlayers = dropdown.value + 2;
         boardController.BuildBoard();
@@ -171,25 +187,32 @@ public class GameManager : Singleton<GameManager>
 
         boardController.ResetAllTiles();
 
-
-
+        ArrayUtils.Shuffle(playerDataList);
+        List<PlayerData> inGamePlayers = new List<PlayerData>();
         for (int i = 0; i < deckViewList.Count; i++)
         {
-            if(i < maxPlayers)
+            if (i < maxPlayers)
             {
+                //playerDataList[i].teamID = i + 1;
                 deckViewList[i].gameObject.SetActive(true);
                 deckViewList[i].ResetDeck();
                 deckViewList[i].deckBuilder.InitDeck(playerDataList[i]);
+                inGamePlayers.Add(playerDataList[i]);
             }
             else
             {
                 deckViewList[i].gameObject.SetActive(false);
             }
-          
+
         }
-        testHud.SetPlayerData(playerDataList[0]);
+
+        inGameHUD.BuildHud(inGamePlayers);
 
         UpdateCurrentTeam();
+
+        boardController.SetInGamePlayers(inGamePlayers, currentTeam);
+
+
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
 
         if (entitiesOnStart != null)
@@ -261,7 +284,7 @@ public class GameManager : Singleton<GameManager>
     //click on tile on board
     public void SelectTile(Tile tile)
     {
-        if(currentDeckInput == null)
+        if (currentDeckInput == null)
         {
             return;
         }
@@ -270,7 +293,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         currentTile = tile;
-        if(currentCard == null)
+        if (currentCard == null)
         {
             return;
         }
@@ -314,13 +337,15 @@ public class GameManager : Singleton<GameManager>
             }
         }
 
-        BoardController.ScoreData score = boardController.GetScore();
+        ScoreData score = boardController.GetScore();
+
+        inGameHUD.UpdateScore(score);
 
         //Debug.Log("Zone 1 " + score.zonesScore1[0] + " - " + score.zonesScore2[0]);
         //Debug.Log("Zone 2 " + score.zonesScore1[1] + " - " + score.zonesScore2[1]);
         //Debug.Log("Zone 3 " + score.zonesScore1[2] + " - " + score.zonesScore2[2]);
 
-        inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
+        //inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
 
         if (IsBotRound)
         {
@@ -332,6 +357,8 @@ public class GameManager : Singleton<GameManager>
             currentDeckInput.SetUnblock();
             currentDeckView.SetUnblock(0.15f / tweenScale);
         }
+
+        boardController.currentPlayerData = playerDataList[currentTeam];
 
     }
 
@@ -356,7 +383,7 @@ public class GameManager : Singleton<GameManager>
     }
     void OnTileOver(Tile tile)
     {
-      
+
         boardView.ClearAllNeighbors();
 
         if (!tile.hasCard && currentCard && !acting)

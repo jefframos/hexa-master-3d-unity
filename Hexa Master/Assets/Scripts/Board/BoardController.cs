@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(BoardBuilder))]
 
@@ -16,69 +17,13 @@ public class BoardController : Singleton<BoardController>
         public List<Tile> tiles;
     }
 
-    public class ScoreData
-    {
-        public int player1 = 0;
-        public int player2 = 0;
-        public int player3 = 0;
-
-        internal List<int> zonesScore1 = new List<int> { 0, 0, 0 };
-        internal List<int> zonesScore2 = new List<int> { 0, 0, 0 };
-        internal List<int> zonesScore3 = new List<int> { 0, 0, 0 };
-        internal void Reset()
-        {
-            for (int i = 0; i < zonesScore1.Count; i++)
-            {
-                zonesScore1[i] = 0;
-                zonesScore2[i] = 0;
-                zonesScore3[i] = 0;
-
-                player1 = 0;
-                player2 = 0;
-                player3 = 0;
-            }
-        }
-        int GetHigher(int id)
-        {
-            int currentHighest = 0;
-
-            if (zonesScore1[id] + zonesScore2[id] + zonesScore3[id] <= 0)
-            {
-                return 0;
-            }
-
-            if (zonesScore1[id] > zonesScore2[id] && zonesScore1[id] > zonesScore3[id])
-            {
-                currentHighest = 1;
-            }
-            else if (zonesScore2[id] > zonesScore1[id] && zonesScore2[id] > zonesScore3[id])
-            {
-                currentHighest = 2;
-            }
-            else if (zonesScore3[id] > zonesScore1[id] && zonesScore3[id] > zonesScore2[id])
-            {
-                currentHighest = 3;
-            }
-            //Mathf.Max(new int[3])
-            return currentHighest;
-        }
-        internal int[] GetResult()
-        {
-            int[] result = new int[3];
-
-            for (int i = 0; i < zonesScore1.Count; i++)
-            {
-                result[i] = GetHigher(i);
-            }
-
-            return result;
-        }
-    }
-
+    
+    List<PlayerData> inGamePlayers;
     public TMP_Dropdown dropdown;
 
     List<List<Tile>> tileList;
     List<CardDynamicData> cardsPlaced;
+    internal PlayerData currentPlayerData;
 
     public bool debugging = false;
     public bool debugging2 = false;
@@ -95,8 +40,10 @@ public class BoardController : Singleton<BoardController>
     }
     public ScoreData GetScore()
     {
+        List<PlayerData> playersList = inGamePlayers;
 
-        score.Reset();
+        //score.Reset(inGamePlayers.Count);
+        score.Reset(4);
 
         for (int i = 0; i < tileList.Count; i++)
         {
@@ -105,23 +52,8 @@ public class BoardController : Singleton<BoardController>
                 if (tileList[i][j] && tileList[i][j].hasCard && tileList[i][j].tileModel.zone >= 0)
                 {
                     int zone = tileList[i][j].tileModel.zone - 1;
-
-                    if (tileList[i][j].TeamID == 0)
-                    {
-                        //score.player1++;
-
-                        score.zonesScore1[zone]++;
-                    }
-                    else if (tileList[i][j].TeamID == 1)
-                    {
-                        //score.player2++;
-
-                        score.zonesScore2[zone]++;
-                    }
-                    else
-                    {
-                        score.zonesScore3[zone]++;
-                    }
+                    Debug.Log(tileList[i][j].TeamID);
+                    score.allZones[zone][tileList[i][j].TeamID]++;
                 }
 
             }
@@ -136,25 +68,20 @@ public class BoardController : Singleton<BoardController>
                
                 flags[i].tileView.SetFlagColor(Color.white);
             }
-            else if (results[i] == 1)
+            else
             {
-                score.player1++;
-                colorTarget = GameConfig.Instance.GetTeamColor(0);
-                flags[i].tileView.SetFlagColor(colorTarget);
+                int id = results[i];
+                score.allPlayers[id - 1]++;//player1++;
+                for (int j = 0;j < playersList.Count; j++)
+                {
+                    if(playersList[j].teamID == id){
+                        colorTarget = playersList[j].teamColor;
+                        flags[i].tileView.SetFlagColor(colorTarget);
+                    }
+                }
+               
             }
-            else if (results[i] == 2)
-            {
-                score.player2++;
-                colorTarget = GameConfig.Instance.GetTeamColor(1);
-                flags[i].tileView.SetFlagColor(colorTarget);
-            }
-            else if (results[i] == 3)
-            {
-                score.player3++;
-                colorTarget = GameConfig.Instance.GetTeamColor(2);
-                flags[i].tileView.SetFlagColor(colorTarget);
-            }
-            Debug.Log(results[i]);
+            
         }
         return score;
     }
@@ -191,8 +118,8 @@ public class BoardController : Singleton<BoardController>
 
         while (!getTile)
         {
-            i = Random.Range(0, tileList.Count);
-            j = Random.Range(0, tileList[i].Count);
+            i = UnityEngine.Random.Range(0, tileList.Count);
+            j = UnityEngine.Random.Range(0, tileList[i].Count);
             if (tileList[i][j].IsAvailable)
             {
                 getTile = true;
@@ -262,6 +189,13 @@ public class BoardController : Singleton<BoardController>
         return neighbor;
 
     }
+
+    internal void SetInGamePlayers(List<PlayerData> _inGamePlayers, int currentPlayer)
+    {
+        inGamePlayers = _inGamePlayers;
+        currentPlayerData = inGamePlayers[currentPlayer];
+    }
+
     internal void BuildBoard()
     {
         //boardBuilder.BuildBoard();

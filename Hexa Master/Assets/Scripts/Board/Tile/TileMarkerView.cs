@@ -31,7 +31,7 @@ public class TileMarkerView : MonoBehaviour
 
     internal void Deactive()
     {
-        Debug.Log("DEACTIVE");
+       // Debug.Log("DEACTIVE");
         if (isOver)
         {
             return;
@@ -55,6 +55,11 @@ public class TileMarkerView : MonoBehaviour
         targetColor = highlightColor;
         markView.gameObject.SetActive(true);
     }
+    internal void Highlight(Color teamColor)
+    {
+        targetColor = teamColor;
+        markView.gameObject.SetActive(true);
+    }
 
     internal void DrawPreview()
     {
@@ -71,4 +76,6 @@ public class TileMarkerView : MonoBehaviour
         targetColor = loseColor;
         markView.gameObject.SetActive(true);
     }
+
+   
 }

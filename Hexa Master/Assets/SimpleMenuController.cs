@@ -13,18 +13,25 @@ public class SimpleMenuController : MonoBehaviour
     {
         if (collapsed)
         {
-            //collapseMenu.transform
-            collapseMenu.DOLocalMoveX(startPos.x - 300f, 0.5f).SetEase(Ease.InBack);
-            //collapseMenu.localPosition = new Vector2(startPos.x - 300f, startPos.y);
-            collapsed = false;
-            buttonText.text = "SHOW";
+            Hide();
         }
         else
         {
-            collapseMenu.DOLocalMoveX(startPos.x, 0.5f).SetEase(Ease.OutBack);
-            collapsed = true;
-            buttonText.text = "HIDE";
+            Unhide();
         }
+    }
+    internal void Hide()
+    {
+        collapseMenu.DOLocalMoveX(startPos.x - 300f, 0.5f).SetEase(Ease.InBack);
+        collapsed = false;
+        buttonText.text = "SHOW";
+    }
+
+    internal void Unhide()
+    {
+        collapseMenu.DOLocalMoveX(startPos.x, 0.5f).SetEase(Ease.OutBack);
+        collapsed = true;
+        buttonText.text = "HIDE";
     }
     // Start is called before the first frame update
     void Start()
