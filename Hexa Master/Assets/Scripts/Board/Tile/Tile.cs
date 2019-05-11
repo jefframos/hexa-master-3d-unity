@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour
     private Collider collider;
     public bool IsAvailable { get => !isBlock && !hasCard; }
     public int TeamID { get => cardDynamicData.teamID; }
+    public int ZoneID { get => tileModel.zone; }
     internal float sin;
     internal bool isFloating;
     public void ResetTile()

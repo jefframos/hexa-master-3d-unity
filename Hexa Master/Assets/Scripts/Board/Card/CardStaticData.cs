@@ -4,26 +4,26 @@ using UnityEngine;
 [System.Serializable]
 public class CardStats
 {
-    public int hp;
-    public int attack;
-    public int defense;
-    public int specAttack;
-    public int specDefense;
-    public int speed;
-    public int range;
+    public int hp = 100;
+    public int attack = 70;
+    public int defense = 60;
+    public int specAttack = 60;
+    public int specDefense = 60;
+    public int speed = 60;
+    public int range = 1;
 }
 [System.Serializable]
 public class CardStaticData
 {
-    public string name;
-    public int number;
-    public CardStats stats;
-    public int level;
+    public string name = "ELF";
+    public int number = 999;
+    public CardStats stats = new CardStats();
+    public int level = 2;
     public string weaknes;
     public string types;
-    public string thumb_url;
-    public string image_url;
+    public string thumb_url = "elf-paladin.png";
+    public string image_url = "elf-paladin.png";
     public string classType;
     public int race;
-    public string folder = "thumbs";
+    public string folder = "new";
 }

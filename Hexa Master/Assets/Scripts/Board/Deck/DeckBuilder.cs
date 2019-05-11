@@ -28,7 +28,7 @@ public class DeckBuilder : MonoBehaviour
     internal void InitDeck(PlayerData _playerData)
     {
         playerData = _playerData;
-        teamID = playerData.teamID - 1;
+        teamID = playerData.teamID;// - 1;
         handDeck = new List<Card3D>();
         maxInHandDefault = maxInHand;
         cardsDataManager = CardsDataManager.Instance;
@@ -59,7 +59,7 @@ public class DeckBuilder : MonoBehaviour
 
     void CreateCards()
     {
-        Debug.Log("CREATE CARDS");
+        //Debug.Log("CREATE CARDS");
 
         if (levels.Length <= 0)
         {

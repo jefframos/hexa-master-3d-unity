@@ -51,7 +51,7 @@ public class CommandList : MonoBehaviour
         commandIndex = 0;
         if (listOfCommands.Count <= 0)
         {
-            Debug.Log("Theres no commands");
+            Debug.LogWarning("Theres no commands");
             return;
         }
         GotoNextCommand();

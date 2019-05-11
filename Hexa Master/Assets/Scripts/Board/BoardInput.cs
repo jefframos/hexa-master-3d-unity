@@ -61,8 +61,9 @@ public class BoardInput : MonoBehaviour
                     }
                     else
                     {
-                        if (Input.GetMouseButtonDown(0))
-                        {
+                        //if (Input.GetMouseButtonDown(0))
+                        if (Input.GetMouseButtonUp(0))
+                            {
                             TileSelect(tempTile);
                         }
                         OnTileOver(tempTile);

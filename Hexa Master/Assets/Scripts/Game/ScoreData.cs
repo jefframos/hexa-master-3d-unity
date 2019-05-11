@@ -1,64 +1,63 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ScoreData
-{
-    //public int player1 = 0;
-    //public int player2 = 0;
-    //public int player3 = 0;
+{    
+    internal List<ZoneData> zonesList = new List<ZoneData>();
+    List<PlayerData> inGamePlayers;
 
-    internal List<List<int>> allZones = new List<List<int>>();
-    internal List<int> allPlayers = new List<int>();
-
-    //internal List<int> zonesScore1 = new List<int> { 0, 0, 0 };
-    //internal List<int> zonesScore2 = new List<int> { 0, 0, 0 };
-    //internal List<int> zonesScore3 = new List<int> { 0, 0, 0 };
-    //internal List<int> zonesScore4 = new List<int> { 0, 0, 0 };
-    internal void Reset(int total)
+    internal void CalcScore()
     {
-        allZones = new List<List<int>>();
-        allPlayers = new List<int>();
-
-        for (int i = 0; i < total; i++)
+        for (int i = 0; i < inGamePlayers.Count; i++)
         {
-            allZones.Add(new List<int> { 0, 0, 0, 0 });
-
-            allPlayers.Add(0);
+            inGamePlayers[i].totalOnBoard = 0;
+            inGamePlayers[i].zonesWinning = 0;
         }
+        for (int i = 0; i < zonesList.Count; i++)
+        {
+            zonesList[i].UpdateScore();
+        }
+
     }
-    int GetHigher(int id)
-    {
-        int currentHighest = 0;
-        int currentID = 0;
 
-        int sum = 0;
-        for (int i = 0; i < allZones.Count; i++)
-        {
-            sum += allZones[id][i];
-
-            if (allZones[id][i] > currentHighest)
-            {
-                currentHighest = allZones[id][i];
-                currentID = i;
-            }
-        }
-        if (sum <= 0)
-        {
-            return 0;
-        }
-
-        return currentID + 1;
-    }
     internal int[] GetResult()
     {
         int[] result = new int[4];
 
-        for (int i = 0; i < allZones.Count; i++)
+       
+        return result;
+    }
+
+    internal void BuildData(List<PlayerData> _inGamePlayers, List<List<Tile>> tileList)
+    {
+        inGamePlayers = _inGamePlayers;
+        List<int> zones = new List<int>();
+        for (int i = 0; i < tileList.Count; i++)
         {
-            result[i] = GetHigher(i);
+            for (int j = 0; j < tileList[i].Count; j++)
+            {
+                if(tileList[i][j] && !zones.Contains(tileList[i][j].ZoneID))
+                {
+                    zones.Add(tileList[i][j].ZoneID);
+                }
+            }
         }
 
-        return result;
+        for (int i = 0; i < zones.Count; i++)
+        {
+            ZoneData zone = new ZoneData
+            {
+                zoneID = zones[i],
+                players = inGamePlayers
+            };
+            zone.Init();
+            zone.FilterTiles(tileList);
+            zonesList.Add(zone);
+
+        }
+        
     }
 }

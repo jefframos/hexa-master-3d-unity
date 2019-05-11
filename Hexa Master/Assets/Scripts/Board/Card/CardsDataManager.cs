@@ -17,54 +17,21 @@ public class CardsDataManager : Singleton<CardsDataManager>
 
     private void LoadGameData()
     {
-        JsonLoader jsonLoader = new JsonLoader();
+        JsonLoader jsonLoader = JsonLoader.Instance;
 
         string json = jsonLoader.LoadFromStreaming(gameDataFileName);
-        allCards = JsonUtility.FromJson<AllCards>(json);
 
+        if (json != null)
+        {
+            allCards = JsonUtility.FromJson<AllCards>(json);
 
-//        string dataAsJson;
-//        // Path.Combine combines strings into a file path
-//        // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build
-//        string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
-//#if UNITY_EDITOR
-//        filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
+        }
+        else
+        {
+            allCards = new AllCards();
+            allCards.CreateMock();
+        }
 
-//#elif UNITY_IOS
-//        filePath = Path.Combine (Application.dataPath + "/Raw", gameDataFileName);
- 
-//#elif UNITY_ANDROID
-//        filePath = Path.Combine ("jar:file://" +Application.dataPath + "!assets/", gameDataFileName);
-//       //filePath = Application.streamingAssetsPath + gameDataFileName;
-//#endif
-//        InGameHUD.DEBUG.text += "\n";
-//        InGameHUD.DEBUG.text += filePath;
-//        InGameHUD.DEBUG.text += "\n";
-//        if (File.Exists(filePath))
-//        {
-//            // Read the json from the file into a string
-//            //string dataAsJson = File.ReadAllText(filePath);
-
-//            dataAsJson = File.ReadAllText(filePath);
-//#if UNITY_EDITOR || UNITY_IOS
-//            //dataAsJson = File.ReadAllText(filePath);
-
-//#elif UNITY_ANDROID
-//            //WWW reader = new WWW (filePath);
-//            //while (!reader.isDone) {
-//            //}
-//            //dataAsJson = reader.text;
-//#endif
-//            InGameHUD.DEBUG.text += "Loaded";
-//            // Pass the json to JsonUtility, and tell it to create a GameData object from it
-//            allCards = JsonUtility.FromJson<AllCards>(dataAsJson);
-//            // Retrieve the allRoundData property of loadedData
-//        }
-//        else
-//        {
-//            InGameHUD.DEBUG.text += "Cannot load game data!";
-//            Debug.LogError("Cannot load game data!");
-//        }
     }
 
     public CardStaticData GetCardByID(int id)

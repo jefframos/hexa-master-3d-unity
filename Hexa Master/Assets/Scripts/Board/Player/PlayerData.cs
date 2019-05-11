@@ -7,9 +7,12 @@ public class PlayerData
     //in future make the player proper pack
     internal List<CardStaticData> playerPack;
     internal List<CardStaticData> playerInGameDeck;
+    internal PlayerInfoView playerInfoView;
     internal DeckType deckType;
     internal int teamID;
     internal Color teamColor;
+    internal int totalOnBoard;
+    internal int zonesWinning;
     CardsDataManager cardsDataManager;
     int attack = 0;
     public int Attack { get  {
@@ -40,6 +43,8 @@ public class PlayerData
     }
 
     int agility = 0;
+    
+
     public int Agility
     {
         get
@@ -59,7 +64,7 @@ public class PlayerData
     internal void LoadDeck(uint deckLenght)
     {
 
-        teamColor = GameConfig.Instance.GetTeamColor(teamID - 1);
+        teamColor = GameConfig.Instance.GetTeamColor(teamID);
 
         cardsDataManager = CardsDataManager.Instance;
         int[] levels = new int[3];

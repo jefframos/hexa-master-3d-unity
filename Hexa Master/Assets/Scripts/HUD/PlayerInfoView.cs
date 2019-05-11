@@ -40,8 +40,9 @@ public class PlayerInfoView : MonoBehaviour
     }
     internal void SetPlayerData(PlayerData _playerData)
     {
-        bar.fillAmount = 0.5f;
         playerData = _playerData;
+        playerData.playerInfoView = this;
+        bar.fillAmount = 0.5f;
         string spritePath = "elf";
         switch (playerData.deckType)
         {
@@ -86,19 +87,22 @@ public class PlayerInfoView : MonoBehaviour
 
     internal void UpdateCurrentStatus(ScoreData score)
     {
-        int zones = 0;
-        for (int i = 0; i < score.allZones.Count; i++)
-        {
-            if (score.allZones[i][TeamID - 1] > 0)
-            {
-                zones++;
-            }
-        }
-        // score.allZones[TeamID];
-        int entities = score.allPlayers[TeamID - 1];
+      
+        int zones = playerData.zonesWinning;
+        //for (int i = 0; i < score.allZones.Count; i++)
+        //{
+        //    if (score.allZones[i][TeamID - 1] > 0)
+        //    {
+        //        zones++;
+        //    }
+        //}
+        //// score.allZones[TeamID];
+        //int entities = score.allPlayers[TeamID - 1];
         bar.DOFillAmount(zones / 3f, 0.5f).SetEase(Ease.OutBack);
         zonesLabel.text = zones.ToString();
-        entitiesLabel.text = entities.ToString();
+        entitiesLabel.text = playerData.totalOnBoard.ToString();
+
+        //entitiesLabel.text = entities.ToString();
         //Debug.Log(zones + " - " + entities);
     }
     //// Update is called once per frame

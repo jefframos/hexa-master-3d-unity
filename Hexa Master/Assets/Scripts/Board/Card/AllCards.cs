@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
@@ -20,5 +21,21 @@ public class AllCards {
         randomized = (CardStaticData[])array.Clone();
         ArrayUtils.Shuffle(randomized);
         return randomized;
+    }
+
+    public void CreateMock()
+    {
+        human = new CardStaticData[10];
+        elf = new CardStaticData[10];
+        dwarf = new CardStaticData[10];
+        orc = new CardStaticData[10];
+
+        for (int i = 0; i < 10; i++)
+        {
+            human[i] = new CardStaticData();
+            elf[i] = new CardStaticData();
+            dwarf[i] = new CardStaticData();
+            orc[i] = new CardStaticData();
+        }
     }
 }

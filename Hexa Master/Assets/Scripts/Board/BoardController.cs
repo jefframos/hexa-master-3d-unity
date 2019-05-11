@@ -17,7 +17,7 @@ public class BoardController : Singleton<BoardController>
         public List<Tile> tiles;
     }
 
-    
+
     List<PlayerData> inGamePlayers;
     public TMP_Dropdown dropdown;
 
@@ -40,49 +40,8 @@ public class BoardController : Singleton<BoardController>
     }
     public ScoreData GetScore()
     {
-        List<PlayerData> playersList = inGamePlayers;
+        score.CalcScore();
 
-        //score.Reset(inGamePlayers.Count);
-        score.Reset(4);
-
-        for (int i = 0; i < tileList.Count; i++)
-        {
-            for (int j = 0; j < tileList[i].Count; j++)
-            {
-                if (tileList[i][j] && tileList[i][j].hasCard && tileList[i][j].tileModel.zone >= 0)
-                {
-                    int zone = tileList[i][j].tileModel.zone - 1;
-                    Debug.Log(tileList[i][j].TeamID);
-                    score.allZones[zone][tileList[i][j].TeamID]++;
-                }
-
-            }
-        }
-
-        int[] results = score.GetResult();
-        Color colorTarget = Color.white;
-        for (int i = 0; i < flags.Length; i++)
-        {
-            if (results[i] == 0)
-            {
-               
-                flags[i].tileView.SetFlagColor(Color.white);
-            }
-            else
-            {
-                int id = results[i];
-                score.allPlayers[id - 1]++;//player1++;
-                for (int j = 0;j < playersList.Count; j++)
-                {
-                    if(playersList[j].teamID == id){
-                        colorTarget = playersList[j].teamColor;
-                        flags[i].tileView.SetFlagColor(colorTarget);
-                    }
-                }
-               
-            }
-            
-        }
         return score;
     }
     public void SetBoard(List<List<Tile>> _tileList)
@@ -194,6 +153,7 @@ public class BoardController : Singleton<BoardController>
     {
         inGamePlayers = _inGamePlayers;
         currentPlayerData = inGamePlayers[currentPlayer];
+        score.BuildData(inGamePlayers, tileList);
     }
 
     internal void BuildBoard()

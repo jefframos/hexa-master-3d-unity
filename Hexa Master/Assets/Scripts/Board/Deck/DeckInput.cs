@@ -124,7 +124,7 @@ public class DeckInput : MonoBehaviour
     }
     void CardSelect(Card3D card)
     {
-        Debug.Log("CARD SELECT");
+        Debug.LogWarning("CARD SELECT");
         if(currentCardSelected != card)
         {
             currentCardSelected = card;

@@ -16,6 +16,20 @@ public class BoardData
     {
         tilemapConfig = _tilemapConfig;
     }
+    internal void CreateMock()
+    {
+        height = 8;
+        width = 11;
+        layers = new BoardLayerData[1];
+        layers[0] = new BoardLayerData
+        {
+            data = new int[height * width]
+        };
+        for (int i = 0; i < height * width; i++)
+        {
+            layers[0].data[i] = 3;
+        }
+    }
     internal TileMapType GetType(int id)
     {
 

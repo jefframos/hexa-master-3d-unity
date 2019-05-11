@@ -96,7 +96,7 @@ public class GameManager : Singleton<GameManager>
                     break;
             }
 
-            playerData.teamID = i + 1;
+            playerData.teamID = i;// + 1;
             playerDataList.Add(playerData);
         }
         maxPlayers = dropdown.value + 2;
@@ -208,9 +208,10 @@ public class GameManager : Singleton<GameManager>
 
         inGameHUD.BuildHud(inGamePlayers);
 
-        UpdateCurrentTeam();
 
         boardController.SetInGamePlayers(inGamePlayers, currentTeam);
+
+        UpdateCurrentTeam();
 
 
         inGameHUD.UpdateCurrentRound(currentTeam + 1, 0, 0);
@@ -278,7 +279,7 @@ public class GameManager : Singleton<GameManager>
         boardInput.enabled = true;
         Invoke("UpdateCurrentTeam", 0.1f / tweenScale);
 
-        Debug.Log("FINISH COMMAND");
+        Debug.LogWarning("FINISH COMMAND");
 
     }
     //click on tile on board
