@@ -197,7 +197,11 @@ public class DeckView : MonoBehaviour
 
     void StandardMode(int i, bool debug = false)
     {
-        Card3D card = handDeck[i];       
+        Card3D card = handDeck[i];
+        if(card == null)
+        {
+            return;
+        }
         float addY = currentState.targetY;
         int order = i;
         float angleMult = 1f;

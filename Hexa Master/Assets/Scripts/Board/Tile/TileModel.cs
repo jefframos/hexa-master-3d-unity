@@ -15,4 +15,6 @@ public class TileModel : MonoBehaviour
     public string col = "";
     internal CardDynamicData cardDynamicData;
     internal int zone;
+
+    internal List<Effector> effectsList = new List<Effector>();
 }

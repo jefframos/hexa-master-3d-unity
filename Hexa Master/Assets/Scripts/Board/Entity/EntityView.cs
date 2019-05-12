@@ -45,8 +45,19 @@ public class EntityView : MonoBehaviour
         charSprite.transform.DOMoveY(charSprite.transform.localPosition.y + 1f, 0.75f).From().SetEase(Ease.OutBounce).OnComplete(()=> {
             EnableFloating();
         });
-        statsLabel.text = (cardStaticData.stats.attack / 10) + " / " + (cardStaticData.stats.defense / 10);
 
+        statsLabel.text = (cardDynamicData.Attack / 10).ToString();
+        if(cardDynamicData.EffectAttack > 0)
+        {
+            statsLabel.text += "+"+(cardDynamicData.EffectAttack / 10).ToString();
+        }
+        statsLabel.text += " / ";
+        statsLabel.text += (cardDynamicData.Defense / 10).ToString();
+        if (cardDynamicData.EffectDefense > 0)
+        {
+            statsLabel.text += "+" + (cardDynamicData.EffectDefense / 10).ToString();
+        }
+        
         attackZones = GetComponentInChildren<AttackZonesCardView>();
         attackZones.SetZones(cardDynamicData.sideList);
         attackZones.SetInGameMode();

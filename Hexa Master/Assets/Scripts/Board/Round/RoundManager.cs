@@ -361,7 +361,7 @@ public class RoundManager : MonoBehaviour
     {
         CardDynamicData cardDynamicData = neighborModel.tile.tileModel.cardDynamicData;
 
-        if (neighborModel.distance > currentCardDynamicData.cardStaticData.stats.range)
+        if (neighborModel.distance > currentCardDynamicData.Range)
         {
             return false;
         }

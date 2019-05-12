@@ -66,9 +66,9 @@ public class GameCardView3D : MonoBehaviour
         cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
 
-        attackLabel.text = (cardStaticData.stats.attack / 10).ToString();
-        defenseLabel.text = (cardStaticData.stats.defense / 10).ToString();
-        rangeLabel.text = cardStaticData.stats.range.ToString();
+        attackLabel.text = (cardDynamicData.StaticAttack / 10).ToString();
+        defenseLabel.text = (cardDynamicData.StaticDefense / 10).ToString();
+        rangeLabel.text = cardDynamicData.StaticRange.ToString();
 
         for (int i = 0; i < starsList.Count; i++)
         {

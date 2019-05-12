@@ -74,25 +74,49 @@ public class BoardBuilder : MonoBehaviour
                         tile.SetZone(boardData.GetZone(dataId));
                         tile.SetFlag(zone);
 
-                        tile.tileView.ChangeColor(boardColorScheme.ZonesFlags[zone -1]);
+                        tile.tileView.ChangeColor(boardColorScheme.ZonesFlags[zone - 1]);
                     }
                     else if (tileType == BoardData.TileMapType.ZONE)
                     {
                         int zone = boardData.GetZone(dataId);
                         tile.SetZone(boardData.GetZone(dataId));
 
-                        if(zone == 1)
+
+
+                        if (zone == 1)
                         {
                             tile.startY = 0.22f;
                         }
                         //tile.rnd = zone * 0.15f;// - 0.3f;
 
-                        tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
+                        if (Random.Range(0f, 1f) < 0.2f)
+                        {
+                            var attack = Mathf.FloorToInt(Random.Range(0, 40) / 10);
+                            var defense = Mathf.FloorToInt(Random.Range(0, 40) / 10);
+                            var range = Mathf.FloorToInt(Random.Range(0, 20) / 10);
+                            Effector tempEffec = new Effector
+                            {
+                                attack = attack,
+                                defense = defense,
+                                range = range,
+                            };
+                            tile.AddEffect(tempEffec);
+                            tile.tileView.ChangeColor(Color.white);
+
+                        }
+                        else
+                        {
+                            tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
+
+                        }
+
                     }
                     else
                     {
                         tile.tileView.ChangeColor(boardColorScheme.Standard[Random.Range(0, boardColorScheme.Standard.Length)]);
                     }
+
+                    tile.UpdateTile();
                 }
                 else
                 {

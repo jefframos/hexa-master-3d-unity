@@ -193,6 +193,8 @@
     <Compile Include="Assets\Scripts\Board\Deck\DeckType.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
+    <Compile Include="Assets\Scripts\Board\Effect\AttributeEffector.cs" />
+    <Compile Include="Assets\Scripts\Board\Effect\Effector.cs" />
     <Compile Include="Assets\Scripts\Board\Entity\EntityView.cs" />
     <Compile Include="Assets\Scripts\Board\EntitySelector\EntitySelectorView.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\AttackType.cs" />

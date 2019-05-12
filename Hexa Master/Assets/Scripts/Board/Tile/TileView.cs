@@ -10,6 +10,7 @@ public class TileView : MonoBehaviour
     public Renderer mainRenderer;
     public TextMeshPro debug;
     public TextMeshPro debugID;
+    public TextMeshPro effectLabel;
     public List<Renderer> renderers;
     public QuickOutline outline;
     public Color highlightColor;
@@ -36,7 +37,7 @@ public class TileView : MonoBehaviour
         {
             Destroy(flagGameObject);
         }
-        
+        effectLabel.text = "";
         tileMarker.gameObject.SetActive(false);
         ChangeColorId(standardColor);
         ChangeColor(Color.white);

@@ -14,7 +14,9 @@ public class Tile : MonoBehaviour
     internal EntityView entityAttached;
     //internal Card3D card;
     internal CardDynamicData cardDynamicData;
-    
+
+    //List<Effector> effectsList = new List<Effector>();
+
     private Collider collider;
     public bool IsAvailable { get => !isBlock && !hasCard; }
     public int TeamID { get => cardDynamicData.teamID; }
@@ -38,10 +40,13 @@ public class Tile : MonoBehaviour
         sin = 0;
 
         transform.localPosition = Vector3.zero;
-
         isFloating = false;
+        tileModel.effectsList = new List<Effector>();
 
     }
+
+    
+
     internal void StartFloating(float _sin)
     {
         isFloating = true;
@@ -110,7 +115,6 @@ public class Tile : MonoBehaviour
         tileModel.cardDynamicData = cardDynamicData;
         hasCard = true;
         collider.enabled = false;
-        //tileView.entityAttached =
     }
 
     internal void SetZone(int v)
@@ -127,9 +131,43 @@ public class Tile : MonoBehaviour
         tileView.SetFlag();
     }
 
+    internal void AddEffect(Effector effector)
+    {
+        tileModel.effectsList.Add(effector);        
+    }
+
     internal void ForceClear()
     {
         tileView.OnOut();
+    }
+
+    internal void UpdateTile()
+    {
+        Debug.Log("COLOCAR ISSO O TILE MODEL PRA ACESSAR DOS OUTROS LUGARES");
+        tileView.effectLabel.text = "";
+
+        float effectAttack = 0;
+        float effectDefense = 0;
+        int effectRange = 0;
+        for (int i = 0; i < tileModel.effectsList.Count; i++)
+        {
+            effectAttack += tileModel.effectsList[i].attack;
+            effectDefense += tileModel.effectsList[i].defense;
+            effectRange += tileModel.effectsList[i].range;
+        }
+        if(effectAttack > 0)
+        {
+            tileView.effectLabel.text += "ATT + " + effectAttack +"\n";
+        }
+        if (effectDefense > 0)
+        {
+            tileView.effectLabel.text += "DEF + " + effectDefense + "\n";
+        }
+        if (effectRange > 0)
+        {
+            tileView.effectLabel.text += "RNG + " + effectRange + "\n";
+        }
+
     }
 }
 

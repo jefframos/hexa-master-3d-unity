@@ -153,6 +153,8 @@ public class BoardController : Singleton<BoardController>
     {
         inGamePlayers = _inGamePlayers;
         currentPlayerData = inGamePlayers[currentPlayer];
+
+        score = new ScoreData();
         score.BuildData(inGamePlayers, tileList);
     }
 

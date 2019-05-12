@@ -38,6 +38,9 @@ public class CommandAddEntity : CommandDefault
         GameObject cardTransform = Object.Instantiate(data.entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, data.boardView.transform);
         cardTransform.transform.localPosition = tile.transform.localPosition;
         EntityView entity = cardTransform.GetComponent<EntityView>();
+        Effector eff = new Effector();
+        eff.attack = 40;
+        data.cardDynamicData.AddEffect(eff);
         entity.SetData(data.cardStaticData, data.cardDynamicData);
 
         return entity;

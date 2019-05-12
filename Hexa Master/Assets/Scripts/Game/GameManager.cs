@@ -378,7 +378,7 @@ public class GameManager : Singleton<GameManager>
     }
     internal void UpdateNeighboursList(Tile tile)
     {
-        currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardStaticData.stats.range);
+        currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardDynamicData.Range);
         currentNeighborsList.CapOnFirstFind();
         currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
     }

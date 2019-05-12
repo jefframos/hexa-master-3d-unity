@@ -9,6 +9,9 @@ public class Card3D : MonoBehaviour
     public CardDynamicData cardDynamicData;
     public uint cardID;
     private int orderAdd = 0;
+
+    public int Range { get => cardStaticData.stats.attack; }
+
     //public List<SideType> sides;
     //public List<SideType> oppositeSides;
 

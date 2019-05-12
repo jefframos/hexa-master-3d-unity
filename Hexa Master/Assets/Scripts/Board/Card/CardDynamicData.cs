@@ -13,11 +13,41 @@ public class CardDynamicData
     internal CardStaticData cardStaticData;
     CardsDataManager cardsDataManager;
 
-    public float Attack { get => cardStaticData.stats.attack; }
-    public float Defense { get => cardStaticData.stats.defense; }
 
+    List<Effector> effectsList = new List<Effector>();
+    List<Effector> tempEffectsList = new List<Effector>();
+
+    public float Attack { get => cardStaticData.stats.attack + effectAttack; }
+    public float Defense { get => cardStaticData.stats.defense + effectDefense; }
+    public int Range { get => cardStaticData.stats.range + effectRange; }
+
+    public float StaticAttack { get => cardStaticData.stats.attack; }
+    public float StaticDefense { get => cardStaticData.stats.defense; }
+    public int StaticRange { get => cardStaticData.stats.range; }
+
+    float effectAttack = 0;
+    public float EffectAttack { get => effectAttack; }
+    float effectDefense = 0;
+    public float EffectDefense { get => effectDefense; }
+    int effectRange = 0;
+    public int EffectRange { get => effectRange; }
+
+    public void AddEffect(Effector effector)
+    {
+        effectsList.Add(effector);
+        effectAttack = 0;
+        effectDefense = 0;
+        effectRange = 0;
+        for (int i = 0; i < effectsList.Count; i++)
+        {
+            effectAttack += effectsList[i].attack;
+            effectDefense += effectsList[i].defense;
+            effectRange += effectsList[i].range;
+        }
+    }
     public void SetData(CardStaticData _cardStaticData)
     {
+        effectsList = new List<Effector>();
         teamID = 1;
         cardsDataManager = CardsDataManager.Instance;
         cardStaticData = _cardStaticData;
@@ -32,9 +62,9 @@ public class CardDynamicData
 
         int maxSpdValue = 120;
 
-        
 
-    
+
+
         //Debug.Log(cardStaticData.stats.speed);
 
         decimal tot = Math.Floor((decimal)cardStaticData.stats.speed / maxSpdValue * tempSideList.Count);
