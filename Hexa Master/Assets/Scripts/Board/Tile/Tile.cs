@@ -21,6 +21,7 @@ public class Tile : MonoBehaviour
     public bool IsAvailable { get => !isBlock && !hasCard; }
     public int TeamID { get => cardDynamicData.teamID; }
     public int ZoneID { get => tileModel.zone; }
+    public List<Effector> EffectList { get => tileModel.effectsList; }
     internal float sin;
     internal bool isFloating;
     public void ResetTile()
@@ -143,7 +144,7 @@ public class Tile : MonoBehaviour
 
     internal void UpdateTile()
     {
-        Debug.Log("COLOCAR ISSO O TILE MODEL PRA ACESSAR DOS OUTROS LUGARES");
+        Debug.Log("ADICIONAR MAIS ATAQUE BASEADO NA DISTANCIA DO ATAQUE");
         tileView.effectLabel.text = "";
 
         float effectAttack = 0;
@@ -157,15 +158,15 @@ public class Tile : MonoBehaviour
         }
         if(effectAttack > 0)
         {
-            tileView.effectLabel.text += "ATT + " + effectAttack +"\n";
+            tileView.effectLabel.text += "ATT + " + effectAttack/10 +"\n";
         }
         if (effectDefense > 0)
         {
-            tileView.effectLabel.text += "DEF + " + effectDefense + "\n";
+            tileView.effectLabel.text += "DEF + " + effectDefense / 10 + "\n";
         }
         if (effectRange > 0)
         {
-            tileView.effectLabel.text += "RNG + " + effectRange + "\n";
+            tileView.effectLabel.text += "RNG + " + effectRange+ "\n";
         }
 
     }

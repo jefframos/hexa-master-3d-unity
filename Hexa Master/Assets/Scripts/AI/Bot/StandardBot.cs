@@ -100,7 +100,8 @@ public class StandardBot : MonoBehaviour
 
     void TestTile(TileModel tileModel, in MoveData moveData, CardDynamicData cardDynamic)
     {
-        NeighborsArroundModel currentNeighborsList = boardController.GetNeighbours(tileModel, cardDynamic.Range);
+        cardDynamic.AddPreviewTile(tileModel);
+        NeighborsArroundModel currentNeighborsList = boardController.GetNeighbours(tileModel, cardDynamic.PreviewRange);
         currentNeighborsList.CapOnFirstFind();
         //currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
         arroundsList = currentNeighborsList.GetCardArrounds(cardDynamic);

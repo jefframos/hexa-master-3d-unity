@@ -93,16 +93,23 @@ public class BoardBuilder : MonoBehaviour
                         {
                             var attack = Mathf.FloorToInt(Random.Range(0, 40) / 10);
                             var defense = Mathf.FloorToInt(Random.Range(0, 40) / 10);
-                            var range = Mathf.FloorToInt(Random.Range(0, 20) / 10);
-                            Effector tempEffec = new Effector
+                            var range =Random.Range(0, 3);
+                            if (attack + defense + range > 0)
                             {
-                                attack = attack,
-                                defense = defense,
-                                range = range,
-                            };
-                            tile.AddEffect(tempEffec);
-                            tile.tileView.ChangeColor(Color.white);
 
+                                Effector tempEffec = new Effector
+                                {
+                                    attack = attack * 10,
+                                    defense = defense * 10,
+                                    range = range,
+                                };
+                                tile.AddEffect(tempEffec);
+                                tile.tileView.ChangeColor(Color.white);
+                            }
+                            else
+                            {
+                                tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
+                            }
                         }
                         else
                         {

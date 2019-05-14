@@ -99,13 +99,15 @@ public class RoundManager : MonoBehaviour
         {
             return ResultType.IGNORE;
         }
-        if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
-        {
+        //if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
+        if (targetAttack.cardDynamic.Defense < cardDynamicData.PreviewAttack)
+            {
             return ResultType.WIN;
         }
 
-        if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
-        {
+        //if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
+        if (targetAttack.cardDynamic.Defense >= cardDynamicData.PreviewAttack)
+            {
             if (targetAttack.dist <= 1)
             {
                 return ResultType.LOSE;
@@ -124,12 +126,16 @@ public class RoundManager : MonoBehaviour
         {
             return ResultType.IGNORE;
         }
-        if (targetAttack.Defense < cardDynamicData.Attack)
+        if (targetAttack.Defense < cardDynamicData.PreviewAttack)
         {
+            Debug.Log(neibourModel.distance);
+            Debug.Log("Nao ta dando cap certo no tile inimigo");
+            Debug.Log("Mostrar os buffs e debuffs");
+
             return ResultType.WIN;
         }
 
-        if (targetAttack.Defense >= cardDynamicData.Attack)
+        if (targetAttack.Defense >= cardDynamicData.PreviewAttack)
         {
             if (neibourModel.distance <= 1)
             {
@@ -328,7 +334,6 @@ public class RoundManager : MonoBehaviour
 
         List<NeighborModel> allArrounds = currentNeighborsList.GetAllEntitiesArroundOnly();
 
-        //Debug.Log("REVIEW ESSE REBOUND, NAO FUNCIONA SEMPRE =/ " + tile.entityAttached.cardStaticData.name + " - "+allArrounds.Count);
 
         if (allArrounds.Count == 0)
         {
@@ -361,7 +366,7 @@ public class RoundManager : MonoBehaviour
     {
         CardDynamicData cardDynamicData = neighborModel.tile.tileModel.cardDynamicData;
 
-        if (neighborModel.distance > currentCardDynamicData.Range)
+        if (neighborModel.distance > currentCardDynamicData.PreviewRange)
         {
             return false;
         }

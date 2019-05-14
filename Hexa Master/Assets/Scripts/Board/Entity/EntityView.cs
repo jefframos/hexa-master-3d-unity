@@ -46,13 +46,13 @@ public class EntityView : MonoBehaviour
             EnableFloating();
         });
 
-        statsLabel.text = (cardDynamicData.Attack / 10).ToString();
+        statsLabel.text = (cardDynamicData.StaticAttack / 10).ToString();
         if(cardDynamicData.EffectAttack > 0)
         {
             statsLabel.text += "+"+(cardDynamicData.EffectAttack / 10).ToString();
         }
         statsLabel.text += " / ";
-        statsLabel.text += (cardDynamicData.Defense / 10).ToString();
+        statsLabel.text += (cardDynamicData.StaticDefense / 10).ToString();
         if (cardDynamicData.EffectDefense > 0)
         {
             statsLabel.text += "+" + (cardDynamicData.EffectDefense / 10).ToString();

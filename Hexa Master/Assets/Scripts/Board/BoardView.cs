@@ -54,7 +54,7 @@ public class BoardView : MonoBehaviour
         List<NeighborModel> enemies = currentNeighborsList.GetOnlyEntitiesConnected();
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i].distance <= currentCard.cardDynamicData.Range)
+            if (enemies[i].distance <= currentCard.cardDynamicData.PreviewRange)
             {
                 NeighborModel enemy = enemies[i];
                 if (enemy.tile.cardDynamicData.teamID != currentCard.cardDynamicData.teamID)

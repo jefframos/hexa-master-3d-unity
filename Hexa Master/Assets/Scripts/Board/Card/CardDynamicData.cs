@@ -32,6 +32,34 @@ public class CardDynamicData
     int effectRange = 0;
     public int EffectRange { get => effectRange; }
 
+    float previewAttack = 0;
+    public float PreviewAttack { get => previewAttack; }
+    float previewDefense = 0;
+    public float PreviewDefense { get => previewDefense; }
+    int previewRange = 0;
+    public int PreviewRange { get => previewRange; }
+
+    internal void AddPreviewTile(TileModel tileModel)
+    {
+        previewAttack = Attack;
+        previewDefense = Defense;
+        previewRange = Range;
+        for (int i = 0; i < tileModel.effectsList.Count; i++)
+        {
+            previewAttack += tileModel.effectsList[i].attack;
+            previewDefense += tileModel.effectsList[i].defense;
+            previewRange += tileModel.effectsList[i].range;
+        }
+    }
+
+    internal void AddEffect(List<Effector> effectList)
+    {
+        for (int i = 0; i < effectList.Count; i++)
+        {
+            AddEffect(effectList[i]);
+        }
+    }
+
     public void AddEffect(Effector effector)
     {
         effectsList.Add(effector);
@@ -44,6 +72,7 @@ public class CardDynamicData
             effectDefense += effectsList[i].defense;
             effectRange += effectsList[i].range;
         }
+        Debug.Log(effectDefense + " - " + StaticDefense);
     }
     public void SetData(CardStaticData _cardStaticData)
     {
