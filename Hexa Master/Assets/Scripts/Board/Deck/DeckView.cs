@@ -47,17 +47,15 @@ public class DeckView : MonoBehaviour
     {
        
 
-        deckInput = GetComponent<DeckInput>();
-        deckInput.onBlockBoard.AddListener(DeckOut);
-        deckInput.onUnblockBoard.AddListener(DeckOver);
-
-        
-
-        t = 0.115f;
+       
     }
 
     internal void ResetDeck()
     {
+        deckInput = GetComponent<DeckInput>();
+        deckInput.onBlockBoard.AddListener(DeckOut);
+        deckInput.onUnblockBoard.AddListener(DeckOver);
+        t = 0.115f;
         handDeck = new List<Card3D>();
         blockMode = false;
         currentState = outState;
@@ -105,8 +103,9 @@ public class DeckView : MonoBehaviour
                 cardInFocus = null;
                 cardInFocusOld = null;
             }
-        }        
-        
+        }
+
+        Debug.Log(handDeck.Count);
         {
             for (int i = 0; i < handDeck.Count; i++)
             {
@@ -162,7 +161,8 @@ public class DeckView : MonoBehaviour
         }
         for (int i = 0; i < handDeck.Count; i++)
         {
-            Destroy(handDeck[i].gameObject);
+            GamePool.Instance.ReturnCard(handDeck[i].gameObject);
+            //Destroy(handDeck[i].gameObject);
         }
         handDeck = new List<Card3D>();
     }
@@ -182,6 +182,7 @@ public class DeckView : MonoBehaviour
         {
             handDeck.Remove(cardSelected);
             Card3D newCard = deckBuilder.GetCard();
+            newCard.ResetCard();
             if (newCard)
             {
                 handDeck.Add(newCard);
@@ -238,6 +239,8 @@ public class DeckView : MonoBehaviour
         card.transform.localPosition = Vector3.Lerp(card.transform.localPosition, targetPosition, t);
         card.transform.eulerAngles = new Vector3(65f, 0, angle);        
         card.SetOrder(order);
+
+        //Debug.Log(order);
     }
 
     internal void SetHandCards(List<Card3D> deck, int max)

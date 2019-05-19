@@ -104,23 +104,15 @@ public class BoardBuilder : MonoBehaviour
                                     range = range,
                                 };
                                 tile.AddEffect(tempEffec);
-                                tile.tileView.ChangeColor(Color.white);
-                            }
-                            else
-                            {
-                                tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
+                                
                             }
                         }
-                        else
-                        {
-                            tile.tileView.ChangeColor(boardColorScheme.Zones[zone - 1]);
-
-                        }
+                        tile.tileView.SetZoneColor(boardColorScheme.Zones[zone - 1]);
 
                     }
                     else
                     {
-                        tile.tileView.ChangeColor(boardColorScheme.Standard[Random.Range(0, boardColorScheme.Standard.Length)]);
+                        tile.tileView.SetZoneColor(boardColorScheme.Standard[Random.Range(0, boardColorScheme.Standard.Length)]);
                     }
 
                     tile.UpdateTile();

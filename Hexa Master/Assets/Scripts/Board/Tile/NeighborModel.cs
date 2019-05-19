@@ -6,4 +6,5 @@ public class NeighborModel
     public Tile tile;
     public int distance;
     public SideType side;
+    public TileMarkerView TileMarker { get => tile.tileView.tileMarker; }
 }

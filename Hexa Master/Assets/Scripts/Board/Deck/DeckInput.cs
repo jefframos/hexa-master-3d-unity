@@ -42,7 +42,7 @@ public class DeckInput : MonoBehaviour
         onCardSelect.AddListener(GameManager.Instance.SetCurrentCard);
     }
     void Update()
-    {        
+    {
 
         if (block)
         {
@@ -64,7 +64,7 @@ public class DeckInput : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, collidableLayers[i]))
             {
 
-                if(deckBlocker == hit.transform)
+                if (deckBlocker == hit.transform)
                 {
                     //Debug.Log("BLOCK");
                     hasBlock = true;
@@ -78,8 +78,8 @@ public class DeckInput : MonoBehaviour
                     {
                         CardSelect(tempCard);
                     }
-                        
-                     OnCardOver(tempCard);
+
+                    OnCardOver(tempCard);
                     hasBlock = true;
 
                 }
@@ -91,7 +91,7 @@ public class DeckInput : MonoBehaviour
             NoCardOver();
         }
 
-        if(mouseOverDeck != hasBlock)
+        if (mouseOverDeck != hasBlock)
         {
             mouseOverDeck = hasBlock;
             if (mouseOverDeck)
@@ -124,8 +124,7 @@ public class DeckInput : MonoBehaviour
     }
     void CardSelect(Card3D card)
     {
-        Debug.LogWarning("CARD SELECT");
-        if(currentCardSelected != card)
+        if (currentCardSelected != card)
         {
             currentCardSelected = card;
 

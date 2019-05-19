@@ -27,6 +27,9 @@ public class TileView : MonoBehaviour
     private GameObject blockGameObject;
     private GameObject flagGameObject;
     public GameObject flagPrefab;
+    TileEffectView tileEffectView;
+    Color currentZoneColor;
+
     internal void ResetView()
     {
         if (blockGameObject)
@@ -38,12 +41,15 @@ public class TileView : MonoBehaviour
             Destroy(flagGameObject);
         }
         effectLabel.text = "";
+        effectLabel.gameObject.SetActive(false);
         tileMarker.gameObject.SetActive(false);
         ChangeColorId(standardColor);
         ChangeColor(Color.white);
         tileMarker.ResetMarker();
         outline.enabled = false;
     }
+
+    
 
     // internal Tile tile;
     // Start is called before the first frame update
@@ -78,6 +84,19 @@ public class TileView : MonoBehaviour
         //mainMaterial.mainTextureOffset = offs;
     }
 
+    internal void SetDistanceEffect(int distance)
+    {
+        GameObject tileEffectTransform = GamePool.Instance.GetTileEffect();
+        tileEffectTransform.transform.SetParent(transform);
+        tileEffectTransform.SetActive(true);
+        tileEffectTransform.transform.localPosition = new Vector3();
+        TileEffectView tileEffect = tileEffectTransform.GetComponent<TileEffectView>();
+        tileEffect.ResetTile();
+        tileEffect.SetDistanceFactor(distance);
+
+        tileEffectView = tileEffect;
+    }
+
     internal void SetZone(int v)
     {
         //ChangeColorId(zonesColor[v-1]);
@@ -107,6 +126,49 @@ public class TileView : MonoBehaviour
             flagRenderer.materials[i].color = Color.white;
         }
         //flagRenderer.materials.color = Color.red;
+    }
+    internal void RemoveTileEffectView()
+    {
+        ChangeColor(currentZoneColor);
+        effectLabel.gameObject.SetActive(false);
+    }
+    internal void UpdateTile(TileModel tileModel)
+    {
+        //Debug.Log("ADICIONAR MAIS ATAQUE BASEADO NA DISTANCIA DO ATAQUE");
+        effectLabel.text = "";
+        if (tileModel.effectsList.Count > 0)
+        {
+            ChangeColor(Color.white);
+            effectLabel.gameObject.SetActive(true);
+        }
+        else
+        {
+            effectLabel.gameObject.SetActive(false);
+            return;
+        }
+        float effectAttack = 0;
+        float effectDefense = 0;
+        int effectRange = 0;
+        for (int i = 0; i < tileModel.effectsList.Count; i++)
+        {
+            effectAttack += tileModel.effectsList[i].attack;
+            effectDefense += tileModel.effectsList[i].defense;
+            effectRange += tileModel.effectsList[i].range;
+        }
+        
+        if (effectAttack > 0)
+        {
+            effectLabel.text += "ATT + " + effectAttack / 10 + "\n";
+        }
+        if (effectDefense > 0)
+        {
+            effectLabel.text += "DEF + " + effectDefense / 10 + "\n";
+        }
+        if (effectRange > 0)
+        {
+            effectLabel.text += "RNG + " + effectRange + "\n";
+        }
+
     }
 
     internal void ChangeColor(Color color)
@@ -144,6 +206,13 @@ public class TileView : MonoBehaviour
             //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         }
     }
+
+    internal void SetZoneColor(Color color)
+    {
+        currentZoneColor = color;
+        ChangeColor(color);
+    }
+
     public void OnOver()
     {
         if (tile.entityAttached)
@@ -151,10 +220,6 @@ public class TileView : MonoBehaviour
             tile.entityAttached.OnOver();
         }
         tileMarker.OnOver();
-        //tileMarker.Highlight();
-       // mainMaterial.DOKill();
-        //mainMaterial.DOColor(mouseOverColor, 0.5f);
-        //outline.enabled = true;
     }
 
     public void OnOut()
@@ -164,10 +229,9 @@ public class TileView : MonoBehaviour
             tile.entityAttached.OnOut();
         }
 
-        //mainMaterial.DOKill();
-        //mainMaterial.DOColor(Color.white, 0.5f);
-        //mainMaterial.color = Color.white;
-        //outline.enabled = false;
+
+        ReturnTileEffect();
+
         tileMarker.OnOut();
         tileMarker.Deactive();
         //tileMarker.gameObject.SetActive(false);
@@ -176,15 +240,22 @@ public class TileView : MonoBehaviour
     public void OnHighlight()
     {
         mainMaterial.DOKill();
-        //mainMaterial.DOColor(highlightColor, 0.5f);
-
-        //tileMarker.Highlight();
-        //outline.enabled = true;
     }
     public void OnClear()
     {
         tileMarker.Deactive();
+        ReturnTileEffect();
         debug.text = "";
+    }
+
+    void ReturnTileEffect()
+    {
+        if (tileEffectView)
+        {
+            GamePool.Instance.ReturnTileEffect(tileEffectView.gameObject);
+
+            tileEffectView = null;
+        }
     }
 
 }

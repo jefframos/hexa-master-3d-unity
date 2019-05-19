@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -29,32 +30,32 @@ public class GameCardView3D : MonoBehaviour
 
     private bool isSelected = false;
 
-    //public GameObject attackZonesPrefab;
     private AttackZonesCardView attackZonesView;
-    //public Transform attackZonesParent;
-    // Start is called before the first frame update
-    //void Start()
-    //{
 
-    //}
+    private bool orderSaved = false;
+
+
     public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
     {
-        //Save the order of the sprites
-        allRenderers = GetComponentsInChildren<SpriteRenderer>();
-        allRenderersOrder = new List<int>();
-        for (int i = 0; i < allRenderers.Length; i++)
+        if (!orderSaved)
         {
-            allRenderersOrder.Add(allRenderers[i].sortingOrder);
-        }
+            //Save the order of the sprites
+            allRenderers = GetComponentsInChildren<SpriteRenderer>();
+            allRenderersOrder = new List<int>();
+            for (int i = 0; i < allRenderers.Length; i++)
+            {
+                allRenderersOrder.Add(allRenderers[i].sortingOrder);
+            }
 
-        //save the order of the text meshes
-        allTextMesh = GetComponentsInChildren<TextMeshPro>();
-        allTextMeshOrder = new List<int>();
-        for (int i = 0; i < allTextMesh.Length; i++)
-        {
-            allTextMeshOrder.Add(allTextMesh[i].sortingOrder);
+            //save the order of the text meshes
+            allTextMesh = GetComponentsInChildren<TextMeshPro>();
+            allTextMeshOrder = new List<int>();
+            for (int i = 0; i < allTextMesh.Length; i++)
+            {
+                allTextMeshOrder.Add(allTextMesh[i].sortingOrder);
+            }
+            orderSaved = true;
         }
-
         //Save the order of the sprites
         //allParticles = GetComponentsInChildren<ParticleSystem>();
         //allParticlesOrder = new List<int>();
@@ -101,8 +102,17 @@ public class GameCardView3D : MonoBehaviour
         }
         isSelected = false;
     }
+
+    internal void ResetCard()
+    {
+        isSelected = false;
+        spriteSelected.color = Color.white;
+        SetOrder(0);
+    }
+
     public void SetOrder(int order)
     {
+        
         for (int i = 0; i < allRenderers.Length; i++)
         {
             allRenderers[i].sortingOrder = allRenderersOrder[i] + order * 1000;
@@ -139,9 +149,4 @@ public class GameCardView3D : MonoBehaviour
         isSelected = false;
         spriteSelected.color = Color.white;
     }
-    // Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 }

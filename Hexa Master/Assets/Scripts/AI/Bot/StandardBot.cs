@@ -29,7 +29,7 @@ public class StandardBot : MonoBehaviour
     void Start()
     {
         deckInput = GetComponent<DeckInput>();
-        deckInput.SetBlock();
+        //deckInput.SetBlock();
         deckView = GetComponent<DeckView>();
         deckView.isBot = true;
         deckView.bot = this;
@@ -102,6 +102,7 @@ public class StandardBot : MonoBehaviour
     {
         cardDynamic.AddPreviewTile(tileModel);
         NeighborsArroundModel currentNeighborsList = boardController.GetNeighbours(tileModel, cardDynamic.PreviewRange);
+        currentNeighborsList.CapOnFirstBlock();
         currentNeighborsList.CapOnFirstFind();
         //currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
         arroundsList = currentNeighborsList.GetCardArrounds(cardDynamic);
@@ -110,7 +111,7 @@ public class StandardBot : MonoBehaviour
         moveData.points += enemiesPassiveList.Count * 5;
         for (int i = 0; i < enemiesActiveList.Count; i++)
         {
-            RoundManager.ResultType result = roundManager.GetResult(enemiesActiveList[i], cardDynamic);
+            RoundManager.ResultType result = roundManager.GetResult(enemiesActiveList[i].cardDynamic, enemiesActiveList[i].neighborModel, cardDynamic);
             switch (result)
             {
                 case RoundManager.ResultType.IGNORE:

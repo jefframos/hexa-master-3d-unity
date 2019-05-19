@@ -93,45 +93,42 @@ public class RoundManager : MonoBehaviour
         onRoundReady.Invoke(roundCommands);
     }
     //get result for one action
-    internal ResultType GetResult(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData)
-    {
-        if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
-        {
-            return ResultType.IGNORE;
-        }
-        //if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
-        if (targetAttack.cardDynamic.Defense < cardDynamicData.PreviewAttack)
-            {
-            return ResultType.WIN;
-        }
+    //internal ResultType GetResult(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData)
+    //{
+    //    if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
+    //    {
+    //        return ResultType.IGNORE;
+    //    }
+    //    //if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
+    //    if (targetAttack.cardDynamic.Defense < cardDynamicData.PreviewAttack)
+    //        {
+    //        return ResultType.WIN;
+    //    }
 
-        //if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
-        if (targetAttack.cardDynamic.Defense >= cardDynamicData.PreviewAttack)
-            {
-            if (targetAttack.dist <= 1)
-            {
-                return ResultType.LOSE;
-            }
-            else
-            {
-                return ResultType.BLOCK;
-            }
-        }
-        return ResultType.IGNORE;
-    }
+    //    //if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
+    //    if (targetAttack.cardDynamic.Defense >= cardDynamicData.PreviewAttack)
+    //        {
+    //        if (targetAttack.dist <= 1)
+    //        {
+    //            return ResultType.LOSE;
+    //        }
+    //        else
+    //        {
+    //            return ResultType.BLOCK;
+    //        }
+    //    }
+    //    return ResultType.IGNORE;
+    //}
 
     internal ResultType GetResult(CardDynamicData targetAttack, NeighborModel neibourModel, CardDynamicData cardDynamicData)
     {
+        cardDynamicData.ApplyDistanceFactor(neibourModel.distance);
         if (targetAttack.teamID == cardDynamicData.teamID)
         {
             return ResultType.IGNORE;
         }
         if (targetAttack.Defense < cardDynamicData.PreviewAttack)
         {
-            Debug.Log(neibourModel.distance);
-            Debug.Log("Nao ta dando cap certo no tile inimigo");
-            Debug.Log("Mostrar os buffs e debuffs");
-
             return ResultType.WIN;
         }
 
@@ -154,7 +151,7 @@ public class RoundManager : MonoBehaviour
     {
         CardStaticData currentCardStaticData = cardDynamicData.cardStaticData;
 
-        ResultType result = GetResult( targetAttack, cardDynamicData);
+        ResultType result = GetResult( targetAttack.cardDynamic, targetAttack.neighborModel, cardDynamicData);
 
         switch (result)
         {
@@ -294,6 +291,7 @@ public class RoundManager : MonoBehaviour
                             tile = arroundsList[i][j].tile,
                             cardStatic = arroundsList[i][j].tile.tileModel.cardDynamicData.cardStaticData,
                             cardDynamic = arroundsList[i][j].tile.tileModel.cardDynamicData,
+                            neighborModel = arroundsList[i][j],
                             dist = arroundsList[i][j].distance,
                             sideAttack = CardsDataManager.Instance.GetOppositeSide(arroundsList[i][j].side)
                         };

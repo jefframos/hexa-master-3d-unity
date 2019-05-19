@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,6 +47,7 @@ public class Card3D : MonoBehaviour
         orderPos.z = -order * 0.2f;
 
         order += orderAdd;
+
         cardView.SetOrder(order);
 
         transform.localPosition = orderPos;
@@ -60,9 +62,15 @@ public class Card3D : MonoBehaviour
         orderAdd = 6;
         cardView.OnOver();
     }
+
+    internal void ResetCard()
+    {
+        orderAdd = 0;
+        cardView.ResetCard();
+    }
     // Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 }

@@ -41,7 +41,8 @@ public class CommandPlaceCard : CommandDefault
             data.currentCard.transform.DOMove(target, time).OnComplete(() =>
             {
                 Kill();
-                GameObject.Destroy(data.currentCard.gameObject);
+                GamePool.Instance.ReturnCard(data.currentCard.gameObject);
+                //GameObject.Destroy(data.currentCard.gameObject);
             });
             data.currentCard.transform.DOLocalRotate(new Vector3(90f, 0, 0), time * 0.75f, RotateMode.Fast).SetEase(Ease.OutBack, 2f);
             data.currentCard.transform.DOScale(0.3f, time).SetEase(Ease.InBack);

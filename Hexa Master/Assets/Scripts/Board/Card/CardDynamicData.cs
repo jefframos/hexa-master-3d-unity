@@ -17,7 +17,7 @@ public class CardDynamicData
     List<Effector> effectsList = new List<Effector>();
     List<Effector> tempEffectsList = new List<Effector>();
 
-    public float Attack { get => cardStaticData.stats.attack + effectAttack; }
+    public float Attack { get => cardStaticData.stats.attack + effectAttack + distanceFactor; }
     public float Defense { get => cardStaticData.stats.defense + effectDefense; }
     public int Range { get => cardStaticData.stats.range + effectRange; }
 
@@ -33,12 +33,12 @@ public class CardDynamicData
     public int EffectRange { get => effectRange; }
 
     float previewAttack = 0;
-    public float PreviewAttack { get => previewAttack; }
+    public float PreviewAttack { get => previewAttack + distanceFactor; }
     float previewDefense = 0;
     public float PreviewDefense { get => previewDefense; }
     int previewRange = 0;
     public int PreviewRange { get => previewRange; }
-
+    internal int distanceFactor;
     internal void AddPreviewTile(TileModel tileModel)
     {
         previewAttack = Attack;
@@ -72,7 +72,7 @@ public class CardDynamicData
             effectDefense += effectsList[i].defense;
             effectRange += effectsList[i].range;
         }
-        Debug.Log(effectDefense + " - " + StaticDefense);
+        //Debug.Log(effectDefense + " - " + StaticDefense);
     }
     public void SetData(CardStaticData _cardStaticData)
     {
@@ -117,4 +117,14 @@ public class CardDynamicData
 
     }
 
+    internal void ApplyDistanceFactor(int distance)
+    {
+        //if uses distance
+        if(distance <= 1)
+        {
+            distanceFactor = 0;
+            return;
+        }
+        distanceFactor = distance * 10;
+    }
 }

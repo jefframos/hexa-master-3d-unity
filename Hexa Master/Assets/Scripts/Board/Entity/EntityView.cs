@@ -21,6 +21,7 @@ public class EntityView : MonoBehaviour
     public Transform blockView;
     public TextMeshPro actionLabel;
     public InteractiveObject interactive;
+    internal Tile tile;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +36,12 @@ public class EntityView : MonoBehaviour
     {
         interactive.gameObject.SetActive(b);
     }
-    public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData)
+    public void SetData(CardStaticData _cardStaticData, CardDynamicData _cardDynamicData, Tile _tile)
     {
+        tile = _tile;
         cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
+        tile.RemoveTileEffectView();
         startY = charSprite.transform.localPosition.y;
         var sp = Resources.Load<Sprite>("Cards/"+ cardStaticData.folder+"/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
         charSprite.sprite = sp;

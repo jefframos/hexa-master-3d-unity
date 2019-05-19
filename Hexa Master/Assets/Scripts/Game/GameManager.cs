@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     public InGameHUD inGameHUD;
     public RoundManager roundManager;
     public MultipleAttackSelector multipleAttackSelector;
-
+    public Transform deckContainer;
     public CommandList commandList;
 
     public NeighborsArroundModel currentNeighborsList;
@@ -167,6 +167,7 @@ public class GameManager : Singleton<GameManager>
         for (int i = 0; i < deckViewList.Count; i++)
         {
             deckViewList[i].deckBuilder.DestroyDeck();
+            GamePool.Instance.ReturnDeck(deckViewList[i].gameObject);
         }
 
         currentCard = null;
@@ -189,22 +190,22 @@ public class GameManager : Singleton<GameManager>
 
         ArrayUtils.Shuffle(playerDataList);
         List<PlayerData> inGamePlayers = new List<PlayerData>();
-        for (int i = 0; i < deckViewList.Count; i++)
-        {
-            if (i < maxPlayers)
-            {
-                //playerDataList[i].teamID = i + 1;
-                deckViewList[i].gameObject.SetActive(true);
-                deckViewList[i].ResetDeck();
-                deckViewList[i].deckBuilder.InitDeck(playerDataList[i]);
-                inGamePlayers.Add(playerDataList[i]);
-            }
-            else
-            {
-                deckViewList[i].gameObject.SetActive(false);
-            }
 
+        deckViewList = new List<DeckView>();
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            GameObject goDeck = GamePool.Instance.GetDeck();
+            DeckView deckView = goDeck.GetComponent<DeckView>();
+            deckViewList.Add(deckView);
+            deckView.transform.SetParent(deckContainer);
+            deckView.transform.localPosition = new Vector3(0, 0, 0);
+            deckView.transform.localEulerAngles = new Vector3(0, 0, 0);
+            deckView.gameObject.SetActive(true);
+            deckView.ResetDeck();
+            deckView.deckBuilder.InitDeck(playerDataList[i]);
+            inGamePlayers.Add(playerDataList[i]);
         }
+       
 
         inGameHUD.BuildHud(inGamePlayers);
 
@@ -275,12 +276,10 @@ public class GameManager : Singleton<GameManager>
     {
         commandList.ResetQueue();
         acting = false;
+        currentCard = null;
 
         boardInput.enabled = true;
         Invoke("UpdateCurrentTeam", 0.1f / tweenScale);
-
-        Debug.LogWarning("FINISH COMMAND");
-
     }
     //click on tile on board
     public void SelectTile(Tile tile)
@@ -326,6 +325,9 @@ public class GameManager : Singleton<GameManager>
     {
         currentDeckView = deckViewList[currentTeam];
         currentDeckInput = currentDeckView.GetComponent<DeckInput>();
+
+        currentDeckInput.SetUnblock();
+
         for (int i = 0; i < deckViewList.Count; i++)
         {
             if (i == currentTeam)
@@ -347,7 +349,7 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log("Zone 3 " + score.zonesScore1[2] + " - " + score.zonesScore2[2]);
 
         //inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
-
+        
         if (IsBotRound)
         {
             Invoke("WaitNextMove", 0.5f / tweenScale);
@@ -380,7 +382,9 @@ public class GameManager : Singleton<GameManager>
     {
         currentCard.cardDynamicData.AddPreviewTile(tile.tileModel);
         currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardDynamicData.PreviewRange);
+        currentNeighborsList.CapOnFirstBlock();
         currentNeighborsList.CapOnFirstFind();
+
         currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
     }
     void OnTileOver(Tile tile)
@@ -392,7 +396,7 @@ public class GameManager : Singleton<GameManager>
         {
             currentTile = tile;
             UpdateNeighboursList(tile);
-            boardView.HighlightAllNeighbors(currentNeighborsList, currentCard);
+            boardView.HighlightAllNeighbors(currentNeighborsList, currentCard.cardDynamicData);
         }
 
         //tile.tileView.OnOver();

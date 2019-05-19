@@ -141,27 +141,14 @@ public class NeighborsArroundModel
     }
     void CapListOnFirstFind(List<NeighborModel> list)
     {
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < list.Count-1; i++)
         {
             list[i].distance = i + 1;
             if (list[i].tile && (list[i].tile.isBlock || list[i].tile.hasCard))
             {
-                if (list[i].tile.hasCard)
-                {
-                    allEnemies.Add(list[i]);
-                    if (i < list.Count - 2)
-                    {
-                        //this line makes the last on the queue be the entity
-                        list.RemoveRange(i + 1, list.Count - (i + 1));
-                    }
-
-                }
-                else
-                {
-                    list.RemoveRange(i, list.Count - i);
-                }
+                list.RemoveRange(i + 1, list.Count - i-1);
                 break;
-            }
+            }            
         }
     }
    // public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)

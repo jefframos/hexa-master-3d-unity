@@ -33,7 +33,6 @@ public class DeckBuilder : MonoBehaviour
         maxInHandDefault = maxInHand;
         cardsDataManager = CardsDataManager.Instance;
         deckView = GetComponent<DeckView>();
-        handDeck = new List<Card3D>();
         DeckLoading();
     }
 
@@ -120,9 +119,12 @@ public class DeckBuilder : MonoBehaviour
             return null;
         }
         CardStaticData data = deck[currentCardID];
-        GameObject cardTransform = Instantiate(cardPrefab, new Vector3(0, 0, 0), Quaternion.identity, deckContainer);
-        cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
-        Card3D card = cardTransform.GetComponent<Card3D>();
+
+        GameObject cardGo = GamePool.Instance.GetCard();
+        cardGo.SetActive(true);
+        cardGo.transform.SetParent(deckContainer);
+        cardGo.transform.localPosition = new Vector3(5f, -2.5f, 0);
+        Card3D card = cardGo.GetComponent<Card3D>();
         card.SetData(data, teamID);
         card.cardID = CARD_ID_COUNTER;
         CARD_ID_COUNTER++;
@@ -133,7 +135,10 @@ public class DeckBuilder : MonoBehaviour
     internal void DestroyDeck()
     {
         if (deckView)
+        {
             deckView.DestroyCards();
+
+        }
         //throw new NotImplementedException();
     }
 

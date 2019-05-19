@@ -40,7 +40,7 @@ public class CommandAddEntity : CommandDefault
         EntityView entity = cardTransform.GetComponent<EntityView>();
        
         data.cardDynamicData.AddEffect(tile.EffectList);
-        entity.SetData(data.cardStaticData, data.cardDynamicData);
+        entity.SetData(data.cardStaticData, data.cardDynamicData, tile);
 
         return entity;
     }

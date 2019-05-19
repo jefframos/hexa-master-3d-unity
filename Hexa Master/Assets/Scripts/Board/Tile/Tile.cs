@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     //internal Card3D card;
     internal CardDynamicData cardDynamicData;
 
+
     //List<Effector> effectsList = new List<Effector>();
 
     private Collider collider;
@@ -46,10 +47,14 @@ public class Tile : MonoBehaviour
 
     }
 
-    
+    internal void RemoveTileEffectView()
+    {
+        tileView.RemoveTileEffectView();
+    }
 
     internal void StartFloating(float _sin)
     {
+        return;
         isFloating = true;
         sin = _sin;
         UpdateFloatingPosition();
@@ -63,6 +68,7 @@ public class Tile : MonoBehaviour
     }
     void Update()
     {
+        return;
         if (isFloating)
         {
             UpdateFloatingPosition();
@@ -75,9 +81,17 @@ public class Tile : MonoBehaviour
         }
        
     }
-
-    internal void Highlight(Color teamColor)
+    internal void SetNeighborModel(NeighborModel neighborModel)
     {
+        if (neighborModel.distance > 1)
+        {
+            tileView.SetDistanceEffect(neighborModel.distance);
+            tileView.debugID.text = "+" + neighborModel.distance;
+
+        }
+    }
+    internal void Highlight(Color teamColor)
+    {        
         tileView.tileMarker.Highlight(teamColor);
     }
 
@@ -89,8 +103,7 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        tileView.tile = this;
-        
+        tileView.tile = this;        
     }
     public void SetBlock(bool v)
     {
@@ -98,17 +111,6 @@ public class Tile : MonoBehaviour
         collider.enabled = false;
         tileView.SetBlock(isBlock);
     }
-    //public bool TileFree()
-    //{
-    //    return !isBlock && !hasCard;
-    //}
-    //public void SetCard(Card3D _card)
-    //{
-    //    card = _card;
-    //    tileModel.card = card;
-    //    hasCard = true;
-    //    //tileView.entityAttached =
-    //}
 
     public void SetData(CardDynamicData _cardDynamicData)
     {
@@ -118,6 +120,7 @@ public class Tile : MonoBehaviour
         collider.enabled = false;
     }
 
+ 
     internal void SetZone(int v)
     {
         
@@ -140,35 +143,15 @@ public class Tile : MonoBehaviour
     internal void ForceClear()
     {
         tileView.OnOut();
+        tileView.debugID.text = "";
+      
     }
 
     internal void UpdateTile()
     {
-        Debug.Log("ADICIONAR MAIS ATAQUE BASEADO NA DISTANCIA DO ATAQUE");
-        tileView.effectLabel.text = "";
-
-        float effectAttack = 0;
-        float effectDefense = 0;
-        int effectRange = 0;
-        for (int i = 0; i < tileModel.effectsList.Count; i++)
-        {
-            effectAttack += tileModel.effectsList[i].attack;
-            effectDefense += tileModel.effectsList[i].defense;
-            effectRange += tileModel.effectsList[i].range;
-        }
-        if(effectAttack > 0)
-        {
-            tileView.effectLabel.text += "ATT + " + effectAttack/10 +"\n";
-        }
-        if (effectDefense > 0)
-        {
-            tileView.effectLabel.text += "DEF + " + effectDefense / 10 + "\n";
-        }
-        if (effectRange > 0)
-        {
-            tileView.effectLabel.text += "RNG + " + effectRange+ "\n";
-        }
-
+        tileView.UpdateTile(tileModel);
+       
+       
     }
 }
 

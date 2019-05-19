@@ -34,54 +34,61 @@ public class BoardView : MonoBehaviour
         currentNeighborsList = new NeighborsArroundModel();
     }
 
-    public void HighlightAllNeighbors(NeighborsArroundModel _currentNeighborsList, Card3D currentCard)
+    public void HighlightAllNeighbors(NeighborsArroundModel _currentNeighborsList, CardDynamicData cardDynamicData)
     {
         currentNeighborsList = _currentNeighborsList;
+        currentNeighborsList.CapOnFirstBlock();
         currentNeighborsList.CapOnFirstFind();
 
         for (int i = 0; i < currentNeighborsList.allLists.Count; i++)
         {
             for (int j = 0; j < currentNeighborsList.allLists[i].Count; j++)
             {
-                if (currentNeighborsList.allLists[i][j].tile && !currentNeighborsList.allLists[i][j].tile.hasCard)
+                if (currentNeighborsList.allLists[i][j].tile )
                 {
-                    currentNeighborsList.allLists[i][j].tile.Highlight(boardController.currentPlayerData.teamColor);
+                    if (!currentNeighborsList.allLists[i][j].tile.hasCard)
+                    {
+                        currentNeighborsList.allLists[i][j].tile.Highlight(boardController.currentPlayerData.teamColor);
 
+                    }
+                    currentNeighborsList.allLists[i][j].tile.SetNeighborModel(currentNeighborsList.allLists[i][j]);
                 }
             }
         }
 
         List<NeighborModel> enemies = currentNeighborsList.GetOnlyEntitiesConnected();
+        currentNeighborsList.CapOnFirstBlock();
+        currentNeighborsList.CapOnFirstFind();
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i].distance <= currentCard.cardDynamicData.PreviewRange)
+            if (enemies[i].distance <= cardDynamicData.PreviewRange)
             {
                 NeighborModel enemy = enemies[i];
-                if (enemy.tile.cardDynamicData.teamID != currentCard.cardDynamicData.teamID)
+                if (enemy.tile.cardDynamicData.teamID != cardDynamicData.teamID)
                 {
 
                     if (CardsDataManager.Instance.IsPassiveAttack(enemy.tile.cardDynamicData, CardsDataManager.Instance.GetOppositeSide(enemy.side)))
                     {
-                        enemy.tile.tileView.tileMarker.WinPreview();
+                        enemy.TileMarker.WinPreview();
                     }
                     else
                     {
-                        RoundManager.ResultType result = GameManager.Instance.roundManager.GetResult(enemy.tile.cardDynamicData, enemy, currentCard.cardDynamicData);
+                        RoundManager.ResultType result = GameManager.Instance.roundManager.GetResult(enemy.tile.cardDynamicData, enemy, cardDynamicData);
                         switch (result)
                         {
                             case RoundManager.ResultType.IGNORE:
                                 break;
                             case RoundManager.ResultType.WIN:
-                                enemy.tile.tileView.tileMarker.WinPreview();
+                                enemy.TileMarker.WinPreview();
                                 break;
                             case RoundManager.ResultType.LOSE:
-                                enemy.tile.tileView.tileMarker.LosePreview();
+                                enemy.TileMarker.LosePreview();
                                 break;
                             case RoundManager.ResultType.DRAW:
-                                enemy.tile.tileView.tileMarker.DrawPreview();
+                                enemy.TileMarker.DrawPreview();
                                 break;
                             case RoundManager.ResultType.BLOCK:
-                                enemy.tile.tileView.tileMarker.DrawPreview();
+                                enemy.TileMarker.DrawPreview();
                                 break;
                             default:
                                 break;
@@ -92,29 +99,29 @@ public class BoardView : MonoBehaviour
             }
         }
 
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopLeft))
+        if (cardDynamicData.sideList.Contains(SideType.TopLeft))
         {
-            HighlightList(currentNeighborsList.topLeft, currentCard, "TL");
+            HighlightList(currentNeighborsList.topLeft, cardDynamicData, "TL");
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.TopRight))
+        if (cardDynamicData.sideList.Contains(SideType.TopRight))
         {
-            HighlightList(currentNeighborsList.topRight, currentCard, "TR");
+            HighlightList(currentNeighborsList.topRight, cardDynamicData, "TR");
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Left))
+        if (cardDynamicData.sideList.Contains(SideType.Left))
         {
-            HighlightList(currentNeighborsList.left, currentCard, "L");
+            HighlightList(currentNeighborsList.left, cardDynamicData, "L");
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.Right))
+        if (cardDynamicData.sideList.Contains(SideType.Right))
         {
-            HighlightList(currentNeighborsList.right, currentCard, "R");
+            HighlightList(currentNeighborsList.right, cardDynamicData, "R");
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomLeft))
+        if (cardDynamicData.sideList.Contains(SideType.BottomLeft))
         {
-            HighlightList(currentNeighborsList.bottomLeft, currentCard, "BL");
+            HighlightList(currentNeighborsList.bottomLeft, cardDynamicData, "BL");
         }
-        if (currentCard.cardDynamicData.sideList.Contains(SideType.BottomRight))
+        if (cardDynamicData.sideList.Contains(SideType.BottomRight))
         {
-            HighlightList(currentNeighborsList.bottomRight, currentCard, "BR");
+            HighlightList(currentNeighborsList.bottomRight, cardDynamicData, "BR");
         }
     }
 
@@ -140,18 +147,18 @@ public class BoardView : MonoBehaviour
         tileList = new List<List<Tile>>();
     }
 
-    public void HighlightList(List<NeighborModel> list, Card3D currentCard, string debug = "")
+    public void HighlightList(List<NeighborModel> list, CardDynamicData cardDynamicData, string debug = "")
     {
         //for (int i = 0; i < list.Count; i++)
         for (int i = 0; i < list.Count; i++)
         {
-            if (i < currentCard.Range)
+            if (i < cardDynamicData.Range)
             {
                 NeighborModel neighbor = list[i];
                 if (neighbor.tile)
                 {
                     neighbor.tile.tileView.OnHighlight();
-                    neighbor.tile.tileView.debug.text = debug;
+                    //neighbor.tile.tileView.debug.text = debug;
                 }
             }
 
@@ -315,7 +322,7 @@ public class BoardView : MonoBehaviour
         GameObject cardTransform = Instantiate(entityPrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
         cardTransform.transform.localPosition = tile.transform.localPosition;
         EntityView entity = cardTransform.GetComponent<EntityView>();
-        entity.SetData(card.cardStaticData, card.cardDynamicData);
+        entity.SetData(card.cardStaticData, card.cardDynamicData, tile);
 
         return entity;
     }

@@ -8,6 +8,7 @@ public class EnemiesAttackData
     public Tile attacker;
     public Tile tile;
     public Card3D card;
+    public NeighborModel neighborModel;
     public CardStaticData cardStatic;
     public CardDynamicData cardDynamic;
     public SideType sideAttack;

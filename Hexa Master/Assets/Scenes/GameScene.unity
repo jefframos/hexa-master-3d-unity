@@ -1197,7 +1197,7 @@ PrefabInstance:
     - target: {fileID: 779553125694583442, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
@@ -1445,6 +1445,7 @@ MonoBehaviour:
   inGameHUD: {fileID: 1137696393}
   roundManager: {fileID: 1799880623}
   multipleAttackSelector: {fileID: 997429651}
+  deckContainer: {fileID: 552404390}
   commandList: {fileID: 1950913660}
   currentNeighborsList:
     topLeft: []
@@ -1456,10 +1457,7 @@ MonoBehaviour:
     allEnemies: []
   currentTile: {fileID: 0}
   currentCard: {fileID: 0}
-  deckViewList:
-  - {fileID: 1948993322}
-  - {fileID: 1880992484}
-  - {fileID: 1571629666}
+  deckViewList: []
   maxPlayers: 2
   entitiesOnStart: 7d020000e7010000e7010000
   tweenScale: 1
@@ -2383,7 +2381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552404389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -2.77, z: 38.07}
+  m_LocalPosition: {x: -0, y: -3.18, z: 37.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1626732870}
@@ -4625,6 +4623,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TilePrefab: {fileID: 217470032729438371, guid: 47e49c79b7f0cc34c87ab0d27ee07d6b,
     type: 3}
+  TileEffectViewPrefab: {fileID: 1217655152497839648, guid: e4cf5714781772e449fbb923f1cbc0b9,
+    type: 3}
+  CardPrefab: {fileID: 8613206588888539370, guid: 3f67992159454c84393f60e77d0775cd,
+    type: 3}
+  DeckPrefab: {fileID: 779553125694583442, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
+    type: 3}
 --- !u!4 &979473764
 Transform:
   m_ObjectHideFlags: 0
@@ -6778,7 +6782,7 @@ PrefabInstance:
     - target: {fileID: 779553125694583442, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
@@ -6951,18 +6955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75630d1fe66ce8429241d4b8c1f2436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1571629666 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1626732872, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1571629662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1571629664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1600607298
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,7 +7087,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 10
+  field of view: 12
   orthographic: 0
   orthographic size: 3.75
   m_Depth: -1
@@ -8544,18 +8536,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 384882126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1880992484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1626732872, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 384882126}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857242523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1892469953
 GameObject:
   m_ObjectHideFlags: 0
@@ -8648,18 +8628,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927543316}
   m_CullTransparentMesh: 0
---- !u!114 &1948993322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1626732872, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 779553127302417367}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c68f04a52fd2646bdb1525fa428ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1950913659
 GameObject:
   m_ObjectHideFlags: 0
@@ -8921,6 +8889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeckContainerPlayer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 779553125694583442, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 779553125694583441, guid: 88b770423cc284448a0a3bbf9fc8c9fb,
         type: 3}
@@ -9899,7 +9872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 105.89923, y: -239.52602}
+  m_AnchoredPosition: {x: 105.89917, y: -239.52637}
   m_SizeDelta: {x: 201.79846, y: 479.05203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9031144039276695987
