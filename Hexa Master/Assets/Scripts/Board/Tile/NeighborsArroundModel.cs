@@ -15,13 +15,15 @@ public class NeighborsArroundModel
     public List<NeighborModel> allEnemies = new List<NeighborModel>();
     public void AddListsOnList()
     {
-        allLists = new List<List<NeighborModel>>();
-        allLists.Add(topLeft);
-        allLists.Add(topRight);
-        allLists.Add(left);
-        allLists.Add(right);
-        allLists.Add(bottomLeft);
-        allLists.Add(bottomRight);
+        allLists = new List<List<NeighborModel>>
+        {
+            topLeft,
+            topRight,
+            left,
+            right,
+            bottomLeft,
+            bottomRight
+        };
     }
     public void AddListsOnBasedOnSideList(CardDynamicData data)
     {

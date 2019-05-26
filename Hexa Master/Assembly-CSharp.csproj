@@ -222,6 +222,7 @@
     <Compile Include="Assets\Scripts\Camera\DragCamera.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandAddEntity.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandAttack.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandBuff.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandDefault.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandList.cs" />
     <Compile Include="Assets\Scripts\Commands\CommandPlaceCard.cs" />

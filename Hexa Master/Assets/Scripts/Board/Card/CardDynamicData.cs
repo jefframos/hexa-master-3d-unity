@@ -58,7 +58,12 @@ public class CardDynamicData
 
     private AttackType attackType = AttackType.AttackFirstFindOnly;
     internal AttackType AttackType { get => attackType;}
-
+    private NeighborsArroundModel neighborsArround;
+    public NeighborsArroundModel NeighborsArround { get => neighborsArround; internal set
+        {
+            neighborsArround = value;
+        }
+    }
 
     internal int distanceFactor;
     internal void AddPreviewTile(TileModel tileModel)

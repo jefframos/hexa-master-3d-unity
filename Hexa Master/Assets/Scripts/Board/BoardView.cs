@@ -289,6 +289,20 @@ public class BoardView : MonoBehaviour
             }
         }
     }
+
+    internal CommandDefault AddBuffs(CardDynamicData cardDynamicData, Tile tile)
+    {
+        CommandBuff.CommandBuffData data = new CommandBuff.CommandBuffData
+        {
+            cardDynamicData = cardDynamicData,           
+        };
+
+        CommandBuff commandAdd = new CommandBuff();
+        commandAdd.SetData(data);
+
+        return commandAdd;
+    }
+
     internal CommandDefault PlaceEntity(CardStaticData cardStaticData, CardDynamicData cardDynamicData, Tile tile)
     {
         CommandAddEntity.CommandEntityData data = new CommandAddEntity.CommandEntityData

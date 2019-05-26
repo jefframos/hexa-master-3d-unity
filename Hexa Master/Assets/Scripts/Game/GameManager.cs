@@ -326,10 +326,9 @@ public class GameManager : Singleton<GameManager>
             //start
             boardController.PlaceCard(currentCard.cardDynamicData, tile);
 
-            boardController.AddPreAttackBuff(currentCard);
-
-
             commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
+            boardController.AddPreAttackBuff(currentCard);
+            commandList.AddCommand(boardView.AddBuffs(currentCard.cardDynamicData, tile));
             commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
             {
                 commandList.ResetQueue();

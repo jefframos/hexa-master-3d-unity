@@ -66,7 +66,9 @@ public class BoardController : Singleton<BoardController>
     {
         tile.SetData(cardDynamicData);
         cardsPlaced.Add(cardDynamicData);
-        //tile.SetCard(card);
+
+        NeighborsArroundModel neighborsArround = GetNeighbours(tile.tileModel, 1);
+        cardDynamicData.NeighborsArround = neighborsArround;
     }
 
     public Tile GetRandomEmpryTile()
