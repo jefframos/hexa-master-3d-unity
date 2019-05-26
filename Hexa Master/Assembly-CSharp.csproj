@@ -194,11 +194,17 @@
     <Compile Include="Assets\Scripts\Board\Deck\DeckView.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\InGameDeck.cs" />
     <Compile Include="Assets\Scripts\Board\Effect\AttributeEffector.cs" />
+    <Compile Include="Assets\Scripts\Board\Effect\BuffData.cs" />
     <Compile Include="Assets\Scripts\Board\Effect\Effector.cs" />
     <Compile Include="Assets\Scripts\Board\Effect\TileEffectView.cs" />
     <Compile Include="Assets\Scripts\Board\Entity\EntityView.cs" />
     <Compile Include="Assets\Scripts\Board\EntitySelector\EntitySelectorView.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\AttackType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\BuffConditionType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\BuffType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\ClassType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\ClassTypeHelper.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\RoundAttackType.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\SideType.cs" />
     <Compile Include="Assets\Scripts\Board\MultipleAttackSelector.cs" />
     <Compile Include="Assets\Scripts\Board\Player\PlayerData.cs" />

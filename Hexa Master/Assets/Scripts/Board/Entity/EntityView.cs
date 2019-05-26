@@ -22,6 +22,8 @@ public class EntityView : MonoBehaviour
     public TextMeshPro actionLabel;
     public InteractiveObject interactive;
     internal Tile tile;
+    public List<Sprite> spriteFeedbacks;
+    public SpriteRenderer previewFeedback;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class EntityView : MonoBehaviour
         floating = false;
         getAttackedParticle.SetActive(false);
         blockView.gameObject.SetActive(false);
+        previewFeedback.gameObject.SetActive(false);
         SetInteractive(false);
 
     }
@@ -43,16 +46,17 @@ public class EntityView : MonoBehaviour
         cardDynamicData = _cardDynamicData;
         tile.RemoveTileEffectView();
         startY = charSprite.transform.localPosition.y;
-        var sp = Resources.Load<Sprite>("Cards/"+ cardStaticData.folder+"/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
+        var sp = Resources.Load<Sprite>("Cards/" + cardStaticData.folder + "/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
         charSprite.sprite = sp;
-        charSprite.transform.DOMoveY(charSprite.transform.localPosition.y + 1f, 0.75f).From().SetEase(Ease.OutBounce).OnComplete(()=> {
+        charSprite.transform.DOMoveY(charSprite.transform.localPosition.y + 1f, 0.75f).From().SetEase(Ease.OutBounce).OnComplete(() =>
+        {
             EnableFloating();
         });
 
         statsLabel.text = (cardDynamicData.StaticAttack / 10).ToString();
-        if(cardDynamicData.EffectAttack > 0)
+        if (cardDynamicData.EffectAttack > 0)
         {
-            statsLabel.text += "+"+(cardDynamicData.EffectAttack / 10).ToString();
+            statsLabel.text += "+" + (cardDynamicData.EffectAttack / 10).ToString();
         }
         statsLabel.text += " / ";
         statsLabel.text += (cardDynamicData.StaticDefense / 10).ToString();
@@ -60,16 +64,19 @@ public class EntityView : MonoBehaviour
         {
             statsLabel.text += "+" + (cardDynamicData.EffectDefense / 10).ToString();
         }
-        
+
+
+        statsLabel.text = (cardDynamicData.Defense / 10).ToString();
+
         attackZones = GetComponentInChildren<AttackZonesCardView>();
-        attackZones.SetZones(cardDynamicData.sideList);
+        attackZones.SetZones(cardDynamicData.SideList);
         attackZones.SetInGameMode();
 
         ApplyTeamColor();
     }
     public void ApplyTeamColor()
     {
-        teamMaterial.material.DOColor(cardDynamicData.teamColor, 0.5f);
+        teamMaterial.material.DOColor(cardDynamicData.TeamColor, 0.5f);
         //teamMaterial.material.color = cardDynamicData.teamColor;
     }
     public void EnableFloating()
@@ -99,6 +106,9 @@ public class EntityView : MonoBehaviour
         Invoke("HideBlock", 1f);
 
     }
+
+
+
     void HideBlock()
     {
         blockView.gameObject.SetActive(false);
@@ -118,9 +128,29 @@ public class EntityView : MonoBehaviour
             sin += Time.deltaTime * 1.1f;
             charSprite.transform.localPosition = targ;
         }
-      
-    }
 
+    }
+    internal void WinFeedback()
+    {
+        previewFeedback.gameObject.SetActive(true);
+        previewFeedback.sprite = spriteFeedbacks[0];
+
+    }
+    internal void BlockFeedback()
+    {
+        previewFeedback.gameObject.SetActive(true);
+        previewFeedback.sprite = spriteFeedbacks[1];
+
+    }
+    internal void LoseFeedback()
+    {
+        previewFeedback.gameObject.SetActive(true);
+        previewFeedback.sprite = spriteFeedbacks[2];
+    }
+    internal void HideFeedback()
+    {
+        previewFeedback.gameObject.SetActive(false);
+    }
     internal void OnOver()
     {
         Color targColor = Color.white;

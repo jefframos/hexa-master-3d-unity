@@ -263,4 +263,14 @@ public class BoardController : Singleton<BoardController>
 
         return returnObject;
     }
+
+    internal void AddPosAttackBuff(Card3D currentCard)
+    {
+        Debug.Log("AddPos - AttackBuff");
+    }
+
+    internal void AddPreAttackBuff(Card3D currentCard)
+    {
+        Debug.Log("AddPre - AttackBuff");
+    }
 }

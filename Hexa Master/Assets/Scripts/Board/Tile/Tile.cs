@@ -8,7 +8,6 @@ public class Tile : MonoBehaviour
     public TileModel tileModel;
     public TileView tileView;
     public float startY = 0;
-    public bool isBlock = false;
     internal bool isFlag;
     public bool hasCard = false;
     internal EntityView entityAttached;
@@ -19,16 +18,20 @@ public class Tile : MonoBehaviour
     //List<Effector> effectsList = new List<Effector>();
 
     private Collider collider;
-    public bool IsAvailable { get => !isBlock && !hasCard; }
-    public int TeamID { get => cardDynamicData.teamID; }
+    public bool IsAvailable { get => !IsBlock && !hasCard; }
+    public int TeamID { get => cardDynamicData.TeamID; }
     public int ZoneID { get => tileModel.zone; }
     public List<Effector> EffectList { get => tileModel.effectsList; }
+
+    private bool isBlock = false;
+    public bool IsBlock { get => isBlock; set => isBlock = value; }
+
     internal float sin;
     internal bool isFloating;
     public void ResetTile()
     {
         entityAttached = null;
-        isBlock = false;
+        IsBlock = false;
         //tileModel = null;
         //tileView = null;
         isFlag = false;
@@ -81,9 +84,13 @@ public class Tile : MonoBehaviour
         }
        
     }
-    internal void SetNeighborModel(NeighborModel neighborModel)
+    internal void SetNeighborModel(NeighborModel neighborModel, CardDynamicData cardDynamic)
     {
-        if (neighborModel.distance > 1)
+        if (!ClassTypeHelper.UseDistanceAsMultiplier(cardDynamic.ClassType))
+        {
+            return;
+        }
+        if (neighborModel.distance > 1 )
         {
             tileView.SetDistanceEffect(neighborModel.distance);
             tileView.debugID.text = "+" + neighborModel.distance;
@@ -107,9 +114,9 @@ public class Tile : MonoBehaviour
     }
     public void SetBlock(bool v)
     {
-        isBlock = v;
+        IsBlock = v;
         collider.enabled = false;
-        tileView.SetBlock(isBlock);
+        tileView.SetBlock(IsBlock);
     }
 
     public void SetData(CardDynamicData _cardDynamicData)
@@ -117,7 +124,7 @@ public class Tile : MonoBehaviour
         cardDynamicData = _cardDynamicData;
         tileModel.cardDynamicData = cardDynamicData;
         hasCard = true;
-        collider.enabled = false;
+        //collider.enabled = false;
     }
 
  
@@ -130,7 +137,7 @@ public class Tile : MonoBehaviour
 
     internal void SetFlag(int zone)
     {
-        isBlock = true;
+        IsBlock = true;
         isFlag = true;
         tileView.SetFlag();
     }
@@ -144,6 +151,11 @@ public class Tile : MonoBehaviour
     {
         tileView.OnOut();
         tileView.debugID.text = "";
+
+        if (entityAttached)
+        {
+            entityAttached.HideFeedback();
+        }
       
     }
 

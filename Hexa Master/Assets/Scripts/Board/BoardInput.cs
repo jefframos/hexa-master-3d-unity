@@ -54,7 +54,7 @@ public class BoardInput : MonoBehaviour
                 if (tempTile != null)
                 {
 
-                    if (tempTile.isBlock)
+                    if (tempTile.IsBlock)
                     {
                        
                         NoTileOver();

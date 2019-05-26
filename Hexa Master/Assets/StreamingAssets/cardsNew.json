@@ -17,7 +17,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/dwarf-miner.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -38,7 +38,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/dwarf-monk.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -59,7 +59,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/dwarf-warrior.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -80,7 +80,7 @@
             "types": "Water",
             "thumb_url": "thumbs/elf-paladin.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 1
         },
@@ -101,7 +101,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/elf-ranger.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -122,7 +122,7 @@
             "types": "Steel,Dragon",
             "thumb_url": "thumbs/elf-thief.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -143,7 +143,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/elf-white-mage.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Mage",
             "folder": "new",
             "race": 1
         },
@@ -164,7 +164,7 @@
             "types": "Normal",
             "thumb_url": "thumbs/human-mage.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 2
         },
@@ -185,7 +185,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -206,7 +206,7 @@
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/human-thief.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -227,7 +227,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/human-warrior.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }
@@ -250,7 +250,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -271,7 +271,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -292,7 +292,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -313,7 +313,7 @@
             "types": "Water",
             "thumb_url": "thumbs/orc-soldier.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 1
         },
@@ -334,7 +334,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/orc-soldier.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -355,7 +355,7 @@
             "types": "Steel,Dragon",
             "thumb_url":  "thumbs/orc-soldier.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -376,7 +376,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -397,7 +397,7 @@
             "types": "Normal",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 2
         },
@@ -418,7 +418,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -439,7 +439,7 @@
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/orc-warrior-2.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -460,7 +460,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/orc-warrior-2.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }
@@ -476,14 +476,14 @@
                 "specAttack": 100,
                 "specDefense": 100,
                 "speed": 60,
-                "range": 1
+                "range": 2
             },
             "level": 1,
             "weakness": [],
             "types": "Normal",
             "thumb_url": "thumbs/human-mage.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Mage",
             "folder": "new",
             "race": 2
         },
@@ -504,7 +504,7 @@
             "types": "Normal",
             "thumb_url": "thumbs/human-mage.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Mage",
             "folder": "new",
             "race": 2
         },
@@ -525,7 +525,7 @@
             "types": "Normal",
             "thumb_url": "thumbs/human-mage.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Mage",
             "folder": "new",
             "race": 2
         },
@@ -546,7 +546,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -567,7 +567,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -588,7 +588,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -609,7 +609,7 @@
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/human-thief.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -623,14 +623,14 @@
                 "specAttack": 100,
                 "specDefense": 80,
                 "speed": 70,
-                "range": 1
+                "range": 2
             },
             "level": 3,
             "weakness": [],
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/human-thief.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -651,7 +651,7 @@
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/human-thief.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -672,7 +672,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/human-warrior.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -693,7 +693,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/human-warrior.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -714,7 +714,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/human-warrior.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }
@@ -737,7 +737,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/dwarf-miner.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -758,7 +758,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/dwarf-miner.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -779,7 +779,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/dwarf-miner.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -800,7 +800,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/dwarf-monk.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -821,7 +821,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/dwarf-monk.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -842,7 +842,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/dwarf-monk.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -863,7 +863,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/dwarf-warrior.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -884,7 +884,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/dwarf-warrior.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -905,7 +905,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/dwarf-warrior.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }
@@ -928,7 +928,7 @@
             "types": "Water",
             "thumb_url": "thumbs/elf-paladin.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Paladin",
             "folder": "new",
             "race": 1
         },{
@@ -948,7 +948,7 @@
             "types": "Water",
             "thumb_url": "thumbs/elf-paladin.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Paladin",
             "folder": "new",
             "race": 1
         },
@@ -969,7 +969,7 @@
             "types": "Water",
             "thumb_url": "thumbs/elf-paladin.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Paladin",
             "folder": "new",
             "race": 1
         },
@@ -990,7 +990,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/elf-ranger.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -1011,7 +1011,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/elf-ranger.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -1032,7 +1032,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/elf-ranger.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -1053,7 +1053,7 @@
             "types": "Steel,Dragon",
             "thumb_url": "thumbs/elf-thief.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -1074,7 +1074,7 @@
             "types": "Steel,Dragon",
             "thumb_url": "thumbs/elf-thief.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -1095,7 +1095,7 @@
             "types": "Steel,Dragon",
             "thumb_url": "thumbs/elf-thief.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -1116,7 +1116,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/elf-white-mage.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }, 
@@ -1137,7 +1137,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/elf-white-mage.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Mage",
             "folder": "new",
             "race": 1
         } ,
@@ -1158,7 +1158,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/elf-white-mage.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Mage",
             "folder": "new",
             "race": 1
         } 
@@ -1181,7 +1181,7 @@
             "types": "Psychic",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/150.png",
-            "class": "Rogue",
+            "classType": "Rogue",
             "folder": "new",
             "race": 0
         },
@@ -1202,7 +1202,7 @@
             "types": "Psychic,Flying",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/249.png",
-            "class": "Tank",
+            "classType": "Tank",
             "folder": "new",
             "race": 1
         },
@@ -1223,7 +1223,7 @@
             "types": "Fire,Flying",
             "thumb_url": "thumbs/orc-ranger.png",
             "image_url": "images/250.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -1244,7 +1244,7 @@
             "types": "Water",
             "thumb_url": "thumbs/orc-soldier.png",
             "image_url": "images/382.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 1
         },
@@ -1265,7 +1265,7 @@
             "types": "Dragon,Flying",
             "thumb_url": "thumbs/orc-soldier.png",
             "image_url": "images/384.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -1286,7 +1286,7 @@
             "types": "Steel,Dragon",
             "thumb_url":  "thumbs/orc-soldier.png",
             "image_url": "images/483.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -1307,7 +1307,7 @@
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/487.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         },
@@ -1328,7 +1328,7 @@
             "types": "Normal",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/493.png",
-            "class": "Knight",
+            "classType": "Knight",
             "folder": "new",
             "race": 2
         },
@@ -1349,7 +1349,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/orc-warrior.png",
             "image_url": "images/643.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 2
         },
@@ -1370,7 +1370,7 @@
             "types": "Dragon,Electric",
             "thumb_url": "thumbs/orc-warrior-2.png",
             "image_url": "images/644.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 0
         },
@@ -1391,7 +1391,7 @@
             "types": "Dragon,Ice",
             "thumb_url": "thumbs/orc-warrior-2.png",
             "image_url": "images/646.png",
-            "class": "Warrior",
+            "classType": "Warrior",
             "folder": "new",
             "race": 1
         }

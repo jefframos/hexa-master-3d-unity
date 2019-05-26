@@ -74,7 +74,7 @@ public class GameManager : Singleton<GameManager>
         GAME_TIME_SCALE = tweenScale;
         Application.targetFrameRate = 300;
         playerDataList = new List<PlayerData>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             PlayerData playerData = new PlayerData();
 
@@ -123,7 +123,7 @@ public class GameManager : Singleton<GameManager>
         CardStaticData cardStaticData = CardsDataManager.Instance.GetCardByID(id);
         CardDynamicData cardDynamicData = new CardDynamicData();
         cardDynamicData.SetData(cardStaticData);
-        cardDynamicData.teamID = 5;
+        cardDynamicData.TeamID = 5;
 
         Tile tile = boardController.GetRandomEmpryTile();
         boardController.PlaceCard(cardDynamicData, tile);
@@ -197,6 +197,15 @@ public class GameManager : Singleton<GameManager>
             GameObject goDeck = GamePool.Instance.GetDeck();
             DeckView deckView = goDeck.GetComponent<DeckView>();
             deckViewList.Add(deckView);
+
+            if (!ignoredBots.Contains(i))
+            {
+                deckView.InitBot();
+            }else
+            {
+                deckView.DestroyBot();
+            }
+
             deckView.transform.SetParent(deckContainer);
             deckView.transform.localPosition = new Vector3(0, 0, 0);
             deckView.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -276,6 +285,8 @@ public class GameManager : Singleton<GameManager>
     {
         commandList.ResetQueue();
         acting = false;
+
+        boardController.AddPosAttackBuff(currentCard);
         currentCard = null;
 
         boardInput.enabled = true;
@@ -299,14 +310,24 @@ public class GameManager : Singleton<GameManager>
         }
         if (roundManager.CanPlance(tile, currentCard.cardDynamicData))
         {
+            //view
             currentTile.ForceClear();
             boardView.ClearAllNeighbors();
+
+            //input
             boardInput.enabled = false;
             currentDeckInput.SetBlock();
             currentDeckView.RemoveCurrentCard();
             currentDeckView.SetBlock();
+
+            //block
             acting = true;
+
+            //start
             boardController.PlaceCard(currentCard.cardDynamicData, tile);
+
+            boardController.AddPreAttackBuff(currentCard);
+
 
             commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
             commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
@@ -349,7 +370,7 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log("Zone 3 " + score.zonesScore1[2] + " - " + score.zonesScore2[2]);
 
         //inGameHUD.UpdateCurrentRound(currentTeam + 1, score.player1, score.player2);
-        
+        Debug.Log(IsBotRound);
         if (IsBotRound)
         {
             Invoke("WaitNextMove", 0.5f / tweenScale);
@@ -382,8 +403,9 @@ public class GameManager : Singleton<GameManager>
     {
         currentCard.cardDynamicData.AddPreviewTile(tile.tileModel);
         currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardDynamicData.PreviewRange);
-        currentNeighborsList.CapOnFirstBlock();
-        currentNeighborsList.CapOnFirstFind();
+        currentNeighborsList.FilterListByType(currentCard.cardDynamicData);
+        //currentNeighborsList.CapOnFirstBlock();
+        //currentNeighborsList.CapOnFirstFind();
 
         currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
     }

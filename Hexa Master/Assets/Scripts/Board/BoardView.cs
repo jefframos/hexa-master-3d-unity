@@ -37,8 +37,8 @@ public class BoardView : MonoBehaviour
     public void HighlightAllNeighbors(NeighborsArroundModel _currentNeighborsList, CardDynamicData cardDynamicData)
     {
         currentNeighborsList = _currentNeighborsList;
-        currentNeighborsList.CapOnFirstBlock();
-        currentNeighborsList.CapOnFirstFind();
+        currentNeighborsList.FilterListByType(cardDynamicData);
+       
 
         for (int i = 0; i < currentNeighborsList.allLists.Count; i++)
         {
@@ -51,25 +51,24 @@ public class BoardView : MonoBehaviour
                         currentNeighborsList.allLists[i][j].tile.Highlight(boardController.currentPlayerData.teamColor);
 
                     }
-                    currentNeighborsList.allLists[i][j].tile.SetNeighborModel(currentNeighborsList.allLists[i][j]);
+                    currentNeighborsList.allLists[i][j].tile.SetNeighborModel(currentNeighborsList.allLists[i][j], cardDynamicData);
                 }
             }
         }
 
         List<NeighborModel> enemies = currentNeighborsList.GetOnlyEntitiesConnected();
-        currentNeighborsList.CapOnFirstBlock();
-        currentNeighborsList.CapOnFirstFind();
         for (int i = 0; i < enemies.Count; i++)
         {
             if (enemies[i].distance <= cardDynamicData.PreviewRange)
             {
                 NeighborModel enemy = enemies[i];
-                if (enemy.tile.cardDynamicData.teamID != cardDynamicData.teamID)
+                if (enemy.tile.cardDynamicData.TeamID != cardDynamicData.TeamID)
                 {
 
                     if (CardsDataManager.Instance.IsPassiveAttack(enemy.tile.cardDynamicData, CardsDataManager.Instance.GetOppositeSide(enemy.side)))
                     {
                         enemy.TileMarker.WinPreview();
+                        enemy.tile.entityAttached.WinFeedback();
                     }
                     else
                     {
@@ -80,15 +79,19 @@ public class BoardView : MonoBehaviour
                                 break;
                             case RoundManager.ResultType.WIN:
                                 enemy.TileMarker.WinPreview();
+                                enemy.tile.entityAttached.WinFeedback();
                                 break;
                             case RoundManager.ResultType.LOSE:
                                 enemy.TileMarker.LosePreview();
+                                enemy.tile.entityAttached.LoseFeedback();
                                 break;
                             case RoundManager.ResultType.DRAW:
                                 enemy.TileMarker.DrawPreview();
+                                enemy.tile.entityAttached.BlockFeedback();
                                 break;
                             case RoundManager.ResultType.BLOCK:
                                 enemy.TileMarker.DrawPreview();
+                                enemy.tile.entityAttached.BlockFeedback();
                                 break;
                             default:
                                 break;
@@ -99,27 +102,27 @@ public class BoardView : MonoBehaviour
             }
         }
 
-        if (cardDynamicData.sideList.Contains(SideType.TopLeft))
+        if (cardDynamicData.SideList.Contains(SideType.TopLeft))
         {
             HighlightList(currentNeighborsList.topLeft, cardDynamicData, "TL");
         }
-        if (cardDynamicData.sideList.Contains(SideType.TopRight))
+        if (cardDynamicData.SideList.Contains(SideType.TopRight))
         {
             HighlightList(currentNeighborsList.topRight, cardDynamicData, "TR");
         }
-        if (cardDynamicData.sideList.Contains(SideType.Left))
+        if (cardDynamicData.SideList.Contains(SideType.Left))
         {
             HighlightList(currentNeighborsList.left, cardDynamicData, "L");
         }
-        if (cardDynamicData.sideList.Contains(SideType.Right))
+        if (cardDynamicData.SideList.Contains(SideType.Right))
         {
             HighlightList(currentNeighborsList.right, cardDynamicData, "R");
         }
-        if (cardDynamicData.sideList.Contains(SideType.BottomLeft))
+        if (cardDynamicData.SideList.Contains(SideType.BottomLeft))
         {
             HighlightList(currentNeighborsList.bottomLeft, cardDynamicData, "BL");
         }
-        if (cardDynamicData.sideList.Contains(SideType.BottomRight))
+        if (cardDynamicData.SideList.Contains(SideType.BottomRight))
         {
             HighlightList(currentNeighborsList.bottomRight, cardDynamicData, "BR");
         }

@@ -11,7 +11,7 @@ public class CommandAttack : CommandDefault
         internal CardDynamicData currentCardDynamicData;
         internal EntityView entityAttack;
         internal EntityView entityDefense;
-        internal AttackType attackType;
+        internal RoundAttackType attackType;
         internal int teamTarget;
         internal Color colorTarget;
         internal bool isBlock;
@@ -41,17 +41,17 @@ public class CommandAttack : CommandDefault
         //attackType
         if (!data.isBlock && !data.isCounter)
         {
-            if (data.attackType == AttackType.Passive)
+            if (data.attackType == RoundAttackType.Passive)
             {
-                data.attackData.cardDynamic.teamID = data.teamTarget;
-                data.attackData.cardDynamic.teamColor = data.colorTarget;
+                data.attackData.cardDynamic.TeamID = data.teamTarget;
+                data.attackData.cardDynamic.TeamColor = data.colorTarget;
                 data.attackData.tile.entityAttached.ApplyTeamColor();
                 Debug.Log("PASSIVE");
             }
             else
             {
-                data.attackData.cardDynamic.teamID = data.teamTarget;
-                data.attackData.cardDynamic.teamColor = data.colorTarget;
+                data.attackData.cardDynamic.TeamID = data.teamTarget;
+                data.attackData.cardDynamic.TeamColor = data.colorTarget;
                 data.attackData.tile.entityAttached.ApplyTeamColor();
                 Debug.Log("ACTIVE");
             }

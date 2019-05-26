@@ -26,34 +26,34 @@ public class NeighborsArroundModel
     public void AddListsOnBasedOnSideList(CardDynamicData data)
     {
         allLists = new List<List<NeighborModel>>();
-        for (int i = 0; i < data.sideList.Count; i++)
+        for (int i = 0; i < data.SideList.Count; i++)
         {
-            if (data.sideList[i] == SideType.TopLeft)
+            if (data.SideList[i] == SideType.TopLeft)
             {
                 allLists.Add(topLeft);
 
             }
-            if (data.sideList[i] == SideType.TopRight)
+            if (data.SideList[i] == SideType.TopRight)
             {
                 allLists.Add(topRight);
 
             }
-            if (data.sideList[i] == SideType.Left)
+            if (data.SideList[i] == SideType.Left)
             {
                 allLists.Add(left);
 
             }
-            if (data.sideList[i] == SideType.Right)
+            if (data.SideList[i] == SideType.Right)
             {
                 allLists.Add(right);
 
             }
-            if (data.sideList[i] == SideType.BottomLeft)
+            if (data.SideList[i] == SideType.BottomLeft)
             {
                 allLists.Add(bottomLeft);
 
             }
-            if (data.sideList[i] == SideType.BottomRight)
+            if (data.SideList[i] == SideType.BottomRight)
             {
                 allLists.Add(bottomRight);
 
@@ -67,6 +67,29 @@ public class NeighborsArroundModel
         //        //allLists[i].RemoveRange(data.cardStaticData.stats.range-1, allLists[i].Count - data.cardStaticData.stats.range);
         //    }
         //}
+    }
+
+    internal void FilterListByType(CardDynamicData cardDynamicData)
+    {
+        switch (cardDynamicData.AttackType)
+        {
+            case AttackType.AttackFirstFindOnly:
+                CapOnFirstBlock();
+                CapOnFirstFind();
+                //GetOnlyRangeTile(cardDynamicData.PreviewRange);
+                break;
+            case AttackType.AttackOnlyRangeFind:
+                GetOnlyRangeTile(cardDynamicData.PreviewRange);
+                break;
+            case AttackType.AttackAllRangeFind:
+                CapOnFirstBlock();
+                break;
+            case AttackType.NoAttack:
+                break;
+            default:
+                break;
+        }
+
     }
 
     internal List<NeighborModel> GetOnlyEntitiesConnected()
@@ -84,8 +107,8 @@ public class NeighborsArroundModel
         }
         return connectedEntities;
     }
-
-    public void CapOnFirstBlock()
+    // Cap on the first blocker on the way
+    void CapOnFirstBlock()
     {
         CapListOnBlock(topLeft);
         CapListOnBlock(topRight);
@@ -94,6 +117,19 @@ public class NeighborsArroundModel
         CapListOnBlock(bottomLeft);
         CapListOnBlock(bottomRight);
     }
+    void CapListOnBlock(List<NeighborModel> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].distance = i + 1;
+            if (list[i].tile && list[i].tile.IsBlock)
+            {
+                list.RemoveRange(i, list.Count - i);
+                break;
+            }
+        }
+    }
+    //Cap on the first card found
     public List<NeighborModel> CapOnFirstFind()
     {
         allEnemies = new List<NeighborModel>();
@@ -107,7 +143,50 @@ public class NeighborsArroundModel
 
         return allEnemies;
     }
-  
+    void CapListOnFirstFind(List<NeighborModel> list)
+    {
+        for (int i = 0; i < list.Count - 1; i++)
+        {
+            list[i].distance = i + 1;
+            if (list[i].tile && (list[i].tile.IsBlock || list[i].tile.hasCard))
+            {
+                list.RemoveRange(i + 1, list.Count - i - 1);
+                break;
+            }
+        }
+    }
+    //Get only the tiles based on specific range
+
+    public List<NeighborModel> GetOnlyRangeTile(int range)
+    {
+        allEnemies = new List<NeighborModel>();
+
+        GetOnlyRangeOnLyst(topLeft, range);
+        GetOnlyRangeOnLyst(topRight, range);
+        GetOnlyRangeOnLyst(left, range);
+        GetOnlyRangeOnLyst(right, range);
+        GetOnlyRangeOnLyst(bottomLeft, range);
+        GetOnlyRangeOnLyst(bottomRight, range);
+
+        return allEnemies;
+    }
+
+    void GetOnlyRangeOnLyst(List<NeighborModel> list, int range)
+    {
+
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            if (list[i].Exists)
+            {
+                if (list[i].distance != range || list[i].tile.IsBlock)
+                {
+                    list.RemoveRange(i, 1);
+                }
+            }
+
+        }
+    }
+
     public List<NeighborModel> GetAllEntitiesArroundOnly(int range = 1)
     {
         List<NeighborModel> rebounds = new List<NeighborModel>();
@@ -127,55 +206,33 @@ public class NeighborsArroundModel
         }
         return rebounds;
     }
-    void CapListOnBlock(List<NeighborModel> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            list[i].distance = i + 1;
-            if (list[i].tile && list[i].tile.isBlock)
-            {
-                list.RemoveRange(i, list.Count - i);
-                break;
-            }
-        }
-    }
-    void CapListOnFirstFind(List<NeighborModel> list)
-    {
-        for (int i = 0; i < list.Count-1; i++)
-        {
-            list[i].distance = i + 1;
-            if (list[i].tile && (list[i].tile.isBlock || list[i].tile.hasCard))
-            {
-                list.RemoveRange(i + 1, list.Count - i-1);
-                break;
-            }            
-        }
-    }
-   // public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)
+
+
+    // public List<List<NeighborModel>> GetCardArrounds(Card3D currentCard)
     public List<List<NeighborModel>> GetCardArrounds(CardDynamicData currentCard)
     {
         List<List<NeighborModel>> arroundsList = new List<List<NeighborModel>>();
-        if (currentCard.sideList.Contains(SideType.TopLeft))
+        if (currentCard.SideList.Contains(SideType.TopLeft))
         {
             arroundsList.Add(topLeft);
         }
-        if (currentCard.sideList.Contains(SideType.TopRight))
+        if (currentCard.SideList.Contains(SideType.TopRight))
         {
             arroundsList.Add(topRight);
         }
-        if (currentCard.sideList.Contains(SideType.Left))
+        if (currentCard.SideList.Contains(SideType.Left))
         {
             arroundsList.Add(left);
         }
-        if (currentCard.sideList.Contains(SideType.Right))
+        if (currentCard.SideList.Contains(SideType.Right))
         {
             arroundsList.Add(right);
         }
-        if (currentCard.sideList.Contains(SideType.BottomLeft))
+        if (currentCard.SideList.Contains(SideType.BottomLeft))
         {
             arroundsList.Add(bottomLeft);
         }
-        if (currentCard.sideList.Contains(SideType.BottomRight))
+        if (currentCard.SideList.Contains(SideType.BottomRight))
         {
             arroundsList.Add(bottomRight);
         }

@@ -30,9 +30,9 @@ public class Card3D : MonoBehaviour
         cardStaticData = _cardStaticData;
         cardDynamicData.SetData(cardStaticData);
 
-        cardDynamicData.teamID = teamID;
+        cardDynamicData.TeamID = teamID;
         //get this color from player data
-        cardDynamicData.teamColor = GameConfig.Instance.GetTeamColor(teamID);
+        cardDynamicData.TeamColor = GameConfig.Instance.GetTeamColor(teamID);
         //GameConfig.GetTeamColor(teamID);
         cardView.SetData(cardStaticData, cardDynamicData);
 

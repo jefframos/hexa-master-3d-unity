@@ -17,6 +17,7 @@ public class GameCardView3D : MonoBehaviour
     public TextMeshPro defenseLabel;
     public TextMeshPro rangeLabel;
     public TextMeshPro nameLabel;
+    public TextMeshPro description;
     public List<GameObject> starsList;
 
     public SpriteRenderer[] allRenderers;
@@ -71,6 +72,9 @@ public class GameCardView3D : MonoBehaviour
         defenseLabel.text = (cardDynamicData.StaticDefense / 10).ToString();
         rangeLabel.text = cardDynamicData.StaticRange.ToString();
 
+
+        description.text = ClassTypeHelper.GetAttackDesc(cardDynamicData.ClassType);
+
         for (int i = 0; i < starsList.Count; i++)
         {
             starsList[i].SetActive(false);
@@ -86,9 +90,9 @@ public class GameCardView3D : MonoBehaviour
         //GameObject attackZones = Instantiate(attackZonesPrefab, new Vector3(0, 0, 0), Quaternion.identity, attackZonesParent);
         //cardTransform.transform.localPosition = new Vector3(5f, -2.5f, 0);
         attackZonesView = GetComponentInChildren<AttackZonesCardView>();
-        attackZonesView.SetZones(cardDynamicData.sideList);
+        attackZonesView.SetZones(cardDynamicData.SideList);
         //attackZonesView.SetTeamID(cardDynamicData.teamID);
-        attackZonesView.SetTeamColor(cardDynamicData.teamColor);
+        attackZonesView.SetTeamColor(cardDynamicData.TeamColor);
         
         attackZonesView.setDeckLayer();
         charSprite.sprite = sp;
@@ -142,7 +146,7 @@ public class GameCardView3D : MonoBehaviour
     public void OnSelect()
     {
         isSelected = true;
-        spriteSelected.color = cardDynamicData.teamColor;
+        spriteSelected.color = cardDynamicData.TeamColor;
     }
     public void OnUnSelect()
     {

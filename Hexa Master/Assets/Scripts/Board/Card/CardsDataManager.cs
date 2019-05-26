@@ -261,6 +261,6 @@ public class CardsDataManager : Singleton<CardsDataManager>
 
     internal bool IsPassiveAttack(CardDynamicData cardDynamic, SideType sideAttack)
     {
-        return !cardDynamic.sideList.Contains(sideAttack);
+        return !cardDynamic.SideList.Contains(sideAttack);
     }
 }

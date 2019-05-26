@@ -134,7 +134,6 @@ public class TileView : MonoBehaviour
     }
     internal void UpdateTile(TileModel tileModel)
     {
-        //Debug.Log("ADICIONAR MAIS ATAQUE BASEADO NA DISTANCIA DO ATAQUE");
         effectLabel.text = "";
         if (tileModel.effectsList.Count > 0)
         {
@@ -219,7 +218,11 @@ public class TileView : MonoBehaviour
         {
             tile.entityAttached.OnOver();
         }
-        tileMarker.OnOver();
+        else
+        {
+            tileMarker.OnOver();
+
+        }
     }
 
     public void OnOut()
@@ -231,6 +234,11 @@ public class TileView : MonoBehaviour
 
 
         ReturnTileEffect();
+
+        if (tile.entityAttached)
+        {
+            tile.entityAttached.HideFeedback();
+        }
 
         tileMarker.OnOut();
         tileMarker.Deactive();
@@ -244,6 +252,10 @@ public class TileView : MonoBehaviour
     public void OnClear()
     {
         tileMarker.Deactive();
+        if (tile.entityAttached)
+        {
+            tile.entityAttached.HideFeedback();
+        }
         ReturnTileEffect();
         debug.text = "";
     }

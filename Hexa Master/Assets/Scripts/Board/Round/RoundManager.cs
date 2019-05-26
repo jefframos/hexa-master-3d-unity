@@ -48,6 +48,7 @@ public class RoundManager : MonoBehaviour
 
     internal void DoRound(Tile tile, NeighborsArroundModel currentNeighborsList, CardDynamicData cardDynamicData)
     {
+        
         roundCommands = new List<CommandDefault>();
         List<List<NeighborModel>> arroundsList = currentNeighborsList.GetCardArrounds(cardDynamicData);
 
@@ -63,13 +64,12 @@ public class RoundManager : MonoBehaviour
 
         for (int i = 0; i < enemiesPassiveList.Count; i++)
         {
-            roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.teamID, tile, currentCardDynamicData.teamColor));
+            roundCommands.Add(AddPassiveAttackCommand(enemiesPassiveList[i], currentCardDynamicData.TeamID, tile, currentCardDynamicData.TeamColor));
         }
         if (enemiesActiveList.Count > 0)
         {
             if (enemiesActiveList.Count <= 1)
             {
-                //onMultipleAttack.Invoke(enemiesActiveList);
                 GenerateRoundCommands(enemiesActiveList[0], cardDynamicData, tile);
                 onRoundReady.Invoke(roundCommands);
             }
@@ -83,6 +83,7 @@ public class RoundManager : MonoBehaviour
             onRoundReady.Invoke(roundCommands);
         }
     }
+
     public void GenerateRoundCommands(List<EnemiesAttackData> targets, CardDynamicData cardDynamicData, Tile tile)
     {
         for (int i = 0; i < targets.Count; i++)
@@ -92,38 +93,11 @@ public class RoundManager : MonoBehaviour
 
         onRoundReady.Invoke(roundCommands);
     }
-    //get result for one action
-    //internal ResultType GetResult(EnemiesAttackData targetAttack, CardDynamicData cardDynamicData)
-    //{
-    //    if (targetAttack.cardDynamic.teamID == cardDynamicData.teamID)
-    //    {
-    //        return ResultType.IGNORE;
-    //    }
-    //    //if (targetAttack.cardDynamic.Defense < cardDynamicData.Attack)
-    //    if (targetAttack.cardDynamic.Defense < cardDynamicData.PreviewAttack)
-    //        {
-    //        return ResultType.WIN;
-    //    }
-
-    //    //if (targetAttack.cardDynamic.Defense >= cardDynamicData.Attack)
-    //    if (targetAttack.cardDynamic.Defense >= cardDynamicData.PreviewAttack)
-    //        {
-    //        if (targetAttack.dist <= 1)
-    //        {
-    //            return ResultType.LOSE;
-    //        }
-    //        else
-    //        {
-    //            return ResultType.BLOCK;
-    //        }
-    //    }
-    //    return ResultType.IGNORE;
-    //}
-
+    
     internal ResultType GetResult(CardDynamicData targetAttack, NeighborModel neibourModel, CardDynamicData cardDynamicData)
     {
         cardDynamicData.ApplyDistanceFactor(neibourModel.distance);
-        if (targetAttack.teamID == cardDynamicData.teamID)
+        if (targetAttack.TeamID == cardDynamicData.TeamID)
         {
             return ResultType.IGNORE;
         }
@@ -159,14 +133,14 @@ public class RoundManager : MonoBehaviour
                 return;
                 
             case ResultType.WIN:
-                targetAttack.cardDynamic.teamID = cardDynamicData.teamID;
-                targetAttack.cardDynamic.teamColor = cardDynamicData.teamColor;
-                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, cardDynamicData.teamColor));
-                roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.teamID, cardDynamicData.teamColor));
+                targetAttack.cardDynamic.TeamID = cardDynamicData.TeamID;
+                targetAttack.cardDynamic.TeamColor = cardDynamicData.TeamColor;
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.TeamID, tile, cardDynamicData.TeamColor));
+                roundCommands.Add(AddReboundCommand(targetAttack.tile, cardDynamicData.TeamID, cardDynamicData.TeamColor));
                 break;
             case ResultType.LOSE:
-                cardDynamicData.teamID = targetAttack.cardDynamic.teamID;
-                cardDynamicData.teamColor = targetAttack.cardDynamic.teamColor;
+                cardDynamicData.TeamID = targetAttack.cardDynamic.TeamID;
+                cardDynamicData.TeamColor = targetAttack.cardDynamic.TeamColor;
                 EnemiesAttackData selfData = new EnemiesAttackData
                 {
                     tile = tile,
@@ -175,14 +149,14 @@ public class RoundManager : MonoBehaviour
                     dist = targetAttack.dist,
                     sideAttack = SideType.BottomLeft
                 };
-                roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.teamID, tile));
-                roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.teamID, targetAttack.tile, targetAttack.cardDynamic.teamColor));
-                roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.teamID, targetAttack.cardDynamic.teamColor, true));
+                roundCommands.Add(AddMockAttackCommand(targetAttack, cardDynamicData.TeamID, tile));
+                roundCommands.Add(AddAttackCommand(selfData, targetAttack.cardDynamic.TeamID, targetAttack.tile, targetAttack.cardDynamic.TeamColor));
+                roundCommands.Add(AddReboundCommand(selfData.tile, targetAttack.cardDynamic.TeamID, targetAttack.cardDynamic.TeamColor, true));
                 break;
             case ResultType.DRAW:
                 break;
             case ResultType.BLOCK:
-                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.teamID, tile, cardDynamicData.teamColor, true));
+                roundCommands.Add(AddAttackCommand(targetAttack, cardDynamicData.TeamID, tile, cardDynamicData.TeamColor, true));
                 break;
             default:
                 break;
@@ -212,7 +186,7 @@ public class RoundManager : MonoBehaviour
         {
             attackData = enemyData,
             teamTarget = teamTarget,
-            attackType = AttackType.Active,
+            attackType = RoundAttackType.Active,
             entityAttack = attacker.entityAttached,
             entityDefense = enemyData.tile.entityAttached,
             isCounter = true,
@@ -233,7 +207,7 @@ public class RoundManager : MonoBehaviour
             attackData = enemyData,
             teamTarget = teamTarget,
             colorTarget = colorTarget,
-            attackType = AttackType.Active,
+            attackType = RoundAttackType.Active,
             entityAttack = attacker.entityAttached,
             entityDefense = enemyData.tile.entityAttached,
             isBlock = isBlock
@@ -253,7 +227,7 @@ public class RoundManager : MonoBehaviour
             attackData = enemyData,
             teamTarget = teamTarget,
             colorTarget = colorTarget,
-            attackType = AttackType.Passive,
+            attackType = RoundAttackType.Passive,
             entityAttack = attacker.entityAttached,
             entityDefense = enemyData.tile.entityAttached
         };
@@ -282,7 +256,7 @@ public class RoundManager : MonoBehaviour
                 {
                     if (!found && DetectPossibleAttack(arroundsList[i][j], currentCardDynamicData))
                     {
-                        if (currentCardDynamicData.attackType == AttackType.AttackFirstFindOnly)
+                        if (currentCardDynamicData.AttackType == AttackType.AttackFirstFindOnly)
                         {
                             found = true;
                         }
@@ -353,8 +327,8 @@ public class RoundManager : MonoBehaviour
             //Debug.Log("-" + allArrounds[i].tile.cardDynamicData.cardStaticData.name + " - " + allArrounds[i].tile.cardDynamicData.teamID + " - to: - " + teamID);
 
 
-            allArrounds[i].tile.cardDynamicData.teamID = teamID;
-            allArrounds[i].tile.cardDynamicData.teamColor = teamColor;// tile.entityAttached.cardDynamicData.teamID;
+            allArrounds[i].tile.cardDynamicData.TeamID = teamID;
+            allArrounds[i].tile.cardDynamicData.TeamColor = teamColor;// tile.entityAttached.cardDynamicData.teamID;
             //allArrounds[i].tile.entityAttached.ApplyTeamColor();
         }
         return allArrounds;
@@ -369,7 +343,7 @@ public class RoundManager : MonoBehaviour
             return false;
         }
 
-        return cardDynamicData.teamID != currentCardDynamicData.teamID;
+        return cardDynamicData.TeamID != currentCardDynamicData.TeamID;
 
     }
 }

@@ -26,13 +26,11 @@ public class StandardBot : MonoBehaviour
     List<MoveData> moveDataList;
 
     // Start is called before the first frame update
-    void Start()
+    internal void InitBot()
     {
         deckInput = GetComponent<DeckInput>();
         //deckInput.SetBlock();
         deckView = GetComponent<DeckView>();
-        deckView.isBot = true;
-        deckView.bot = this;
         boardController = BoardController.Instance;
         gameManager = GameManager.Instance;
     }
@@ -102,8 +100,9 @@ public class StandardBot : MonoBehaviour
     {
         cardDynamic.AddPreviewTile(tileModel);
         NeighborsArroundModel currentNeighborsList = boardController.GetNeighbours(tileModel, cardDynamic.PreviewRange);
-        currentNeighborsList.CapOnFirstBlock();
-        currentNeighborsList.CapOnFirstFind();
+        currentNeighborsList.FilterListByType(cardDynamic);
+        //currentNeighborsList.CapOnFirstBlock();
+        //currentNeighborsList.CapOnFirstFind();
         //currentNeighborsList.AddListsOnBasedOnSideList(currentCard.cardDynamicData);
         arroundsList = currentNeighborsList.GetCardArrounds(cardDynamic);
         roundManager.GetAttackLists(arroundsList, cardDynamic, out List<EnemiesAttackData> enemiesActiveList, out List<EnemiesAttackData> enemiesPassiveList);
@@ -117,7 +116,7 @@ public class StandardBot : MonoBehaviour
                 case RoundManager.ResultType.IGNORE:
                     break;
                 case RoundManager.ResultType.WIN:
-                    moveData.points += 20 + enemiesActiveList[i].cardDynamic.sideList.Count + enemiesActiveList[i].dist * 2;
+                    moveData.points += 20 + enemiesActiveList[i].cardDynamic.SideList.Count + enemiesActiveList[i].dist * 2;
                     break;
                 case RoundManager.ResultType.LOSE:
                     moveData.points -= 100;

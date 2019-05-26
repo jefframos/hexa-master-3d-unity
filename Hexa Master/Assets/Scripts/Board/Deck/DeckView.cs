@@ -45,9 +45,9 @@ public class DeckView : MonoBehaviour
 
     void Start()
     {
-       
 
-       
+
+
     }
 
     internal void ResetDeck()
@@ -91,7 +91,7 @@ public class DeckView : MonoBehaviour
 
     void LateUpdate()
     {
-       if(handDeck == null || handDeck.Count <= 0)
+        if (handDeck == null || handDeck.Count <= 0)
         {
             return;
         }
@@ -105,7 +105,6 @@ public class DeckView : MonoBehaviour
             }
         }
 
-        Debug.Log(handDeck.Count);
         {
             for (int i = 0; i < handDeck.Count; i++)
             {
@@ -120,7 +119,7 @@ public class DeckView : MonoBehaviour
         }
 
         if (cardInFocus)
-        {           
+        {
             Focus();
             blockTransform.localPosition = focusState.targetBlocker;
         }
@@ -136,7 +135,7 @@ public class DeckView : MonoBehaviour
         float focusDistance = focusState.cardsDistance;//cardsDistance * 0.8f;
         float targetScale = focusState.cardScale;//cardScale * 1.5f;
         float targetAngle = 0f;
-        
+
         card.SetOrder(maxInHand + 1);
 
         Vector3 scale = Vector3.Lerp(card.transform.localScale, new Vector3(targetScale, targetScale, targetScale), t); ;
@@ -199,7 +198,7 @@ public class DeckView : MonoBehaviour
     void StandardMode(int i, bool debug = false)
     {
         Card3D card = handDeck[i];
-        if(card == null)
+        if (card == null)
         {
             return;
         }
@@ -223,12 +222,12 @@ public class DeckView : MonoBehaviour
 
         float tempCardsInHand = Mathf.Max((maxInHand - 1), 0);
         float tempRotation = 0;
-        if(tempCardsInHand > 0)
+        if (tempCardsInHand > 0)
         {
             tempRotation = currentState.cardsRotation / tempCardsInHand * (i) - (currentState.cardsRotation / 2);
             tempRotation *= angleMult;
         }
-        
+
         float angle = Mathf.LerpAngle(card.transform.eulerAngles.z, tempRotation, t);
         float sin = Mathf.Abs(Mathf.Sin(angle / 180 * Mathf.PI));
 
@@ -237,10 +236,26 @@ public class DeckView : MonoBehaviour
         targetPosition.y += sin * sin * currentState.cardsArc;
 
         card.transform.localPosition = Vector3.Lerp(card.transform.localPosition, targetPosition, t);
-        card.transform.eulerAngles = new Vector3(65f, 0, angle);        
+        card.transform.eulerAngles = new Vector3(65f, 0, angle);
         card.SetOrder(order);
 
         //Debug.Log(order);
+    }
+
+    internal void DestroyBot()
+    {
+        if (bot)
+        {
+            Destroy(bot.gameObject);
+        }
+        bot = null;
+    }
+
+    internal void InitBot()
+    {
+        bot = GetComponent<StandardBot>();
+        bot.InitBot();
+        isBot = true;
     }
 
     internal void SetHandCards(List<Card3D> deck, int max)
@@ -255,14 +270,14 @@ public class DeckView : MonoBehaviour
     }
     public void CardSelect(Card3D card)
     {
-        if(cardSelected == card)
+        if (cardSelected == card)
         {
             cardSelected.cardView.OnUnSelect();
             cardSelected = null;
         }
         else
         {
-            if(cardSelected != null)
+            if (cardSelected != null)
             {
                 cardSelected.cardView.OnUnSelect();
             }

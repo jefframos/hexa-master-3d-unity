@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class CardDynamicData
 {
-    public List<SideType> sideList;
-    public List<SideType> oppositeSideList;
-    public int teamID;
-    internal Color teamColor;
-    internal AttackType attackType = AttackType.AttackFirstFindOnly;
+
     internal CardStaticData cardStaticData;
     CardsDataManager cardsDataManager;
 
@@ -38,6 +34,32 @@ public class CardDynamicData
     public float PreviewDefense { get => previewDefense; }
     int previewRange = 0;
     public int PreviewRange { get => previewRange; }
+
+    private List<SideType> sideList;
+    public List<SideType> SideList { get => sideList; set => sideList = value; }
+
+    private List<SideType> oppositeSideList;
+    public List<SideType> OppositeSideList { get => oppositeSideList; set => oppositeSideList = value; }
+
+    private int teamID;
+    public int TeamID { get => teamID; set => teamID = value; }
+
+    private Color teamColor;
+    internal Color TeamColor { get => teamColor; set => teamColor = value; }
+
+    private List<BuffData> preAttackBuff;
+    public List<BuffData> PreAttackBuff { get => preAttackBuff; set => preAttackBuff = value; }
+
+    private List<BuffData> posAttackBuff;
+    public List<BuffData> PosAttackBuff { get => posAttackBuff; set => posAttackBuff = value; }
+
+    private ClassType classType;
+    public ClassType ClassType { get => classType;}
+
+    private AttackType attackType = AttackType.AttackFirstFindOnly;
+    internal AttackType AttackType { get => attackType;}
+
+
     internal int distanceFactor;
     internal void AddPreviewTile(TileModel tileModel)
     {
@@ -77,24 +99,29 @@ public class CardDynamicData
     public void SetData(CardStaticData _cardStaticData)
     {
         effectsList = new List<Effector>();
-        teamID = 1;
+        TeamID = 1;
         cardsDataManager = CardsDataManager.Instance;
         cardStaticData = _cardStaticData;
 
-        List<SideType> tempSideList = new List<SideType>();
-        tempSideList.Add(SideType.BottomLeft);
-        tempSideList.Add(SideType.BottomRight);
-        tempSideList.Add(SideType.Left);
-        tempSideList.Add(SideType.Right);
-        tempSideList.Add(SideType.TopLeft);
-        tempSideList.Add(SideType.TopRight);
+        preAttackBuff = new List<BuffData>();
+        posAttackBuff = new List<BuffData>();
+
+        classType = ClassTypeHelper.GetClassByString(cardStaticData.classType);
+        attackType = ClassTypeHelper.GetAttackType(classType);
+
+
+        List<SideType> tempSideList = new List<SideType>
+        {
+            SideType.BottomLeft,
+            SideType.BottomRight,
+            SideType.Left,
+            SideType.Right,
+            SideType.TopLeft,
+            SideType.TopRight
+        };
 
         int maxSpdValue = 120;
 
-
-
-
-        //Debug.Log(cardStaticData.stats.speed);
 
         decimal tot = Math.Floor((decimal)cardStaticData.stats.speed / maxSpdValue * tempSideList.Count);
 
@@ -104,15 +131,15 @@ public class CardDynamicData
             tot = 1;
 
 
-        sideList = new List<SideType>();
-        oppositeSideList = new List<SideType>();
+        SideList = new List<SideType>();
+        OppositeSideList = new List<SideType>();
         ArrayUtils.Shuffle(tempSideList);
 
         for (var i = 0; i < tot; i++)
         {
-            sideList.Add(tempSideList[i]);
+            SideList.Add(tempSideList[i]);
 
-            oppositeSideList.Add(cardsDataManager.GetOppositeSide(tempSideList[i]));
+            OppositeSideList.Add(cardsDataManager.GetOppositeSide(tempSideList[i]));
         };
 
     }
@@ -120,7 +147,7 @@ public class CardDynamicData
     internal void ApplyDistanceFactor(int distance)
     {
         //if uses distance
-        if(distance <= 1)
+        if(distance <= 1 || ClassType != ClassType.Ranger)
         {
             distanceFactor = 0;
             return;
