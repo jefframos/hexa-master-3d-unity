@@ -69,7 +69,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 80,
-                "defense": 80,
+                "defense": 100,
                 "specAttack": 120,
                 "specDefense": 120,
                 "speed": 80,
@@ -90,7 +90,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 120,
-                "defense": 40,
+                "defense": 80,
                 "specAttack": 120,
                 "specDefense": 80,
                 "speed": 100,
@@ -122,7 +122,7 @@
             "types": "Steel,Dragon",
             "thumb_url": "thumbs/elf-thief.png",
             "image_url": "images/483.png",
-            "classType": "Warrior",
+            "classType": "Thief",
             "folder": "new",
             "race": 0
         },
@@ -917,7 +917,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 60,
-                "defense": 60,
+                "defense": 80,
                 "specAttack": 120,
                 "specDefense": 120,
                 "speed": 80,
@@ -937,7 +937,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 80,
-                "defense": 80,
+                "defense": 100,
                 "specAttack": 120,
                 "specDefense": 120,
                 "speed": 80,
@@ -958,7 +958,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 100,
-                "defense": 80,
+                "defense": 100,
                 "specAttack": 120,
                 "specDefense": 120,
                 "speed": 80,
@@ -1000,7 +1000,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 90,
-                "defense": 50,
+                "defense": 60,
                 "specAttack": 120,
                 "specDefense": 80,
                 "speed": 100,
@@ -1021,7 +1021,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 100,
-                "defense": 60,
+                "defense": 70,
                 "specAttack": 120,
                 "specDefense": 80,
                 "speed": 100,
@@ -1063,7 +1063,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 100,
-                "defense": 40,
+                "defense": 60,
                 "specAttack": 120,
                 "specDefense": 80,
                 "speed": 80,
@@ -1084,7 +1084,7 @@
             "stats": {
                 "hp": 80,
                 "attack": 120,
-                "defense": 40,
+                "defense": 80,
                 "specAttack": 120,
                 "specDefense": 80,
                 "speed": 90,
