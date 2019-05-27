@@ -12,10 +12,22 @@ public class GameConfig : Singleton<GameConfig>
     }
     // Start is called before the first frame update
     public List<TeamColorData> teamColorData;
-
+    public ClassColorScheme classColorScheme;
 
     internal Color GetTeamColor(int teamID)
     {
         return teamColorData[teamID].color;
+    }
+
+    internal Color GetClassColor(ClassType classType)
+    {
+        for (int i = 0; i < classColorScheme.classColors.Length; i++)
+        {
+            if(classColorScheme.classColors[i].classType == classType)
+            {
+                return classColorScheme.classColors[i].classColor;
+            }
+        }
+        return new Color();
     }
 }

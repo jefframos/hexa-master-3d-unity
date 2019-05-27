@@ -89,24 +89,24 @@ public class BoardBuilder : MonoBehaviour
                         }
                         //tile.rnd = zone * 0.15f;// - 0.3f;
 
-                        if (Random.Range(0f, 1f) < 0.2f)
-                        {
-                            var attack = Mathf.FloorToInt(Random.Range(0, 40) / 10);
-                            var defense = Mathf.FloorToInt(Random.Range(0, 40) / 10);
-                            var range =Random.Range(0, 3);
-                            if (attack + defense + range > 0)
-                            {
+                        //if (Random.Range(0f, 1f) < 0.2f)
+                        //{
+                        //    var attack = Mathf.FloorToInt(Random.Range(0, 40) / 10);
+                        //    var defense = Mathf.FloorToInt(Random.Range(0, 40) / 10);
+                        //    var range =Random.Range(0, 3);
+                        //    if (attack + defense + range > 0)
+                        //    {
 
-                                Effector tempEffec = new Effector
-                                {
-                                    attack = attack * 10,
-                                    defense = defense * 10,
-                                    range = range,
-                                };
-                                tile.AddEffect(tempEffec);
+                        //        Effector tempEffec = new Effector
+                        //        {
+                        //            attack = attack * 10,
+                        //            defense = defense * 10,
+                        //            range = range,
+                        //        };
+                        //        tile.AddEffect(tempEffec);
                                 
-                            }
-                        }
+                        //    }
+                        //}
                         tile.tileView.SetZoneColor(boardColorScheme.Zones[zone - 1]);
 
                     }

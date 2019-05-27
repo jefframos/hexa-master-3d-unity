@@ -5454,9 +5454,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamColorData:
   - color: {r: 0.05098039, g: 0.47325808, b: 1, a: 1}
-  - color: {r: 0.009878943, g: 0.6981132, b: 0.12483281, a: 1}
-  - color: {r: 0.764151, g: 0.19103774, b: 0.24269782, a: 1}
+  - color: {r: 0.7647059, g: 0.19215687, b: 0.24313726, a: 1}
+  - color: {r: 0.9056604, g: 0.70340496, b: 0.18369527, a: 1}
   - color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  classColorScheme: {fileID: 11400000, guid: 8eaad1141eaf2bf41b25dd4fd27d1a16, type: 2}
 --- !u!1 &1275914895
 GameObject:
   m_ObjectHideFlags: 0

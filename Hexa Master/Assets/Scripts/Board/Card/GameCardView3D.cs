@@ -18,16 +18,18 @@ public class GameCardView3D : MonoBehaviour
     public TextMeshPro rangeLabel;
     public TextMeshPro nameLabel;
     public TextMeshPro description;
+    public SpriteRenderer classColor;
+
     public List<GameObject> starsList;
 
-    public SpriteRenderer[] allRenderers;
-    public List<int> allRenderersOrder;
+    internal SpriteRenderer[] allRenderers;
+    internal List<int> allRenderersOrder;
 
-    public TextMeshPro[] allTextMesh;
-    public List<int> allTextMeshOrder;
+    internal TextMeshPro[] allTextMesh;
+    internal List<int> allTextMeshOrder;
 
-    public ParticleSystem[] allParticles;
-    public List<int> allParticlesOrder;
+    internal ParticleSystem[] allParticles;
+    internal List<int> allParticlesOrder;
 
     private bool isSelected = false;
 
@@ -64,9 +66,10 @@ public class GameCardView3D : MonoBehaviour
         //{
         //    allParticlesOrder.Add(allParticles[i].re);
         //}
-
         cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
+
+        classColor.color = GameConfig.Instance.GetClassColor(cardDynamicData.ClassType);
 
         attackLabel.text = (cardDynamicData.StaticAttack / 10).ToString();
         defenseLabel.text = (cardDynamicData.StaticDefense / 10).ToString();
@@ -96,14 +99,14 @@ public class GameCardView3D : MonoBehaviour
         
         attackZonesView.setDeckLayer();
         charSprite.sprite = sp;
-        if(cardStaticData.folder == "new")
-        {
-            charSprite.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else
-        {
-            charSprite.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
-        }
+        //if(cardStaticData.folder == "new")
+        //{
+        //    charSprite.transform.localScale = new Vector3(1f, 1f, 1f);
+        //}
+        //else
+        //{
+        //    charSprite.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
+        //}
         isSelected = false;
     }
 

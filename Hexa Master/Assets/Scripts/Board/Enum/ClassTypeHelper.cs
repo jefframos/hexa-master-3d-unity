@@ -33,18 +33,18 @@ public class ClassTypeHelper
     {
         switch (classType)
         {
-            //case ClassType.Warrior:
-            //    return AttackType.AttackFirstFindOnly;
-            //case ClassType.Knight:
-            //    return AttackType.AttackFirstFindOnly;
+            case ClassType.Warrior:
+                return "+1 Attack for each Enemy arround";
+            case ClassType.Knight:
+                return "+1 Defense for each Enemy arround";
             case ClassType.Ranger:
                 return "Add +1 Attack based on Distance";
             case ClassType.Mage:
                 return "Attack only your Range";
             case ClassType.Thief:
                 return "Attack all cards on Range";
-            //case ClassType.Paladin:
-            //    return AttackType.AttackFirstFindOnly;
+            case ClassType.Paladin:
+                return "+1 Defense for each Ally arround";
             //case ClassType.None:
             //    return AttackType.AttackFirstFindOnly;
             default:

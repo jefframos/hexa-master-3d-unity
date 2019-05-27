@@ -188,6 +188,7 @@
     <Compile Include="Assets\Scripts\Board\Data\BoardLayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Data\BoardTilemapConfig.cs" />
     <Compile Include="Assets\Scripts\Board\Data\ColorScheme\BoardColorScheme.cs" />
+    <Compile Include="Assets\Scripts\Board\Data\ColorScheme\ClassColorScheme.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckBuilder.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckInput.cs" />
     <Compile Include="Assets\Scripts\Board\Deck\DeckType.cs" />
