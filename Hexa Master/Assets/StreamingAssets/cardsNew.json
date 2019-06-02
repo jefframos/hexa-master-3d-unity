@@ -173,7 +173,7 @@
             "number": 643,
             "stats": {
                 "hp": 80,
-                "attack": 100,
+                "attack": 80,
                 "defense": 80,
                 "specAttack": 120,
                 "specDefense": 100,
@@ -185,7 +185,7 @@
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "classType": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -534,8 +534,8 @@
             "number": 643,
             "stats": {
                 "hp": 80,
-                "attack": 90,
-                "defense": 50,
+                "attack": 60,
+                "defense": 60,
                 "specAttack": 120,
                 "specDefense": 100,
                 "speed": 60,
@@ -555,7 +555,7 @@
             "number": 643,
             "stats": {
                 "hp": 80,
-                "attack": 100,
+                "attack": 60,
                 "defense": 70,
                 "specAttack": 120,
                 "specDefense": 100,
@@ -576,19 +576,19 @@
             "number": 643,
             "stats": {
                 "hp": 80,
-                "attack": 110,
+                "attack": 80,
                 "defense": 70,
                 "specAttack": 120,
                 "specDefense": 100,
                 "speed": 100,
-                "range": 2
+                "range": 3
             },
             "level": 3,
             "weakness": [],
             "types": "Dragon,Fire",
             "thumb_url": "thumbs/human-ranger.png",
             "image_url": "images/643.png",
-            "classType": "Warrior",
+            "classType": "Ranger",
             "folder": "new",
             "race": 2
         },
@@ -715,6 +715,27 @@
             "thumb_url": "thumbs/human-warrior.png",
             "image_url": "images/646.png",
             "classType": "Warrior",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Human Priest",
+            "number": 646,
+            "stats": {
+                "hp": 100,
+                "attack": 80,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 80,
+                "speed": 60,
+                "range": 1
+            },
+            "level": 4,
+            "weakness": [],
+            "types": "Dragon,Ice",
+            "thumb_url": "thumbs/human-warrior.png",
+            "image_url": "images/646.png",
+            "classType": "Priest",
             "folder": "new",
             "race": 1
         }
@@ -912,6 +933,48 @@
     ],
     "elf":[
         {
+            "name": "Elf Priest",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 60,
+                "defense": 80,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "classType": "Priest",
+            "folder": "new",
+            "race": 1
+        },
+        {
+            "name": "Elf Priest 2",
+            "number": 382,
+            "stats": {
+                "hp": 80,
+                "attack": 60,
+                "defense": 100,
+                "specAttack": 120,
+                "specDefense": 120,
+                "speed": 80,
+                "range": 1
+            },
+            "level": 1,
+            "weakness": [],
+            "types": "Water",
+            "thumb_url": "thumbs/elf-paladin.png",
+            "image_url": "images/382.png",
+            "classType": "Priest",
+            "folder": "new",
+            "race": 1
+        },
+        {
             "name": "Elf Paladin 1",
             "number": 382,
             "stats": {
@@ -1100,7 +1163,7 @@
             "race": 0
         },
         {
-            "name": "Elf White Mage 1",
+            "name": "Elf Mage 1",
             "number": 487,
             "stats": {
                 "hp": 120,
@@ -1109,19 +1172,19 @@
                 "specAttack": 100,
                 "specDefense": 80,
                 "speed": 60,
-                "range": 1
+                "range": 2
             },
             "level": 2,
             "weakness": [],
             "types": "Ghost,Dragon",
             "thumb_url": "thumbs/elf-white-mage.png",
             "image_url": "images/487.png",
-            "classType": "Warrior",
+            "classType": "Mage",
             "folder": "new",
             "race": 1
         }, 
         {
-            "name": "Elf White Mage 2",
+            "name": "Elf Mage 2",
             "number": 487,
             "stats": {
                 "hp": 120,
@@ -1130,7 +1193,7 @@
                 "specAttack": 100,
                 "specDefense": 80,
                 "speed": 60,
-                "range": 1
+                "range": 2
             },
             "level": 3,
             "weakness": [],
@@ -1142,16 +1205,16 @@
             "race": 1
         } ,
          {
-            "name": "Elf White Mage 3",
+            "name": "Elf Mage 3",
             "number": 487,
             "stats": {
                 "hp": 120,
-                "attack": 70,
-                "defense": 120,
+                "attack": 100,
+                "defense": 100,
                 "specAttack": 100,
                 "specDefense": 80,
                 "speed": 80,
-                "range": 1
+                "range": 3
             },
             "level": 4,
             "weakness": [],

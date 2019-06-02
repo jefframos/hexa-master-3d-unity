@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
     public SimpleMenuController simpleMenuController;
     public TMP_Dropdown dropdown;
 
-
+    public bool autoStart;
     void Update()
     {
         if (isPause)
@@ -116,7 +116,15 @@ public class GameManager : Singleton<GameManager>
         roundManager.onMultipleAttack.AddListener(OnMultipleAttack);
         multipleAttackSelector.onMultiplesReady.AddListener(MultipleAttackReady);
 
-        boardController.BuildBoard();
+
+        if (autoStart)
+        {
+            Invoke("PlayVs", 0.1f);
+        }
+        else
+        {
+            boardController.BuildBoard();
+        }
     }
     void AddCardOnBoardById(int id)
     {
@@ -286,7 +294,8 @@ public class GameManager : Singleton<GameManager>
         commandList.ResetQueue();
         acting = false;
 
-        boardController.AddPosAttackBuff(currentCard);
+        boardController.FinishRound(currentCard);
+        boardController.ApplyPassiveBuffs();
         currentCard = null;
 
         boardInput.enabled = true;
@@ -328,7 +337,11 @@ public class GameManager : Singleton<GameManager>
 
             commandList.AddCommand(boardView.PlaceCard(currentCard, tile));
             boardController.AddPreAttackBuff(currentCard);
+
+            //pre attack buff
             commandList.AddCommand(boardView.AddBuffs(currentCard.cardDynamicData, tile));
+
+            //
             commandList.AddCommand(boardView.PlaceEntity(currentCard.cardStaticData, currentCard.cardDynamicData, tile)).AddCallback(() =>
             {
                 commandList.ResetQueue();
@@ -401,6 +414,10 @@ public class GameManager : Singleton<GameManager>
     internal void UpdateNeighboursList(Tile tile)
     {
         currentCard.cardDynamicData.AddPreviewTile(tile.tileModel);
+
+        boardController.SimulateTile(currentCard.cardDynamicData, tile);
+
+
         currentNeighborsList = boardController.GetNeighbours(tile.tileModel, currentCard.cardDynamicData.PreviewRange);
         currentNeighborsList.FilterListByType(currentCard.cardDynamicData);
         //currentNeighborsList.CapOnFirstBlock();
@@ -419,7 +436,5 @@ public class GameManager : Singleton<GameManager>
             UpdateNeighboursList(tile);
             boardView.HighlightAllNeighbors(currentNeighborsList, currentCard.cardDynamicData);
         }
-
-        //tile.tileView.OnOver();
     }
 }

@@ -44,6 +44,8 @@ public class EntityView : MonoBehaviour
         tile = _tile;
         cardStaticData = _cardStaticData;
         cardDynamicData = _cardDynamicData;
+
+        cardDynamicData.OnUpdateData.AddListener(UpdateDynamicData);
         tile.RemoveTileEffectView();
         startY = charSprite.transform.localPosition.y;
         var sp = Resources.Load<Sprite>("Cards/" + cardStaticData.folder + "/" + Path.GetFileNameWithoutExtension(cardStaticData.thumb_url));
@@ -73,6 +75,19 @@ public class EntityView : MonoBehaviour
         attackZones.SetInGameMode();
 
         ApplyTeamColor();
+    }
+    public void UpdateDynamicData(CardDynamicData _cardDynamicData)
+    {
+        if(cardDynamicData.Defense > cardDynamicData.StaticDefense)
+        {
+            statsLabel.color = Color.green;
+        }
+        else
+        {
+            statsLabel.color = Color.white;
+
+        }
+        statsLabel.text = (cardDynamicData.Defense / 10).ToString();
     }
     public void ApplyTeamColor()
     {

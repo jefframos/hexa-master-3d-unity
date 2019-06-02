@@ -79,13 +79,13 @@ public class DeckBuilder : MonoBehaviour
         }
         else
         {
-            playerData.LoadDeck(12);
+            playerData.LoadDeck((uint)deckLenght);
             deck = playerData.playerInGameDeck;
             ArrayUtils.Shuffle(deck);
         }
 
 
-        if (deck.Count < 12)
+        if (deck.Count < deckLenght)
         {
             Debug.Log(deckLenght);
             Debug.Log(levels);
@@ -116,6 +116,7 @@ public class DeckBuilder : MonoBehaviour
             currentCardID++;
             int n = currentCardID - deck.Count;
             deckView.changeCardsInHandTotal(maxInHandDefault - n);
+            Debug.LogWarning("ACABOU OS CARD "+ deck.Count);
             return null;
         }
         CardStaticData data = deck[currentCardID];

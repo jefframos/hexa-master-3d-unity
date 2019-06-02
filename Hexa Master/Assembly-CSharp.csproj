@@ -204,9 +204,9 @@
     <Compile Include="Assets\Scripts\Board\Enum\BuffConditionType.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\BuffType.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\ClassType.cs" />
-    <Compile Include="Assets\Scripts\Board\Enum\ClassTypeHelper.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\RoundAttackType.cs" />
     <Compile Include="Assets\Scripts\Board\Enum\SideType.cs" />
+    <Compile Include="Assets\Scripts\Board\Enum\StatType.cs" />
     <Compile Include="Assets\Scripts\Board\MultipleAttackSelector.cs" />
     <Compile Include="Assets\Scripts\Board\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Board\Player\TeamData.cs" />
@@ -218,6 +218,7 @@
     <Compile Include="Assets\Scripts\Board\Tile\TileMarkerView.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\TileModel.cs" />
     <Compile Include="Assets\Scripts\Board\Tile\TileView.cs" />
+    <Compile Include="Assets\Scripts\Board\TileMapInput.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraCopy.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLook.cs" />
     <Compile Include="Assets\Scripts\Camera\DragCamera.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Assets\Scripts\HUD\TopHUD.cs" />
     <Compile Include="Assets\Scripts\Server\ServerConnect.cs" />
     <Compile Include="Assets\Scripts\Utils\ArrayUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\ClassTypeHelper.cs" />
     <Compile Include="Assets\Scripts\Utils\GamePool.cs" />
     <Compile Include="Assets\Scripts\Utils\InteractiveObject.cs" />
     <Compile Include="Assets\Scripts\Utils\JsonLoader.cs" />

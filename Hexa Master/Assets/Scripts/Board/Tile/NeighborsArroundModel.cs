@@ -12,7 +12,40 @@ public class NeighborsArroundModel
     public List<NeighborModel> bottomLeft = new List<NeighborModel>();
     public List<NeighborModel> bottomRight = new List<NeighborModel>();
     public List<List<NeighborModel>> allLists = new List<List<NeighborModel>>();
-    public List<NeighborModel> allEnemies = new List<NeighborModel>();
+    public List<CardDynamicData> allEnemies = new List<CardDynamicData>();
+    public List<CardDynamicData> allAllies = new List<CardDynamicData>();
+    internal int allyCount = 0;
+    internal int enemyCount = 0;
+    internal TileModel tileModel;
+
+    public void UpdateEntitiesCounter(CardDynamicData cardDynamicData)
+    {
+        allyCount = 0;
+        enemyCount = 0;
+        allEnemies = new List<CardDynamicData>();
+        allAllies = new List<CardDynamicData>();
+        for (int i = 0; i < allLists.Count; i++)
+        {
+            List<NeighborModel> sideList = allLists[i];
+            if (sideList.Count > 0 && sideList[0].Exists)
+            {
+                if (sideList[0].tile.hasCard)
+                {
+                    if(cardDynamicData.TeamID == sideList[0].tile.cardDynamicData.TeamID)
+                    {
+                        allyCount++;
+                        allAllies.Add(sideList[0].tile.cardDynamicData);
+
+                    }
+                    else
+                    {
+                        enemyCount++;
+                        allEnemies.Add(sideList[0].tile.cardDynamicData);
+                    }
+                }
+            }
+        }
+    }
     public void AddListsOnList()
     {
         allLists = new List<List<NeighborModel>>
@@ -132,9 +165,8 @@ public class NeighborsArroundModel
         }
     }
     //Cap on the first card found
-    public List<NeighborModel> CapOnFirstFind()
+    public void CapOnFirstFind()
     {
-        allEnemies = new List<NeighborModel>();
 
         CapListOnFirstFind(topLeft);
         CapListOnFirstFind(topRight);
@@ -142,8 +174,7 @@ public class NeighborsArroundModel
         CapListOnFirstFind(right);
         CapListOnFirstFind(bottomLeft);
         CapListOnFirstFind(bottomRight);
-
-        return allEnemies;
+        
     }
     void CapListOnFirstFind(List<NeighborModel> list)
     {
@@ -159,9 +190,8 @@ public class NeighborsArroundModel
     }
     //Get only the tiles based on specific range
 
-    public List<NeighborModel> GetOnlyRangeTile(int range)
+    public void GetOnlyRangeTile(int range)
     {
-        allEnemies = new List<NeighborModel>();
 
         GetOnlyRangeOnLyst(topLeft, range);
         GetOnlyRangeOnLyst(topRight, range);
@@ -169,8 +199,7 @@ public class NeighborsArroundModel
         GetOnlyRangeOnLyst(right, range);
         GetOnlyRangeOnLyst(bottomLeft, range);
         GetOnlyRangeOnLyst(bottomRight, range);
-
-        return allEnemies;
+        
     }
 
     void GetOnlyRangeOnLyst(List<NeighborModel> list, int range)

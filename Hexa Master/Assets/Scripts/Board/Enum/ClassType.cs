@@ -6,7 +6,8 @@
     Mage = 3,
     Thief = 4,
     None = 5,
-    Paladin = 6
+    Paladin = 6,
+    Priest = 7
 }
 
 

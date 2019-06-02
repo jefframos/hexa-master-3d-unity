@@ -181,9 +181,9 @@ public class DeckView : MonoBehaviour
         {
             handDeck.Remove(cardSelected);
             Card3D newCard = deckBuilder.GetCard();
-            newCard.ResetCard();
             if (newCard)
             {
+                newCard.ResetCard();
                 handDeck.Add(newCard);
             }
         }

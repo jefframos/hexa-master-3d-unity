@@ -86,14 +86,26 @@ public class Tile : MonoBehaviour
     }
     internal void SetNeighborModel(NeighborModel neighborModel, CardDynamicData cardDynamic)
     {
-        if (!ClassTypeHelper.UseDistanceAsMultiplier(cardDynamic.ClassType))
+        cardDynamic.ApplyPreAttackBuff();
+        bool buffed = false;
+
+        int attackAcc = neighborModel.distance;
+
+        if(cardDynamic.BuffAttack > 0)
+        {
+            attackAcc += (int)(cardDynamic.BuffAttack / 10f);
+            buffed = true;
+        }
+
+        //tileView.SetDistanceEffect(2);
+        if (!ClassTypeHelper.UseDistanceAsMultiplier(cardDynamic.ClassType) && !buffed)
         {
             return;
         }
-        if (neighborModel.distance > 1 )
+        if (attackAcc > 1 )
         {
-            tileView.SetDistanceEffect(neighborModel.distance);
-            tileView.debugID.text = "+" + neighborModel.distance;
+            tileView.SetDistanceEffect(attackAcc);
+            tileView.debugID.text = "+" + attackAcc;
 
         }
     }

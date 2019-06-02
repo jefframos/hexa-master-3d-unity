@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="hexagonal" renderorder="right-down" width="11" height="8" tilewidth="32" tileheight="32" infinite="0" hexsidelength="16" staggeraxis="y" staggerindex="odd" nextlayerid="3" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.1" orientation="hexagonal" renderorder="right-down" width="11" height="11" tilewidth="32" tileheight="32" infinite="0" hexsidelength="16" staggeraxis="y" staggerindex="odd" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" name="map" tilewidth="32" tileheight="32" tilecount="8" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -27,16 +27,19 @@
    <image width="32" height="32" source="neutral.png"/>
   </tile>
  </tileset>
- <layer id="2" name="Tile Layer 1" width="11" height="8">
+ <layer id="3" name="Tile Layer 1" width="11" height="11">
   <data encoding="csv">
-0,0,0,8,8,8,8,8,8,0,0,
-0,0,0,0,8,1,1,1,8,0,0,
-0,8,0,0,8,8,8,8,8,0,0,
-8,1,8,8,8,8,8,8,8,8,8,
-0,8,8,8,8,8,8,8,8,1,8,
-8,8,1,8,8,8,8,8,8,8,8,
-0,8,8,8,8,8,8,1,8,8,8,
-0,8,8,1,0,0,0,8,8,8,0
+0,0,0,8,8,8,8,8,0,0,0,
+0,0,8,8,8,1,1,1,0,0,0,
+0,0,8,8,8,8,8,8,8,0,0,
+0,1,8,8,8,8,8,8,8,0,0,
+0,0,8,8,8,8,8,8,8,0,0,
+0,8,1,8,8,8,8,8,8,0,0,
+0,0,8,8,8,8,8,1,8,0,0,
+0,0,8,1,8,8,8,8,0,0,0,
+0,0,0,8,8,8,8,8,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>

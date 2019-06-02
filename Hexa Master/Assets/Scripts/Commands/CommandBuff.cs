@@ -30,21 +30,19 @@ public class CommandBuff : CommandDefault
     public override void Play()
     {
         //Kill();
-        Debug.Log("BUFFS");
-        Debug.Log(data.cardDynamicData.NeighborsArround.allLists.Count);
-        for (int i = 0; i < data.cardDynamicData.NeighborsArround.allLists.Count; i++)
-        {
-            List<NeighborModel> sideList = data.cardDynamicData.NeighborsArround.allLists[i];
-
-
-            if (sideList.Count > 0 && sideList[0].Exists)
-            {
-                if (sideList[0].tile.hasCard)
-                {
-                    Debug.Log(sideList[0].tile.entityAttached.cardStaticData.name);
-                }
-            }
-        }
+        Debug.Log("BUFFS pre attack, criar um sistema pra preview isso aqui");
+        data.cardDynamicData.ApplyPreAttackBuff();
+        //for (int i = 0; i < data.cardDynamicData.NeighborsArround.allLists.Count; i++)
+        //{
+        //    List<NeighborModel> sideList = data.cardDynamicData.NeighborsArround.allLists[i];
+        //    if (sideList.Count > 0 && sideList[0].Exists)
+        //    {
+        //        if (sideList[0].tile.hasCard)
+        //        {
+        //            Debug.Log(sideList[0].tile.entityAttached.cardStaticData.name);
+        //        }
+        //    }
+        //}
 
 
         base.Play();

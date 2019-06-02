@@ -22,7 +22,7 @@ public class BoardController : Singleton<BoardController>
     public TMP_Dropdown dropdown;
 
     List<List<Tile>> tileList;
-    List<CardDynamicData> cardsPlaced;
+    List<CardDynamicData> entitiesPlaced;
     internal PlayerData currentPlayerData;
 
     public bool debugging = false;
@@ -47,7 +47,7 @@ public class BoardController : Singleton<BoardController>
     public void SetBoard(List<List<Tile>> _tileList)
     {
         tileList = _tileList;
-        cardsPlaced = new List<CardDynamicData>();
+        entitiesPlaced = new List<CardDynamicData>();
 
         for (int i = 0; i < tileList.Count; i++)
         {
@@ -65,12 +65,21 @@ public class BoardController : Singleton<BoardController>
     public void PlaceCard(CardDynamicData cardDynamicData, Tile tile)
     {
         tile.SetData(cardDynamicData);
-        cardsPlaced.Add(cardDynamicData);
-
-        NeighborsArroundModel neighborsArround = GetNeighbours(tile.tileModel, 1);
-        cardDynamicData.NeighborsArround = neighborsArround;
+        entitiesPlaced.Add(cardDynamicData);
+        SimulateTile(cardDynamicData, tile);
     }
 
+    public void SimulateTile(CardDynamicData cardDynamicData, Tile tile)
+    {
+     
+        if (cardDynamicData.NeighborsArround != null && cardDynamicData.NeighborsArround.tileModel.id == tile.tileModel.id)
+        {
+            return;
+        }
+        NeighborsArroundModel neighborsArround = GetNeighbours(tile.tileModel, 1);
+        cardDynamicData.NeighborsArround = neighborsArround;
+
+    }
     public Tile GetRandomEmpryTile()
     {
         bool getTile = false;
@@ -183,7 +192,7 @@ public class BoardController : Singleton<BoardController>
         {
             return;
         }
-        cardsPlaced = new List<CardDynamicData>();
+        entitiesPlaced = new List<CardDynamicData>();
         for (int i = 0; i < tileList.Count; i++)
         {
             for (int j = 0; j < tileList[i].Count; j++)
@@ -215,7 +224,7 @@ public class BoardController : Singleton<BoardController>
 
         //Debug.Log("verificar se tah pegando certo aqui, no neiboors data tah vindo vazio as cartas na segunda vez, por isso bugando");
         NeighborsArroundModel returnObject = new NeighborsArroundModel();
-
+        returnObject.tileModel = tile;
         returnObject.topLeft.Add(GetTileOnSide(tile, SideType.TopLeft, 1));
         returnObject.topRight.Add(GetTileOnSide(tile, SideType.TopRight, 1));
         returnObject.left.Add(GetTileOnSide(tile, SideType.Left, 1));
@@ -266,13 +275,31 @@ public class BoardController : Singleton<BoardController>
         return returnObject;
     }
 
-    internal void AddPosAttackBuff(Card3D currentCard)
+    internal void ApplyPassiveBuffs()
     {
-        Debug.Log("AddPos - AttackBuff");
+        //Debug.Log("AddPos - AttackBuff " + cardsPlaced.Count);
     }
+    internal void FinishRound(Card3D currentCard)
+    {
+        //Debug.Log("AddPos - AttackBuff ");
 
+        for (int i = 0; i < entitiesPlaced.Count; i++)
+        {
+            entitiesPlaced[i].ResetAllBuffs();
+        }
+
+        for (int i = 0; i < entitiesPlaced.Count; i++)
+        {
+            entitiesPlaced[i].UpdateRound();
+        }
+
+        for (int i = 0; i < entitiesPlaced.Count; i++)
+        {
+            entitiesPlaced[i].FinishRoundBuffs();
+        }
+    }
     internal void AddPreAttackBuff(Card3D currentCard)
     {
-        Debug.Log("AddPre - AttackBuff");
+        //Debug.Log("AddPre - AttackBuff");
     }
 }
